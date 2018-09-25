@@ -1,2 +1,5 @@
-# build
+# jekyll config
+_config.yml
+
+# build scripts
 build.js

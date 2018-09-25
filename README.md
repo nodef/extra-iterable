@@ -1,5 +1,6 @@
 # iterable-extra
 
+> [iterable-extra](https://www.npmjs.com/package/iterable-extra) was renamed to [extra-iterable](https://www.npmjs.com/package/extra-iterable).
 [![NPM](https://nodei.co/npm/iterable-extra.png)](https://nodei.co/npm/iterable-extra/)
 
 Extra methods for [iterable].<br>
