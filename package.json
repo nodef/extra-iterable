@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Standard utility methods for Iterable.",
   "main": "index.js",
   "scripts": {
