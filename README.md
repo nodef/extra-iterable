@@ -1,12 +1,13 @@
-Extra methods for [iterable].<br>
+Extra methods for [Iterable].<br>
 Browserified, minified module: [extra-iterable.min].
 
 ```javascript
-const extra = require('extra-iterable');
-// extra.is(<value>)
-// extra.isCollection(<iterable>)
+const Iterable = require('extra-iterable');
+// Iterable.is(<value>)
+// Iterable.isCollection(<iterable>)
 // ...
 ```
+
 
 Datatype methods:
 - [is](https://www.npmjs.com/package/@extra-iterable/is)
@@ -20,6 +21,11 @@ About methods:
 - [last](https://www.npmjs.com/package/@extra-iterable/last)
 - [keys](https://www.npmjs.com/package/@extra-iterable/keys)
 - [entries](https://www.npmjs.com/package/@extra-iterable/entries)
+- [any](https://www.npmjs.com/package/@extra-iterable/any)
+- [all](https://www.npmjs.com/package/@extra-iterable/all)
+
+Generate methods:
+- [from](https://www.npmjs.com/package/@extra-iterable/from)
 
 Search methods:
 - [startsWith](https://www.npmjs.com/package/@extra-iterable/starts-with)
@@ -31,7 +37,6 @@ Search methods:
 - [contains](https://www.npmjs.com/package/@extra-iterable/contains)
 
 Transform methods:
-- [from](https://www.npmjs.com/package/@extra-iterable/from)
 - [join](https://www.npmjs.com/package/@extra-iterable/join)
 - [pick](https://www.npmjs.com/package/@extra-iterable/pick)
 - [pickAs](https://www.npmjs.com/package/@extra-iterable/pick-as)
@@ -62,15 +67,16 @@ Functional methods:
 - [map](https://www.npmjs.com/package/@extra-iterable/map)
 
 Evaluate methods:
-- [any](https://www.npmjs.com/package/@extra-iterable/any)
-- [all](https://www.npmjs.com/package/@extra-iterable/all)
 - [max](https://www.npmjs.com/package/@extra-iterable/max)
 - [min](https://www.npmjs.com/package/@extra-iterable/min)
 - [sum](https://www.npmjs.com/package/@extra-iterable/sum)
 - [average](https://www.npmjs.com/package/@extra-iterable/average)
 - [hammingDistance](https://www.npmjs.com/package/@extra-iterable/hamming-distance)
 - [euclideanDistance](https://www.npmjs.com/package/@extra-iterable/euclidean-distance)
+<br>
 
 
-[iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
+[![nodef](https://i.imgur.com/KR83Nzx.jpg)](https://nodef.github.io)
+
+[Iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
 [extra-iterable.min]: https://www.npmjs.com/package/extra-iterable.min
