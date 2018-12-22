@@ -1,8 +1,8 @@
-Merge values of each inner [iterable] at corresponding position, like [_.zip()].
-> [@extra-iterable/zip] is [reversible] and behaves exactly like [iterable-unzip].
+Merge values of each inner [Iterable] at corresponding position, like [_.zip()].
+> [@extra-iterable/zip] is [reversible] and behaves exactly like [unzip].
 
 ```javascript
-const zip = require('iterable-zip');
+const zip = require('@extra-iterable/zip');
 // zip(<iterable>, [begin=0], [end], [target=[]], [at])
 
 zip([['r', 'i', 'm'], [18, 9, 13]]);
@@ -22,8 +22,8 @@ zip(['pset', 'line', 'rect', 'fill'], 1, 3, [['z'], ['y']], 1);
 
 [![extra-iterable](https://i.imgur.com/KR83Nzx.jpg)](https://www.npmjs.com/package/extra-iterable)
 
-[iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
+[Iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
 [_.zip()]: http://underscorejs.org/#zip
-[iterable-zip]: https://www.npmjs.com/package/iterable-zip
-[iterable-unzip]: https://www.npmjs.com/package/iterable-unzip
+[@extra-iterable/zip]: https://www.npmjs.com/package/iterable-zip
 [reversible]: https://en.wikipedia.org/wiki/Involution_(mathematics)
+[unzip]: https://www.npmjs.com/package/iterable-unzip

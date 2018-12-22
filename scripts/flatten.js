@@ -1,4 +1,4 @@
-const is = require('iterable-is');
+const is = require('./is');
 function flattenAll(itr, lvl, z, z0) {
   for(var v of itr) {
     if(lvl!==0 && is(v)) z0 = flattenAll(v, lvl-1, z, z0);

@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Standard utility methods for Iterable.",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,8 @@
   "author": "wolfram77@gmail.com",
   "license": "MIT",
   "devDependencies": {
+    "@extra-array/reverse": "^1.0.1",
+    "@extra-array/slice": "^1.0.1",
     "browserify": "^16.2.3",
     "find-npm-prefix": "^1.0.2",
     "recast": "^0.16.1",
