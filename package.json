@@ -1,11 +1,11 @@
 {
   "name": "extra-iterable",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Standard utility methods for Iterable.",
   "main": "index.js",
   "scripts": {
     "prepublishOnly": "node ./prepublish",
-    "browserify": "browserify index.js -o index.web.js -s Integer",
+    "browserify": "browserify index.js -o index.web.js -s Iterable",
     "uglifyjs": "uglifyjs -c -m -o index.min.js index.web.js",
     "test": "exit"
   },
@@ -30,8 +30,8 @@
   "author": "wolfram77@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "@extra-array/reverse": "^1.0.1",
-    "@extra-array/slice": "^1.0.1",
+    "@extra-array/reverse": "^1.1.0",
+    "@extra-array/slice": "^1.1.0",
     "browserify": "^16.2.3",
     "find-npm-prefix": "^1.0.2",
     "recast": "^0.16.1",
