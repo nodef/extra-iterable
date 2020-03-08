@@ -1,0 +1,15 @@
+- iterable.find
+- iterable.findAll
+- iterable.some
+- iterable.every
+- iterable.map
+- iterable.reduce
+- iterable.sum
+- iterable.min
+- iterable.max
+- iterable.all
+- iterable.any
+- iterable.filter
+- iterable.average
+- iterable.foreach
+- iterable.product
