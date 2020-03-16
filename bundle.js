@@ -196,11 +196,12 @@ async function main(a) {
   console.log('main:', a);
   console.log({BIN, ORG, PACKAGE_ROOT, STANDALONE});
   var o = {org: ORG, package_root: PACKAGE_ROOT};
-  for(var f of fsReadDir('scripts')) {
+  for(var f of fsReadDir('src')) {
     if(path.extname(f)!=='.js') continue;
     if(f.startsWith('_')) continue;
     if(f==='index.js') continue;
-    var pth = path.join('scripts', f);
+    try {
+    var pth = path.join('src', f);
     var tmp = scatterPackage(pth, o);
     cp.execSync('npm publish', {cwd: tmp, stdio});
     var standalone = toSnakeCase(f.replace(/\..*/, ''), '_');
@@ -208,6 +209,8 @@ async function main(a) {
     minifyPackage(tmp, Object.assign({standalone}, o));
     cp.execSync('npm publish', {cwd: tmp, stdio});
     cp.execSync(`rm -rf ${tmp}`);
+    }
+    catch(e) { console.error(e); }
   }
   standalone = STANDALONE;
   minifyPackage('.', Object.assign({standalone}, o));

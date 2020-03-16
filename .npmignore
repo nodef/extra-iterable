@@ -1,10 +1,12 @@
 # scripts
-scripts/
+src/
 
 # build
 build.js
 bundle.js
 .travis.yml
 
-# todo
+# others
+unused/
+unused.js
 TODO
