@@ -11,4 +11,4 @@ function every(x, fn=null, ths=null) {
     if(!fn.call(ths, v, ++i, x)) return false;
   return true;
 }
-exports.every = every;
+module.exports = every;

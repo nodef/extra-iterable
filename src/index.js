@@ -1,0 +1,1 @@
+exports.every = require('./every');

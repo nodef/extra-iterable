@@ -13,3 +13,4 @@
 - iterable.average
 - iterable.foreach
 - iterable.product
+- intersperse
