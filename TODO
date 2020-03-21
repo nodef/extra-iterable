@@ -4,7 +4,6 @@
 - iterable.average
 - iterable.product
 - intersperse
-- flat
 - flatMap
 - includes?
 - splice
