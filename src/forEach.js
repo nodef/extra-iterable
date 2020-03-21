@@ -4,7 +4,7 @@
  * @param {function} fn called function (v, i, x)
  * @param {object?} ths this argument
  */
-function forEach(x, fn=null, ths=null) {
+function forEach(x, fn, ths=null) {
   var i = -1;
   for(var v of x)
     fn.call(ths, v, ++i, x);
