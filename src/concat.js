@@ -3,7 +3,7 @@
  * @param  {...Iterable} xs iterables
  * @returns {Iterable}
  */
-function concat(...xs) {
+function* concat(...xs) {
   for(var x of xs)
     yield* x;
 }
