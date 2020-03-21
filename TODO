@@ -18,3 +18,11 @@
 - flat
 - flatMap
 - includes?
+- splice
+- slice
+- compare
+- isEqual
+- findAll
+- findIndices?
+- head, tail, init, last
+
