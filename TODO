@@ -10,3 +10,5 @@
 - slice
 - findIndex?
 - findIndices?
+- partition
+- count

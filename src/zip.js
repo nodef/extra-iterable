@@ -7,7 +7,7 @@ const args = require('./_args');
  * @param {object?} ths this argument
  * @returns {Iterable}
  */
-function zip(xs, fn=null, ths=null) {
+function* zip(xs, fn=null, ths=null) {
   var fn = fn||args;
   var is = xs.map(x => x[Symbol.iterator]());
   while(true) {
