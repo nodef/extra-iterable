@@ -3,6 +3,7 @@
  * @param {Iterable} x an iterable
  * @param {function} fn test function (v, i, x)
  * @param {object?} ths this argument
+ * @returns {Iterable}
  */
 function* filter(x, fn=null, ths=null) {
   var i = -1;

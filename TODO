@@ -17,3 +17,4 @@
 - findIndex?
 - flat
 - flatMap
+- includes?
