@@ -9,7 +9,5 @@
 - includes?
 - splice
 - slice
-- compare
-- isEqual
 - findIndex?
 - findIndices?
