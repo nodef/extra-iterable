@@ -14,3 +14,6 @@
 - iterable.foreach
 - iterable.product
 - intersperse
+- findIndex?
+- flat
+- flatMap
