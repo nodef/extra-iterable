@@ -4,7 +4,7 @@
  * @param {number} n number of values
  * @returns {Iterable}
  */
-function cycle(x, n) {
+function* cycle(x, n) {
   while(true) for(var v of x) {
     if(--n<0) break;
     yield v;
