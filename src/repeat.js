@@ -8,3 +8,4 @@ function* repeat(x, n) {
   for(; n!==0; n--)
     yield* x;
 }
+module.exports = repeat;

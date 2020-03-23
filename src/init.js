@@ -10,3 +10,4 @@ function* init(x) {
     u = v;
   }
 }
+module.exports = init;

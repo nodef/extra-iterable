@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.0.29",
+  "version": "2.0.30",
   "description": "Standard utility methods for Iterable.",
   "main": "index.js",
   "scripts": {
@@ -27,8 +27,21 @@
   "author": "wolfram77@gmail.com",
   "license": "MIT",
   "devDependencies": {
+    "@extra-array/count": "^2.4.4",
+    "@extra-array/count-all-on": "^2.4.4",
+    "@extra-array/count-on": "^2.4.4",
+    "@extra-array/is-disjoint": "^2.4.4",
+    "@extra-array/is-disjoint-on": "^2.4.4",
+    "@extra-array/max": "^2.4.4",
+    "@extra-array/max-on": "^2.4.4",
+    "@extra-array/min": "^2.4.4",
+    "@extra-array/min-on": "^2.4.4",
+    "@extra-array/partition": "^2.4.4",
+    "@extra-array/partition-on": "^2.4.4",
+    "@extra-array/range": "^2.4.4",
+    "@extra-array/range-on": "^2.4.4",
     "find-npm-prefix": "^1.0.2",
     "recast": "^0.18.7",
-    "tempy": "^0.4.0"
+    "tempy": "^0.5.0"
   }
 }
