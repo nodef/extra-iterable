@@ -1,3 +1,5 @@
+There is a bit of duplication here, how we reduce taht.
+
 Extra methods for [Iterable].<br>
 Browserified, minified module: [extra-iterable.min].
 
