@@ -1,4 +1,4 @@
-const isIterator = require('./isIterator');
+const from = require('./from');
 
 /**
  * Repeats an iterable given times.
@@ -7,7 +7,7 @@ const isIterator = require('./isIterator');
  * @returns {Iterable}
  */
 function* repeat(x, n) {
-  x = isIterator(x)? Array.from(x):x;
+  var x = from(x);
   for(; n!==0; n--)
     yield* x;
 }

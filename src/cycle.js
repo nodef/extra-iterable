@@ -1,4 +1,4 @@
-const isIterator = require('./isIterator');
+const from = require('./from');
 
 /**
  * Gives values that cycle through an iterable.
@@ -7,7 +7,7 @@ const isIterator = require('./isIterator');
  * @returns {Iterable}
  */
 function* cycle(x, n=-1) {
-  x = isIterator(x)? Array.from(x):x;
+  var x = from(x);
   w: while(true) {
     for(var v of x) {
       if(n--===0) break w;
