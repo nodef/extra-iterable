@@ -38,6 +38,7 @@ exports.range = require('@extra-array/range');
 exports.rangeOn = require('@extra-array/range-on');
 exports.reduce = require('./reduce');
 exports.repeat = require('./repeat');
+exports.shift = require('./shift');
 exports.size = require('./size');
 exports.slice = require('./slice');
 exports.some = require('./some');

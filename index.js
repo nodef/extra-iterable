@@ -709,6 +709,15 @@ function* repeat(x, n) {
     yield* x;
 }
 /**
+ * Removes first value.
+ * @param {Iterable} x an iterable
+ * @returns {Array} [value, iterable]
+ */
+function shift(x) {
+  var ix = x[Symbol.iterator]();
+  return [ix.next().value, ix];
+}
+/**
  * Counts the number of values.
  * @param {Iterable} x an iterable
  * @returns {number}
@@ -845,6 +854,7 @@ exports.range = range;
 exports.rangeOn = rangeOn;
 exports.reduce = reduce;
 exports.repeat = repeat;
+exports.shift = shift;
 exports.size = size;
 exports.slice = slice;
 exports.some = some;
