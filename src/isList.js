@@ -1,7 +1,7 @@
 const is = require('./is');
 
 /**
- * Checks if value is a list (!string).
+ * Checks if value is a list (not string).
  * @param {*} v a value
  * @returns {boolean}
  */
