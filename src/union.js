@@ -2,19 +2,20 @@ const cmp = require('./_cmp');
 const from = require('./from');
 
 /**
- * Gives values of an iterable not present in another.
+ * Gives values present in any array.
  * @param {Iterable} x an iterable
  * @param {Iterable} y another iterable
  * @param {function?} fn compare function (a, b)
  * @returns {Iterable}
  */
-function* difference(x, y, fn=null) {
+function* union(x, y, fn=null) {
   var fn = fn||cmp;
-  var y = from(y);
-  x: for(var u of x) {
-    for(var v of y)
-      if(fn(u, v)===0) continue x;
-    yield u;
+  var x = from(x);
+  yield* x;
+  y: for(var v of y) {
+    for(var u of x)
+      if(fn(u, v)===0) continue y;
+    yield v;
   }
 }
-module.exports = difference;
+module.exports = union;

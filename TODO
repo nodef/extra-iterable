@@ -6,6 +6,7 @@ SINGLE ITERABLE?
 
 OTHERS
 
+- function.iterate
 - iterable.sum
 - iterable.min
 - iterable.max

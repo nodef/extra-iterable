@@ -5,10 +5,10 @@
  * @param {number?} I end index (end)
  */
 function* slice(x, i=0, I=Number.MAX_SAFE_INTEGER) {
-  var j = -1;
+  var k = -1;
   for(var v of x) {
-    if(++j>=I) break;
-    if(j>=i) yield v;
+    if(++k>=I) break;
+    if(k>=i) yield v;
   }
 }
 module.exports = slice;

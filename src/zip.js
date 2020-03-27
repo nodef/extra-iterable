@@ -11,9 +11,9 @@ function* zip(xs, fn=null, ths=null) {
   var fn = fn||args;
   var is = xs.map(x => x[Symbol.iterator]());
   while(true) {
-    var rs = is.map(i => i.next());
-    if(rs.every(r => r.done)) break;
-    var vs = rs.map(r => r.value);
+    var io = is.map(i => i.next());
+    if(io.every(r => r.done)) break;
+    var vs = io.map(r => r.value);
     yield fn.apply(ths, vs);
   }
 }

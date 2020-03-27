@@ -1,7 +1,7 @@
 /**
  * Gives iterator for iterable.
  * @param {Iterable} x an iterable
- * @returns {Iterator}
+ * @returns {Iterable}
  */
 function iterator(x) {
   return x[Symbol.iterator]();
