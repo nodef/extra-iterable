@@ -621,15 +621,25 @@ function partitionOn(x, fn=null, ths=null) {
   return m;
 }
 /**
+ * Adds values to the end. 
+ * @param {Iterable} x an iterable
+ * @param {...any} vs values to add
+ * @returns {Iterable} iterable
+ */
+function* push(x, ...vs) {
+  yield* x;
+  yield* vs;
+}
+/**
  * Compares two values.
  * @param {*} a a value
  * @param {*} b another value
  * @returns {number} a<b: -1, a=b: 0, a>b: 1
  */
-function cmp49(a, b) {
+function cmp50(a, b) {
   return a<b? -1:(a>b? 1:0);
 }
-const cmp50 = cmp49;
+const cmp51 = cmp50;
 
 /**
  * Finds smallest and largest values.
@@ -638,7 +648,7 @@ const cmp50 = cmp49;
  * @returns {Array} [min, max]
  */
 function range(x, fn=null) {
-  var fn = fn||cmp50, m = x[0], n = m;
+  var fn = fn||cmp51, m = x[0], n = m;
   for(var v of x) {
     if(fn(v, m)<0) m = v;
     if(fn(v, n)>0) n = v;
@@ -650,10 +660,10 @@ function range(x, fn=null) {
  * @param {*} v a value
  * @returns {*} v
  */
-function id51(v) {
+function id52(v) {
   return v;
 }
-const id52 = id51;
+const id53 = id52;
 
 /**
  * Finds smallest and largest values.
@@ -663,7 +673,7 @@ const id52 = id51;
  * @returns {Array} [min, max]
  */
 function rangeOn(x, fn=null, ths=null) {
-  var fn = fn||id52, i = -1;
+  var fn = fn||id53, i = -1;
   var mk = fn.call(ths, x[0], 0, x), mv = x[0];
   var nk = mk, nv = mv;
   for(var v of x) {
@@ -830,6 +840,7 @@ exports.min = min;
 exports.minOn = minOn;
 exports.partition = partition;
 exports.partitionOn = partitionOn;
+exports.push = push;
 exports.range = range;
 exports.rangeOn = rangeOn;
 exports.reduce = reduce;

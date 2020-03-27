@@ -33,6 +33,7 @@ exports.min = require('@extra-array/min');
 exports.minOn = require('@extra-array/min-on');
 exports.partition = require('@extra-array/partition');
 exports.partitionOn = require('@extra-array/partition-on');
+exports.push = require('./push');
 exports.range = require('@extra-array/range');
 exports.rangeOn = require('@extra-array/range-on');
 exports.reduce = require('./reduce');
