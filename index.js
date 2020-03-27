@@ -63,10 +63,10 @@ const cmp5 = cmp4;
 
 /**
  * Counts occurrences of a value.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {*} v value
  * @param {function?} fn compare function (a, b)
- * @returns {number} occurrences
+ * @returns {number}
  */
 function count(x, v, fn=null) {
   var fn = fn||cmp5, n = 0;
@@ -84,10 +84,10 @@ function id(v) {
 }
 /**
  * Counts occurrences of values.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
- * @returns {Map<any, number>} occurrences
+ * @returns {Map<any, number>}
  */
 function countAllOn(x, fn=null, ths=null) {
   var fn = fn||id;
@@ -110,11 +110,11 @@ const id9 = id8;
 
 /**
  * Counts occurrences of a value.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {*} v value
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
- * @returns {number} occurrences
+ * @returns {number}
  */
 function countOn(x, v, fn=null, ths=null) {
   var fn = fn||id9, i = -1, n = 0;
@@ -253,7 +253,7 @@ function is(v) {
   return v!=null && typeof v[Symbol.iterator]==='function';
 }
 /**
- * Checks if value is a list (!string).
+ * Checks if value is a list (not string).
  * @param {*} v a value
  * @returns {boolean}
  */
@@ -382,8 +382,8 @@ const cmp30 = cmp29;
 
 /**
  * Checks if arrays have no value in common.
- * @param {Array} x an array
- * @param {Array} y another array
+ * @param {Iterable} x an array
+ * @param {Iterable} y another array
  * @param {function?} fn compare function (a, b)
  * @returns {boolean} true if disjoint
  */
@@ -422,8 +422,8 @@ const id33 = id32;
 
 /**
  * Checks if arrays have no value in common.
- * @param {Array} x an array
- * @param {Array} y another array
+ * @param {Iterable} x an array
+ * @param {Iterable} y another array
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {boolean} true if disjoint
@@ -493,7 +493,7 @@ const cmp39 = cmp38;
 
 /**
  * Finds largest value.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {function?} fn compare function (a, b)
  * @returns {*}
  */
@@ -515,7 +515,7 @@ const id41 = id40;
 
 /**
  * Finds largest value.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {*}
@@ -542,7 +542,7 @@ const cmp43 = cmp42;
 
 /**
  * Finds smallest value.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {function?} fn compare function (a, b)
  * @returns {*}
  */
@@ -564,7 +564,7 @@ const id45 = id44;
 
 /**
  * Finds smallest value.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {*}
@@ -580,7 +580,7 @@ function minOn(x, fn=null, ths=null) {
 }
 /**
  * Breaks array into values, by test.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {function} fn test function (v, i, x)
  * @param {object?} ths this argument
  * @returns {Array<Array>} [[...satisfies], [...doesnt]]
@@ -605,7 +605,7 @@ const id48 = id47;
 
 /**
  * Breaks array into values, by map.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {function} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {Map<any, Array>} {key => [...values]}
@@ -633,7 +633,7 @@ const cmp50 = cmp49;
 
 /**
  * Finds smallest and largest values.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {function?} fn compare function (a, b)
  * @returns {Array} [min, max]
  */
@@ -657,7 +657,7 @@ const id52 = id51;
 
 /**
  * Finds smallest and largest values.
- * @param {Array} x an array
+ * @param {Iterable} x an array
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {Array} [min, max]
