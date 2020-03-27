@@ -1,3 +1,11 @@
+SINGLE ITERABLE?
+
+- cycle
+- repeat
+
+
+OTHERS
+
 - iterable.sum
 - iterable.min
 - iterable.max

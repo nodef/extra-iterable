@@ -15,7 +15,7 @@ function compare(x, y, fn=null) {
     var u = ix.next();
     var v = iy.next();
     if(u.done && v.done) return 0;
-    var c = fn(u, v);
+    var c = fn(u.value, v.value);
     if(c!==0) return c;
   }
 }
