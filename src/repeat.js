@@ -1,3 +1,5 @@
+const isIterator = require('./isIterator');
+
 /**
  * Repeats an iterable given times.
  * @param {Iterable} x an iterable
@@ -5,6 +7,7 @@
  * @returns {Iterable}
  */
 function* repeat(x, n) {
+  x = isIterator(x)? Array.from(x):x;
   for(; n!==0; n--)
     yield* x;
 }
