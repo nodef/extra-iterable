@@ -42,4 +42,5 @@ exports.slice = require('./slice');
 exports.some = require('./some');
 exports.split = require('./split');
 exports.tail = require('./tail');
+exports.unshift = require('./unshift');
 exports.zip = require('./zip');

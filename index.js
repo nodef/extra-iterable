@@ -761,6 +761,16 @@ function* tail(x) {
     if(++i>0) yield v;
 }
 /**
+ * Adds values to the start.
+ * @param {Iterable} x an array
+ * @param {...any} vs values to add
+ * @returns {Iterable} iterable
+ */
+function* unshift(x, ...vs) {
+  yield* vs;
+  yield* x;
+}
+/**
  * Gives passed values as array.
  * @param  {...any} vs values
  * @returns {Array}
@@ -829,4 +839,5 @@ exports.slice = slice;
 exports.some = some;
 exports.split = split;
 exports.tail = tail;
+exports.unshift = unshift;
 exports.zip = zip;
