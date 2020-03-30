@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.0.45",
+  "version": "2.0.46",
   "description": "Standard utility methods for Iterable.",
   "main": "index.js",
   "scripts": {
@@ -27,21 +27,25 @@
   "author": "wolfram77@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "@extra-array/count": "^2.4.4",
-    "@extra-array/count-all-on": "^2.4.4",
-    "@extra-array/count-on": "^2.4.4",
-    "@extra-array/is-disjoint": "^2.4.4",
-    "@extra-array/is-disjoint-on": "^2.4.4",
-    "@extra-array/max": "^2.4.4",
-    "@extra-array/max-on": "^2.4.4",
-    "@extra-array/min": "^2.4.4",
-    "@extra-array/min-on": "^2.4.4",
-    "@extra-array/partition": "^2.4.4",
-    "@extra-array/partition-on": "^2.4.4",
-    "@extra-array/range": "^2.4.4",
-    "@extra-array/range-on": "^2.4.4",
+    "@extra-array/count": "*",
+    "@extra-array/count-all-on": "*",
+    "@extra-array/count-on": "*",
+    "@extra-array/is-disjoint": "*",
+    "@extra-array/is-disjoint-on": "*",
+    "@extra-array/is-infix": "*",
+    "@extra-array/max": "*",
+    "@extra-array/max-on": "*",
+    "@extra-array/min": "*",
+    "@extra-array/min-on": "*",
+    "@extra-array/partition": "*",
+    "@extra-array/partition-on": "*",
+    "@extra-array/range": "*",
+    "@extra-array/range-on": "*",
     "find-npm-prefix": "^1.0.2",
-    "recast": "^0.18.7",
+    "recast": "^0.18.8",
     "tempy": "^0.5.0"
+  },
+  "dependencies": {
+    "@extra-array/is-infix-on": "^2.4.51"
   }
 }

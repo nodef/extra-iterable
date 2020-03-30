@@ -2,12 +2,12 @@ const uniques = require('./_uniques');
 const id = require('./_id');
 
 /**
- * Checks if arrays have no value in common.
- * @param {Iterable} x an array
- * @param {Iterable} y another array
+ * Checks if iterables have no value in common.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y another iterable
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
- * @returns {boolean} true if disjoint
+ * @returns {boolean}
  */
 function isDisjointOn(x, y, fn=null, ths=null) {
   var s = uniques(x, fn, ths);
