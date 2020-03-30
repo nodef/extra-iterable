@@ -1,5 +1,7 @@
-# scripts
+# parts
 src/
+wiki/
+.gitmodules
 
 # build
 build.js
