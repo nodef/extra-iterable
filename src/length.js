@@ -1,3 +1,5 @@
+const size = require('./size');
+
 /**
  * Counts the number of values.
  * @param {Iterable} x an iterable
@@ -5,10 +7,7 @@
  * @param {number} I end index (-ve: from right) (end)
  * @returns {number}
  */
-function size(x, i=0, I=Number.MAX_SAFE_INTEGER) {
-  var j = -1, n = 0;
-  for(var v of x)
-    if(++j>=i && j<I) n++;
-  return n;
+function length(x, i=0, I=Number.MAX_SAFE_INTEGER) {
+  return size(x, i, I);
 }
-module.exports = size;
+module.exports = length;

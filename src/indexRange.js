@@ -1,4 +1,4 @@
-const index = require('./index?');
+const size = require('./size');
 
 /**
  * Gets index range of part of array.
@@ -7,9 +7,11 @@ const index = require('./index?');
  * @param {number} I end index (-ve: from right) (end)
  * @returns {number} [start index, end index]
  */
-function indexRange(x, i=0, I=x.length) {
-  i = index(x, i);
-  I = Math.max(i, index(x, I));
+function indexRange(x, i=0, I=Number.MAX_SAFE_INTEGER) {
+  var n = size(x);
+  i = i<0? Math.max(n+i, 0) : Math.min(i, n);
+  I = I<0? Math.max(n+I, 0) : Math.min(I, n);
+  I = Math.max(i, I);
   return [i, I];
 }
 module.exports = indexRange;
