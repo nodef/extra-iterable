@@ -1,18 +1,22 @@
 const cmp = require('./_cmp');
 
 /**
- * Checks if array has a subsequence.
- * @param {Array} x an array
- * @param {Array} y subsequence?
+ * Checks if iterable has a subsequence.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y subsequence?
  * @param {function?} fn compare function (a, b)
  * @returns {boolean}
  */
 function isSubsequence(x, y, fn=null) {
-  if(y.length===0) return true;
   var fn = fn||cmp;
-  var j = 0, J = y.length;
-  for(var u of x)
-    if(fn(u, y[j])===0 && (++j)===J) return true;
+  var iy = y[Symbol.iterator]();
+  var {value, done} = iy.next();
+  if(done) return true;
+  for(var u of x) {
+    if(fn(u, value)!==0) continue;
+    var {value, done} = iy.next();
+    if(done) return true;
+  }
   return false;
 }
 module.exports = isSubsequence;

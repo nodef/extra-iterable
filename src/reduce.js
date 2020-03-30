@@ -8,8 +8,8 @@
 function reduce(x, fn, acc) {
   var al = arguments.length, i = -1;
   for(var v of x) {
-    if(i<0 && al>2) acc = v; 
-    else acc = fn(acc, v, ++i, x);
+    if(++i===0 && al===2) acc = v; 
+    else acc = fn(acc, v, i, x);
   }
   return acc;
 }
