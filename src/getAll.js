@@ -8,13 +8,15 @@ const get = require('./get');
  */
 function* getAll(x, is) {
   var ii = is[Symbol.iterator]();
-  var io = ii.next(), j = -1;
-  if(io.done) return;
+  var {value, done} = ii.next(), j = -1;
+  if(done) return;
   for(var v of x) {
-    if(++j!==io.value) continue;
+    if(++j!==value) continue;
     yield v;
-    io = ii.next();
-    io.value = io.value || Number.MAX_SAFE_INTEGER;
+    var {value, done} = ii.next();
+    value = value || Number.MAX_SAFE_INTEGER;
   }
+  if(!done) yield undefined;
+  for(var i of ii) yield undefined;
 }
 module.exports = getAll;
