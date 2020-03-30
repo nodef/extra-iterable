@@ -14,9 +14,10 @@ function compare(x, y, fn=null) {
   while(true) {
     var u = ix.next();
     var v = iy.next();
-    if(u.done && v.done) return 0;
+    if(u.done || v.done) break;
     var c = fn(u.value, v.value);
     if(c!==0) return c;
   }
+  return (v.done? 1:0) - (u.done? 1:0);
 }
 module.exports = compare;

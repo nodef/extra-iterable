@@ -12,5 +12,6 @@ function* chunk(x, n=1) {
     yield a;
     a = []; m = 0;
   }
+  if(a.length>0) yield a;
 }
 module.exports = chunk;

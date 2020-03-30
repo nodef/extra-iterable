@@ -9,7 +9,7 @@
 function* fill(x, v, i=0, I=Number.MAX_SAFE_INTEGER) {
   var j = -1;
   for(var u of x) {
-    if(++j>=i && j<=I) yield v;
+    if(++j>=i && j<I) yield v;
     else yield u;
   }
 }

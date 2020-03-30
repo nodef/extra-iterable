@@ -11,14 +11,13 @@ const id = require('./_id');
  */
 function* unionOn(x, y, fn=null, ths=null) {
   var fn = fn||id;
-  var s = new Set(), i = -1;
+  var s = new Set(), i = -1, j = -1;
   for(var v of x) {
     var v1 = fn.call(ths, v, ++i, x);
     s.add(v1); yield v;
   }
-  i = -1;
   for(var v of y) {
-    var v1 = fn.call(ths, v, ++i, y);
+    var v1 = fn.call(ths, v, ++j, y);
     if(!s.has(v1)) { s.add(v1); yield v; }
   }
 }
