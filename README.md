@@ -160,8 +160,8 @@ var x = [1, 2, 3, 4];
 [unshift]: https://github.com/nodef/extra-iterable/wiki/unshift
 [zip]: https://github.com/nodef/extra-iterable/wiki/zip
 
-[array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 [browserify]: https://www.npmjs.com/package/browserify
 [rollup]: https://www.npmjs.com/package/rollup
+[uglify-js]: https://www.npmjs.com/package/uglify-js
 [iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
 [extra-iterable.min]: https://www.npmjs.com/package/extra-iterable.min
