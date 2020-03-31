@@ -12,6 +12,7 @@ function* chunk(x, n=1) {
     yield a;
     a = []; m = 0;
   }
+  if(a.length>0) yield a;
 }
 /**
  * Compares two values.
@@ -20,7 +21,7 @@ function* chunk(x, n=1) {
  * @returns {number} a<b: -1, a=b: 0, a>b: 1
  */
 function cmp(a, b) {
-  return a<b? -1:(a>b? 1:0);
+  return a===b? 0:(a<b? -1:1);
 }
 /**
  * Compares two iterables.
@@ -36,10 +37,11 @@ function compare(x, y, fn=null) {
   while(true) {
     var u = ix.next();
     var v = iy.next();
-    if(u.done && v.done) return 0;
-    var c = fn(u, v);
+    if(u.done || v.done) break;
+    var c = fn(u.value, v.value);
     if(c!==0) return c;
   }
+  return (v.done? 1:0) - (u.done? 1:0);
 }
 /**
  * Appends iterables to the end.
@@ -50,28 +52,111 @@ function* concat(...xs) {
   for(var x of xs)
     yield* x;
 }
-/**
- * Compares two values.
- * @param {*} a a value
- * @param {*} b another value
- * @returns {number} a<b: -1, a=b: 0, a>b: 1
- */
-function cmp4(a, b) {
-  return a<b? -1:(a>b? 1:0);
+function* slicePP(x, i, I) {
+  var k = -1;
+  for(var v of x) {
+    if(++k>=I) break;
+    if(k>=i) yield v;
+  }
 }
-const cmp5 = cmp4;
+
+function* slicePN(x, i, I) {
+  var k = -1;
+  var a = [], ai = 0, al = -I;
+  for(var v of x) {
+    if(++k<i) { yield v; continue; }
+    if(a.length>=al) yield a[ai % al];
+    a[ai++ % al] = v;
+  }
+}
+
+function* sliceN(x, i, I) {
+  var n = 0;
+  var a = [], ai = 0, al = -i;
+  for(var v of x) {
+    a[ai++ % al] = v;
+    n++;
+  }
+  I = I<0? I:Math.min(I-n, 0);
+  for(; i<I; i++)
+    yield a[ai++ % al];
+}
 
 /**
- * Counts occurrences of a value.
- * @param {Iterable} x an array
- * @param {*} v value
- * @param {function?} fn compare function (a, b)
+ * Gets part of an iterable.
+ * @param {Iterable} x an iterable
+ * @param {number?} i start index (0)
+ * @param {number?} I end index (end)
+ * @returns {Iterable}
+ */
+function* slice(x, i=0, I=Number.MAX_SAFE_INTEGER) {
+  if(i>=0 && I>=0) yield* slicePP(x, i, I);
+  else if(i>=0 && I<0) yield* slicePN(x, i, I);
+  else yield* sliceN(x, i, I);
+}
+/**
+ * Copies part of iterable to another.
+ * @param {Iterable} x target iterable
+ * @param {Iterable} y source iterable
+ * @param {number?} j write index (0)
+ * @param {number?} i read start index (0)
+ * @param {number?} I read end index (end)
+ * @returns {Iterable}
+ */
+function* copy(x, y, j=0, i=0, I=Number.MAX_SAFE_INTEGER) {
+  var k = -1, n = 0, K = 0;
+  for(var v of x) {
+    if(++k===j) {
+      for(var u of slice(y, i, I))
+      { yield u; n++; }
+      K = j + Math.min(I-i, n);
+    }
+    if(k>=j && k<K) continue;
+    else yield v;
+  }
+  if(j>=k) {
+    for(; ++k<j;) yield undefined;
+    yield* slice(y, i, I);
+  }
+}
+/**
+ * Converts an iterator to iterable.
+ * @param {Iterable} x an iterable
+ * @returns {Iterable}
+ */
+function from(x) {
+  return x===x[Symbol.iterator]()? Array.from(x):x;
+}
+/**
+ * Copies part of iterable within.
+ * @param {Iterable} x an iterable
+ * @param {number} j write index
+ * @param {number?} i read start index (0)
+ * @param {number?} I read end index (end)
+ * @returns {Iterable}
+ */
+function* copyWithin(x, j, i=0, I=Number.MAX_SAFE_INTEGER) {
+  var x = from(x), y = slice(x, i, I);
+  var k = -1, K = j+(I-i), done = false;
+  for(var v of x) {
+    if(!done && ++k>=j && k<K) {
+      var {value, done} = y.next();
+      yield done? v : value;
+    }
+    else yield v;
+  }
+}
+/**
+ * Counts values which satisfy a test.
+ * @param {Iterable} x an iterable
+ * @param {function} fn test function (v, i, x)
+ * @param {object?} ths this argument
  * @returns {number}
  */
-function count(x, v, fn=null) {
-  var fn = fn||cmp5, n = 0;
-  for(var u of x)
-    if(fn(u, v)===0) n++;
+function count(x, fn, ths=null) {
+  var n = 0, i = -1;
+  for(var v of x)
+    if(fn.call(ths, v, ++i, x)) n++;
   return n;
 }
 /**
@@ -84,46 +169,61 @@ function id(v) {
 }
 /**
  * Counts occurrences of values.
- * @param {Iterable} x an array
+ * @param {Iterable} x an iterable
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
- * @returns {Map<any, number>}
+ * @returns {Map<any, number>} Map {value => count}
  */
-function countAllOn(x, fn=null, ths=null) {
+function countOn(x, fn=null, ths=null) {
   var fn = fn||id;
   var m = new Map(), i = -1;
   for(var v of x) {
-    var v1 = fn.call(ths, v, i, x);
-    m.set((m.get(v1)||0) + 1);
+    var v1 = fn.call(ths, v, ++i, x);
+    m.set(v1, (m.get(v1)||0) + 1);
   }
   return m;
 }
 /**
- * Gives same value.
- * @param {*} v a value
- * @returns {*} v
+ * Breaks iterable at given indices.
+ * @param {Iterable} x an iterable
+ * @param {Iterable<number>} is split indices (sorted)
+ * @returns {Iterable<Array>} ...pieces
  */
-function id8(v) {
-  return v;
-}
-const id9 = id8;
-
-/**
- * Counts occurrences of a value.
- * @param {Iterable} x an array
- * @param {*} v value
- * @param {function?} fn map function (v, i, x)
- * @param {object?} ths this argument
- * @returns {number}
- */
-function countOn(x, v, fn=null, ths=null) {
-  var fn = fn||id9, i = -1, n = 0;
-  var v1 = fn.call(ths, v, 0, null);
-  for(var u of x) {
-    var u1 = fn.call(ths, u, ++i, x);
-    if(u1===v1) n++;
+function* cut(x, is) {
+  var ii = is[Symbol.iterator]();
+  var {value, done} = ii.next();
+  if(done) { yield Array.from(x); return; }
+  var j = -1, a = [];
+  for(var v of x) {
+    if(++j<value) { a.push(v); continue; }
+    yield a; a = [v];
+    var {value, done} = ii.next();
+    value = value || Number.MAX_SAFE_INTEGER;
   }
-  return n;
+  yield a;
+  if(!done) yield [];
+  for(var i of ii) yield [];
+}
+/**
+ * Breaks iterable after given indices.
+ * @param {Iterable} x an iterable
+ * @param {Iterable<number>} is split indices (sorted)
+ * @returns {Iterable<Array>} ...pieces
+ */
+function* cutRight(x, is) {
+  var ii = is[Symbol.iterator]();
+  var {value, done} = ii.next();
+  if(done) { yield Array.from(x); return; }
+  var j = -1, a = [];
+  for(var v of x) {
+    if(++j<=value) { a.push(v); continue; }
+    yield a; a = [v];
+    var {value, done} = ii.next();
+    value = value || Number.MAX_SAFE_INTEGER;
+  }
+  yield a;
+  if(!done) yield [];
+  for(var i of ii) yield [];
 }
 /**
  * Gives values that cycle through an iterable.
@@ -132,6 +232,7 @@ function countOn(x, v, fn=null, ths=null) {
  * @returns {Iterable}
  */
 function* cycle(x, n=-1) {
+  var x = from(x);
   w: while(true) {
     for(var v of x) {
       if(n--===0) break w;
@@ -140,7 +241,7 @@ function* cycle(x, n=-1) {
   }
 }
 /**
- * Gives values of an array not present in another.
+ * Gives values of an iterable not present in another.
  * @param {Iterable} x an iterable
  * @param {Iterable} y another iterable
  * @param {function?} fn compare function (a, b)
@@ -148,6 +249,7 @@ function* cycle(x, n=-1) {
  */
 function* difference(x, y, fn=null) {
   var fn = fn||cmp;
+  var y = from(y);
   x: for(var u of x) {
     for(var v of y)
       if(fn(u, v)===0) continue x;
@@ -169,26 +271,16 @@ function uniques(x, fn=null, ths=null) {
   return s;
 }
 /**
- * Gives same value.
- * @param {*} v a value
- * @returns {*} v
- */
-function id13(v) {
-  return v;
-}
-const id14 = id13;
-
-/**
- * Gives values of an array not present in another.
- * @param {Iterable} x an array
- * @param {Iterable} y another array
+ * Gives values of an iterable not present in another.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y another iterable
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {Iterable}
  */
 function* differenceOn(x, y, fn=null, ths=null) {
+  var fn = fn||id, i = -1;
   var s = uniques(y, fn, ths);
-  var fn = fn||id14, i = -1;
   for(var u of x) {
     var u1 = fn.call(ths, u, ++i, x);
     if(!s.has(u1)) yield u;
@@ -208,6 +300,21 @@ function every(x, fn, ths=null) {
   return true;
 }
 /**
+ * Fills with given value.
+ * @param {Iterable} x an iterable
+ * @param {*} v value
+ * @param {number?} i start index (0)
+ * @param {number?} I end index (end)
+ * @returns {Iterable}
+ */
+function* fill(x, v, i=0, I=Number.MAX_SAFE_INTEGER) {
+  var j = -1;
+  for(var u of x) {
+    if(++j>=i && j<I) yield v;
+    else yield u;
+  }
+}
+/**
  * Keeps the values which pass a test.
  * @param {Iterable} x an iterable
  * @param {function} fn test function (v, i, x)
@@ -218,6 +325,30 @@ function* filter(x, fn, ths=null) {
   var i = -1;
   for(var v of x)
     if(fn.call(ths, v, ++i, x)) yield v;
+}
+/**
+ * Finds index of leftmost value passing the test.
+ * @param {Iterable} x an iterable
+ * @param {function} fn test function (v, i, x)
+ * @param {object?} ths this argument
+ * @returns {number} index of value, -1 if not found
+ */
+function findIndex(x, fn, ths=null) {
+  var i = -1;
+  for(var v of x)
+    if(fn.call(ths, v, ++i, x)) return i;
+}
+/**
+ * Finds indices of values passing the test.
+ * @param {Iterable} x an iterable
+ * @param {function} fn test function (v, i, x)
+ * @param {object?} ths this argument
+ * @returns {Iterable<number>}
+ */
+function* findIndices(x, fn, ths=null) {
+  var i = -1;
+  for(var v of x)
+    if(fn.call(ths, v, ++i, x)) yield i;
 }
 /**
  * Finds first value which satisfies a test.
@@ -284,6 +415,36 @@ function forEach(x, fn, ths=null) {
     fn.call(ths, v, ++i, x);
 }
 /**
+ * Gets value at indices.
+ * @param {Iterable} x an iterable
+ * @param {Iterable<number>} is indices (sorted)
+ * @returns {*} ...values
+ */
+function* getAll(x, is) {
+  var ii = is[Symbol.iterator]();
+  var {value, done} = ii.next(), j = -1;
+  if(done) return;
+  for(var v of x) {
+    if(++j!==value) continue;
+    yield v;
+    var {value, done} = ii.next();
+    value = value || Number.MAX_SAFE_INTEGER;
+  }
+  if(!done) yield undefined;
+  for(var i of ii) yield undefined;
+}
+/**
+ * Gets value at index.
+ * @param {Iterable} x an iterable
+ * @param {number} i index
+ * @returns {*}
+ */
+function get(x, i) {
+  var j = -1;
+  for(var v of x)
+    if(++j===i) return v;
+}
+/**
  * Keeps similar values together and in order.
  * @param {Iterable} x an iterable
  * @param {function?} fn compare function (a, b)
@@ -328,6 +489,43 @@ function head(x) {
     return v;
 }
 /**
+ * Counts the number of values.
+ * @param {Iterable} x an iterable
+ * @param {number} i start index (0)
+ * @param {number} I end index (end)
+ * @returns {number}
+ */
+function size(x, i=0, I=Number.MAX_SAFE_INTEGER) {
+  var j = -1, n = 0;
+  for(var v of x)
+    if(++j>=i && j<I) n++;
+  return n;
+}
+/**
+ * Gets zero-based index.
+ * @param {Iterable} x an iterable
+ * @param {number} i index (-ve: from right)
+ * @returns {number}
+ */
+function index(x, i) {
+  var n = size(x);
+  return i<0? Math.max(n+i, 0) : Math.min(i, n);
+}
+/**
+ * Gets index range of part of array.
+ * @param {Array} x an array
+ * @param {number} i start index (-ve: from right) (0)
+ * @param {number} I end index (-ve: from right) (end)
+ * @returns {number} [start index, end index]
+ */
+function indexRange(x, i=0, I=Number.MAX_SAFE_INTEGER) {
+  var n = size(x);
+  i = i<0? Math.max(n+i, 0) : Math.min(i, n);
+  I = I<0? Math.max(n+I, 0) : Math.min(I, n);
+  I = Math.max(i, I);
+  return [i, I];
+}
+/**
  * Gets values except last.
  * @param {Iterable} x an iterable
  * @returns {Iterable}
@@ -340,7 +538,18 @@ function* init(x) {
   }
 }
 /**
- * Gives values of an iterable present in another.
+ * Places values of an iterable between another.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y another iterable
+ * @param {number?} m number of values from x (1)
+ * @param {number?} n number of values from y (1)
+ * @returns {Iterable}
+ */
+function* interleave(x, y, m=1, n=1) {
+  throw new Error('TODO?');
+}
+/**
+ * Gives values present in both iterables.
  * @param {Iterable} x an iterable
  * @param {Iterable} y another iterable
  * @param {function?} fn compare function (a, b)
@@ -348,13 +557,14 @@ function* init(x) {
  */
 function* intersection(x, y, fn=null) {
   var fn = fn||cmp;
+  var y = from(y);
   x: for(var u of x) {
     for(var v of y)
       if(fn(u, v)===0) { yield u; continue x; }
   }
 }
 /**
- * Gives values of an iterable present in another.
+ * Gives values present in both iterables.
  * @param {Iterable} x an iterable
  * @param {Iterable} y another iterable
  * @param {function?} fn map function (v, i, x)
@@ -370,25 +580,15 @@ function* intersectionOn(x, y, fn=null, ths=null) {
   }
 }
 /**
- * Compares two values.
- * @param {*} a a value
- * @param {*} b another value
- * @returns {number} a<b: -1, a=b: 0, a>b: 1
- */
-function cmp29(a, b) {
-  return a<b? -1:(a>b? 1:0);
-}
-const cmp30 = cmp29;
-
-/**
- * Checks if arrays have no value in common.
- * @param {Iterable} x an array
- * @param {Iterable} y another array
+ * Checks if iterables have no value in common.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y another iterable
  * @param {function?} fn compare function (a, b)
- * @returns {boolean} true if disjoint
+ * @returns {boolean}
  */
 function isDisjoint(x, y, fn=null) {
-  var fn = fn||cmp30;
+  var fn = fn||cmp;
+  var x = from(x);
   for(var v of y) {
     for(var u of x)
       if(fn(u, v)===0) return false;
@@ -396,41 +596,16 @@ function isDisjoint(x, y, fn=null) {
   return true;
 }
 /**
- * Gets unique set of values.
- * @param {Array} x an array
+ * Checks if iterables have no value in common.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y another iterable
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
- * @returns {Set}
- */
-function uniques31(x, fn=null, ths=null) {
-  if(!fn) return new Set(x);
-  var s = new Set(), i = -1;
-  for(var v of x)
-    s.add(fn.call(ths, v, ++i, x));
-  return s;
-}
-/**
- * Gives same value.
- * @param {*} v a value
- * @returns {*} v
- */
-function id32(v) {
-  return v;
-}
-const uniques33 = uniques31;
-const id33 = id32;
-
-/**
- * Checks if arrays have no value in common.
- * @param {Iterable} x an array
- * @param {Iterable} y another array
- * @param {function?} fn map function (v, i, x)
- * @param {object?} ths this argument
- * @returns {boolean} true if disjoint
+ * @returns {boolean}
  */
 function isDisjointOn(x, y, fn=null, ths=null) {
-  var s = uniques33(x, fn, ths);
-  var fn = fn||id33, i = -1;
+  var s = uniques(x, fn, ths);
+  var fn = fn||id, i = -1;
   for(var v of y) {
     var v1 = fn.call(ths, v, ++i, y);
     if(s.has(v1)) return false;
@@ -440,12 +615,241 @@ function isDisjointOn(x, y, fn=null, ths=null) {
 /**
  * Checks if two iterables are equal.
  * @param {Iterable} x an iterable
- * @param {Iterable} y an iterable
+ * @param {Iterable} y another iterable
  * @param {function?} fn compare function (a, b)
  * @returns {boolean}
  */
 function isEqual(x, y, fn=null) {
   return compare(x, y, fn)===0;
+}
+/**
+ * Compares two values.
+ * @param {*} a a value
+ * @param {*} b another value
+ * @returns {number} a<b: -1, a=b: 0, a>b: 1
+ */
+function cmp43(a, b) {
+  return a<b? -1:(a>b? 1:0);
+}
+const cmp44 = cmp43;
+
+/**
+ * Checks if array contains an infix.
+ * @param {Array} x an array
+ * @param {Array} y infix?
+ * @param {function?} fn compare function (a, b)
+ * @returns {boolean} true if infix
+ */
+function isInfix(x, y, fn=null) {
+  if(y.length===0) return true;
+  var fn = fn||cmp44;
+  var Y = y.length, J = 0;
+  var m = new Array(Y).fill(false);
+  for(var u of x) {
+    for(var j=J; j>0; j--)
+      m[j] = m[j-1] && fn(u, y[j])===0;
+    m[0] = fn(u, y[0])===0;
+    J = Math.min(J+1, Y-1);
+    if(m[Y-1]) return true;
+  }
+  return false;
+}
+const _isInfix = isInfix45;
+
+/**
+ * Checks if iterable contains an infix.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y infix?
+ * @param {function?} fn compare function (a, b)
+ * @returns {boolean}
+ */
+function isInfix45(x, y, fn=null) {
+  var y = Array.isArray(y)? y:Array.from(y);
+  return _isInfix(x, y, fn);
+}
+const _isInfixOn = require('@extra-array/is-infix-on');
+
+/**
+ * Checks if iterable contains an infix.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y infix?
+ * @param {function?} fn map function (v, i, x)
+ * @param {object?} ths this argument
+ * @returns {boolean}
+ */
+function isInfixOn(x, y, fn=null, ths=null) {
+  var y = Array.isArray(y)? y:Array.from(y);
+  return _isInfixOn(x, y, fn, ths);
+}
+/**
+ * Checks if value is an iterator (can iterate only once).
+ * @param {*} v a value
+ * @returns {boolean}
+ */
+function isIterator(v) {
+  return is(v) && v===v[Symbol.iterator]();
+}
+/**
+ * Checks if iterable starts with a prefix.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y prefix?
+ * @param {function?} fn compare function (a, b)
+ * @returns {boolean}
+ */
+function isPrefix(x, y, fn=null) {
+  var fn = fn||cmp;
+  var ix = x[Symbol.iterator]();
+  for(var v of y) {
+    var {value, done} = ix.next();
+    if(done || fn(value, v)!==0) return false;
+  }
+  return true;
+}
+/**
+ * Checks if iterable starts with a prefix.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y prefix?
+ * @param {function?} fn map function (v, i, x)
+ * @param {object?} ths this argument
+ * @returns {boolean}
+ */
+function isPrefixOn(x, y, fn=null, ths=null) {
+  var fn = fn||id, i = -1;
+  var ix = x[Symbol.iterator]();
+  for(var v of y) {
+    var {value, done} = ix.next();
+    if(done) return false;
+    var u1 = fn.call(ths, value, ++i, x);
+    var v1 = fn.call(ths, v, i, y);
+    if(u1!==v1) return false;
+  }
+  return true;
+}
+/**
+ * Checks if iterable has a subsequence.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y subsequence?
+ * @param {function?} fn compare function (a, b)
+ * @returns {boolean}
+ */
+function isSubsequence(x, y, fn=null) {
+  var fn = fn||cmp;
+  var iy = y[Symbol.iterator]();
+  var {value, done} = iy.next();
+  if(done) return true;
+  for(var u of x) {
+    if(fn(u, value)!==0) continue;
+    var {value, done} = iy.next();
+    if(done) return true;
+  }
+  return false;
+}
+/**
+ * Checks if iterable has a subsequence.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y subsequence?
+ * @param {function?} fn map function (v, i, x)
+ * @param {object?} ths this argument
+ * @returns {boolean}
+ */
+function isSubsequenceOn(x, y, fn=null, ths=null) {
+  var fn = fn||id, i = -1, j = -1;
+  var iy = y[Symbol.iterator]();
+  var {value, done} = iy.next();
+  if(done) return true;
+  var v1 = fn.call(ths, value, ++j, y);
+  for(var u of x) {
+    var u1 = fn.call(ths, u, ++i, x);
+    if(u1!==v1) continue;
+    var {value, done} = iy.next();
+    if(done) return true;
+    v1 = fn.call(ths, value, ++j, y);
+  }
+  return false;
+}
+/**
+ * Checks if iterable ends with a suffix.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y suffix?
+ * @param {function?} fn compare function (a, b)
+ * @returns {boolean}
+ */
+function isSuffix(x, y, fn=null) {
+  var fn = fn||cmp;
+  var y = Array.isArray(y)? y:Array.from(y);
+  var Y = y.length, a = [], ai = 0;
+  if(Y===0) return true;
+  for(var u of x)
+    a[ai++ % Y] = u;
+  if(a.length<Y) return false;
+  for(var i=0; i<Y; i++)
+    if(fn(a[ai++ % Y], y[i])!==0) return false;
+  return true;
+}
+/**
+ * Checks if iterable ends with a suffix.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y suffix?
+ * @param {function?} fn map function (v, i, x)
+ * @param {object?} ths this argument
+ * @returns {boolean}
+ */
+function isSuffixOn(x, y, fn=null, ths=null) {
+  var fn = fn||id, n = 0;
+  var y = Array.isArray(y)? y:Array.from(y);
+  var Y = y.length, a = [], ai = 0;
+  if(Y===0) return true;
+  for(var u of x) {
+    a[ai++ % Y] = u;
+    n++;
+  }
+  if(a.length<Y) return false;
+  for(var i=0, j=n-Y; i<Y; i++, j++) {
+    var u1 = fn.call(ths, a[ai++ % Y], j, x);
+    var v1 = fn.call(ths, y[i], i, y);
+    if(u1!==v1) return false;
+  }
+  return true;
+}
+/**
+ * Checks if there are no duplicate values.
+ * @param {Array} x an array
+ * @param {function?} fn compare function (a, b)
+ * @returns {boolean}
+ */
+function isUnique(x, fn=null) {
+  var fn = fn||cmp;
+  for(var i=0, I=x.length; i<I; i++) {
+    for(var j=0; j<i; j++)
+      if(fn(x[i], x[j])===0) return false;
+  }
+  return true;
+}
+/**
+ * Checks if there are no duplicate values.
+ * @param {Array} x an array
+ * @param {function?} fn map function (v, i, x)
+ * @param {object?} ths this argument
+ * @returns {boolean}
+ */
+function isUniqueOn(x, fn=null, ths=null) {
+  var fn = fn||id;
+  for(var i=0, I=x.length; i<I; i++) {
+    var u = fn.call(ths, x[i], i, x);
+    for(var j=0; j<i; j++) {
+      var v = fn.call(ths, x[j], j, x);
+      if(u===v) return false;
+    }
+  }
+  return true;
+}
+/**
+ * Gives iterator for iterable.
+ * @param {Iterable} x an iterable
+ * @returns {Iterable}
+ */
+function iterator(x) {
+  return x[Symbol.iterator]();
 }
 /**
  * Joins values together.
@@ -469,6 +873,16 @@ function last(x) {
   return v;
 }
 /**
+ * Counts the number of values.
+ * @param {Iterable} x an iterable
+ * @param {number} i start index (-ve: from right) (0)
+ * @param {number} I end index (-ve: from right) (end)
+ * @returns {number}
+ */
+function length(x, i=0, I=Number.MAX_SAFE_INTEGER) {
+  return size(x, i, I);
+}
+/**
  * Updates values based on map function.
  * @param {Iterable} x an iterable
  * @param {function} fn map function (v, i, x)
@@ -481,109 +895,75 @@ function* map(x, fn, ths=null) {
     yield fn.call(ths, v, ++i, x);
 }
 /**
- * Compares two values.
- * @param {*} a a value
- * @param {*} b another value
- * @returns {number} a<b: -1, a=b: 0, a>b: 1
- */
-function cmp38(a, b) {
-  return a<b? -1:(a>b? 1:0);
-}
-const cmp39 = cmp38;
-
-/**
  * Finds largest value.
- * @param {Iterable} x an array
+ * @param {Iterable} x an iterable
  * @param {function?} fn compare function (a, b)
  * @returns {*}
  */
 function max(x, fn=null) {
-  var fn = fn||cmp39, m = x[0];
-  for(var v of x)
+  var fn = fn||cmp;
+  var m, i = -1;
+  for(var v of x) {
+    if(++i===0) m = v;
     if(fn(v, m)>0) m = v;
+  }
   return m;
 }
 /**
- * Gives same value.
- * @param {*} v a value
- * @returns {*} v
- */
-function id40(v) {
-  return v;
-}
-const id41 = id40;
-
-/**
  * Finds largest value.
- * @param {Iterable} x an array
+ * @param {Iterable} x an iterable
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {*}
  */
 function maxOn(x, fn=null, ths=null) {
-  var fn = fn||id41, i = -1;
-  var mk = fn.call(ths, x[0], 0, x), mv = x[0];
+  var fn = fn||id;
+  var mk, mv, i = -1;
   for(var v of x) {
     var k = fn.call(ths, v, ++i, x);
+    if(i===0) { mk = k; mv = v; }
     if(k>mk) { mk = k; mv = v; }
   }
   return mv;
 }
 /**
- * Compares two values.
- * @param {*} a a value
- * @param {*} b another value
- * @returns {number} a<b: -1, a=b: 0, a>b: 1
- */
-function cmp42(a, b) {
-  return a<b? -1:(a>b? 1:0);
-}
-const cmp43 = cmp42;
-
-/**
  * Finds smallest value.
- * @param {Iterable} x an array
+ * @param {Iterable} x an iterable
  * @param {function?} fn compare function (a, b)
  * @returns {*}
  */
 function min(x, fn=null) {
-  var fn = fn||cmp43, m = x[0];
-  for(var v of x)
+  var fn = fn||cmp;
+  var m, i = -1;
+  for(var v of x) {
+    if(++i===0) m = v;
     if(fn(v, m)<0) m = v;
+  }
   return m;
 }
 /**
- * Gives same value.
- * @param {*} v a value
- * @returns {*} v
- */
-function id44(v) {
-  return v;
-}
-const id45 = id44;
-
-/**
  * Finds smallest value.
- * @param {Iterable} x an array
+ * @param {Iterable} x an iterable
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {*}
  */
 function minOn(x, fn=null, ths=null) {
-  var fn = fn||id45, i = -1;
-  var mk = fn.call(ths, x[0], 0, x), mv = x[0];
+  var fn = fn||id, i = -1;
+  var mk, mv;
   for(var v of x) {
     var k = fn.call(ths, v, ++i, x);
+    if(i===0) { mk = k; mv = v; }
     if(k<mk) { mk = k; mv = v; }
   }
   return mv;
 }
 /**
- * Breaks array into values, by test.
- * @param {Iterable} x an array
+ * Segregates iterable keeping similar values together.
+ * @param {Iterable} x an iterable
  * @param {function} fn test function (v, i, x)
  * @param {object?} ths this argument
- * @returns {Array<Array>} [[...satisfies], [...doesnt]]
+ * @returns {Array<Array>} [satisfies, doesnt]
  */
 function partition(x, fn, ths=null) {
   var t = [], f = [], i = -1;
@@ -594,24 +974,14 @@ function partition(x, fn, ths=null) {
   return [t, f];
 }
 /**
- * Gives same value.
- * @param {*} v a value
- * @returns {*} v
- */
-function id47(v) {
-  return v;
-}
-const id48 = id47;
-
-/**
- * Breaks array into values, by map.
+ * Segregates array keeping similar values together.
  * @param {Iterable} x an array
  * @param {function} fn map function (v, i, x)
  * @param {object?} ths this argument
- * @returns {Map<any, Array>} {key => [...values]}
+ * @returns {Map<any, Array>} {key => values}
  */
 function partitionOn(x, fn=null, ths=null) {
-  var fn = fn||id48;
+  var fn = fn||id;
   var m = new Map(), i = -1;
   for(var v of x) {
     var v1 = fn.call(ths, v, ++i, x);
@@ -619,6 +989,15 @@ function partitionOn(x, fn=null, ths=null) {
     m.get(v1).push(v);
   }
   return m;
+}
+/**
+ * Removes last value.
+ * @param {Iterable} x an iterable
+ * @returns {Array} [value, iterable]
+ */
+function pop(x) {
+  var x = from(x);
+  return [last(x), init(x)];
 }
 /**
  * Adds values to the end. 
@@ -631,40 +1010,21 @@ function* push(x, ...vs) {
   yield* vs;
 }
 /**
- * Compares two values.
- * @param {*} a a value
- * @param {*} b another value
- * @returns {number} a<b: -1, a=b: 0, a>b: 1
- */
-function cmp50(a, b) {
-  return a<b? -1:(a>b? 1:0);
-}
-const cmp51 = cmp50;
-
-/**
  * Finds smallest and largest values.
- * @param {Iterable} x an array
+ * @param {Iterable} x an iterable
  * @param {function?} fn compare function (a, b)
  * @returns {Array} [min, max]
  */
 function range(x, fn=null) {
-  var fn = fn||cmp51, m = x[0], n = m;
+  var fn = fn||cmp;
+  var m, n, i = -1;
   for(var v of x) {
+    if(++i===0) { m = n = v; }
     if(fn(v, m)<0) m = v;
     if(fn(v, n)>0) n = v;
   }
   return [m, n];
 }
-/**
- * Gives same value.
- * @param {*} v a value
- * @returns {*} v
- */
-function id52(v) {
-  return v;
-}
-const id53 = id52;
-
 /**
  * Finds smallest and largest values.
  * @param {Iterable} x an array
@@ -673,11 +1033,11 @@ const id53 = id52;
  * @returns {Array} [min, max]
  */
 function rangeOn(x, fn=null, ths=null) {
-  var fn = fn||id53, i = -1;
-  var mk = fn.call(ths, x[0], 0, x), mv = x[0];
-  var nk = mk, nv = mv;
+  var fn = fn||id, i = -1;
+  var mk, mv, nk, nv;
   for(var v of x) {
     var k = fn.call(ths, v, ++i, x);
+    if(i===0) { mk = nk = k; mv = nv = v; }
     if(k<mk) { mk = k; mv = v; }
     if(k>nk) { nk = k; nv = v; }
   }
@@ -693,8 +1053,8 @@ function rangeOn(x, fn=null, ths=null) {
 function reduce(x, fn, acc) {
   var al = arguments.length, i = -1;
   for(var v of x) {
-    if(i<0 && al>2) acc = v; 
-    else acc = fn(acc, v, ++i, x);
+    if(++i===0 && al===2) acc = v; 
+    else acc = fn(acc, v, i, x);
   }
   return acc;
 }
@@ -705,8 +1065,68 @@ function reduce(x, fn, acc) {
  * @returns {Iterable}
  */
 function* repeat(x, n) {
+  var x = from(x);
   for(; n!==0; n--)
     yield* x;
+}
+/**
+ * Searches a value throughout.
+ * @param {Iterable} x an iterable
+ * @param {*} v search value
+ * @param {function?} fn compare function (a, b)
+ * @returns {Iterable<number>} indices of value
+ */
+function* searchAll(x, v, fn=null) {
+  var fn = fn||cmp, i = -1;
+  for(var u of x) {
+    ++i;
+    if(fn(u, v)===0) yield i;
+  }
+}
+/**
+ * Searches a value from left.
+ * @param {Iterable} x an iterable
+ * @param {*} v search value
+ * @param {function?} fn compare function (a, b)
+ * @returns {number} index of value, -1 if not found
+ */
+function search(x, v, fn=null) {
+  var fn = fn||cmp, i = -1;
+  for(var u of x) {
+    ++i;
+    if(fn(u, v)===0) return i;
+  }
+  return -1;
+}
+/**
+ * Searches a value from right.
+ * @param {Iterable} x an iterable
+ * @param {*} v search value
+ * @param {function?} fn compare function (a, b)
+ * @returns {number} index of value, -1 if not found
+ */
+function searchRight(x, v, fn=null) {
+  var fn = fn||cmp, i = -1, j = -1;
+  for(var u of x) {
+    ++i;
+    if(fn(u, v)===0) j = i;
+  }
+  return j;
+}
+/**
+ * Sets value at index.
+ * @param {Iterable} x an iterable
+ * @param {number} i index
+ * @param {*} v value
+ * @returns {Iterable}
+ */
+function* set(x, i, v) {
+  var j = -1;
+  for(var u of x)
+    yield (++j===i? v:u);
+  if(j>=i) return;
+  for(; ++j<i;) yield undefined;
+  yield v;
 }
 /**
  * Removes first value.
@@ -716,30 +1136,6 @@ function* repeat(x, n) {
 function shift(x) {
   var ix = x[Symbol.iterator]();
   return [ix.next().value, ix];
-}
-/**
- * Counts the number of values.
- * @param {Iterable} x an iterable
- * @returns {number}
- */
-function size(x) {
-  var i = -1;
-  for(var v of x)
-    ++i;
-  return i+1;
-}
-/**
- * Gets part of an iterable.
- * @param {Iterable} x an iterable
- * @param {number?} i begin index (0)
- * @param {number?} I end index (end)
- */
-function* slice(x, i=0, I=Number.MAX_SAFE_INTEGER) {
-  var j = -1;
-  for(var v of x) {
-    if(++j>=I) break;
-    if(j>=i) yield v;
-  }
 }
 /**
  * Checks if any value satisfies a test.
@@ -770,6 +1166,25 @@ function* split(x, fn, ths=null) {
   if(a.length) yield a;
 }
 /**
+ * Exchanges two values.
+ * @param {Iterable} x an iterable
+ * @param {number} i an index
+ * @param {number} j another index
+ * @returns {Iterable}
+ */
+function* swap(x, i, j) {
+  if(i===j) yield* x;
+  var k = Math.min(i, j);
+  var l = Math.max(i, j);
+  var vk, m = [], i = -1;
+  for(var v of x) {
+    if(++i<k || i>l) yield v;
+    else if(i===k) vk = v;
+    else if(i<l) m.push(v)
+    else { yield v; yield* m; yield vk; }
+  }
+}
+/**
  * Gets values except first.
  * @param {Iterable} x an iterable
  * @returns {Iterable}
@@ -778,6 +1193,64 @@ function* tail(x) {
   var i = -1;
   for(var v of x)
     if(++i>0) yield v;
+}
+/**
+ * Gives values present in any iterable.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y another iterable
+ * @param {function?} fn compare function (a, b)
+ * @returns {Iterable}
+ */
+function* union(x, y, fn=null) {
+  var fn = fn||cmp;
+  var x = from(x), s = new Set();
+  yield* x;
+  y: for(var v of y) {
+    for(var u of x)
+      if(fn(u, v)===0) continue y;
+    for(var u of s)
+      if(fn(u, v)===0) continue y;
+    yield v; s.add(v);
+  }
+}
+/**
+ * Gives values present in any iterable.
+ * @param {Iterable} x an iterable
+ * @param {Iterable} y another iterable
+ * @param {function?} fn map function (v, i, x)
+ * @param {object?} ths this argument
+ * @returns {Iterable}
+ */
+function* unionOn(x, y, fn=null, ths=null) {
+  var fn = fn||id;
+  var s = new Set(), i = -1, j = -1;
+  for(var v of x) {
+    var v1 = fn.call(ths, v, ++i, x);
+    s.add(v1); yield v;
+  }
+  for(var v of y) {
+    var v1 = fn.call(ths, v, ++j, y);
+    if(!s.has(v1)) { s.add(v1); yield v; }
+  }
+}
+/**
+ * Removes duplicate values.
+ * @param {Iterable} x an iterable
+ * @param {function?} fn compare function (a, b)
+ * @returns {Iterable}
+ */
+function* unique(x, fn=null) {
+  yield* union([], x, fn);
+}
+/**
+ * Removes duplicate values.
+ * @param {Iterable} x an iterable
+ * @param {function?} fn map function (v, i, x)
+ * @param {object?} ths this argument
+ * @returns {Iterable}
+ */
+function* uniqueOn(x, fn=null, ths=null) {
+  yield* unionOn([], x, fn, ths);
 }
 /**
  * Adds values to the start.
@@ -808,40 +1281,65 @@ function* zip(xs, fn=null, ths=null) {
   var fn = fn||args;
   var is = xs.map(x => x[Symbol.iterator]());
   while(true) {
-    var rs = is.map(i => i.next());
-    if(rs.every(r => r.done)) break;
-    var vs = rs.map(r => r.value);
+    var io = is.map(i => i.next());
+    if(io.every(r => r.done)) break;
+    var vs = io.map(r => r.value);
     yield fn.apply(ths, vs);
   }
 }
 exports.chunk = chunk;
 exports.compare = compare;
 exports.concat = concat;
+exports.copy = copy;
+exports.copyWithin = copyWithin;
 exports.count = count;
-exports.countAllOn = countAllOn;
 exports.countOn = countOn;
+exports.cut = cut;
+exports.cutRight = cutRight;
 exports.cycle = cycle;
 exports.difference = difference;
 exports.differenceOn = differenceOn;
 exports.every = every;
+exports.fill = fill;
 exports.filter = filter;
+exports.findIndex = findIndex;
+exports.findIndices = findIndices;
 exports.find = find;
 exports.findRight = findRight;
 exports.flat = flat;
 exports.forEach = forEach;
+exports.from = from;
+exports.getAll = getAll;
+exports.get = get;
 exports.group = group;
 exports.groupOn = groupOn;
 exports.head = head;
+exports.index = index;
+exports.indexRange = indexRange;
 exports.init = init;
+exports.interleave = interleave;
 exports.intersection = intersection;
 exports.intersectionOn = intersectionOn;
-exports.is = is;
 exports.isDisjoint = isDisjoint;
 exports.isDisjointOn = isDisjointOn;
 exports.isEqual = isEqual;
+exports.isInfix = isInfix45;
+exports.isInfixOn = isInfixOn;
+exports.isIterator = isIterator;
+exports.is = is;
 exports.isList = isList;
+exports.isPrefix = isPrefix;
+exports.isPrefixOn = isPrefixOn;
+exports.isSubsequence = isSubsequence;
+exports.isSubsequenceOn = isSubsequenceOn;
+exports.isSuffix = isSuffix;
+exports.isSuffixOn = isSuffixOn;
+exports.isUnique = isUnique;
+exports.isUniqueOn = isUniqueOn;
+exports.iterator = iterator;
 exports.join = join;
 exports.last = last;
+exports.length = length;
 exports.map = map;
 exports.max = max;
 exports.maxOn = maxOn;
@@ -849,16 +1347,27 @@ exports.min = min;
 exports.minOn = minOn;
 exports.partition = partition;
 exports.partitionOn = partitionOn;
+exports.pop = pop;
 exports.push = push;
 exports.range = range;
 exports.rangeOn = rangeOn;
 exports.reduce = reduce;
 exports.repeat = repeat;
+exports.searchAll = searchAll;
+exports.search = search;
+exports.searchRight = searchRight;
+exports.set = set;
 exports.shift = shift;
 exports.size = size;
 exports.slice = slice;
 exports.some = some;
+//exports.splice = require('./splice');
 exports.split = split;
+exports.swap = swap;
 exports.tail = tail;
+exports.union = union;
+exports.unionOn = unionOn;
+exports.unique = unique;
+exports.uniqueOn = uniqueOn;
 exports.unshift = unshift;
 exports.zip = zip;
