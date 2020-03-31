@@ -1,7 +1,7 @@
 An [iterable] is a sequence of values.
 
 Methods look like:
-- `unique()`: dont modify the array itself (default).
+- `unique()`: accepts a compare function (default).
 - `uniqueOn()`: accepts a map function *for faster comparision* (map).
 
 I find this map-approach beautiful, which i learned from Haskell's `sortOn()`.
