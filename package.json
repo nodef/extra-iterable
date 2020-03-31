@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "scripts": {
@@ -111,6 +111,7 @@
     "@extra-array/is-disjoint": "*",
     "@extra-array/is-disjoint-on": "*",
     "@extra-array/is-infix": "*",
+    "@extra-array/is-infix-on": "*",
     "@extra-array/max": "*",
     "@extra-array/max-on": "*",
     "@extra-array/min": "*",
@@ -122,8 +123,5 @@
     "find-npm-prefix": "^1.0.2",
     "recast": "^0.18.8",
     "tempy": "^0.5.0"
-  },
-  "dependencies": {
-    "@extra-array/is-infix-on": "^2.4.51"
   }
 }
