@@ -2,7 +2,7 @@ const cmp = require('./_cmp');
 const from = require('./from');
 
 /**
- * Gives values present in any array.
+ * Gives values present in any iterable.
  * @param {Iterable} x an iterable
  * @param {Iterable} y another iterable
  * @param {function?} fn compare function (a, b)

@@ -2,7 +2,7 @@ const cmp = require('./_cmp');
 const from = require('./from');
 
 /**
- * Gives values of an iterable present in another.
+ * Gives values present in both iterables.
  * @param {Iterable} x an iterable
  * @param {Iterable} y another iterable
  * @param {function?} fn compare function (a, b)

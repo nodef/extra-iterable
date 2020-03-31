@@ -2,7 +2,7 @@
  * Gets value at index.
  * @param {Iterable} x an iterable
  * @param {number} i index
- * @returns {*} value
+ * @returns {*}
  */
 function get(x, i) {
   var j = -1;

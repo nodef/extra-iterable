@@ -1,8 +1,8 @@
 /**
  * Counts the number of values.
  * @param {Iterable} x an iterable
- * @param {number} i start index (-ve: from right) (0)
- * @param {number} I end index (-ve: from right) (end)
+ * @param {number} i start index (0)
+ * @param {number} I end index (end)
  * @returns {number}
  */
 function size(x, i=0, I=Number.MAX_SAFE_INTEGER) {

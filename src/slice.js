@@ -31,7 +31,7 @@ function* sliceN(x, i, I) {
 /**
  * Gets part of an iterable.
  * @param {Iterable} x an iterable
- * @param {number?} i begin index (0)
+ * @param {number?} i start index (0)
  * @param {number?} I end index (end)
  * @returns {Iterable}
  */

@@ -1,7 +1,7 @@
 /**
  * Sets value at index.
  * @param {Iterable} x an iterable
- * @param {number} i index (-ve: from right)
+ * @param {number} i index
  * @param {*} v value
  * @returns {Iterable}
  */

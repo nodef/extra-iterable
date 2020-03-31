@@ -1,5 +1,3 @@
-const get = require('./get');
-
 /**
  * Gets value at indices.
  * @param {Iterable} x an iterable

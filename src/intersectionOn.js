@@ -2,7 +2,7 @@ const uniques = require('./_uniques');
 const id = require('./_id');
 
 /**
- * Gives values of an iterable present in another.
+ * Gives values present in both iterables.
  * @param {Iterable} x an iterable
  * @param {Iterable} y another iterable
  * @param {function?} fn map function (v, i, x)
