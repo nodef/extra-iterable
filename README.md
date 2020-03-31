@@ -35,70 +35,63 @@ var x = [1, 2, 3, 4];
 
 | Method                | Action
 |-----------------------|-------
-| [is]                  | Checks if value is an iterable.
+| [is]                  | Checks if value is iterable.
 | [get]                 | Gets value at index.
 | [set]                 | Sets value at index.
 | [swap]                | Exchanges two values.
 | [index]               | Gets zero-based index.
 | [indexRange]          | Gets index range of part of iterable.
 | [size]                | Counts the number of values.
+| [iterator]            | Gives iterator for iterable.
+| [from]                | Converts an iterator to iterable.
 |                       |
-| [chunk]               | Breaks iterable into chunks of given size.
-| [compare]             | Compares two iterables.
-| [concat]              | Appends iterables to the end.
-| [copy]                | Copies part of iterable to another.
-| [count]               | Counts values which satisfy a test.
-| [cut]                 | Breaks iterable at given indices.
-| [cycle]               | Gives values that cycle through an iterable.
-| [difference]          | Gives values of an iterable not present in another.
-| [every]               | Checks if all values satisfy a test.
 | [fill]                | Fills with given value.
+| [copy]                | Copies part of iterable to another.
+| [concat]              | Appends iterables to the end.
+| [slice]               | Gets a part of iterable.
+| [splice]              | Removes or replaces existing values.
+| [flat]                | Flattens nested iterable to given depth.
+| [cut]                 | Breaks iterable at given indices.
+| [chunk]               | Breaks iterable into chunks of given size.
+| [cycle]               | Gives values that cycle through an iterable.
+| [repeat]              | Repeats an iterable given times.
+| [interleave]          | Places values of an iterable between another.
+|                       |
+| [min]                 | Finds smallest value.
+| [max]                 | Finds largest value.
+| [range]               | Finds smallest and largest values.
+| [map]                 | Updates values based on map function.
+| [reduce]              | Reduces values to a single value.
 | [filter]              | Keeps values which pass a test.
+| [count]               | Counts values which satisfy a test.
+| [partition]           | Segregates iterable keeping similar values together.
+| [group]               | Keeps similar values together and in order.
+| [split]               | Breaks iterable considering test as separator.
+| [zip]                 | Combines values from n iterables.
+| [join]                | Joins values together.
+|                       |
+| [unique]              | Removes duplicate values.
+| [union]               | Gives values present in any iterable.
+| [intersection]        | Gives values present in both iterables.
+| [difference]          | Gives values of an iterable not present in another.
+| [isUnique]            | Checks if there are no duplicate values.
+| [isDisjoint]          | Checks if iterables have no value in common.
+|                       |
+| [isPrefix]            | Checks if iterable starts with a prefix.
+| [isInfix]             | Checks if iterable contains an infix.
+| [isSuffix]            | Checks if iterable ends with a suffix.
+| [isSubsequence]       | Checks if iterable has a subsequence.
+|                       |
+| [isEqual]             | Checks if two iterables are equal.
+| [compare]             | Compares two iterables.
+| [search]              | Searches a value from left.
 | [find]                | Finds leftmost value passing the test.
 | [findIndex]           | Finds index of leftmost value passing the test.
-| [flat]                | Flattens nested iterable to given depth.
-| [forEach]             | Calls a function for each value.
-| [from]                | Converts an iterator to iterable.
-| [group]               | Keeps similar values together and in order.
-| [head]                | Gets first value.
-| [init]                | Gets values except last.
-| [interleave]          | Places values of an iterable between another.
-| [intersection]        | Gives values present in both iterables.
-| [isDisjoint]          | Checks if iterables have no value in common.
-| [isEqual]             | Checks if two iterables are equal.
-| [isInfix]             | Checks if iterable contains an infix.
-| [isIterator]          | Checks if value is an iterator (can iterate only once).
-| [is]                  | Checks if value is iterable.
-| [isList]              | Checks if value is a list (not string).
-| [isPrefix]            | Checks if iterable starts with a prefix.
-| [isSubsequence]       | Checks if iterable has a subsequence.
-| [isSuffix]            | Checks if iterable ends with a suffix.
-| [isUnique]            | Checks if there are no duplicate values.
-| [iterator]            | Gives iterator for iterable.
-| [join]                | Joins values together.
-| [last]                | Gets last value.
-| [length]              | Counts the number of values.
-| [map]                 | Updates values based on map function.
-| [max]                 | Finds largest value.
-| [min]                 | Finds smallest value.
-| [partition]           | Segregates iterable keeping similar values together.
-| [pop]                 | Removes last value.
-| [push]                | Adds values to the end. 
-| [range]               | Finds smallest and largest values.
-| [reduce]              | Reduces values to a single value.
-| [repeat]              | Repeats an iterable given times.
-| [search]              | Searches a value from left.
-| [shift]               | Removes first value.
-| [slice]               | Gets a part of iterable.
 | [some]                | Checks if any value satisfies a test.
-| [splice]              | Removes or replaces existing values.
-| [split]               | Breaks iterable considering test as separator.
-| [tail]                | Gets values except first.
-| [union]               | Gives values present in any iterable.
-| [unique]              | Removes duplicate values.
-| [unshift]             | Adds values to the start.
-| [zip]                 | Combines values from n iterables.
+| [every]               | Checks if all values satisfy a test.
+| [forEach]             | Calls a function for each value.
 
+<br>
 
 [![nodef](https://merferry.glitch.me/card/extra-iterable.svg)](https://nodef.github.io)
 
