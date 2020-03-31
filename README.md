@@ -159,5 +159,9 @@ var x = [1, 2, 3, 4];
 [unique]: https://github.com/nodef/extra-array/wiki/unique
 [unshift]: https://github.com/nodef/extra-array/wiki/unshift
 [zip]: https://github.com/nodef/extra-array/wiki/zip
+
+[array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+[browserify]: https://www.npmjs.com/package/browserify
+[rollup]: https://www.npmjs.com/package/rollup
 [iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
 [extra-iterable.min]: https://www.npmjs.com/package/extra-iterable.min
