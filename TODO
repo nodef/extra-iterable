@@ -1,23 +1,10 @@
-SINGLE ITERABLE?
-
-- cycle
-- repeat
-
-
 OTHERS
 
 - function.iterate
 - iterable.sum
-- iterable.min
-- iterable.max
 - iterable.average
 - iterable.product
 - intersperse
 - flatMap
 - includes?
 - splice
-- slice
-- findIndex?
-- findIndices?
-- partition
-- count
