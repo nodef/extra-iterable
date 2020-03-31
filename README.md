@@ -36,6 +36,13 @@ var x = [1, 2, 3, 4];
 | Method                | Action
 |-----------------------|-------
 | [is]                  | Checks if value is an iterable.
+| [get]                 | Gets value at index.
+| [set]                 | Sets value at index.
+| [swap]                | Exchanges two values.
+| [index]               | Gets zero-based index.
+| [indexRange]          | Gets index range of part of iterable.
+| [size]                | Counts the number of values.
+|                       |
 | [chunk]               | Breaks iterable into chunks of given size.
 | [compare]             | Compares two iterables.
 | [concat]              | Appends iterables to the end.
@@ -52,11 +59,8 @@ var x = [1, 2, 3, 4];
 | [flat]                | Flattens nested iterable to given depth.
 | [forEach]             | Calls a function for each value.
 | [from]                | Converts an iterator to iterable.
-| [get]                 | Gets value at index.
 | [group]               | Keeps similar values together and in order.
 | [head]                | Gets first value.
-| [index]               | Gets zero-based index.
-| [indexRange]          | Gets index range of part of iterable.
 | [init]                | Gets values except last.
 | [interleave]          | Places values of an iterable between another.
 | [intersection]        | Gives values present in both iterables.
@@ -84,14 +88,11 @@ var x = [1, 2, 3, 4];
 | [reduce]              | Reduces values to a single value.
 | [repeat]              | Repeats an iterable given times.
 | [search]              | Searches a value from left.
-| [set]                 | Sets value at index.
 | [shift]               | Removes first value.
-| [size]                | Counts the number of values.
 | [slice]               | Gets a part of iterable.
 | [some]                | Checks if any value satisfies a test.
 | [splice]              | Removes or replaces existing values.
 | [split]               | Breaks iterable considering test as separator.
-| [swap]                | Exchanges two values.
 | [tail]                | Gets values except first.
 | [union]               | Gives values present in any iterable.
 | [unique]              | Removes duplicate values.
