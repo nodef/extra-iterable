@@ -512,8 +512,8 @@ function index(x, i) {
   return i<0? Math.max(n+i, 0) : Math.min(i, n);
 }
 /**
- * Gets index range of part of array.
- * @param {Array} x an array
+ * Gets index range of part of iterable.
+ * @param {Iterable} x an iterable
  * @param {number} i start index (-ve: from right) (0)
  * @param {number} I end index (-ve: from right) (end)
  * @returns {number} [start index, end index]
@@ -667,7 +667,41 @@ function isInfix45(x, y, fn=null) {
   var y = Array.isArray(y)? y:Array.from(y);
   return _isInfix(x, y, fn);
 }
-const _isInfixOn = require('@extra-array/is-infix-on');
+/**
+ * Gives same value.
+ * @param {*} v a value
+ * @returns {*} v
+ */
+function id46(v) {
+  return v;
+}
+const id47 = id46;
+
+/**
+ * Checks if array contains an infix.
+ * @param {Iterable} x an array
+ * @param {Array} y infix?
+ * @param {function?} fn map function (v, i, x)
+ * @param {object?} ths this argument
+ * @returns {boolean}
+ */
+function isInfixOn(x, y, fn=null, ths=null) {
+  if(y.length===0) return true;
+  var fn = fn||id47;
+  var Y = y.length, i = -1, J = 0;
+  var y1 = y.map(fn, ths);
+  var m = new Array(Y).fill(false);
+  for(var u of x) {
+    var u1 = fn.call(ths, u, ++i, x);
+    for(var j=J; j>0; j--)
+      m[j] = m[j-1] && u1===y1[j];
+    m[0] = u1===y1[0];
+    J = Math.min(J+1, Y-1);
+    if(m[Y-1]) return true;
+  }
+  return false;
+}
+const _isInfixOn = isInfixOn48;
 
 /**
  * Checks if iterable contains an infix.
@@ -677,7 +711,7 @@ const _isInfixOn = require('@extra-array/is-infix-on');
  * @param {object?} ths this argument
  * @returns {boolean}
  */
-function isInfixOn(x, y, fn=null, ths=null) {
+function isInfixOn48(x, y, fn=null, ths=null) {
   var y = Array.isArray(y)? y:Array.from(y);
   return _isInfixOn(x, y, fn, ths);
 }
@@ -813,7 +847,7 @@ function isSuffixOn(x, y, fn=null, ths=null) {
 }
 /**
  * Checks if there are no duplicate values.
- * @param {Array} x an array
+ * @param {Iterable} x an iterable
  * @param {function?} fn compare function (a, b)
  * @returns {boolean}
  */
@@ -827,7 +861,7 @@ function isUnique(x, fn=null) {
 }
 /**
  * Checks if there are no duplicate values.
- * @param {Array} x an array
+ * @param {Iterable} x an iterable
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {boolean}
@@ -975,7 +1009,7 @@ function partition(x, fn, ths=null) {
 }
 /**
  * Segregates array keeping similar values together.
- * @param {Iterable} x an array
+ * @param {Iterable} x an iterable
  * @param {function} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {Map<any, Array>} {key => values}
@@ -1027,7 +1061,7 @@ function range(x, fn=null) {
 }
 /**
  * Finds smallest and largest values.
- * @param {Iterable} x an array
+ * @param {Iterable} x an iterable
  * @param {function?} fn map function (v, i, x)
  * @param {object?} ths this argument
  * @returns {Array} [min, max]
@@ -1254,7 +1288,7 @@ function* uniqueOn(x, fn=null, ths=null) {
 }
 /**
  * Adds values to the start.
- * @param {Iterable} x an array
+ * @param {Iterable} x an iterable
  * @param {...any} vs values to add
  * @returns {Iterable} iterable
  */
@@ -1324,7 +1358,7 @@ exports.isDisjoint = isDisjoint;
 exports.isDisjointOn = isDisjointOn;
 exports.isEqual = isEqual;
 exports.isInfix = isInfix45;
-exports.isInfixOn = isInfixOn;
+exports.isInfixOn = isInfixOn48;
 exports.isIterator = isIterator;
 exports.is = is;
 exports.isList = isList;

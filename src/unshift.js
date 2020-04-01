@@ -1,6 +1,6 @@
 /**
  * Adds values to the start.
- * @param {Iterable} x an array
+ * @param {Iterable} x an iterable
  * @param {...any} vs values to add
  * @returns {Iterable} iterable
  */

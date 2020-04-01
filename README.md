@@ -35,7 +35,7 @@ var x = [1, 2, 3, 4];
 
 | Method                | Action
 |-----------------------|-------
-| [is]                  | Checks if value is iterable.
+| [is]                  | Checks if value is an iterable.
 | [get]                 | Gets value at index.
 | [set]                 | Sets value at index.
 | [swap]                | Exchanges two values.
@@ -48,7 +48,7 @@ var x = [1, 2, 3, 4];
 | [fill]                | Fills with given value.
 | [copy]                | Copies part of iterable to another.
 | [concat]              | Appends iterables to the end.
-| [slice]               | Gets a part of iterable.
+| [slice]               | Gets part of an iterable.
 | [splice]              | Removes or replaces existing values.
 | [flat]                | Flattens nested iterable to given depth.
 | [cut]                 | Breaks iterable at given indices.
@@ -62,7 +62,7 @@ var x = [1, 2, 3, 4];
 | [range]               | Finds smallest and largest values.
 | [map]                 | Updates values based on map function.
 | [reduce]              | Reduces values to a single value.
-| [filter]              | Keeps values which pass a test.
+| [filter]              | Keeps the values which pass a test.
 | [count]               | Counts values which satisfy a test.
 | [partition]           | Segregates iterable keeping similar values together.
 | [group]               | Keeps similar values together and in order.
@@ -85,7 +85,7 @@ var x = [1, 2, 3, 4];
 | [isEqual]             | Checks if two iterables are equal.
 | [compare]             | Compares two iterables.
 | [search]              | Searches a value from left.
-| [find]                | Finds leftmost value passing the test.
+| [find]                | Finds first value which satisfies a test.
 | [findIndex]           | Finds index of leftmost value passing the test.
 | [some]                | Checks if any value satisfies a test.
 | [every]               | Checks if all values satisfy a test.
@@ -97,6 +97,11 @@ var x = [1, 2, 3, 4];
 
 > Browserified, minified version of this package is [extra-iterable.min].
 
+[browserify]: https://www.npmjs.com/package/browserify
+[rollup]: https://www.npmjs.com/package/rollup
+[uglify-js]: https://www.npmjs.com/package/uglify-js
+[iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
+[extra-iterable.min]: https://www.npmjs.com/package/extra-iterable.min
 [is]: https://github.com/nodef/extra-iterable/wiki/is
 [chunk]: https://github.com/nodef/extra-iterable/wiki/chunk
 [compare]: https://github.com/nodef/extra-iterable/wiki/compare
@@ -159,9 +164,3 @@ var x = [1, 2, 3, 4];
 [unique]: https://github.com/nodef/extra-iterable/wiki/unique
 [unshift]: https://github.com/nodef/extra-iterable/wiki/unshift
 [zip]: https://github.com/nodef/extra-iterable/wiki/zip
-
-[browserify]: https://www.npmjs.com/package/browserify
-[rollup]: https://www.npmjs.com/package/rollup
-[uglify-js]: https://www.npmjs.com/package/uglify-js
-[iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
-[extra-iterable.min]: https://www.npmjs.com/package/extra-iterable.min

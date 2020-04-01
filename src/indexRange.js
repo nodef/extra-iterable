@@ -1,8 +1,8 @@
 const size = require('./size');
 
 /**
- * Gets index range of part of array.
- * @param {Array} x an array
+ * Gets index range of part of iterable.
+ * @param {Iterable} x an iterable
  * @param {number} i start index (-ve: from right) (0)
  * @param {number} I end index (-ve: from right) (end)
  * @returns {number} [start index, end index]

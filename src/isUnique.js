@@ -2,7 +2,7 @@ const cmp = require('./_cmp');
 
 /**
  * Checks if there are no duplicate values.
- * @param {Array} x an array
+ * @param {Iterable} x an iterable
  * @param {function?} fn compare function (a, b)
  * @returns {boolean}
  */
