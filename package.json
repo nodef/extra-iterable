@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.1.15",
+  "version": "2.1.16",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "scripts": {
@@ -123,8 +123,6 @@
     "@extra-array/partition-on": "*",
     "@extra-array/range": "*",
     "@extra-array/range-on": "*",
-    "find-npm-prefix": "^1.0.2",
-    "recast": "^0.18.8",
-    "tempy": "^0.5.0"
+    "extra-build": "^1.0.116"
   }
 }
