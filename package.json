@@ -1,11 +1,16 @@
 {
   "name": "extra-iterable",
-  "version": "2.1.16",
+  "version": "2.1.17",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "scripts": {
+    "einit": "ebuild init",
+    "ecode": "ebuild update --docs false",
+    "eupdate": "ebuild update",
+    "escatter": "ebuild scatter",
     "test": "exit"
   },
+  "runkitExampleFilename": "example.js",
   "keywords": [
     "extra",
     "iterable",
