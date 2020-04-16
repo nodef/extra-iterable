@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.1.22",
+  "version": "2.1.23",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "scripts": {
@@ -113,21 +113,20 @@
   "author": "wolfram77@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "@extra-array/count": "*",
-    "@extra-array/count-all-on": "*",
-    "@extra-array/count-on": "*",
-    "@extra-array/is-disjoint": "*",
-    "@extra-array/is-disjoint-on": "*",
-    "@extra-array/is-infix": "*",
-    "@extra-array/is-infix-on": "*",
-    "@extra-array/max": "*",
-    "@extra-array/max-on": "*",
-    "@extra-array/min": "*",
-    "@extra-array/min-on": "*",
-    "@extra-array/partition": "*",
-    "@extra-array/partition-on": "*",
-    "@extra-array/range": "*",
-    "@extra-array/range-on": "*",
+    "@extra-array/count": "^2.6.62",
+    "@extra-array/count-on": "^2.6.62",
+    "@extra-array/is-disjoint": "^2.6.62",
+    "@extra-array/is-disjoint-on": "^2.6.62",
+    "@extra-array/is-infix": "^2.6.62",
+    "@extra-array/is-infix-on": "^2.6.62",
+    "@extra-array/max": "^2.6.62",
+    "@extra-array/max-on": "^2.6.62",
+    "@extra-array/min": "^2.6.62",
+    "@extra-array/min-on": "^2.6.62",
+    "@extra-array/partition": "^2.6.62",
+    "@extra-array/partition-on": "^2.6.62",
+    "@extra-array/range": "^2.6.62",
+    "@extra-array/range-on": "^2.6.62",
     "extra-build": "^1.0.116"
   }
 }
