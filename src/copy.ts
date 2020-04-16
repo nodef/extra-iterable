@@ -8,18 +8,18 @@ import slice from './slice';
  * @param i read start index (0)
  * @param I read end index (end)
  */
-function* copy<T>(x: Iterable<T>, y: Iterable<T>, j: number=0, i: number=0, I: number=Number.MAX_SAFE_INTEGER): Iterable<T> {
-  var k = -1, n = 0, K = 0;
-  for(var v of x) {
+function* copy<T>(x: Iterable<T>, y: Iterable<T>, j: number=0, i: number=0, I: number=Number.MAX_SAFE_INTEGER): IterableIterator<T> {
+  var k = -1, J = -1;
+  for(var u of x) {
     if(++k===j) {
-      for(var u of slice(y, i, I))
-      { yield u; n++; }
-      K = j + Math.min(I-i, n);
+      J = k;
+      for(var v of slice(y, i, I))
+      { yield v; ++J; }
     }
-    if(k>=j && k<K) continue;
-    else yield v;
+    if(k>=j && k<J) continue;
+    else yield u;
   }
-  if(j>=k) {
+  if(k<=j) {
     for(; ++k<j;) yield undefined;
     yield* slice(y, i, I);
   }

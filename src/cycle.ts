@@ -5,7 +5,7 @@ import from from './from';
  * @param x an iterable
  * @param n number of values (-1 => Inf)
  */
-function* cycle<T>(x: Iterable<T>, n: number=-1): Iterable<T> {
+function* cycle<T>(x: Iterable<T>, n: number=-1): IterableIterator<T> {
   var x = from(x);
   w: while(true) {
     for(var v of x) {

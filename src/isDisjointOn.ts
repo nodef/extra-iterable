@@ -10,11 +10,11 @@ import type {mapFn} from './_types';
  * @param ths this argument
  */
 function isDisjointOn<T, U>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, U>=null, ths: object=null): boolean {
-  var s = uniques(x, fn, ths);
+  var s = uniques(y, fn, ths);
   var fn = fn||id, i = -1;
-  for(var v of y) {
-    var v1 = fn.call(ths, v, ++i, y);
-    if(s.has(v1)) return false;
+  for(var u of x) {
+    var u1 = fn.call(ths, u, ++i, x);
+    if(s.has(u1)) return false;
   }
   return true;
 }

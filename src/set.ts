@@ -4,7 +4,7 @@
  * @param i index
  * @param v value
  */
-function* set<T>(x: Iterable<T>, i: number, v: T): Iterable<T> {
+function* set<T>(x: Iterable<T>, i: number, v: T): IterableIterator<T> {
   var j = -1;
   for(var u of x)
     yield (++j===i? v:u);

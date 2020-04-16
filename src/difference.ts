@@ -1,6 +1,6 @@
-import cmp from './_cmp';
 import from from './from';
-import { compareFn } from './_types';
+import cmp from './_cmp';
+import type {compareFn} from './_types';
 
 /**
  * Gives values of an iterable not present in another.
@@ -8,7 +8,7 @@ import { compareFn } from './_types';
  * @param y another iterable
  * @param fn compare function (a, b)
  */
-function* difference<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): Iterable<T> {
+function* difference<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): IterableIterator<T> {
   var fn = fn||cmp;
   var y = from(y);
   x: for(var u of x) {

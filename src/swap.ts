@@ -4,7 +4,7 @@
  * @param i an index
  * @param j another index
  */
-function* swap<T>(x: Iterable<T>, i: number, j: number): Iterable<T> {
+function* swap<T>(x: Iterable<T>, i: number, j: number): IterableIterator<T> {
   if(i===j) yield* x;
   var k = Math.min(i, j);
   var l = Math.max(i, j);

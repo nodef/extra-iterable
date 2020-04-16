@@ -6,7 +6,7 @@ import type {testFn} from "./_types";
  * @param fn test function (v, i, x)
  * @param ths this argument
  */
-function* split<T>(x: Iterable<T>, fn: testFn<T>, ths: object=null): Iterable<T[]> {
+function* split<T>(x: Iterable<T>, fn: testFn<T>, ths: object=null): IterableIterator<T[]> {
   var a: T[] = [], i = -1;
   for(var v of x) {
     if(!fn.call(ths, v, ++i, x)) a.push(v);

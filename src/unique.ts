@@ -1,12 +1,12 @@
-const union = require('./union');
+import union from './union';
+import type {compareFn} from './_types';
 
 /**
  * Removes duplicate values.
- * @param {Iterable} x an iterable
- * @param {function?} fn compare function (a, b)
- * @returns {Iterable}
+ * @param x an iterable
+ * @param fn compare function (a, b)
  */
-function* unique(x, fn=null) {
+function* unique<T>(x: Iterable<T>, fn: compareFn<T>=null): IterableIterator<T> {
   yield* union([], x, fn);
 }
-module.exports = unique;
+export default unique;

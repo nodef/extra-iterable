@@ -8,8 +8,8 @@ import type {mapFn} from './_types';
  * @param ths this argument
  */
 function minOn<T, U>(x: Iterable<T>, fn: mapFn<T, U>=null, ths: object=null): T {
-  var fn = fn||id, i = -1;
-  var mk: U, mv: T;
+  var fn = fn||id;
+  var mk: U, mv: T, i = -1;
   for(var v of x) {
     var k = fn.call(ths, v, ++i, x);
     if(i===0) { mk = k; mv = v; }

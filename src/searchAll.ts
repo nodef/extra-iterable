@@ -8,7 +8,7 @@ import type {compareFn} from './_types';
  * @param fn compare function (a, b)
  * @returns indices of value
  */
-function* searchAll<T>(x: Iterable<T>, v: T, fn: compareFn<T>=null): Iterable<number> {
+function* searchAll<T>(x: Iterable<T>, v: T, fn: compareFn<T>=null): IterableIterator<number> {
   var fn = fn||cmp, i = -1;
   for(var u of x) {
     ++i;

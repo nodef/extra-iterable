@@ -10,14 +10,14 @@ import type {compareFn} from './_types';
  */
 function isSuffix<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): boolean {
   var fn = fn||cmp;
-  var y = Array.isArray(y)? y:Array.from(y);
-  var Y = y.length, a = [], ai = 0;
+  var y1 = Array.isArray(y)? y:Array.from(y);
+  var Y = y1.length, a = [], ai = 0;
   if(Y===0) return true;
   for(var u of x)
     a[ai++ % Y] = u;
   if(a.length<Y) return false;
   for(var i=0; i<Y; i++)
-    if(fn(a[ai++ % Y], y[i])!==0) return false;
+    if(fn(a[ai++ % Y], y1[i])!==0) return false;
   return true;
 }
 export default isSuffix;

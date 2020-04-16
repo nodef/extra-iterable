@@ -8,7 +8,7 @@ import type {compareFn} from './_types';
  * @param y another iterable
  * @param fn compare function (a, b)
  */
-function* intersection<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): Iterable<T> {
+function* intersection<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): IterableIterator<T> {
   var fn = fn||cmp;
   var y = from(y);
   x: for(var u of x) {

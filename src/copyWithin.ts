@@ -1,4 +1,4 @@
-import slice from './slice';
+import copy from './copy';
 import from from './from';
 
 /**
@@ -8,15 +8,8 @@ import from from './from';
  * @param i read start index (0)
  * @param I read end index (end)
  */
-function* copyWithin<T>(x: Iterable<T>, j: number, i: number=0, I: number=Number.MAX_SAFE_INTEGER): Iterable<T> {
-  var x = from(x), y = slice(x, i, I);
-  var k = -1, K = j+(I-i), done = false;
-  for(var v of x) {
-    if(!done && ++k>=j && k<K) {
-      var {value, done} = y.next();
-      yield done? v : value;
-    }
-    else yield v;
-  }
+function* copyWithin<T>(x: Iterable<T>, j: number, i: number=0, I: number=Number.MAX_SAFE_INTEGER): IterableIterator<T> {
+  var y = from(x);
+  yield* copy(y, y, j, i, I);
 }
 export default copyWithin;

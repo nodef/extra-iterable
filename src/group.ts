@@ -6,12 +6,12 @@ import type {compareFn} from './_types';
  * @param x an iterable
  * @param fn compare function (a, b)
  */
-function* group<T>(x: Iterable<T>, fn: compareFn<T>=null): Iterable<T[]> {
+function* group<T>(x: Iterable<T>, fn: compareFn<T>=null): IterableIterator<T[]> {
   var fn = fn||cmp;
-  var u = x[0], a = [];
+  var a = [], u: T, i = -1;
   for(var v of x) {
-    if(fn(u, v)===0) a.push(v);
-    else { yield a; a = [v]; }
+    if(++i>0 && fn(u, v)!==0) { yield a; a = [v]; }
+    else a.push(v);
     u = v;
   }
   yield a;

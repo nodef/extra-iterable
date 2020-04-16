@@ -1,14 +1,14 @@
-var from = require('./from');
-var init = require('./init');
-var last = require('./last');
+import last from './last';
+import init from './init';
+import from from './from';
 
 /**
  * Removes last value.
- * @param {Iterable} x an iterable
- * @returns {Array} [value, iterable]
+ * @param x an iterable
+ * @returns [value, iterable]
  */
-function pop(x) {
+function pop<T>(x: Iterable<T>): [T, IterableIterator<T>] {
   var x = from(x);
   return [last(x), init(x)];
 }
-module.exports = pop;
+export default pop;

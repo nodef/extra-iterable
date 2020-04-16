@@ -1,3 +1,4 @@
+import from from './from';
 import cmp from './_cmp';
 import type {compareFn} from './_types';
 
@@ -8,9 +9,13 @@ import type {compareFn} from './_types';
  */
 function isUnique<T>(x: Iterable<T>, fn: compareFn<T>=null): boolean {
   var fn = fn||cmp;
-  for(var i=0, I=x.length; i<I; i++) {
-    for(var j=0; j<i; j++)
-      if(fn(x[i], x[j])===0) return false;
+  var x = from(x), i = -1;
+  for(var u of x) {
+    var j = -1; ++i;
+    for(var v of x) {
+      if(++j>=i) break;
+      if(fn(u, v)===0) return false;
+    }
   }
   return true;
 }

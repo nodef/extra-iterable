@@ -8,7 +8,7 @@ import type {mapFn} from './_types';
  * @param fn map function (v, i, x)
  * @param ths this argument
  */
-function* unionOn<T, U>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, U>=null, ths: object=null): Iterable<T> {
+function* unionOn<T, U>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, U>=null, ths: object=null): IterableIterator<T> {
   var fn = fn||id;
   var s = new Set<U>();
   var i = -1, j = -1;

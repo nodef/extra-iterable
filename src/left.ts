@@ -5,7 +5,7 @@ import slice from './slice';
  * @param x an iterable
  * @param n number of values (1)
  */
-function* left<T>(x: Iterable<T>, n: number=1): Iterable<T> {
+function* left<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
   yield* slice(x, 0, n);
 }
 export default left;

@@ -4,7 +4,7 @@
  * @param vs values to add
  * @returns iterable
  */
-function* unshift<T>(x: Iterable<T>, ...vs: T[]): Iterable<T> {
+function* unshift<T>(x: Iterable<T>, ...vs: T[]): IterableIterator<T> {
   yield* vs;
   yield* x;
 }

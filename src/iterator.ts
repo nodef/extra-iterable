@@ -1,9 +1,8 @@
 /**
  * Gives iterator for iterable.
- * @param {Iterable} x an iterable
- * @returns {Iterable}
+ * @param x an iterable
  */
-function iterator<T>(x: Iterable<T>): Iterator<T, T> {
+function iterator<T>(x: Iterable<T>): Iterator<T> {
   return x[Symbol.iterator]();
 }
-module.exports = iterator;
+export default iterator;

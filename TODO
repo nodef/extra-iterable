@@ -8,3 +8,10 @@ OTHERS
 - flatMap
 - includes?
 - splice
+
+- from(iterable1/iteartor)
+- isIterator(iterable1?)
+- isIterableIterator()?
+- isInfix -> iterable
+- array.partition = iterable.partition
+- max, min, range

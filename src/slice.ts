@@ -1,4 +1,4 @@
-function* slicePP<T>(x: Iterable<T>, i: number, I: number): Iterable<T> {
+function* slicePP<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
   var k = -1;
   for(var v of x) {
     if(++k>=I) break;
@@ -6,7 +6,7 @@ function* slicePP<T>(x: Iterable<T>, i: number, I: number): Iterable<T> {
   }
 }
 
-function* slicePN<T>(x: Iterable<T>, i: number, I: number): Iterable<T> {
+function* slicePN<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
   var k = -1;
   var a: T[] = [], ai = 0, al = -I;
   for(var v of x) {
@@ -16,7 +16,7 @@ function* slicePN<T>(x: Iterable<T>, i: number, I: number): Iterable<T> {
   }
 }
 
-function* sliceN<T>(x: Iterable<T>, i: number, I: number): Iterable<T> {
+function* sliceN<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
   var n = 0;
   var a: T[] = [], ai = 0, al = -i;
   for(var v of x) {
@@ -34,7 +34,7 @@ function* sliceN<T>(x: Iterable<T>, i: number, I: number): Iterable<T> {
  * @param i start index (0)
  * @param I end index (end)
  */
-function* slice<T>(x: Iterable<T>, i: number=0, I: number=Number.MAX_SAFE_INTEGER): Iterable<T> {
+function* slice<T>(x: Iterable<T>, i: number=0, I: number=Number.MAX_SAFE_INTEGER): IterableIterator<T> {
   if(i>=0 && I>=0) yield* slicePP(x, i, I);
   else if(i>=0 && I<0) yield* slicePN(x, i, I);
   else yield* sliceN(x, i, I);

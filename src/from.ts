@@ -3,6 +3,6 @@
  * @param x an iterable
  */
 function from<T>(x: Iterable<T>): Iterable<T> {
-  return x===x[Symbol.iterator]()? Array.from(x):x;
+  return x===x[Symbol.iterator]() as IterableIterator<T>? Array.from(x):x;
 }
 export default from;

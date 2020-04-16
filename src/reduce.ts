@@ -9,7 +9,7 @@ import type {reduceFn} from './_types';
 function reduce<T, U>(x: Iterable<T>, fn: reduceFn<T, U>, acc?: U): U {
   var al = arguments.length, i = -1;
   for(var v of x) {
-    if(++i===0 && al===2) acc = v; 
+    if(++i===0 && al===2) acc = v as unknown as U;
     else acc = fn(acc, v, i, x);
   }
   return acc;

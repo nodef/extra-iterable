@@ -10,9 +10,9 @@ import type {compareFn} from './_types';
  */
 function isDisjoint<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): boolean {
   var fn = fn||cmp;
-  var x = from(x);
-  for(var v of y) {
-    for(var u of x)
+  var y = from(y);
+  for(var u of x) {
+    for(var v of y)
       if(fn(u, v)===0) return false;
   }
   return true;

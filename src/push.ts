@@ -4,7 +4,7 @@
  * @param vs values to add
  * @returns iterable
  */
-function* push<T>(x: Iterable<T>, ...vs: T[]): Iterable<T> {
+function* push<T>(x: Iterable<T>, ...vs: T[]): IterableIterator<T> {
   yield* x;
   yield* vs;
 }

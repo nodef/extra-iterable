@@ -6,7 +6,7 @@ import type {mapFn} from './_types';
  * @param fn map function (v, i, x)
  * @param ths this argument
  */
-function* map<T>(x: Iterable<T>, fn: mapFn<T, U>, ths: object=null): Iterable<T> {
+function* map<T, U>(x: Iterable<T>, fn: mapFn<T, U>, ths: object=null): IterableIterator<T> {
   var i = -1;
   for(var v of x)
     yield fn.call(ths, v, ++i, x);
