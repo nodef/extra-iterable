@@ -1,7 +1,7 @@
 import type {testFn} from './_types';
 
 /**
- * Segregates iterable keeping similar values together.
+ * Segregates values by test result.
  * @param x an iterable
  * @param fn test function (v, i, x)
  * @param ths this argument

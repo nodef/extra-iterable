@@ -2,7 +2,7 @@ import id from './_id';
 import type {mapFn} from './_types';
 
 /**
- * Segregates array keeping similar values together.
+ * Segregates values by similarity.
  * @param x an iterable
  * @param fn map function (v, i, x)
  * @param ths this argument
