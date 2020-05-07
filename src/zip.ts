@@ -2,9 +2,9 @@ import id from './_id';
 import type {mapFn} from './_types';
 
 /**
- * Combines values from n iterables.
- * @param xs n iterables
- * @param fn map function ([...vs], i, x)
+ * Combines values from iterables.
+ * @param xs iterables
+ * @param fn map function (vs, i, x)
  * @param ths this argument
  */
 function* zip<T, U>(xs: Iterable<T>[], fn: mapFn<T[], U>=null, ths: object=null): IterableIterator<U> {

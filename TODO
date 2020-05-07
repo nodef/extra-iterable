@@ -1,3 +1,8 @@
+WHAT TO CALL MANY TIME ITERABLE
+- from? (but iterable assumes all inputs as 1 time iterables)
+- from -> iterator to iterable? (shift)
+- slice too complicated
+
 OTHERS
 
 - function.iterate

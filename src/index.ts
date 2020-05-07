@@ -25,7 +25,7 @@ export {default as getAll} from './getAll';
 export {default as group} from './group';
 export {default as groupOn} from './groupOn';
 export {default as head} from './head';
-export {default as index} from './index?';
+export {default as index} from './index!';
 export {default as indexRange} from './indexRange';
 export {default as init} from './init';
 export {default as intersection} from './intersection';
