@@ -83,4 +83,5 @@ export {default as unionOn} from './unionOn';
 export {default as unique} from './unique';
 export {default as uniqueOn} from './uniqueOn';
 export {default as unshift} from './unshift';
+export {default as values} from './values';
 export {default as zip} from './zip';

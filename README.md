@@ -1,4 +1,4 @@
-An [iterable] is a sequence of values.
+An [iterable] is a sequence of values. [:running:] [:vhs:] [:package:] [:moon:]
 
 Methods look like:
 - `unique()`: accepts a compare function (default).
@@ -43,11 +43,11 @@ var x = [1, 2, 3, 4];
 | [indexRange]          | Gets index range of part of iterable.
 | [size]                | Counts the number of values.
 | [iterator]            | Gives iterator for iterable.
-| [from]                | Converts an iterator to iterable.
+| [from]                | Converts a one-time iterable to iterable.
 |                       |
 | [fill]                | Fills with given value.
 | [copy]                | Copies part of iterable to another.
-| [concat]              | Appends iterables to the end.
+| [concat]              | Appends iterables together.
 | [slice]               | Gets part of an iterable.
 | [splice]              | Removes or replaces existing values.
 | [flat]                | Flattens nested iterable to given depth.
@@ -64,10 +64,10 @@ var x = [1, 2, 3, 4];
 | [reduce]              | Reduces values to a single value.
 | [filter]              | Keeps the values which pass a test.
 | [count]               | Counts values which satisfy a test.
-| [partition]           | Segregates iterable keeping similar values together.
+| [partition]           | Segregates values by test result.
 | [group]               | Keeps similar values together and in order.
 | [split]               | Breaks iterable considering test as separator.
-| [zip]                 | Combines values from n iterables.
+| [zip]                 | Combines values from iterables.
 | [join]                | Joins values together.
 |                       |
 | [unique]              | Removes duplicate values.
@@ -86,7 +86,7 @@ var x = [1, 2, 3, 4];
 | [compare]             | Compares two iterables.
 | [search]              | Searches a value from left.
 | [find]                | Finds first value which satisfies a test.
-| [findIndex]           | Finds index of leftmost value passing the test.
+| [findIndex]           | Finds index of leftmost value passing a test.
 | [some]                | Checks if any value satisfies a test.
 | [every]               | Checks if all values satisfy a test.
 | [forEach]             | Calls a function for each value.
@@ -164,3 +164,7 @@ var x = [1, 2, 3, 4];
 [unique]: https://github.com/nodef/extra-iterable/wiki/unique
 [unshift]: https://github.com/nodef/extra-iterable/wiki/unshift
 [zip]: https://github.com/nodef/extra-iterable/wiki/zip
+[:running:]: https://npm.runkit.com/extra-iterable
+[:vhs:]: https://asciinema.org/a/iWowOF29bsDMcmUVYiIqelfGj
+[:package:]: https://www.npmjs.com/package/extra-iterable
+[:moon:]: https://www.npmjs.com/package/extra-iterable.min
