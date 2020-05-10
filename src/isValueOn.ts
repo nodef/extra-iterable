@@ -1,0 +1,18 @@
+import id from './_id';
+import type {mapFn} from './_types';
+
+/**
+ * Checks if iterable has a value.
+ * @param x an iterable
+ * @param v value?
+ */
+function isValueOn<T, U>(x: Iterable<T>, v: T, fn: mapFn<T, U>=null, ths: object=null): boolean {
+  var fn = fn||id, i = -1;
+  var v1 = fn.call(ths, v, 0, null);
+  for(var u of x) {
+    var u1 = fn.call(ths, u, ++i, x);
+    if(u1===v1) return true;
+  }
+  return false;
+}
+export default isValueOn;

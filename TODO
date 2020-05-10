@@ -9,7 +9,7 @@ OTHERS
 - intersperse
 - flatMap
 - includes?
-- splice
+- splice (logic suggests array might have to change)
 
 - isEqualOn
 - flatMap
