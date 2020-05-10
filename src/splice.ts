@@ -14,4 +14,4 @@ function* splice<T>(x: Iterable<T>, i: number=0, n: number=Number.MAX_SAFE_INTEG
     else if(j===i) yield* vs;
   }
 }
-module.exports = splice;
+export default splice;
