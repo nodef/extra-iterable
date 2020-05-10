@@ -8,6 +8,6 @@ import type {compareFn} from './_types';
  * @param fn compare function (a, b)
  */
 function isValue<T>(x: Iterable<T>, v: T, fn: compareFn<T>=null): boolean {
-  return search(x, v, fn)!==undefined;
+  return search(x, v, fn)>=0;
 }
 export default isValue;

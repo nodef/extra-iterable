@@ -31,8 +31,8 @@ function* sliceN<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
 /**
  * Gets part of an iterable.
  * @param x an iterable
- * @param i start index (0)
- * @param I end index (end)
+ * @param i start index (-ve: from right) (0)
+ * @param I end index (-ve: from right) (end)
  */
 function* slice<T>(x: Iterable<T>, i: number=0, I: number=Number.MAX_SAFE_INTEGER): IterableIterator<T> {
   if(i>=0 && I>=0) yield* slicePP(x, i, I);
