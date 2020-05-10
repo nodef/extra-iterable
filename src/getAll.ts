@@ -5,16 +5,16 @@
  * @returns ...values
  */
 function* getAll<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T> {
-  var ii = is[Symbol.iterator]();
-  var {value, done} = ii.next(), j = -1;
-  if(done) return;
+  var ii = is[Symbol.iterator]() as Iterator<number, number>;
+  var value = -1, j = -1;
   for(var v of x) {
-    if(++j!==value) continue;
-    yield v;
-    var {value, done} = ii.next();
-    value = value || Number.MAX_SAFE_INTEGER;
+    while(value<=j) {
+      var {value, done} = ii.next();
+      if(done) return;
+      if(value<=j) yield undefined;
+    }
+    if(value===++j) yield v;
   }
-  if(!done) yield undefined;
   while(!ii.next().done) yield undefined;
 }
 export default getAll;

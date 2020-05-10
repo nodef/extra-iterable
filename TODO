@@ -7,12 +7,9 @@ OTHERS
 - iterable.average
 - iterable.product
 - intersperse
-- flatMap
-- includes?
 - splice (logic suggests array might have to change)
 
 - isEqualOn
-- flatMap
 - findLast
 - findLastIndex
 
