@@ -1,12 +1,12 @@
-- splice (logic suggests array might have to change)
-- slice too complicated?
 - zipMin vs zipMax
+- slice too complicated?
 
 - isEqualOn
 - findLast
 - findLastIndex
 
 - On => compare()
+- array.splice logic change
 - array.equal vs compare
 
 - map.flip (python) swap key-value (compiler class)

@@ -1,12 +1,10 @@
-import from from './from';
+import tail from './tail';
 
 /**
  * Removes first value.
  * @param x an iterable
- * @returns [value, iterator]
  */
-function shift<T>(x: Iterable<T>): [T, Iterable<T>] {
-  var ix = x[Symbol.iterator]();
-  return [ix.next().value, from(ix)];
+function* shift<T>(x: Iterable<T>): IterableIterator<T> {
+  yield* tail(x);
 }
 export default shift;
