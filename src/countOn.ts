@@ -10,7 +10,7 @@ import type {mapFn} from './_types';
  */
 function countOn<T, U>(x: Iterable<T>, fn: mapFn<T, U>=null, ths: object=null): Map<U, number> {
   var fn = fn||id;
-  var m = new Map<U, number>(), i = -1;
+  var m = new Map(), i = -1;
   for(var v of x) {
     var v1 = fn.call(ths, v, ++i, x);
     m.set(v1, (m.get(v1)||0) + 1);

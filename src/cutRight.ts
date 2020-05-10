@@ -8,6 +8,6 @@ import map from './map';
  * @returns ...pieces
  */
 function* cutRight<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T[]> {
-  yield* cut(x, map(is, v => v+1));
+  yield* cut(x, map(is, i => i+1));
 }
 export default cutRight;

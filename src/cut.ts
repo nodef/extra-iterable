@@ -7,16 +7,15 @@
 function* cut<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T[]> {
   var ii = is[Symbol.iterator]();
   var {value, done} = ii.next();
-  if(done) { yield Array.from(x); return; }
+  if(done) value = Number.MAX_SAFE_INTEGER;
   var a = [], j = -1;
   for(var v of x) {
     if(++j<value) { a.push(v); continue; }
     yield a; a = [v];
     var {value, done} = ii.next();
-    value = value || Number.MAX_SAFE_INTEGER;
+    if(done) value = Number.MAX_SAFE_INTEGER;
   }
   yield a;
-  if(!done) yield [];
-  while(!ii.next().done) yield [];
+  for(; !done; {done}=ii.next()) yield [];
 }
 export default cut;
