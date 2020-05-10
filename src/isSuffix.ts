@@ -1,5 +1,4 @@
 import cmp from './_cmp';
-import slice from './slice';
 import type {compareFn} from './_types';
 
 /**

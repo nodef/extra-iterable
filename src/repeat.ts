@@ -1,4 +1,4 @@
-import from from './from';
+import many from './many';
 
 /**
  * Repeats an iterable given times.
@@ -6,7 +6,7 @@ import from from './from';
  * @param n times (-1 => Inf)
  */
 function* repeat<T>(x: Iterable<T>, n: number): IterableIterator<T> {
-  var x = from(x);
+  var x = many(x);
   for(; n!==0; n--)
     yield* x;
 }

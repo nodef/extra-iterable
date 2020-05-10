@@ -1,6 +1,6 @@
 import last from './last';
 import init from './init';
-import from from './from';
+import many from './many';
 
 /**
  * Removes last value.
@@ -8,7 +8,7 @@ import from from './from';
  * @returns [value, iterable]
  */
 function pop<T>(x: Iterable<T>): [T, IterableIterator<T>] {
-  var x = from(x);
+  var x = many(x);
   return [last(x), init(x)];
 }
 export default pop;

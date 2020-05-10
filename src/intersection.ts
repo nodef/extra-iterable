@@ -1,5 +1,5 @@
+import many from './many';
 import cmp from './_cmp';
-import from from './from';
 import type {compareFn} from './_types';
 
 /**
@@ -10,7 +10,7 @@ import type {compareFn} from './_types';
  */
 function* intersection<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): IterableIterator<T> {
   var fn = fn||cmp;
-  var y = from(y);
+  var y = many(y);
   x: for(var u of x) {
     for(var v of y)
       if(fn(u, v)===0) { yield u; continue x; }

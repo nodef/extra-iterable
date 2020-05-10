@@ -1,8 +1,9 @@
 /**
- * Converts a one-time iterable to iterable.
- * @param x an iterable
+ * Converts iterator to iterable.
+ * @param x an iterator
  */
-function from<T>(x: Iterable<T>): Iterable<T> {
-  return x===x[Symbol.iterator]() as IterableIterator<T>? Array.from(x):x;
+function from<T>(x: Iterator<T>): Iterable<T> {
+  if(typeof x[Symbol.iterator]==='function') return x as any as Iterable<T>;
+  return {[Symbol.iterator]() { return x; }};
 }
 export default from;

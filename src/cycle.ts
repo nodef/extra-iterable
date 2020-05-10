@@ -1,4 +1,4 @@
-import from from './from';
+import many from './many';
 
 /**
  * Gives values that cycle through an iterable.
@@ -6,7 +6,7 @@ import from from './from';
  * @param n number of values (-1 => Inf)
  */
 function* cycle<T>(x: Iterable<T>, n: number=-1): IterableIterator<T> {
-  var x = from(x);
+  var x = many(x);
   w: while(true) {
     for(var v of x) {
       if(n--===0) break w;

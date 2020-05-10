@@ -36,7 +36,7 @@ export {default as isDisjointOn} from './isDisjointOn';
 export {default as isEqual} from './isEqual';
 export {default as isInfix} from './isInfix';
 export {default as isInfixOn} from './isInfixOn';
-export {default as isIterable1} from './isIterable1';
+export {default as isOnce} from './isOnce';
 export {default as isIterator} from './isIterator';
 export {default as isList} from './isList';
 export {default as isPrefix} from './isPrefix';

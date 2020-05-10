@@ -1,5 +1,5 @@
 /**
- * Checks if value is an iterable.
+ * Checks if value is iterable.
  * @param v a value
  */
 function is(v: any): boolean {

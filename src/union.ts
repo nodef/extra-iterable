@@ -1,4 +1,4 @@
-import from from './from';
+import many from './many';
 import cmp from './_cmp';
 import type {compareFn} from './_types';
 
@@ -10,7 +10,7 @@ import type {compareFn} from './_types';
  */
 function* union<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): IterableIterator<T> {
   var fn = fn||cmp;
-  var x = from(x), s = new Set<T>();
+  var x = many(x), s = new Set<T>();
   yield* x;
   y: for(var v of y) {
     for(var u of x)

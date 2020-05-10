@@ -1,7 +1,7 @@
 import is from './is';
 
 /**
- * Checks if value is a list (not string).
+ * Checks if value is list (not string).
  * @param v a value
  */
 function isList(v: any): boolean {

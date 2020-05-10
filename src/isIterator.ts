@@ -1,10 +1,8 @@
-import is from './is';
-
 /**
- * Checks if value is an iterator (can iterate only once).
+ * Checks if value is iterator.
  * @param v a value
  */
 function isIterator(v: any): boolean {
-  return is(v) && v===v[Symbol.iterator]();
+  return v!=null && typeof v.next==='function';
 }
 export default isIterator;

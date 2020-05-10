@@ -1,5 +1,5 @@
 import copy from './copy';
-import from from './from';
+import many from './many';
 
 /**
  * Copies part of iterable within.
@@ -9,7 +9,7 @@ import from from './from';
  * @param I read end index (end)
  */
 function* copyWithin<T>(x: Iterable<T>, j: number, i: number=0, I: number=Number.MAX_SAFE_INTEGER): IterableIterator<T> {
-  var y = from(x);
-  yield* copy(y, y, j, i, I);
+  var x = many(x);
+  yield* copy(x, x, j, i, I);
 }
 export default copyWithin;

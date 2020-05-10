@@ -1,4 +1,4 @@
-import from from './from';
+import many from './many';
 import cmp from './_cmp';
 import type {compareFn} from './_types';
 
@@ -9,7 +9,7 @@ import type {compareFn} from './_types';
  */
 function isUnique<T>(x: Iterable<T>, fn: compareFn<T>=null): boolean {
   var fn = fn||cmp;
-  var x = from(x), i = -1;
+  var x = many(x), i = -1;
   for(var u of x) {
     var j = -1; ++i;
     for(var v of x) {
