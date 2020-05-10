@@ -26,6 +26,8 @@ OTHERS
 - findLast
 - findLastIndex
 
+- On => compare()
+
 - [Data.List.takeWhile: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:takeWhile)
 - [Data.List.takeWhileEnd: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:takeWhileEnd)
 - [Data.List.dropWhile: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:dropWhile)
