@@ -1,5 +1,6 @@
 - zipMin vs zipMax
 - slice too complicated?
+https://docs.rs/itertools/0.4.19/itertools/trait.Itertools.html#method.unique
 
 - isEqualOn
 - findLast

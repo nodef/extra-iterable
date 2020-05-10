@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.1.60",
+  "version": "2.1.61",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "scripts": {
@@ -111,7 +111,8 @@
     "uniqueOn",
     "unshift",
     "values",
-    "zip"
+    "zip",
+    "zipLongest"
   ],
   "repository": {
     "type": "git",
