@@ -86,7 +86,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [isEqual]             | Checks if two iterables are equal.
 | [compare]             | Compares two iterables.
 | [search]              | Searches a value from left.
-| [find]                | Finds first value which satisfies a test.
+| [find]                | Finds first value passing a test.
 | [findIndex]           | Finds index of leftmost value passing a test.
 | [some]                | Checks if any value satisfies a test.
 | [every]               | Checks if all values satisfy a test.
