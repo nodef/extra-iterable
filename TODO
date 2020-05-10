@@ -1,6 +1,7 @@
 - interleave
 - splice (logic suggests array might have to change)
 - slice too complicated?
+- zipMin vs zipMax
 
 - isEqualOn
 - findLast
