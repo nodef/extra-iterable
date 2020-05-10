@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.1.53",
+  "version": "2.1.54",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "scripts": {
@@ -47,8 +47,10 @@
     "index",
     "indexRange",
     "init",
+    "interleave",
     "intersection",
     "intersectionOn",
+    "intersperse",
     "is",
     "isDisjoint",
     "isDisjointOn",
