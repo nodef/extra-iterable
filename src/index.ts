@@ -96,3 +96,4 @@ export {default as uniqueOn} from './uniqueOn';
 export {default as unshift} from './unshift';
 export {default as values} from './values';
 export {default as zip} from './zip';
+export {default as zipLongest} from './zipLongest';
