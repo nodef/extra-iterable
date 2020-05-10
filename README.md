@@ -15,19 +15,20 @@ also available as separate package for use by bundling tools, like [browserify],
 ```javascript
 const iterable = require('extra-iterable');
 
-iterable.get([1, 2, 3], 1);
-// 2
+var x = [2, 4, 6, 8];
+iterable.get(x, 1);
+// 4
 
 var x = [1, 2, 3, 4];
 [...iterable.swap(x, 0, 1)];
-// [2, 1, 3, 4]
+// [ 2, 1, 3, 4 ]
 
 var x = [1, 2, 3];
 [...iterable.cycle(x, 4)];
 // [1, 2, 3, 1]
 
 var x = [1, 2, 3, 4];
-[...iterable.reduce(x, (acc, v) => acc+v)];
+iterable.reduce(x, (acc, v) => acc+v);
 // 10
 ```
 
@@ -167,3 +168,4 @@ var x = [1, 2, 3, 4];
 [:running:]: https://npm.runkit.com/extra-iterable
 [:package:]: https://www.npmjs.com/package/extra-iterable
 [:moon:]: https://www.npmjs.com/package/extra-iterable.min
+[:vhs:]: https://asciinema.org/a/NPymTE6ocX1xA0Dcufom7DvMP
