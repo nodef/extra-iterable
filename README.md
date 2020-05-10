@@ -35,7 +35,7 @@ var x = [1, 2, 3, 4];
 
 | Method                | Action
 |-----------------------|-------
-| [is]                  | Checks if value is an iterable.
+| [is]                  | Checks if value is iterable.
 | [get]                 | Gets value at index.
 | [set]                 | Sets value at index.
 | [swap]                | Exchanges two values.
@@ -43,7 +43,7 @@ var x = [1, 2, 3, 4];
 | [indexRange]          | Gets index range of part of iterable.
 | [size]                | Counts the number of values.
 | [iterator]            | Gives iterator for iterable.
-| [from]                | Converts a one-time iterable to iterable.
+| [from]                | Converts iterator to iterable.
 |                       |
 | [fill]                | Fills with given value.
 | [copy]                | Copies part of iterable to another.
