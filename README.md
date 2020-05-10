@@ -168,4 +168,4 @@ iterable.reduce(x, (acc, v) => acc+v);
 [:running:]: https://npm.runkit.com/extra-iterable
 [:package:]: https://www.npmjs.com/package/extra-iterable
 [:moon:]: https://www.npmjs.com/package/extra-iterable.min
-[:vhs:]: https://asciinema.org/a/NPymTE6ocX1xA0Dcufom7DvMP
+[:vhs:]: https://asciinema.org/a/328696
