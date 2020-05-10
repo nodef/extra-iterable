@@ -1,10 +1,6 @@
-WHAT TO CALL MANY TIME ITERABLE
-- from? (but iterable assumes all inputs as 1 time iterables)
-- from -> iterator to iterable? (shift)
-- slice too complicated
-
 OTHERS
 
+- slice too complicated?
 - map.flip (python) swap key-value (compiler class)
 - function.iterate
 - iterable.sum
@@ -15,12 +11,6 @@ OTHERS
 - includes?
 - splice
 
-- from(iterable1/iteartor)
-- isIterator(iterable1?)
-- isIterableIterator()?
-- isInfix -> iterable
-- array.partition = iterable.partition
-- max, min, range
 - isEqualOn
 - flatMap
 - findLast
