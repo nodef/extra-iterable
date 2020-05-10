@@ -5,6 +5,7 @@ WHAT TO CALL MANY TIME ITERABLE
 
 OTHERS
 
+- map.flip (python) swap key-value (compiler class)
 - function.iterate
 - iterable.sum
 - iterable.average
@@ -20,3 +21,14 @@ OTHERS
 - isInfix -> iterable
 - array.partition = iterable.partition
 - max, min, range
+- isEqualOn
+- flatMap
+- findLast
+- findLastIndex
+
+- [Data.List.takeWhile: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:takeWhile)
+- [Data.List.takeWhileEnd: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:takeWhileEnd)
+- [Data.List.dropWhile: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:dropWhile)
+- [Data.List.dropWhileEnd: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:dropWhileEnd)
+- [Data.List.span: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:span)
+- [Data.List.break: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:break)
