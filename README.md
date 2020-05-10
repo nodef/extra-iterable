@@ -165,6 +165,5 @@ var x = [1, 2, 3, 4];
 [unshift]: https://github.com/nodef/extra-iterable/wiki/unshift
 [zip]: https://github.com/nodef/extra-iterable/wiki/zip
 [:running:]: https://npm.runkit.com/extra-iterable
-[:vhs:]: https://asciinema.org/a/iWowOF29bsDMcmUVYiIqelfGj
 [:package:]: https://www.npmjs.com/package/extra-iterable
 [:moon:]: https://www.npmjs.com/package/extra-iterable.min
