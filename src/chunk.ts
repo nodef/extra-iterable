@@ -4,7 +4,7 @@
  * @param n chunk size (1)
  */
 function* chunk<T>(x: Iterable<T>, n: number=1): IterableIterator<T[]> {
-  var a: T[] = [], m = 0;
+  var a = [], m = 0;
   for(var v of x) {
     a.push(v);
     if(++m<n) continue;

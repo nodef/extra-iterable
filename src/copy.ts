@@ -19,7 +19,7 @@ function* copy<T>(x: Iterable<T>, y: Iterable<T>, j: number=0, i: number=0, I: n
     if(k>=j && k<J) continue;
     else yield u;
   }
-  if(k<=j) {
+  if(k<j) {
     for(; ++k<j;) yield undefined;
     yield* slice(y, i, I);
   }

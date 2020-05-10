@@ -5,6 +5,8 @@ import type {mapFn} from './_types';
  * Checks if iterable has a value.
  * @param x an iterable
  * @param v value?
+ * @param fn map function (v, i, x)
+ * @param ths this argument
  */
 function isValueOn<T, U>(x: Iterable<T>, v: T, fn: mapFn<T, U>=null, ths: object=null): boolean {
   var fn = fn||id, i = -1;
