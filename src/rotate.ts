@@ -20,9 +20,9 @@ function* rotateLeft<T>(x: Iterable<T>, n: number): IterableIterator<T> {
 /**
  * Rotates values in iterable.
  * @param x an iterable
- * @param n rotate amount (-ve: left, +ve: right)
+ * @param n rotate amount (-ve: left, +ve: right) (0)
  */
-function* rotate<T>(x: Iterable<T>, n: number): IterableIterator<T> {
+function* rotate<T>(x: Iterable<T>, n: number=0): IterableIterator<T> {
   if(n===0) yield* x;
   else if(n>0) yield* rotateRight(x, n);
   else yield* rotateLeft(x, -n);
