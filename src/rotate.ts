@@ -1,10 +1,3 @@
-function* rotateRight<T>(x: Iterable<T>, n: number): IterableIterator<T> {
-  var a = Array.from(x);
-  var n = n % a.length;
-  yield* a.slice(-n);
-  yield* a.slice(0, -n);
-}
-
 function* rotateLeft<T>(x: Iterable<T>, n: number): IterableIterator<T> {
   var a = [], i = -1;
   for(var v of x) {
@@ -15,6 +8,13 @@ function* rotateLeft<T>(x: Iterable<T>, n: number): IterableIterator<T> {
   var n = n % i;
   yield* a.slice(n);
   yield* a.slice(-n);
+}
+
+function* rotateRight<T>(x: Iterable<T>, n: number): IterableIterator<T> {
+  var a = Array.from(x);
+  var n = n % a.length;
+  yield* a.slice(-n);
+  yield* a.slice(0, -n);
 }
 
 /**

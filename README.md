@@ -56,6 +56,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [chunk]               | Breaks iterable into chunks of given size.
 | [cycle]               | Gives values that cycle through an iterable.
 | [repeat]              | Repeats an iterable given times.
+| [rotate]              | Rotates values in iterable.
 | [interleave]          | Places values of an iterable between another.
 |                       |
 | [min]                 | Finds smallest value.
@@ -87,7 +88,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [compare]             | Compares two iterables.
 | [search]              | Searches a value from left.
 | [find]                | Finds first value passing a test.
-| [findIndex]           | Finds index of leftmost value passing a test.
+| [findIndex]           | Finds index of first value passing a test.
 | [some]                | Checks if any value satisfies a test.
 | [every]               | Checks if all values satisfy a test.
 | [forEach]             | Calls a function for each value.
@@ -169,3 +170,4 @@ iterable.reduce(x, (acc, v) => acc+v);
 [:package:]: https://www.npmjs.com/package/extra-iterable
 [:moon:]: https://www.npmjs.com/package/extra-iterable.min
 [:vhs:]: https://asciinema.org/a/328696
+[rotate]: https://github.com/nodef/extra-iterable/wiki/rotate
