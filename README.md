@@ -56,6 +56,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [chunk]               | Breaks iterable into chunks of given size.
 | [cycle]               | Gives values that cycle through an iterable.
 | [repeat]              | Repeats an iterable given times.
+| [reverse]             | Reverses the values.
 | [rotate]              | Rotates values in iterable.
 | [interleave]          | Places values of an iterable between another.
 |                       |
@@ -171,3 +172,4 @@ iterable.reduce(x, (acc, v) => acc+v);
 [:moon:]: https://www.npmjs.com/package/extra-iterable.min
 [:vhs:]: https://asciinema.org/a/328696
 [rotate]: https://github.com/nodef/extra-iterable/wiki/rotate
+[reverse]: https://github.com/nodef/extra-iterable/wiki/reverse
