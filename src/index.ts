@@ -76,6 +76,7 @@ export {default as range} from './range';
 export {default as rangeOn} from './rangeOn';
 export {default as reduce} from './reduce';
 export {default as repeat} from './repeat';
+export {default as reverse} from './reverse';
 export {default as right} from './right';
 export {default as rotate} from './rotate';
 export {default as search} from './search';

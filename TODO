@@ -7,14 +7,14 @@ https://docs.rs/itertools/0.4.19/itertools/trait.Itertools.html#method.unique
 - findLastIndex
 
 - On => compare()
-- array.splice logic change
-- array.equal vs compare
 
 - map.flip (python) swap key-value (compiler class)
 - function.iterate
 - iterable.sum
 - iterable.average
 - iterable.product
+
+- gpg signature
 
 - [Data.List.takeWhile: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:takeWhile)
 - [Data.List.takeWhileEnd: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:takeWhileEnd)
