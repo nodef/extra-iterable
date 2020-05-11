@@ -2,7 +2,6 @@
  * Breaks iterable at given indices.
  * @param x an iterable
  * @param is split indices (sorted)
- * @returns ...pieces
  */
 function* cut<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T[]> {
   var ii = is[Symbol.iterator]();

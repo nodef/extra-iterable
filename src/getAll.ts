@@ -1,8 +1,7 @@
 /**
- * Gets value at indices.
+ * Gets values at indices.
  * @param x an iterable
  * @param is indices (sorted)
- * @returns ...values
  */
 function* getAll<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T> {
   var ii = is[Symbol.iterator]() as Iterator<number, number>;
