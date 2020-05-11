@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.1.68",
+  "version": "2.1.69",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "scripts": {
@@ -127,6 +127,6 @@
   "author": "wolfram77@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "extra-build": "^1.0.125"
+    "extra-build": "^1.0.137"
   }
 }

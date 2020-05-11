@@ -1,4 +1,4 @@
-An [iterable] is a sequence of values. [:running:] [:vhs:] [:package:] [:moon:]
+An [iterable] is a sequence of values. [:running:] [:vhs:] [:package:] [:moon:] [:ledger:]
 
 Methods look like:
 - `unique()`: accepts a compare function (default).
@@ -173,3 +173,4 @@ iterable.reduce(x, (acc, v) => acc+v);
 [:vhs:]: https://asciinema.org/a/328696
 [rotate]: https://github.com/nodef/extra-iterable/wiki/rotate
 [reverse]: https://github.com/nodef/extra-iterable/wiki/reverse
+[:ledger:]: https://unpkg.com/extra-iterable/
