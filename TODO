@@ -1,25 +1,111 @@
-- zipMin vs zipMax
-- slice too complicated?
-- cycle i n
-https://docs.rs/itertools/0.4.19/itertools/trait.Itertools.html#method.unique
+zip?
 
-- isEqualOn
-- findLast
-- findLastIndex
+In general i found that zip =>
+combine together till length of shortest iterable.
 
-- On => compare()
+But instead should zip =>
+combine together till length of first iterable?
+
+Also arguments of zipLongest
+is not consistent with zip
+
+
+
+slice?
+
+This needs some (rename) work for more clarity.
+I dont expect there to be any breaking change.
+
+
+
+cycle?
+
+Should cycle accept a start index parameter?
+It would make sense to be able to start cycle
+at a given start index (more generic).
+cycle(x, i, n)
+
+
+compareOn?
+
+It is possible to have *On functions for the following:
+compare, isEqual, search*.
+Does that look useful?
+
+
+
+findLastIndex?
+
+This one isnt present yet.
+Should it be called findRightIndex instead.
+Ref: lastIndexOf
+
+
+
+take*, drop*?
+
+This is available in Haskell.
+Is it useful here, or we aleady have a replacement?
+take(While)(End), drop*, span, break.
+
+
+
+itertools: Python?
+
+We have no means to generate an iterable yet.
+Should progressions be a separate package, or just here?
+
+
+
+scan / accumulate?
+
+Capturing result of reduce fn looks useful.
+accumulate(x, fn, acc)?
+
+
+
+tee?
+
+This splits an iterable into n parts.
+Basically a vertical chunk.
+But isnt it difficult to return multiple iterables?
+Could be worth a try? Maybe get to learn something new.
+
+
+
+itertools: Rust?
+
+Rust interleave() looks like zip -> concat.
+Nothing to do here then?
+
+
+
+batching? coalesce? dedup?
+
+Looks like a custom chunk function.
+Can this be done with a reduce?
+
+
+
+step?
+
+step(x, n) is a customized version of filter.
+
+
+
+merge?
+
+merge(xs, fn) &! mergeOn(xs, fn, ths)
+This inspired me to look into more deeply.
+
+
+
+(cartesian)Product?
+
+
+
+peekable iterators?
+
 
 - map.flip (python) swap key-value (compiler class)
 - function.iterate
-- iterable.sum
-- iterable.average
-- iterable.product
-
-- gpg signature
-
-- [Data.List.takeWhile: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:takeWhile)
-- [Data.List.takeWhileEnd: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:takeWhileEnd)
-- [Data.List.dropWhile: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:dropWhile)
-- [Data.List.dropWhileEnd: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:dropWhileEnd)
-- [Data.List.span: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:span)
-- [Data.List.break: Haskell](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:break)
