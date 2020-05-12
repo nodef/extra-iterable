@@ -1,4 +1,4 @@
-function* slicePP<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
+function* slicePos<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
   var k = -1;
   for(var v of x) {
     if(++k>=I) break;
@@ -6,26 +6,29 @@ function* slicePP<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> 
   }
 }
 
-function* slicePN<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
-  var k = -1;
-  var a: T[] = [], ai = 0, al = -I;
+function* slicePosNeg<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
+  var j = 0, k = -1;
+  var a = [], A = -I;
   for(var v of x) {
-    if(++k<i) { yield v; continue; }
-    if(a.length>=al) yield a[ai % al];
-    a[ai++ % al] = v;
+    if(++k<i) continue;
+    if(a.length>=A) yield a[j];
+    a[j] = v; j = (j+1) % A;
   }
 }
 
-function* sliceN<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
-  var n = 0;
-  var a: T[] = [], ai = 0, al = -i;
+function* sliceNeg<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
+  var j = 0, n = 0;
+  var a = [], A = -i;
   for(var v of x) {
-    a[ai++ % al] = v;
+    a[j] = v; j = (j+1) % A;
     n++;
   }
-  I = I<0? I:Math.min(I-n, 0);
-  for(; i<I; i++)
-    yield a[ai++ % al];
+  if(n<A) return;
+  var I = I<0? I : Math.min(I-n, 0);
+  var n = Math.max(I-i, 0);
+  var J = Math.max(j+n-A, 0);
+  yield* a.slice(j, j+n);
+  yield* a.slice(0, J);
 }
 
 /**
@@ -35,8 +38,8 @@ function* sliceN<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
  * @param I end index (-ve: from right) (end)
  */
 function* slice<T>(x: Iterable<T>, i: number=0, I: number=Number.MAX_SAFE_INTEGER): IterableIterator<T> {
-  if(i>=0 && I>=0) yield* slicePP(x, i, I);
-  else if(i>=0 && I<0) yield* slicePN(x, i, I);
-  else yield* sliceN(x, i, I);
+  if(i>=0 && I>=0) yield* slicePos(x, i, I);
+  else if(i>=0 && I<0) yield* slicePosNeg(x, i, I);
+  else yield* sliceNeg(x, i, I);
 }
 export default slice;
