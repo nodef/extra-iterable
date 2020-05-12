@@ -1,4 +1,5 @@
 import id from './_id';
+import array from './_array';
 import type {mapFn} from './_types';
 
 /**
@@ -10,10 +11,10 @@ import type {mapFn} from './_types';
  */
 function isInfixOn<T, U>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, U>=null, ths: object=null): boolean {
   var fn = fn||id;
-  var y1 = Array.isArray(y)? y:Array.from(y);
+  var y1 = array(y);
   if(y1.length===0) return true;
   var Y = y1.length, i = -1, J = 0;
-  var y1 = y1.map(fn, ths) as any[];
+  var y1 = y1.map(fn, ths) as T[];
   var m = new Array(Y).fill(false);
   for(var u of x) {
     var u1 = fn.call(ths, u, ++i, x);

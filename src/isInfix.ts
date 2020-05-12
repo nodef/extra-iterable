@@ -1,4 +1,5 @@
 import cmp from './_cmp';
+import array from './_array';
 import type {compareFn} from './_types';
 
 /**
@@ -9,7 +10,7 @@ import type {compareFn} from './_types';
  */
 function isInfix<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): boolean {
   var fn = fn||cmp;
-  var y1 = Array.isArray(y)? y : Array.from(y);
+  var y1 = array(y);
   if(y1.length===0) return true;
   var Y = y1.length, J = 0;
   var m = new Array(Y).fill(false);

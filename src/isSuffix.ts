@@ -1,4 +1,5 @@
 import cmp from './_cmp';
+import array from './_array';
 import type {compareFn} from './_types';
 
 /**
@@ -9,7 +10,7 @@ import type {compareFn} from './_types';
  */
 function isSuffix<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): boolean {
   var fn = fn||cmp;
-  var y1 = Array.isArray(y)? y:Array.from(y);
+  var y1 = array(y);
   var Y = y1.length, a = [], ai = 0;
   if(Y===0) return true;
   for(var u of x)

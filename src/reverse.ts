@@ -1,9 +1,11 @@
+import array from './_array';
+
 /**
  * Reverses the values.
  * @param x an iterable
  */
 function* reverse<T>(x: Iterable<T>): IterableIterator<T> {
-  var a = Array.from(x);
+  var a = array(x);
   for(var i=a.length-1; i>=0; i--)
     yield a[i];
 }

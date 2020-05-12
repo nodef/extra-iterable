@@ -1,4 +1,5 @@
 import id from './_id';
+import array from './_array';
 import type {mapFn} from './_types';
 
 /**
@@ -9,8 +10,8 @@ import type {mapFn} from './_types';
  * @param ths this argument
  */
 function isSuffixOn<T, U>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, U>=null, ths: object=null): boolean {
-  var fn = fn||id, n = 0;
-  var y1 = Array.isArray(y)? y:Array.from(y);
+  var fn = fn||id;
+  var y1 = array(y), n = 0;
   var Y = y1.length, a = [], ai = 0;
   if(Y===0) return true;
   for(var u of x) {
