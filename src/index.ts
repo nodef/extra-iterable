@@ -68,6 +68,7 @@ export {default as max} from './max';
 export {default as maxIndex} from './maxIndex';
 export {default as maxIndexOn} from './maxIndexOn';
 export {default as maxOn} from './maxOn';
+export {default as merge} from './merge';
 export {default as middle} from './middle';
 export {default as min} from './min';
 export {default as minIndex} from './minIndex';
