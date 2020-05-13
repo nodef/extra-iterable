@@ -12,8 +12,7 @@ function minOn<T, U>(x: Iterable<T>, fn: mapFn<T, U>=null, ths: object=null): T 
   var mk: U, mv: T, i = -1;
   for(var v of x) {
     var k = fn.call(ths, v, ++i, x);
-    if(i===0) { mk = k; mv = v; }
-    if(k<mk) { mk = k; mv = v; }
+    if(i===0 || k<mk) { mk = k; mv = v; }
   }
   return mv;
 }
