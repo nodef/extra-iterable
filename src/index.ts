@@ -71,6 +71,7 @@ export {default as minOn} from './minOn';
 export {default as partition} from './partition';
 export {default as partitionOn} from './partitionOn';
 export {default as pop} from './pop';
+export {default as product} from './product';
 export {default as push} from './push';
 export {default as range} from './range';
 export {default as rangeOn} from './rangeOn';

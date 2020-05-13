@@ -11,13 +11,6 @@ is not consistent with zip
 
 
 
-slice?
-
-This needs some (rename) work for more clarity.
-I dont expect there to be any breaking change.
-
-
-
 cycle?
 
 Should cycle accept a start index parameter?
