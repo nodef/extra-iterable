@@ -107,3 +107,6 @@ dist/
 ├─ index.min.js     ( UMD, compressed )
 ├─ index.mjs        ( ES Module )
 └─ index.min.mjs    ( ES Module, compressed )
+
+- set.compare using array.compare
+- set.union using array.compare ...
