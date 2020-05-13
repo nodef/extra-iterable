@@ -26,7 +26,7 @@ take*, drop*?
 
 This is available in Haskell.
 Is it useful here, or we aleady have a replacement?
-take(While)(End), drop*, span, break.
+span, break.
 
 
 
