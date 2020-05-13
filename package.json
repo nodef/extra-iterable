@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.2.16",
+  "version": "2.2.17",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "scripts": {
@@ -84,6 +84,7 @@
     "maxIndex",
     "maxIndexOn",
     "maxOn",
+    "merge",
     "middle",
     "min",
     "minIndex",
