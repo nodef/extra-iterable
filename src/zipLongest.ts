@@ -1,5 +1,11 @@
-import id from './_id';
+import zip from './zip';
 import type {mapFn} from './_types';
+
+function tillLongest<T>(os: IteratorResult<T>[]): boolean {
+  for(var o of os)
+    if(!o.done) return false;
+  return true;
+}
 
 /**
  * Combines values from iterables, till longest.
@@ -8,14 +14,7 @@ import type {mapFn} from './_types';
  * @param fn map function (vs, i, xs)
  * @param ths this argument
  */
-function* zipLongest<T, U>(xs: Iterable<T>[], vd: U, fn: mapFn<T[], U>=null, ths: object=null): IterableIterator<U> {
-  var fn = fn||id, i = -1;
-  var is = xs.map(x => x[Symbol.iterator]());
-  while(true) {
-    var ns = is.map(i => i.next());
-    if(ns.every(r => r.done)) break;
-    var vs = ns.map(r => r.value || vd);
-    yield fn.call(ths, vs, ++i, xs);
-  }
+function* zipLongest<T, U>(xs: Iterable<T>[], vd?: T, fn: mapFn<T[], U>=null, ths: object=null): IterableIterator<U> {
+  yield* zip(xs, vd, fn, ths, tillLongest);
 }
 export default zipLongest;

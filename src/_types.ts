@@ -1,3 +1,4 @@
+export type tillFn<T>       = (os: IteratorResult<T>[]) => boolean;
 export type reduceFn<T, U>  = (acc: U, v: T, i: number, x: Iterable<T>) => U;
 export type calledFn<T>     = (v: T, i: number, x: Iterable<T>) => void;
 export type testFn<T>       = (v: T, i: number, x: Iterable<T>) => boolean;
