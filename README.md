@@ -101,13 +101,10 @@ iterable.reduce(x, (acc, v) => acc+v);
 
 [![nodef](https://merferry.glitch.me/card/extra-iterable.svg)](https://nodef.github.io)
 
-> Browserified, minified version of this package is [extra-iterable.min].
-
 [browserify]: https://www.npmjs.com/package/browserify
 [rollup]: https://www.npmjs.com/package/rollup
 [uglify-js]: https://www.npmjs.com/package/uglify-js
 [iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
-[extra-iterable.min]: https://www.npmjs.com/package/extra-iterable.min
 [is]: https://github.com/nodef/extra-iterable/wiki/is
 [chunk]: https://github.com/nodef/extra-iterable/wiki/chunk
 [compare]: https://github.com/nodef/extra-iterable/wiki/compare
