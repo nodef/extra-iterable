@@ -102,3 +102,9 @@ peekable iterators?
 
 - map.flip (python) swap key-value (compiler class)
 - function.iterate
+dist/
+├─ index.common.js  ( CommonJS )
+├─ index.js         ( UMD )
+├─ index.min.js     ( UMD, compressed )
+├─ index.mjs        ( ES Module )
+└─ index.min.mjs    ( ES Module, compressed )

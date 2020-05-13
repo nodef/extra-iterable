@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "scripts": {
@@ -87,6 +87,7 @@
     "partition",
     "partitionOn",
     "pop",
+    "product",
     "push",
     "range",
     "rangeOn",
