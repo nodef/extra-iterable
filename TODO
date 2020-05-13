@@ -1,16 +1,3 @@
-zip?
-
-In general i found that zip =>
-combine together till length of shortest iterable.
-
-But instead should zip =>
-combine together till length of first iterable?
-
-Also arguments of zipLongest
-is not consistent with zip
-
-
-
 cycle?
 
 Should cycle accept a start index parameter?
