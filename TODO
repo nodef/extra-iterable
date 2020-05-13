@@ -95,9 +95,10 @@ This inspired me to look into more deeply.
 
 (cartesian)Product?
 
-
-
 peekable iterators?
+
+max => [i, v]?
+
 
 
 - map.flip (python) swap key-value (compiler class)
