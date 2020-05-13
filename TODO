@@ -37,13 +37,6 @@ Should progressions be a separate package, or just here?
 
 
 
-scan / accumulate?
-
-Capturing result of reduce fn looks useful.
-accumulate(x, fn, acc)?
-
-
-
 tee?
 
 This splits an iterable into n parts.
