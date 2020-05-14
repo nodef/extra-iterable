@@ -1,9 +1,10 @@
-cycle?
+cycle? chunk? IN PROGRESS
 
 Should cycle accept a start index parameter?
 It would make sense to be able to start cycle
 at a given start index (more generic).
 cycle(x, i, n)
+
 
 
 compareOn?
@@ -90,5 +91,6 @@ dist/
 
 - set.compare using array.compare
 - set.union using array.compare ...
+- array.chunkAt
 
 EASTER EGG?
