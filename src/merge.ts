@@ -1,14 +1,13 @@
 import minIndex from './minIndex';
-import cmp from './_cmp';
-import type {compareFn} from './_types';
+import type {compareFn, mapFn} from './_types';
 
 /**
  * Merges values from sorted iterables.
  * @param xs iterables
- * @param fn compare function (a, b)
+ * @param fc compare function (a, b)
+ * @param fm map function (v, i, x)
  */
-function* merge<T>(xs: Iterable<T>[], fn: compareFn<T>=null): IterableIterator<T> {
-  var fn = fn||cmp;
+function* merge<T, U=T>(xs: Iterable<T>[], fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
   var X = xs.length;
   var is = [], os = [];
   for(var n=0, i=0; n<X; n++) {
@@ -18,7 +17,7 @@ function* merge<T>(xs: Iterable<T>[], fn: compareFn<T>=null): IterableIterator<T
   }
   while(i>0) {
     var vs = os.map(o => o.value);
-    var j = minIndex(vs, fn);
+    var j = minIndex(vs, fc, fm);
     yield vs[j];
     os[j] = is[j].next();
     if(!os[j].done) continue;

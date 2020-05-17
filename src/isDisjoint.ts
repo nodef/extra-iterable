@@ -1,14 +1,10 @@
 import many from './many';
+import id from './_id';
 import cmp from './_cmp';
-import type {compareFn} from './_types';
+import uniques from './_uniques';
+import type {compareFn, mapFn} from './_types';
 
-/**
- * Checks if iterables have no value in common.
- * @param x an iterable
- * @param y another iterable
- * @param fn compare function (a, b)
- */
-function isDisjoint<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): boolean {
+function isDisjointCompare<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): boolean {
   var fn = fn||cmp;
   var y = many(y);
   for(var u of x) {
@@ -16,5 +12,40 @@ function isDisjoint<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): b
       if(fn(u, v)===0) return false;
   }
   return true;
+}
+
+function isDisjointMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, T|U>=null): boolean {
+  var s = uniques(y, fn);
+  var fn = fn||id, i = -1;
+  for(var u of x) {
+    var u1 = fn(u, ++i, x);
+    if(s.has(u1)) return false;
+  }
+  return true;
+}
+
+function isDisjointDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): boolean {
+  var fc = fc||cmp, fm = fm||id;
+  var y = many(y), i = -1;
+  for(var u of x) {
+    var u1 = fm(u, ++i, x), j = -1;
+    for(var v of y) {
+      var v1 = fm(v, ++j, y);
+      if(fc(u1, v1)===0) return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Checks if iterables have no value in common.
+ * @param x an iterable
+ * @param y another iterable
+ * @param fc compare function (a, b)
+ * @param fm map function (v, i, x)
+ */
+function isDisjoint<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): boolean {
+  if(fc) return isDisjointDual(x, y, fc, fm);
+  return isDisjointMap(x, y, fm);
 }
 export default isDisjoint;

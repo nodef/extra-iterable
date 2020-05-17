@@ -6,7 +6,7 @@ function everyIf<T>(x: Iterable<T>): boolean {
   return true;
 }
 
-function everyFn<T>(x: Iterable<T>, fn: testFn<T>, ths: object=null): boolean {
+function everyTest<T>(x: Iterable<T>, fn: testFn<T>, ths: object=null): boolean {
   var i = -1;
   for(var v of x)
     if(!fn.call(ths, v, ++i, x)) return false;
@@ -20,7 +20,7 @@ function everyFn<T>(x: Iterable<T>, fn: testFn<T>, ths: object=null): boolean {
  * @param ths this argument
  */
 function every<T>(x: Iterable<T>, fn: testFn<T>=null, ths: object=null): boolean {
-  if(!fn) return everyIf(x);
-  return everyFn(x, fn, ths);
+  if(fn) return everyTest(x, fn, ths);
+  else return everyIf(x);
 }
 export default every;
