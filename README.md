@@ -61,7 +61,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [repeat]              | Repeats an iterable given times.
 | [reverse]             | Reverses the values.
 | [rotate]              | Rotates values in iterable.
-| [interleave]          | Places values of an iterable between another.
+| [interleave]          | Merges values from iterables.
 |                       |
 | [min]                 | Finds smallest value.
 | [max]                 | Finds largest value.
