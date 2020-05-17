@@ -27,7 +27,7 @@ var x = [1, 2, 3, 4];
 // [ 2, 1, 3, 4 ]
 
 var x = [1, 2, 3];
-[...iterable.cycle(x, 4)];
+[...iterable.cycle(x, 0, 4)];
 // [1, 2, 3, 1]
 
 var x = [1, 2, 3, 4];
@@ -170,7 +170,6 @@ iterable.reduce(x, (acc, v) => acc+v);
 [:running:]: https://npm.runkit.com/extra-iterable
 [:package:]: https://www.npmjs.com/package/extra-iterable
 [:moon:]: https://www.npmjs.com/package/extra-iterable.min
-[:vhs:]: https://asciinema.org/a/328696
 [rotate]: https://github.com/nodef/extra-iterable/wiki/rotate
 [reverse]: https://github.com/nodef/extra-iterable/wiki/reverse
 [:ledger:]: https://unpkg.com/extra-iterable/
