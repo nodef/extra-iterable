@@ -6,7 +6,7 @@ import type {mapFn, tillFn} from './_types';
  * Combines values from iterables.
  * @param xs iterables
  * @param fm map function (vs, i, xs)
- * @param ft till function (dones)
+ * @param ft till function (dones) (some)
  * @param vd default value
  */
 function* zip<T, U>(xs: Iterable<T>[], fm: mapFn<T[], T[]|U>=null, ft: tillFn=null, vd?: T): IterableIterator<T[]|U> {
