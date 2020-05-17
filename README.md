@@ -173,3 +173,4 @@ iterable.reduce(x, (acc, v) => acc+v);
 [rotate]: https://github.com/nodef/extra-iterable/wiki/rotate
 [reverse]: https://github.com/nodef/extra-iterable/wiki/reverse
 [:ledger:]: https://unpkg.com/extra-iterable/
+[:vhs:]: https://asciinema.org/a/331126
