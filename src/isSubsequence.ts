@@ -47,7 +47,7 @@ function isSubsequence<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U
   var v1 = fm(value, ++j, y);
   for(var u of x) {
     var u1 = fm(u, ++i, x);
-    if(fc(u1, v1)===0) continue;
+    if(fc(u1, v1)!==0) continue;
     var {value, done} = iy.next();
     if(done) return true;
     v1 = fm(value, ++j, y);
