@@ -43,20 +43,20 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [get]                 | Gets value at index.
 | [set]                 | Sets value at index.
 | [swap]                | Exchanges two values.
-| [head]                | Exchanges two values.
+| [head]                | Gets first value.
 | [index]               | Gets zero-based index.
 | [indexRange]          | Gets index range of part of iterable.
 | [size]                | Counts the number of values.
-| [entries]             | Converts iterator to iterable.
+| [entries]             | Lists all index-value pairs.
 | [iterator]            | Gives iterator for iterable.
-| [many]                | Converts iterator to iterable.
+| [many]                | Converts a once iterable to many.
 | [from]                | Converts iterator to iterable.
 |                       |
-| [push]                | Fills with given value.
+| [push]                | Adds values to the end. 
 | [fill]                | Fills with given value.
 | [copy]                | Copies part of iterable to another.
 | [concat]              | Appends iterables together.
-| [left]                | Gets part of an iterable.
+| [left]                | Gets values from the left.
 | [slice]               | Gets part of an iterable.
 | [splice]              | Removes or replaces existing values.
 | [flat]                | Flattens nested iterable to given depth.
@@ -67,7 +67,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [reverse]             | Reverses the values.
 | [rotate]              | Rotates values in iterable.
 | [interleave]          | Merges values from iterables.
-| [merge]               | Merges values from iterables.
+| [merge]               | Merges values from sorted iterables.
 |                       |
 | [min]                 | Finds smallest value.
 | [max]                 | Finds largest value.
@@ -75,14 +75,14 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [map]                 | Updates values based on map function.
 | [reduce]              | Reduces values to a single value.
 | [filter]              | Keeps the values which pass a test.
-| [take]                | Keeps the values which pass a test.
-| [drop]                | Keeps the values which pass a test.
+| [take]                | Extracts given number of values from iterable.
+| [drop]                | Drops given number of values from iterable.
 | [count]               | Counts values which satisfy a test.
 | [partition]           | Segregates values by test result.
 | [group]               | Keeps similar values together and in order.
 | [split]               | Breaks iterable considering test as separator.
 | [join]                | Joins values together.
-| [cartesianProduct]    | Combines values from iterables.
+| [cartesianProduct]    | Lists cartesian product of iterables.
 | [zip]                 | Combines values from iterables.
 |                       |
 | [unique]              | Removes duplicate values.
@@ -92,7 +92,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [isUnique]            | Checks if there are no duplicate values.
 | [isDisjoint]          | Checks if iterables have no value in common.
 |                       |
-| [isValue]             | Checks if iterable starts with a prefix.
+| [isValue]             | Checks if iterable has a value.
 | [isPrefix]            | Checks if iterable starts with a prefix.
 | [isInfix]             | Checks if iterable contains an infix.
 | [isSuffix]            | Checks if iterable ends with a suffix.
@@ -120,3 +120,65 @@ iterable.reduce(x, (acc, v) => acc+v);
 [:moon:]: https://www.npmjs.com/package/extra-iterable.min
 [:ledger:]: https://unpkg.com/extra-iterable/
 [:vhs:]: https://asciinema.org/a/331126
+[is]: https://github.com/nodef/extra-iterable/wiki/is
+[get]: https://github.com/nodef/extra-iterable/wiki/get
+[set]: https://github.com/nodef/extra-iterable/wiki/set
+[swap]: https://github.com/nodef/extra-iterable/wiki/swap
+[head]: https://github.com/nodef/extra-iterable/wiki/head
+[index]: https://github.com/nodef/extra-iterable/wiki/index
+[indexRange]: https://github.com/nodef/extra-iterable/wiki/indexRange
+[size]: https://github.com/nodef/extra-iterable/wiki/size
+[entries]: https://github.com/nodef/extra-iterable/wiki/entries
+[iterator]: https://github.com/nodef/extra-iterable/wiki/iterator
+[many]: https://github.com/nodef/extra-iterable/wiki/many
+[from]: https://github.com/nodef/extra-iterable/wiki/from
+[push]: https://github.com/nodef/extra-iterable/wiki/push
+[fill]: https://github.com/nodef/extra-iterable/wiki/fill
+[copy]: https://github.com/nodef/extra-iterable/wiki/copy
+[concat]: https://github.com/nodef/extra-iterable/wiki/concat
+[left]: https://github.com/nodef/extra-iterable/wiki/left
+[slice]: https://github.com/nodef/extra-iterable/wiki/slice
+[splice]: https://github.com/nodef/extra-iterable/wiki/splice
+[flat]: https://github.com/nodef/extra-iterable/wiki/flat
+[cut]: https://github.com/nodef/extra-iterable/wiki/cut
+[chunk]: https://github.com/nodef/extra-iterable/wiki/chunk
+[cycle]: https://github.com/nodef/extra-iterable/wiki/cycle
+[repeat]: https://github.com/nodef/extra-iterable/wiki/repeat
+[reverse]: https://github.com/nodef/extra-iterable/wiki/reverse
+[rotate]: https://github.com/nodef/extra-iterable/wiki/rotate
+[interleave]: https://github.com/nodef/extra-iterable/wiki/interleave
+[merge]: https://github.com/nodef/extra-iterable/wiki/merge
+[min]: https://github.com/nodef/extra-iterable/wiki/min
+[max]: https://github.com/nodef/extra-iterable/wiki/max
+[range]: https://github.com/nodef/extra-iterable/wiki/range
+[map]: https://github.com/nodef/extra-iterable/wiki/map
+[reduce]: https://github.com/nodef/extra-iterable/wiki/reduce
+[filter]: https://github.com/nodef/extra-iterable/wiki/filter
+[take]: https://github.com/nodef/extra-iterable/wiki/take
+[drop]: https://github.com/nodef/extra-iterable/wiki/drop
+[count]: https://github.com/nodef/extra-iterable/wiki/count
+[partition]: https://github.com/nodef/extra-iterable/wiki/partition
+[group]: https://github.com/nodef/extra-iterable/wiki/group
+[split]: https://github.com/nodef/extra-iterable/wiki/split
+[join]: https://github.com/nodef/extra-iterable/wiki/join
+[cartesianProduct]: https://github.com/nodef/extra-iterable/wiki/cartesianProduct
+[zip]: https://github.com/nodef/extra-iterable/wiki/zip
+[unique]: https://github.com/nodef/extra-iterable/wiki/unique
+[union]: https://github.com/nodef/extra-iterable/wiki/union
+[intersection]: https://github.com/nodef/extra-iterable/wiki/intersection
+[difference]: https://github.com/nodef/extra-iterable/wiki/difference
+[isUnique]: https://github.com/nodef/extra-iterable/wiki/isUnique
+[isDisjoint]: https://github.com/nodef/extra-iterable/wiki/isDisjoint
+[isValue]: https://github.com/nodef/extra-iterable/wiki/isValue
+[isPrefix]: https://github.com/nodef/extra-iterable/wiki/isPrefix
+[isInfix]: https://github.com/nodef/extra-iterable/wiki/isInfix
+[isSuffix]: https://github.com/nodef/extra-iterable/wiki/isSuffix
+[isSubsequence]: https://github.com/nodef/extra-iterable/wiki/isSubsequence
+[isEqual]: https://github.com/nodef/extra-iterable/wiki/isEqual
+[compare]: https://github.com/nodef/extra-iterable/wiki/compare
+[search]: https://github.com/nodef/extra-iterable/wiki/search
+[find]: https://github.com/nodef/extra-iterable/wiki/find
+[findIndex]: https://github.com/nodef/extra-iterable/wiki/findIndex
+[some]: https://github.com/nodef/extra-iterable/wiki/some
+[every]: https://github.com/nodef/extra-iterable/wiki/every
+[forEach]: https://github.com/nodef/extra-iterable/wiki/forEach
