@@ -1,17 +1,14 @@
 An [iterable] is a sequence of values. [:running:] [:vhs:] [:package:] [:moon:] [:ledger:]
 
-I find this map-approach beautiful, which i learned from Haskell's `sortOn()`.
-You can notice that i have followed Javascript naming scheme as far as possible.
-Some names are borrowed from Haskell, Python, Java, Processing.
-
-Methods look like:
-- `unique()`: accepts a compare function (default).
-- `uniqueOn()`: accepts a map function *for faster comparision* (map).
-
 Methods as separate packages:
 
 - `@extra-iterable/swap`: use [rollup] to bundle this es module.
 - `@extra-iterable/swap.min`: use in browser ([browserify], [uglify-js]).
+
+Some methods accept a map function *for faster comparision* (like [unique]).
+I find this map-approach beautiful, which i learned from Haskell's `sortOn()`.
+You can notice that i have followed Javascript naming scheme as far as possible.
+Some names are borrowed from Haskell, Python, Java, Processing.
 
 > Stability: Experimental.
 
