@@ -1,20 +1,24 @@
-import chunk from './chunk';
-import repeat from './repeat';
-
 /**
- * Places values of an iterable between another.
- * @param x an iterable
- * @param y another iterable
- * @param m number of values from x (1)
- * @param n number of values from y (1)
+ * Merges values from iterables.
+ * @param xs iterables
  */
-function* interleave<T>(x: Iterable<T>, y: Iterable<T>, m: number=1, n: number=1): IterableIterator<T> {
-  var x1 = chunk(x, m);
-  var y1 = chunk(repeat(y), n);
-  var iy = y1[Symbol.iterator](), i = -1;
-  for(var u of x1) {
-    if(++i>0) yield* iy.next().value;
-    yield* u;
+function* interleave<T>(xs: Iterable<T>[]): IterableIterator<T> {
+  var X = xs.length;
+  var is = [], os = [];
+  for(var n=0, i=0; n<X; n++) {
+    is[i] = xs[i][Symbol.iterator]();
+    os[i] = is[i].next();
+    if(!os[i].done) i++;
+  }
+  for(var j=0; i>0; j++) {
+    var vs = os.map(o => o.value);
+    j %= i;
+    yield vs[j];
+    os[j] = is[j].next();
+    if(!os[j].done) continue;
+    is.splice(j, 1);
+    os.splice(j, 1);
+    i--;
   }
 }
 export default interleave;

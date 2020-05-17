@@ -6,9 +6,8 @@ import type {mapFn} from './_types';
  * Lists cartesian product of iterables.
  * @param xs iterables
  * @param fn map function (vs, i, xs)
- * @param ths this argument
  */
-function* cartesianProduct<T, U>(xs: Iterable<T>[], fn: mapFn<T[], U>=null, ths: object=null): IterableIterator<U> {
+function* cartesianProduct<T, U=T>(xs: Iterable<T>[], fn: mapFn<T[], T[]|U>=null): IterableIterator<T[]|U> {
   var fn = fn||id;
   var X = xs.length;
   if(X===0) return;
@@ -22,7 +21,7 @@ function* cartesianProduct<T, U>(xs: Iterable<T>[], fn: mapFn<T[], U>=null, ths:
   for(var i=0;; i++) {
     var vs = [];
     for(var o of os) vs.push(o.value);
-    yield fn.call(ths, vs, i, xs);
+    yield fn(vs, i, null);
     for(var r=X-1; r>=0; r--) {
       os[r] = is[r].next();
       if(!os[r].done) break;

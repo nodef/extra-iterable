@@ -13,8 +13,9 @@ function* cycle<T>(x: Iterable<T>, i: number=0, n: number=-1): IterableIterator<
   var i = i===0? 0 : mod(i, size(x));
   while(true) {
     for(var v of x) {
+      if(--i>=0) continue;
       if(n--===0) return;
-      if(--i<0) yield v;
+      yield v;
     }
   }
 }

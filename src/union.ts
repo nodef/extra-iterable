@@ -55,6 +55,7 @@ function* unionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=n
  * @param x an iterable
  * @param y another iterable
  * @param fc compare function (a, b)
+ * @param fm map function (v, i, x)
  */
 function* union<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
   if(fc) yield* unionDual(x, y, fc, fm);
