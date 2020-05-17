@@ -1,8 +1,14 @@
 {
   "name": "extra-iterable",
-  "version": "2.3.13",
+  "version": "2.3.14",
   "description": "An iterable is a sequence of values.",
+  "type": "module",
   "main": "index.js",
+  "module": "index.mjs",
+  "exports": {
+    "require": "./index.js",
+    "import": "./index.mjs"
+  },
   "scripts": {
     "einit": "ebuild init",
     "ecode": "ebuild update --docs false",
