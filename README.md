@@ -117,7 +117,6 @@ iterable.reduce(x, (acc, v) => acc+v);
 [:package:]: https://www.npmjs.com/package/extra-iterable
 [:moon:]: https://www.npmjs.com/package/extra-iterable.min
 [:ledger:]: https://unpkg.com/extra-iterable/
-[:vhs:]: https://asciinema.org/a/331126
 [is]: https://github.com/nodef/extra-iterable/wiki/is
 [get]: https://github.com/nodef/extra-iterable/wiki/get
 [set]: https://github.com/nodef/extra-iterable/wiki/set
