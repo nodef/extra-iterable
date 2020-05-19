@@ -1,10 +1,10 @@
 /**
  * Breaks iterable into chunks of given size.
  * @param x an iterable
- * @param s chunk step (1)
- * @param n chunk size (s)
+ * @param n chunk size (1)
+ * @param s chunk step (n)
  */
-function* chunk<T>(x: Iterable<T>, s: number=1, n: number=s): IterableIterator<T[]> {
+function* chunk<T>(x: Iterable<T>, n: number=1, s: number=n): IterableIterator<T[]> {
   var M = Math.max(n, s);
   var m = 0, a = [];
   for(var v of x) {
