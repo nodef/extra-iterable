@@ -179,3 +179,4 @@ iterable.reduce(x, (acc, v) => acc+v);
 [some]: https://github.com/nodef/extra-iterable/wiki/some
 [every]: https://github.com/nodef/extra-iterable/wiki/every
 [forEach]: https://github.com/nodef/extra-iterable/wiki/forEach
+[:vhs:]: https://asciinema.org/a/331910
