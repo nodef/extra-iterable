@@ -7,7 +7,7 @@ import slice from './slice';
  * @param v search value
  * @param i start index
  */
-function indexOf<T>(x: Iterable<T>, v: T, i: number=0) {
+function indexOf<T>(x: Iterable<T>, v: T, i: number=0): number {
   var a = search(slice(x, i), v);
   return a<0? a : a+i;
 }

@@ -7,7 +7,7 @@ import slice from './slice';
  * @param v search value
  * @param i start index
  */
-function lastIndexOf<T>(x: Iterable<T>, v: T, i: number=Number.MAX_SAFE_INTEGER-1) {
+function lastIndexOf<T>(x: Iterable<T>, v: T, i: number=Number.MAX_SAFE_INTEGER-1): number {
   return searchRight(slice(x, 0, i+1), v);
 }
 export default lastIndexOf;
