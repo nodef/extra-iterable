@@ -2,12 +2,5 @@ batching? coalesce? dedup?
 Looks like a custom chunk function.
 Can this be done with a reduce?
 
-dist/
-├─ index.common.js  ( CommonJS )
-├─ index.js         ( UMD )
-├─ index.min.js     ( UMD, compressed )
-├─ index.mjs        ( ES Module )
-└─ index.min.mjs    ( ES Module, compressed )
-
 - set.compare using array.compare
 - set.union using array.compare ...
