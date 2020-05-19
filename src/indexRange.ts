@@ -1,4 +1,5 @@
 import size from './size';
+import END from './END';
 
 /**
  * Gets index range of part of iterable.
@@ -7,7 +8,7 @@ import size from './size';
  * @param I end index (-ve: from right) (end)
  * @returns [start index, end index]
  */
-function indexRange<T>(x: Iterable<T>, i: number=0, I: number=Number.MAX_SAFE_INTEGER): [number, number] {
+function indexRange<T>(x: Iterable<T>, i: number=0, I: number=END): [number, number] {
   var n = size(x);
   i = i<0? Math.max(n+i, 0) : Math.min(i, n);
   I = I<0? Math.max(n+I, 0) : Math.min(I, n);

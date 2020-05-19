@@ -1,4 +1,5 @@
 import size from './size';
+import END from './END';
 
 /**
  * Counts the number of values.
@@ -6,7 +7,7 @@ import size from './size';
  * @param i start index (0)
  * @param I end index (end)
  */
-function length<T>(x: Iterable<T>, i: number=0, I: number=Number.MAX_SAFE_INTEGER): number {
+function length<T>(x: Iterable<T>, i: number=0, I: number=END): number {
   return size(x, i, I);
 }
 export default length;

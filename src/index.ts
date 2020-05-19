@@ -1,3 +1,4 @@
+export {default as END} from './END';
 export {default as accumulate} from './accumulate';
 export {default as cartesianProduct} from './cartesianProduct';
 export {default as chunk} from './chunk';

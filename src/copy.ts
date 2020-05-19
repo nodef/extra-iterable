@@ -1,4 +1,5 @@
 import slice from './slice';
+import END from './END';
 
 /**
  * Copies part of iterable to another.
@@ -8,7 +9,7 @@ import slice from './slice';
  * @param i read start index (0)
  * @param I read end index (end)
  */
-function* copy<T>(x: Iterable<T>, y: Iterable<T>, j: number=0, i: number=0, I: number=Number.MAX_SAFE_INTEGER): IterableIterator<T> {
+function* copy<T>(x: Iterable<T>, y: Iterable<T>, j: number=0, i: number=0, I: number=END): IterableIterator<T> {
   var k = -1, J = -1;
   for(var u of x) {
     if(++k===j) {

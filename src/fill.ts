@@ -1,3 +1,5 @@
+import END from './END';
+
 /**
  * Fills with given value.
  * @param x an iterable
@@ -5,7 +7,7 @@
  * @param i start index (0)
  * @param I end index (end)
  */
-function* fill<T>(x: Iterable<T>, v: T, i: number=0, I: number=Number.MAX_SAFE_INTEGER): IterableIterator<T> {
+function* fill<T>(x: Iterable<T>, v: T, i: number=0, I: number=END): IterableIterator<T> {
   var j = -1;
   for(var u of x) {
     if(++j>=i && j<I) yield v;

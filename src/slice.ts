@@ -1,3 +1,5 @@
+import END from './END';
+
 function* slicePos<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
   var k = -1;
   for(var v of x) {
@@ -37,7 +39,7 @@ function* sliceNeg<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T>
  * @param i start index (-ve: from right) (0)
  * @param I end index (-ve: from right) (end)
  */
-function* slice<T>(x: Iterable<T>, i: number=0, I: number=Number.MAX_SAFE_INTEGER): IterableIterator<T> {
+function* slice<T>(x: Iterable<T>, i: number=0, I: number=END): IterableIterator<T> {
   if(i>=0 && I>=0) yield* slicePos(x, i, I);
   else if(i>=0 && I<0) yield* slicePosNeg(x, i, I);
   else yield* sliceNeg(x, i, I);
