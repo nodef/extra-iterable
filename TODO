@@ -1,6 +1,8 @@
-batching? coalesce? dedup?
+BATCHING, COALESCE, DEDUP?
 Looks like a custom chunk function.
 Can this be done with a reduce?
 
-- set.compare using array.compare
-- set.union using array.compare ...
+MINNTH, MAXNTH, SORTEDSLICE
+What if i need only the nth minimum, or only a part of the sorted array.
+Actually i need that for implementing ARRAYVIEW.
+[bag][nth] ...
