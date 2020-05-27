@@ -9,3 +9,8 @@ Actually i need that for implementing ARRAYVIEW.
 
 UNZIP
 Iterable<T[]> -> [Iterable<T>]
+
+CATERORIZE
+core vs derived functions
+core: generic, usually multi-liners
+derived: specific, usually one-liners

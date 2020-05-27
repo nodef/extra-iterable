@@ -1,4 +1,4 @@
-An [iterable] is a sequence of values. [:running:] [:vhs:] [:package:] [:moon:] [:ledger:]
+An [iterable] is a sequence of values. [:running:] [:package:] [:moon:] [:ledger:]
 
 Methods as separate packages:
 
