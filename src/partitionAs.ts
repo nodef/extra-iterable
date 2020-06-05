@@ -8,7 +8,7 @@ import type {mapFn} from './_types';
  * @param ths this argument
  * @returns Map {key => values}
  */
-function partitionAs<T, U=T>(x: Iterable<T>, fn: mapFn<T, T|U>=null, ths=null): Map<T|U, T[]> {
+function partitionAs<T, U=T>(x: Iterable<T>, fn: mapFn<T, T|U>=null, ths: object=null): Map<T|U, T[]> {
   var fn = fn||id;
   var m = new Map(), i = -1;
   for(var v of x) {
