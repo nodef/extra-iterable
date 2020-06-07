@@ -1,4 +1,4 @@
-import mod from '@extra-math/mod';
+import {mod} from 'extra-math';
 import many from './many';
 import size from './size';
 
