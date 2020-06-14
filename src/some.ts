@@ -16,7 +16,7 @@ function someTest<T>(x: Iterable<T>, fn: testFn<T>, ths: object=null): boolean {
 /**
  * Checks if any value satisfies a test.
  * @param x an iterable
- * @param fn test function (v, i ,x)
+ * @param fn test function (v, i, x)
  * @param ths this argument
  */
 function some<T>(x: Iterable<T>, fn: testFn<T>=null, ths: object=null): boolean {

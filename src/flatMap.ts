@@ -1,5 +1,5 @@
-import isList from './isList';
 import id from './_id';
+import isList from './isList';
 import type {mapFn} from './_types';
 
 /**

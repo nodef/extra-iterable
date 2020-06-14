@@ -1,22 +1,17 @@
-import END from './END';
+import type {testFn} from './_types';
 
 /**
- * Breaks iterable at given indices.
+ * Breaks iterable when test passes.
  * @param x an iterable
- * @param is split indices (sorted)
+ * @param fn test function (v, i, x)
+ * @param ths this argument
  */
-function* cut<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T[]> {
-  var ii = is[Symbol.iterator]();
-  var {value, done} = ii.next();
-  if(done) value = END;
-  var a = [], j = -1;
+function* cut<T>(x: Iterable<T>, fn: testFn<T>, ths: object=null): IterableIterator<T[]> {
+  var i = -1, a = [];
   for(var v of x) {
-    if(++j<value) { a.push(v); continue; }
-    yield a; a = [v];
-    var {value, done} = ii.next();
-    if(done) value = END;
+    if(fn.call(ths, v, ++i, x)) { yield a; a = []; }
+    a.push(v);
   }
   yield a;
-  for(; !done; {done}=ii.next()) yield [];
 }
 export default cut;

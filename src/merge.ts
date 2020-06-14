@@ -1,4 +1,4 @@
-import minIndex from './minIndex';
+import min from './min';
 import type {compareFn, mapFn} from './_types';
 
 /**
@@ -17,7 +17,7 @@ function* merge<T, U=T>(xs: Iterable<T>[], fc: compareFn<T|U>=null, fm: mapFn<T,
   }
   while(i>0) {
     var vs = os.map(o => o.value);
-    var j = minIndex(vs, fc, fm);
+    var j = min(vs, fc, fm)[0];
     yield vs[j];
     os[j] = is[j].next();
     if(!os[j].done) continue;
