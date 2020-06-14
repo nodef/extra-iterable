@@ -1,7 +1,7 @@
 import type {testFn} from './_types';
 
 /**
- * Extracts values till a test passes.
+ * Extracts values, while a test passes.
  * @param x an iterable
  * @param fn test function (v, i, x)
  * @param ths this argument
@@ -9,8 +9,8 @@ import type {testFn} from './_types';
 function* takeWhile<T>(x: Iterable<T>, fn: testFn<T>, ths: object=null): IterableIterator<T> {
   var i = -1;
   for(var v of x) {
-    if(!fn.call(ths, v, ++i, x)) return;
-    yield v;
+    if(fn.call(ths, v, ++i, x)) yield v;
+    else return;
   }
 }
 export default takeWhile;
