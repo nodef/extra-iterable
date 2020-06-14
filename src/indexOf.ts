@@ -1,4 +1,4 @@
-import search from './search';
+import searchValue from './searchValue';
 import slice from './slice';
 
 /**
@@ -8,7 +8,7 @@ import slice from './slice';
  * @param i start index
  */
 function indexOf<T>(x: Iterable<T>, v: T, i: number=0): number {
-  var a = search(slice(x, i), v);
+  var a = searchValue(slice(x, i), v);
   return a<0? a : a+i;
 }
 export default indexOf;

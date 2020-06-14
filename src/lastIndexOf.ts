@@ -1,4 +1,4 @@
-import searchRight from './searchRight';
+import searchValueRight from './searchValueRight';
 import slice from './slice';
 import END from './END';
 
@@ -9,6 +9,6 @@ import END from './END';
  * @param i start index
  */
 function lastIndexOf<T>(x: Iterable<T>, v: T, i: number=END-1): number {
-  return searchRight(slice(x, 0, i+1), v);
+  return searchValueRight(slice(x, 0, i+1), v);
 }
 export default lastIndexOf;
