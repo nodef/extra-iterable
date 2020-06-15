@@ -15,7 +15,7 @@ Some names are borrowed from Haskell, Python, Java, Processing.
 ```javascript
 const iterable = require('extra-iterable');
 // import * as iterable from 'extra-iterable';
-// import * as iterable from 'https://unpkg.com/extra-iterable@2.3.36/index.mjs'; (deno)
+// import * as iterable from 'https://unpkg.com/extra-iterable@2.4.25/index.mjs'; (deno)
 
 var x = [2, 4, 6, 8];
 iterable.get(x, 1);
