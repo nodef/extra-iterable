@@ -7,9 +7,6 @@ What if i need only the nth minimum, or only a part of the sorted array.
 Actually i need that for implementing ARRAYVIEW.
 [bag][nth] ...
 
-UNZIP
-Iterable<T[]> -> [Iterable<T>]
-
 CATERORIZE
 core vs derived functions
 core: generic, usually multi-liners
