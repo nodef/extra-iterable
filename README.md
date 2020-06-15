@@ -42,24 +42,27 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [get]                 | Gets value at index.
 | [set]                 | Sets value at index.
 | [swap]                | Exchanges two values.
-| [head]                | Gets first value.
 | [index]               | Gets zero-based index.
 | [indexRange]          | Gets index range of part of iterable.
+| [isEmpty]             | Checks is iterable is empty.
 | [size]                | Counts the number of values.
+|                       |
 | [entries]             | Lists all index-value pairs.
 | [iterator]            | Gives iterator for iterable.
 | [many]                | Converts a once iterable to many.
 | [from]                | Converts iterator to iterable.
 |                       |
-| [push]                | Adds values to the end. 
-| [fill]                | Fills with given value.
-| [copy]                | Copies part of iterable to another.
-| [concat]              | Appends iterables together.
+| [take]                | Extracts values from iterable.
+| [drop]                | Drops values from iterable.
+| [head]                | Gets first value.
 | [left]                | Gets values from the left.
+| [concat]              | Appends iterables together.
+| [push]                | Adds values to the end. 
+| [copy]                | Copies part of iterable to another.
+| [fill]                | Fills with given value.
 | [slice]               | Gets part of an iterable.
 | [splice]              | Removes or replaces existing values.
-| [flat]                | Flattens nested iterable to given depth.
-| [cut]                 | Breaks iterable when test passes.
+|                       |
 | [chunk]               | Breaks iterable into chunks of given size.
 | [cycle]               | Gives values that cycle through an iterable.
 | [repeat]              | Repeats an iterable given times.
@@ -67,20 +70,22 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [rotate]              | Rotates values in iterable.
 | [interleave]          | Merges values from iterables.
 | [merge]               | Merges values from sorted iterables.
+| [flat]                | Flattens nested iterable to given depth.
 |                       |
 | [min]                 | Finds smallest entry.
 | [max]                 | Finds largest entry.
 | [range]               | Finds smallest and largest entries.
-| [map]                 | Updates values based on map function.
-| [reduce]              | Reduces values to a single value.
-| [filter]              | Keeps the values which pass a test.
-| [take]                | Extracts values from iterable.
-| [drop]                | Drops values from iterable.
 | [count]               | Counts values which satisfy a test.
 | [partition]           | Segregates values by test result.
-| [group]               | Keeps similar values together and in order.
+| [cut]                 | Breaks iterable when test passes.
 | [split]               | Breaks iterable considering test as separator.
+| [group]               | Keeps similar values together and in order.
 | [join]                | Joins values together.
+|                       |
+| [map]                 | Updates values based on map function.
+| [filter]              | Keeps the values which pass a test.
+| [reduce]              | Reduces values to a single value.
+| [accumulate]          | Produces accumulating values.
 | [cartesianProduct]    | Lists cartesian product of iterables.
 | [zip]                 | Combines values from iterables.
 |                       |
@@ -88,23 +93,24 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [union]               | Gives values present in any iterable.
 | [intersection]        | Gives values present in both iterables.
 | [difference]          | Gives values not present in another iterable.
+| [symmetricDifference] | Gives values not present in both iterables.
 | [isUnique]            | Checks if there are no duplicate values.
 | [isDisjoint]          | Checks if iterables have no value in common.
 |                       |
 | [isValue]             | Checks if iterable has a value.
 | [isPrefix]            | Searches a prefix.
-| [isInfix]             | Checks if iterable contains an infix.
 | [isSuffix]            | Checks if iterable ends with a suffix.
+| [isInfix]             | Checks if iterable contains an infix.
 | [isSubsequence]       | Checks if iterable has a subsequence.
 |                       |
 | [isEqual]             | Checks if two iterables are equal.
 | [compare]             | Compares two iterables.
 | [search]              | Searches first value passing a test.
+| [scanWhile]           | Scans from left, while a test passes.
 | [find]                | Finds first value passing a test.
-| [findIndex]           | Finds index of first value passing a test.
+| [forEach]             | Calls a function for each value.
 | [some]                | Checks if any value satisfies a test.
 | [every]               | Checks if all values satisfy a test.
-| [forEach]             | Calls a function for each value.
 
 <br>
 
@@ -176,8 +182,11 @@ iterable.reduce(x, (acc, v) => acc+v);
 [compare]: https://github.com/nodef/extra-iterable/wiki/compare
 [search]: https://github.com/nodef/extra-iterable/wiki/search
 [find]: https://github.com/nodef/extra-iterable/wiki/find
-[findIndex]: https://github.com/nodef/extra-iterable/wiki/findIndex
 [some]: https://github.com/nodef/extra-iterable/wiki/some
 [every]: https://github.com/nodef/extra-iterable/wiki/every
 [forEach]: https://github.com/nodef/extra-iterable/wiki/forEach
 [:vhs:]: https://asciinema.org/a/331910
+[isEmpty]: https://github.com/nodef/extra-iterable/wiki/isEmpty
+[accumulate]: https://github.com/nodef/extra-iterable/wiki/accumulate
+[symmetricDifference]: https://github.com/nodef/extra-iterable/wiki/symmetricDifference
+[scanWhile]: https://github.com/nodef/extra-iterable/wiki/scanWhile
