@@ -68,18 +68,18 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [interleave]          | Merges values from iterables.
 | [merge]               | Merges values from sorted iterables.
 |                       |
-| [min]                 | Finds smallest value.
-| [max]                 | Finds largest value.
-| [range]               | Finds smallest and largest values.
+| [min]                 | Finds smallest entry.
+| [max]                 | Finds largest entry.
+| [range]               | Finds smallest and largest entries.
 | [map]                 | Updates values based on map function.
 | [reduce]              | Reduces values to a single value.
 | [filter]              | Keeps the values which pass a test.
-| [take]                | Extracts given number of values from iterable.
-| [drop]                | Drops given number of values from iterable.
+| [take]                | Extracts values from iterable.
+| [drop]                | Drops values from iterable.
 | [count]               | Counts values which satisfy a test.
 | [partition]           | Segregates values by test result.
 | [group]               | Keeps similar values together and in order.
-| [split]               | Breaks iterable considering test as separator.
+| [split]               | Breaks iterable considering indices as separator.
 | [join]                | Joins values together.
 | [cartesianProduct]    | Lists cartesian product of iterables.
 | [zip]                 | Combines values from iterables.
@@ -87,19 +87,19 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [unique]              | Removes duplicate values.
 | [union]               | Gives values present in any iterable.
 | [intersection]        | Gives values present in both iterables.
-| [difference]          | Gives values of an iterable not present in another.
+| [difference]          | Gives values not present in another iterable.
 | [isUnique]            | Checks if there are no duplicate values.
 | [isDisjoint]          | Checks if iterables have no value in common.
 |                       |
 | [isValue]             | Checks if iterable has a value.
-| [isPrefix]            | Checks if iterable starts with a prefix.
+| [isPrefix]            | Searches a prefix.
 | [isInfix]             | Checks if iterable contains an infix.
 | [isSuffix]            | Checks if iterable ends with a suffix.
 | [isSubsequence]       | Checks if iterable has a subsequence.
 |                       |
 | [isEqual]             | Checks if two iterables are equal.
 | [compare]             | Compares two iterables.
-| [search]              | Searches a value from left.
+| [search]              | Searches first value passing a test.
 | [find]                | Finds first value passing a test.
 | [findIndex]           | Finds index of first value passing a test.
 | [some]                | Checks if any value satisfies a test.
