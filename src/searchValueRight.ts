@@ -2,15 +2,6 @@ import id from './_id';
 import cmp from './_cmp';
 import type {compareFn, mapFn} from './_types';
 
-function searchValueRightCompare<T>(x: Iterable<T>, v: T, fn: compareFn<T>=null): number {
-  var fn = fn||cmp, i = -1, j = -1;
-  for(var u of x) {
-    ++i;
-    if(fn(u, v)===0) j = i;
-  }
-  return j;
-}
-
 /**
  * Searches a value, from right.
  * @param x an iterable

@@ -3,19 +3,6 @@ import id from './_id';
 import cmp from './_cmp';
 import type {compareFn, mapFn} from './_types';
 
-function isUniqueCompare<T>(x: Iterable<T>, fn: compareFn<T>=null): boolean {
-  var fn = fn||cmp;
-  var x = many(x), i = -1;
-  for(var u of x) {
-    var j = -1; ++i;
-    for(var v of x) {
-      if(++j>=i) break;
-      if(fn(u, v)===0) return false;
-    }
-  }
-  return true;
-}
-
 function isUniqueMap<T, U=T>(x: Iterable<T>, fn: mapFn<T, T|U>=null): boolean {
   var fn = fn||id;
   var s = new Set(), i = -1;

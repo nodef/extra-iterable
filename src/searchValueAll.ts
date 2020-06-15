@@ -2,14 +2,6 @@ import id from './_id';
 import cmp from './_cmp';
 import type {compareFn, mapFn} from './_types';
 
-function* searchValueAllCompare<T>(x: Iterable<T>, v: T, fn: compareFn<T>=null): IterableIterator<number> {
-  var fn = fn||cmp, i = -1;
-  for(var u of x) {
-    ++i;
-    if(fn(u, v)===0) yield i;
-  }
-}
-
 /**
  * Searches a value throughout.
  * @param x an iterable

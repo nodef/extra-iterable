@@ -2,29 +2,6 @@ import id from './_id';
 import cmp from './_cmp';
 import type {mapFn, compareFn} from './_types';
 
-function* groupCompare<T>(x: Iterable<T>, fn: compareFn<T>=null): IterableIterator<T[]> {
-  var fn = fn||cmp;
-  var a = [], u: T, i = -1;
-  for(var v of x) {
-    if(++i>0 && fn(u, v)!==0) { yield a; a = [v]; }
-    else a.push(v);
-    u = v;
-  }
-  yield a;
-}
-
-function* groupMap<T, U=T>(x: Iterable<T>, fn: mapFn<T, T|U>=null): IterableIterator<T[]> {
-  var fn = fn||id;
-  var a = [], u1: T|U, i = -1;
-  for(var v of x) {
-    var v1 = fn(v, ++i, x);
-    if(i>0 && u1!==v1) { yield a; a = [v]; }
-    else a.push(v);
-    u1 = v1;
-  }
-  yield a;
-}
-
 /**
  * Keeps similar values together and in order.
  * @param x an iterable
