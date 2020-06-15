@@ -1,40 +1,17 @@
 import many from './many';
-import id from './_id';
-import cmp from './_cmp';
-import uniques from './_uniques';
+import difference from './difference';
 import type {compareFn, mapFn} from './_types';
 
-function* symmetricDifferenceMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, T|U>=null): IterableIterator<T> {
-  var s = uniques(y, fn);
-  var fn = fn||id, i = -1;
-  for(var u of x) {
-    var u1 = fn(u, ++i, x);
-    if(!s.has(u1)) yield u;
-  }
-}
-
-function* differenceDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
-  var fc = fc||cmp, fm = fm||id;
-  var y = many(y), i = -1;
-  x: for(var u of x) {
-    var u1 = fm(u, ++i, x), j = -1;
-    for(var v of y) {
-      var v1 = fm(v, ++j, y);
-      if(fc(u1, v1)===0) continue x;
-    }
-    yield u;
-  }
-}
-
 /**
- * Gives values of an iterable not present in another.
+ * Gives values not present in both iterables.
  * @param x an iterable
  * @param y another iterable
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function* difference<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
-  if(fc) yield* differenceDual(x, y, fc, fm);
-  else yield* symmetricDifferenceMap(x, y, fm);
+function* symmetricDifference<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
+  var x = many(x), y = many(y);
+  yield* difference(x, y, fc, fm);
+  yield* difference(y, x, fc, fm);
 }
-export default difference;
+export default symmetricDifference;

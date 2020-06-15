@@ -1,4 +1,3 @@
-import many from './many';
 import id from './_id';
 import cmp from './_cmp';
 import uniques from './_uniques';
@@ -25,7 +24,7 @@ function* differenceDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T
 }
 
 /**
- * Gives values of an iterable not present in another.
+ * Gives values not present in another iterable.
  * @param x an iterable
  * @param y another iterable
  * @param fc compare function (a, b)
