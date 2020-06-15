@@ -3,7 +3,7 @@ import cmp from './_cmp';
 import type {compareFn, mapFn} from './_types';
 
 /**
- * Searches a value from left.
+ * Searches a value.
  * @param x an iterable
  * @param v search value
  * @param fc compare function (a, b)

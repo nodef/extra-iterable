@@ -4,9 +4,9 @@ import array from './_array';
 import type {compareFn, mapFn} from './_types';
 
 /**
- * Checks if iterable contains an infix.
+ * Searches an infix throughout.
  * @param x an iterable
- * @param y infix?
+ * @param y search infix
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */

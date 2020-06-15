@@ -96,6 +96,7 @@ export {default as searchAll} from './searchAll';
 export {default as searchInfixAll} from './searchInfixAll';
 export {default as searchPrefix} from './searchPrefix';
 export {default as searchRight} from './searchRight';
+export {default as searchSubsequence} from './searchSubsequence';
 export {default as searchSuffix} from './searchSuffix';
 export {default as searchValue} from './searchValue';
 export {default as searchValueAll} from './searchValueAll';
