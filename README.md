@@ -59,7 +59,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [slice]               | Gets part of an iterable.
 | [splice]              | Removes or replaces existing values.
 | [flat]                | Flattens nested iterable to given depth.
-| [cut]                 | Breaks iterable at given indices.
+| [cut]                 | Breaks iterable when test passes.
 | [chunk]               | Breaks iterable into chunks of given size.
 | [cycle]               | Gives values that cycle through an iterable.
 | [repeat]              | Repeats an iterable given times.
@@ -79,7 +79,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [count]               | Counts values which satisfy a test.
 | [partition]           | Segregates values by test result.
 | [group]               | Keeps similar values together and in order.
-| [split]               | Breaks iterable considering indices as separator.
+| [split]               | Breaks iterable considering test as separator.
 | [join]                | Joins values together.
 | [cartesianProduct]    | Lists cartesian product of iterables.
 | [zip]                 | Combines values from iterables.

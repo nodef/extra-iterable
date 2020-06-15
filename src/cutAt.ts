@@ -5,7 +5,7 @@ import END from './END';
  * @param x an iterable
  * @param is split indices (sorted)
  */
-function* cut<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T[]> {
+function* cutAt<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T[]> {
   var ii = is[Symbol.iterator]();
   var {value, done} = ii.next();
   if(done) value = END;
@@ -19,4 +19,4 @@ function* cut<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T[]> {
   yield a;
   for(; !done; {done}=ii.next()) yield [];
 }
-export default cut;
+export default cutAt;

@@ -3,7 +3,7 @@
  * @param x an iterable
  * @param is indices (sorted)
  */
-function* split<T>(x: Iterable<T>, is: number[]): IterableIterator<T[]> {
+function* splitAt<T>(x: Iterable<T>, is: number[]): IterableIterator<T[]> {
   var a: T[] = [], i = -1;
   for(var v of x) {
     if(!is.includes(++i)) a.push(v);
@@ -11,4 +11,4 @@ function* split<T>(x: Iterable<T>, is: number[]): IterableIterator<T[]> {
   }
   if(a.length) yield a;
 }
-export default split;
+export default splitAt;
