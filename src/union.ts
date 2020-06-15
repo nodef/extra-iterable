@@ -3,19 +3,6 @@ import id from './_id';
 import cmp from './_cmp';
 import type {compareFn, mapFn} from './_types';
 
-function* unionCompare<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): IterableIterator<T> {
-  var fn = fn||cmp;
-  var x = many(x), s = new Set<T>();
-  yield* x;
-  y: for(var v of y) {
-    for(var u of x)
-      if(fn(u, v)===0) continue y;
-    for(var u of s)
-      if(fn(u, v)===0) continue y;
-    yield v; s.add(v);
-  }
-}
-
 function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, T|U>=null): IterableIterator<T> {
   var fn = fn||id;
   var s = new Set();

@@ -109,6 +109,7 @@ export {default as splice} from './splice';
 export {default as split} from './split';
 export {default as splitAt} from './splitAt';
 export {default as swap} from './swap';
+export {default as symmetricDifference} from './symmetricDifference';
 export {default as tail} from './tail';
 export {default as take} from './take';
 export {default as takeRight} from './takeRight';
