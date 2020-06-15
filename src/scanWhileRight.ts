@@ -1,7 +1,7 @@
 import type {testFn} from './_types';
 
 /**
- * Scans from right, while a test passes.
+ * Scans while a test passes, from right.
  * @param x an iterable
  * @param fn test function (v, i, x)
  * @param ths this argument

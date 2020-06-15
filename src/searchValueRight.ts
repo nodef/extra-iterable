@@ -12,7 +12,7 @@ function searchValueRightCompare<T>(x: Iterable<T>, v: T, fn: compareFn<T>=null)
 }
 
 /**
- * Searches a value from right.
+ * Searches a value, from right.
  * @param x an iterable
  * @param v search value
  * @param fc compare function (a, b)
