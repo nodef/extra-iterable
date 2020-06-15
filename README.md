@@ -185,8 +185,8 @@ iterable.reduce(x, (acc, v) => acc+v);
 [some]: https://github.com/nodef/extra-iterable/wiki/some
 [every]: https://github.com/nodef/extra-iterable/wiki/every
 [forEach]: https://github.com/nodef/extra-iterable/wiki/forEach
-[:vhs:]: https://asciinema.org/a/331910
 [isEmpty]: https://github.com/nodef/extra-iterable/wiki/isEmpty
 [accumulate]: https://github.com/nodef/extra-iterable/wiki/accumulate
 [symmetricDifference]: https://github.com/nodef/extra-iterable/wiki/symmetricDifference
 [scanWhile]: https://github.com/nodef/extra-iterable/wiki/scanWhile
+[:vhs:]: https://asciinema.org/a/339719
