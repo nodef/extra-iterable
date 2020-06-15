@@ -1,10 +1,10 @@
 import id from './_id';
 import cmp from './_cmp';
-import uniques from './_uniques';
+import uniqueSet from './_uniqueSet';
 import type {compareFn, mapFn} from './_types';
 
 function* differenceMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, T|U>=null): IterableIterator<T> {
-  var s = uniques(y, fn);
+  var s = uniqueSet(y, fn);
   var fn = fn||id, i = -1;
   for(var u of x) {
     var u1 = fn(u, ++i, x);
