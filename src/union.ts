@@ -13,27 +13,20 @@ function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, T|U>=nul
   }
   for(var v of y) {
     var v1 = fn(v, ++j, y);
-    if(!s.has(v1)) { s.add(v1); yield v; }
+    if(!s.has(v1)) yield v;
   }
 }
 
 function* unionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
   var fc = fc||cmp, fm = fm||id;
-  var x = many(x), s = new Set<T>();
-  yield* x; var j = -1;
+  var x = many(x);
+  yield* x;
+  var x1 = [...x].map(fm), j = -1;
   y: for(var v of y) {
     var v1 = fm(v, ++j, y);
-    var i = -1;
-    for(var u of x) {
-      var u1 = fm(u, ++i, x);
+    for(var u1 of x1)
       if(fc(u1, v1)===0) continue y;
-    }
-    var i = -1;
-    for(var u of s) {
-      var u1 = fm(u, ++i, y);
-      if(fc(u1, v1)===0) continue y;
-    }
-    yield v; s.add(v);
+    yield v;
   }
 }
 
