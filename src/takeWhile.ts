@@ -1,7 +1,7 @@
 import type {testFn} from './_types';
 
 /**
- * Extracts values, while a test passes.
+ * Extracts values from left, while a test passes.
  * @param x an iterable
  * @param fn test function (v, i, x)
  */

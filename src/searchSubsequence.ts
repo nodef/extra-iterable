@@ -3,7 +3,7 @@ import cmp from './_cmp';
 import type {mapFn, compareFn} from './_types';
 
 /**
- * Searches a subsequence.
+ * Searches from left, for a subsequence.
  * @param x an iterable
  * @param y search subsequence
  * @param fc compare function (a, b)

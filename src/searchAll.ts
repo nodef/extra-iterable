@@ -1,7 +1,7 @@
 import type {testFn} from './_types';
 
 /**
- * Searches values passing a test.
+ * Searches throughout, for values passing a test.
  * @param x an iterable
  * @param fn test function (v, i, x)
  * @returns indices of value

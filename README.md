@@ -52,7 +52,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [many]                | Converts a once iterable to many.
 | [from]                | Converts iterator to iterable.
 |                       |
-| [take]                | Extracts values from iterable.
+| [take]                | Extracts values from left.
 | [drop]                | Drops values from iterable.
 | [head]                | Gets first value.
 | [left]                | Gets values from the left.
@@ -105,7 +105,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 |                       |
 | [isEqual]             | Checks if two iterables are equal.
 | [compare]             | Compares two iterables.
-| [search]              | Searches first value passing a test.
+| [search]              | Searches from left, for a value passing a test.
 | [scanWhile]           | Scans from left, while a test passes.
 | [find]                | Finds first value passing a test.
 | [forEach]             | Calls a function for each value.

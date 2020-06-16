@@ -1,7 +1,7 @@
 import slice from './slice';
 
 /**
- * Drops values of iterable, from right.
+ * Drops values from right.
  * @param x an iterable
  * @param n number of values (1)
  */

@@ -1,7 +1,7 @@
 import type {testFn} from './_types';
 
 /**
- * Finds value passing a test, from right.
+ * Finds last value passing a test.
  * @param x an iterable
  * @param fn test function (v, i, x)
  */

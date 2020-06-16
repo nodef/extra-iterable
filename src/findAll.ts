@@ -2,7 +2,7 @@ import filter from './filter';
 import type {testFn} from './_types';
 
 /**
- * Finds values passing a test.
+ * Finds all values passing a test.
  * @param x an iterable
  * @param fn test function (v, i, x)
  */
