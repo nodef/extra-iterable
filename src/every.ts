@@ -6,20 +6,20 @@ function everyBool<T>(x: Iterable<T>): boolean {
   return true;
 }
 
-function everyTest<T>(x: Iterable<T>, fn: testFn<T>): boolean {
+function everyTest<T>(x: Iterable<T>, ft: testFn<T>): boolean {
   var i = -1;
   for(var v of x)
-    if(!fn(v, ++i, x)) return false;
+    if(!ft(v, ++i, x)) return false;
   return true;
 }
 
 /**
  * Checks if all values satisfy a test.
  * @param x an iterable
- * @param fn test function (v, i, x)
+ * @param ft test function (v, i, x)
  */
-function every<T>(x: Iterable<T>, fn: testFn<T>=null): boolean {
-  if(fn) return everyTest(x, fn);
+function every<T>(x: Iterable<T>, ft: testFn<T>=null): boolean {
+  if(ft) return everyTest(x, ft);
   else return everyBool(x);
 }
 export default every;

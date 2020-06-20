@@ -3,13 +3,13 @@ import type {mapFn} from './_types';
 /**
  * Gets unique set of values.
  * @param x an iterable
- * @param fn map function (v, i, x)
+ * @param fm map function (v, i, x)
  */
-function uniqueSet<T, U=T>(x: Iterable<T>, fn: mapFn<T, T|U>=null): Set<T|U> {
-  if(!fn) return new Set(x);
+function uniqueSet<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): Set<T|U> {
+  if(!fm) return new Set(x);
   var a = new Set<T|U>(), i = -1;
   for(var v of x)
-    a.add(fn(v, ++i, x));
+    a.add(fm(v, ++i, x));
   return a;
 } 
 export default uniqueSet;

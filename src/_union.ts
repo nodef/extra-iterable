@@ -3,16 +3,16 @@ import id from './_id';
 import cmp from './_cmp';
 import type {compareFn, mapFn} from './_types';
 
-function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, T|U>=null): IterableIterator<T> {
-  var fn = fn||id;
+function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIterator<T> {
+  var fm = fm||id;
   var s = new Set();
   var i = -1, j = -1;
   for(var u of x) {
-    var u1 = fn(u, ++i, x);
+    var u1 = fm(u, ++i, x);
     s.add(u1); yield u;
   }
   for(var v of y) {
-    var v1 = fn(v, ++j, y);
+    var v1 = fm(v, ++j, y);
     if(!s.has(v1)) yield v;
   }
 }

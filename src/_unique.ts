@@ -2,11 +2,11 @@ import type {compareFn, mapFn} from './_types';
 import id from './_id';
 import cmp from './_cmp';
 
-function* uniqueMap<T, U=T>(x: Iterable<T>, fn: mapFn<T, T|U>=null): IterableIterator<T> {
-  var fn = fn||id;
+function* uniqueMap<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIterator<T> {
+  var fm = fm||id;
   var us = new Set(), i = -1;
   for(var v of x) {
-    var v1 = fn(v, ++i, x);
+    var v1 = fm(v, ++i, x);
     if(us.has(v1)) continue;
     us.add(v1); yield v;
   }

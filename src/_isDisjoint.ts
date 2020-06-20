@@ -4,21 +4,11 @@ import cmp from './_cmp';
 import uniqueSet from './_uniqueSet';
 import type {compareFn, mapFn} from './_types';
 
-function isDisjointCompare<T>(x: Iterable<T>, y: Iterable<T>, fn: compareFn<T>=null): boolean {
-  var fn = fn||cmp;
-  var y = many(y);
+function isDisjointMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: mapFn<T, T|U>=null): boolean {
+  var s = uniqueSet(y, fm);
+  var fm = fm||id, i = -1;
   for(var u of x) {
-    for(var v of y)
-      if(fn(u, v)===0) return false;
-  }
-  return true;
-}
-
-function isDisjointMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, T|U>=null): boolean {
-  var s = uniqueSet(y, fn);
-  var fn = fn||id, i = -1;
-  for(var u of x) {
-    var u1 = fn(u, ++i, x);
+    var u1 = fm(u, ++i, x);
     if(s.has(u1)) return false;
   }
   return true;

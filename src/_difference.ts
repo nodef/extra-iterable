@@ -3,11 +3,11 @@ import cmp from './_cmp';
 import uniqueSet from './_uniqueSet';
 import type {compareFn, mapFn} from './_types';
 
-function* differenceMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fn: mapFn<T, T|U>=null): IterableIterator<T> {
-  var s = uniqueSet(y, fn);
-  var fn = fn||id, i = -1;
+function* differenceMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, ft: mapFn<T, T|U>=null): IterableIterator<T> {
+  var s = uniqueSet(y, ft);
+  var ft = ft||id, i = -1;
   for(var u of x) {
-    var u1 = fn(u, ++i, x);
+    var u1 = ft(u, ++i, x);
     if(!s.has(u1)) yield u;
   }
 }

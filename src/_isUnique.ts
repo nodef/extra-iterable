@@ -3,11 +3,11 @@ import id from './_id';
 import cmp from './_cmp';
 import type {compareFn, mapFn} from './_types';
 
-function isUniqueMap<T, U=T>(x: Iterable<T>, fn: mapFn<T, T|U>=null): boolean {
-  var fn = fn||id;
+function isUniqueMap<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): boolean {
+  var fm = fm||id;
   var s = new Set(), i = -1;
   for(var v of x) {
-    var v1 = fn(v, ++i, x);
+    var v1 = fm(v, ++i, x);
     if(s.has(v1)) return false;
     s.add(v1);
   }
