@@ -1,6 +1,6 @@
 import type {testFn} from './_types';
 
-function someIf<T>(x: Iterable<T>): boolean {
+function someBool<T>(x: Iterable<T>): boolean {
   for(var v of x)
     if(v) return true;
   return false;
@@ -20,6 +20,6 @@ function someTest<T>(x: Iterable<T>, fn: testFn<T>): boolean {
  */
 function some<T>(x: Iterable<T>, fn: testFn<T>=null): boolean {
   if(fn) return someTest(x, fn);
-  else return someIf(x);
+  else return someBool(x);
 }
 export default some;

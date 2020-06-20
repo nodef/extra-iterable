@@ -1,6 +1,6 @@
 import type {testFn} from './_types';
 
-function everyIf<T>(x: Iterable<T>): boolean {
+function everyBool<T>(x: Iterable<T>): boolean {
   for(var v of x)
     if(!v) return false;
   return true;
@@ -20,6 +20,6 @@ function everyTest<T>(x: Iterable<T>, fn: testFn<T>): boolean {
  */
 function every<T>(x: Iterable<T>, fn: testFn<T>=null): boolean {
   if(fn) return everyTest(x, fn);
-  else return everyIf(x);
+  else return everyBool(x);
 }
 export default every;
