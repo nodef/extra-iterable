@@ -1,5 +1,5 @@
 /**
- * Appends iterables together.
+ * Appends values from iterables.
  * @param xs iterables
  */
 function* concat<T>(...xs: Iterable<T>[]): IterableIterator<T> {
