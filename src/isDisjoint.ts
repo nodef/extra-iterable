@@ -1,4 +1,3 @@
-import many from './many';
 import id from './_id';
 import cmp from './_cmp';
 import uniqueSet from './_uniqueSet';
@@ -16,13 +15,11 @@ function isDisjointMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: mapFn<T, T|U>
 
 function isDisjointDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): boolean {
   var fc = fc||cmp, fm = fm||id;
-  var y = many(y), i = -1;
+  var y1 = [...y].map(fm), i = -1;
   for(var u of x) {
-    var u1 = fm(u, ++i, x), j = -1;
-    for(var v of y) {
-      var v1 = fm(v, ++j, y);
+    var u1 = fm(u, ++i, x);
+    for(var v1 of y1)
       if(fc(u1, v1)===0) return false;
-    }
   }
   return true;
 }

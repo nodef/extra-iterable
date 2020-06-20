@@ -1,4 +1,3 @@
-import many from './many';
 import id from './_id';
 import cmp from './_cmp';
 import type {compareFn, mapFn} from './_types';
@@ -16,14 +15,10 @@ function isUniqueMap<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): boolean {
 
 function isUniqueDual<T, U=T>(x: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): boolean {
   var fc = fc||cmp, fm = fm||id;
-  var x = many(x), i = -1;
-  for(var u of x) {
-    var u1 = fm(u, ++i, x), j = -1;
-    for(var v of x) {
-      if(++j>=i) break;
-      var v1 = fm(v, j, x);
+  var x1 = [...x].map(fm);
+  for(var u1 of x1) {
+    for(var v1 of x1)
       if(fc(u1, v1)===0) return false;
-    }
   }
   return true;
 }
