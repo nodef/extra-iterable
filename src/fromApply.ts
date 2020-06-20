@@ -2,7 +2,7 @@ import type {mapFn} from './_types';
 
 /**
  * Generates iterable from function application.
- * @param fm map function (v, i, x)
+ * @param fm map function (v, i)
  * @param v start value
  * @param n number of values (-1 => Inf)
  */

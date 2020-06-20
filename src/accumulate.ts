@@ -6,10 +6,10 @@ import type {reduceFn} from './_types';
  * @param fr reduce function (acc, v, i, x)
  * @param acc initial value
  */
-function* accumulate<T, U>(x: Iterable<T>, fr: reduceFn<T, U>, acc?: U): IterableIterator<U> {
+function* accumulate<T, U=T>(x: Iterable<T>, fr: reduceFn<T, T|U>, acc?: T|U): IterableIterator<T|U> {
   var init = arguments.length <= 2, i = -1;
   for(var v of x) {
-    if(init) { init = false; acc = v as any as U; ++i; }
+    if(init) { acc = v; init = false; ++i; }
     else acc = fr(acc, v, ++i, x);
     yield acc;
   }
