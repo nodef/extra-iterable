@@ -31,7 +31,6 @@ export {default as flatMap} from './flatMap';
 export {default as forEach} from './forEach';
 export {default as from} from './from';
 export {default as fromApply} from './fromApply';
-export {default as fromAuthor} from './fromAuthor';
 export {default as fromRange} from './fromRange';
 export {default as get} from './get';
 export {default as getAll} from './getAll';
