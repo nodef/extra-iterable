@@ -1,6 +1,6 @@
 import id from './_id';
 import cmp from './_cmp';
-import array from './_array';
+import {from$} from 'extra-array';
 import type {compareFn, mapFn} from './_types';
 
 /**
@@ -12,7 +12,7 @@ import type {compareFn, mapFn} from './_types';
  */
 function isSuffix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>, fm: mapFn<T, T|U>=null): boolean {
   var fc = fc||cmp, fm = fm||id;
-  var y1 = array(y), Y = y1.length;
+  var y1 = from$(y), Y = y1.length;
   var a = [], ai = 0, n = 0;
   if(Y===0) return true;
   for(var u of x) {

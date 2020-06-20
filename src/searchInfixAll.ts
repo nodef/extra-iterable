@@ -1,6 +1,6 @@
 import id from './_id';
 import cmp from './_cmp';
-import array from './_array';
+import {from$} from 'extra-array';
 import type {compareFn, mapFn} from './_types';
 
 /**
@@ -12,7 +12,7 @@ import type {compareFn, mapFn} from './_types';
  */
 function* searchInfixAll<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>, fm: mapFn<T, T|U>=null): IterableIterator<number> {
   var fc = fc||cmp, fm = fm||id;
-  var y1 = array(y), Y = y1.length;
+  var y1 = from$(y), Y = y1.length;
   if(Y===0) yield 0;
   var y1 = y1.map(fm, null) as T[];
   var m = new Array(Y).fill(false);

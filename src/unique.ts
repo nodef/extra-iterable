@@ -4,22 +4,22 @@ import cmp from './_cmp';
 
 function* uniqueMap<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIterator<T> {
   var fm = fm||id;
-  var us = new Set(), i = -1;
+  var s = new Set(), i = -1;
   for(var v of x) {
     var v1 = fm(v, ++i, x);
-    if(us.has(v1)) continue;
-    us.add(v1); yield v;
+    if(s.has(v1)) continue;
+    s.add(v1); yield v;
   }
 }
 
 function* uniqueDual<T, U=T>(x: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
   var fc=fc||cmp, fm = fm||id;
-  var us = [], i = -1;
+  var s = [], i = -1;
   x: for(var v of x) {
     var v1 = fm(v, ++i, x);
-    for(var u1 of us)
+    for(var u1 of s)
       if(fc(u1, v1)===0) continue x;
-    us.push(v1); yield v;
+    s.push(v1); yield v;
   }
 }
 
