@@ -3,7 +3,7 @@ import cmp from './_cmp';
 import type {mapFn, compareFn} from './_types';
 
 /**
- * Searches a prefix.
+ * Checks if iterable starts with a prefix.
  * @param x an iterable
  * @param y prefix?
  * @param fc compare function (a, b)

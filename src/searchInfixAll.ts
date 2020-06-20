@@ -4,7 +4,7 @@ import {from$} from 'extra-array';
 import type {compareFn, mapFn} from './_types';
 
 /**
- * Searches throughout, for an infix.
+ * Finds indices of an infix.
  * @param x an iterable
  * @param y search infix
  * @param fc compare function (a, b)

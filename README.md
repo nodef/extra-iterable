@@ -55,7 +55,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [drop]                | Discards first n values only.
 | [head]                | Gets first value.
 | [left]                | Gets values from left.
-| [concat]              | Appends iterables together.
+| [concat]              | Appends values from iterables.
 | [push]                | Adds values to the end. 
 | [copy]                | Copies part of iterable to another.
 | [fill]                | Fills with given value.
@@ -97,7 +97,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [isDisjoint]          | Checks if iterables have no value in common.
 |                       |
 | [isValue]             | Checks if iterable has a value.
-| [isPrefix]            | Searches a prefix.
+| [isPrefix]            | Checks if iterable starts with a prefix.
 | [isSuffix]            | Checks if iterable ends with a suffix.
 | [isInfix]             | Checks if iterable contains an infix.
 | [isSubsequence]       | Checks if iterable has a subsequence.

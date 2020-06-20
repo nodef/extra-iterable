@@ -3,7 +3,7 @@ import searchInfixAll from './searchInfixAll';
 import type {compareFn, mapFn} from './_types';
 
 /**
- * Searches from left, for an infix.
+ * Finds first index of an infix.
  * @param x an iterable
  * @param y search infix
  * @param fc compare function (a, b)
