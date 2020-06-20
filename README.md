@@ -7,8 +7,7 @@ Methods as separate packages:
 
 Some methods accept a map function *for faster comparision* (like [unique]).
 I find this map-approach beautiful, which i learned from Haskell's `sortOn()`.
-You can notice that i have followed Javascript naming scheme as far as possible.
-Some names are borrowed from Haskell, Python, Java, Processing.
+You can notice that this package uses [bootstrapping] technique.
 
 > Stability: Experimental.
 
@@ -52,10 +51,10 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [many]                | Converts a once iterable to many.
 | [from]                | Converts iterator to iterable.
 |                       |
-| [take]                | Extracts values from left.
-| [drop]                | Drops values from iterable.
+| [take]                | Keeps first n values only.
+| [drop]                | Discards first n values only.
 | [head]                | Gets first value.
-| [left]                | Gets values from the left.
+| [left]                | Gets values from left.
 | [concat]              | Appends iterables together.
 | [push]                | Adds values to the end. 
 | [copy]                | Copies part of iterable to another.
@@ -105,7 +104,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 |                       |
 | [isEqual]             | Checks if two iterables are equal.
 | [compare]             | Compares two iterables.
-| [search]              | Searches from left, for a value passing a test.
+| [search]              | Finds index of first value passing a test.
 | [scanWhile]           | Scans from left, while a test passes.
 | [find]                | Finds first value passing a test.
 | [forEach]             | Calls a function for each value.
@@ -120,6 +119,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 [rollup]: https://www.npmjs.com/package/rollup
 [uglify-js]: https://www.npmjs.com/package/uglify-js
 [iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
+[bootstrapping]: https://en.wikipedia.org/wiki/Bootstrapping_(compilers)
 [:running:]: https://npm.runkit.com/extra-iterable
 [:package:]: https://www.npmjs.com/package/extra-iterable
 [:moon:]: https://www.npmjs.com/package/extra-iterable.min
