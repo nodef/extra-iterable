@@ -5,7 +5,7 @@ import END from './END';
  * @param x an iterable
  * @param v value
  * @param i start index (0)
- * @param I end index (end)
+ * @param I end index (X)
  */
 function* fill<T>(x: Iterable<T>, v: T, i: number=0, I: number=END): IterableIterator<T> {
   var j = -1;

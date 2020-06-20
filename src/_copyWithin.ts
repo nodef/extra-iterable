@@ -8,7 +8,7 @@ import END from './END';
  * @param x an iterable
  * @param j write index
  * @param i read start index (0)
- * @param I read end index (end)
+ * @param I read end index (X)
  */
 function* copyWithin<T>(x: Iterable<T>, j: number, i: number=0, I: number=END): IterableIterator<T> {
   var x = many(x), n = size(x);

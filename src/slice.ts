@@ -37,7 +37,7 @@ function* sliceNeg<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T>
  * Gets part of an iterable.
  * @param x an iterable
  * @param i start index (-ve: from right) (0)
- * @param I end index (-ve: from right) (end)
+ * @param I end index (-ve: from right) (X)
  */
 function* slice<T>(x: Iterable<T>, i: number=0, I: number=END): IterableIterator<T> {
   if(i>=0 && I>=0) yield* slicePos(x, i, I);

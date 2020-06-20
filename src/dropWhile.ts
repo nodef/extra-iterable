@@ -1,7 +1,7 @@
 import type {testFn} from './_types';
 
 /**
- * Drops values from left, while a test passes.
+ * Discards values from left, while a test passes.
  * @param x an iterable
  * @param fn test function (v, i, x)
  */

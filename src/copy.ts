@@ -7,7 +7,7 @@ import END from './END';
  * @param y source iterable
  * @param j write index (0)
  * @param i read start index (0)
- * @param I read end index (end)
+ * @param I read end index (X)
  */
 function* copy<T>(x: Iterable<T>, y: Iterable<T>, j: number=0, i: number=0, I: number=END): IterableIterator<T> {
   var k = -1, J = -1;

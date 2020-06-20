@@ -5,7 +5,7 @@ import END from './END';
  * Gets index range of part of iterable.
  * @param x an iterable
  * @param i start index (-ve: from right) (0)
- * @param I end index (-ve: from right) (end)
+ * @param I end index (-ve: from right) (X)
  * @returns [start index, end index]
  */
 function indexRange<T>(x: Iterable<T>, i: number=0, I: number=END): [number, number] {
