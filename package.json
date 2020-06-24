@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.4.47",
+  "version": "2.4.48",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "module": "index.mjs",
@@ -94,6 +94,7 @@
     "merge",
     "middle",
     "min",
+    "moveWithin",
     "partition",
     "partitionAs",
     "pop",
