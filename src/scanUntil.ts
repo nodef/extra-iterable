@@ -1,3 +1,4 @@
+import {scanUntil as arrayScanUntil} from 'extra-array';
 import type {testFn} from './_types';
 
 /**
@@ -7,9 +8,6 @@ import type {testFn} from './_types';
  * @returns index where test passes
  */
 function scanUntil<T>(x: Iterable<T>, ft: testFn<T>): number {
-  var i = -1;
-  for(var v of x)
-    if(ft(v, ++i, x)) return i;
-  return ++i;
+  return arrayScanUntil(x, ft);
 }
 export default scanUntil;

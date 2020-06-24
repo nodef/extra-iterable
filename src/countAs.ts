@@ -1,4 +1,4 @@
-import id from './_id';
+import {countAs as arrayCountAs} from 'extra-array';
 import type {mapFn} from './_types';
 
 /**
@@ -8,12 +8,6 @@ import type {mapFn} from './_types';
  * @returns Map {value => count}
  */
 function countAs<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): Map<T|U, number> {
-  var fm = fm||id;
-  var m = new Map(), i = -1;
-  for(var v of x) {
-    var v1 = fm(v, ++i, x);
-    m.set(v1, (m.get(v1)||0) + 1);
-  }
-  return m;
+  return arrayCountAs(x, fm);
 }
 export default countAs;

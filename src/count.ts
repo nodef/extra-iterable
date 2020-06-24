@@ -1,3 +1,4 @@
+import {count as arrayCount} from 'extra-array';
 import type {testFn} from './_types';
 
 /**
@@ -6,9 +7,6 @@ import type {testFn} from './_types';
  * @param ft test function (v, i, x)
  */
 function count<T>(x: Iterable<T>, ft: testFn<T>): number {
-  var n = 0, i = -1;
-  for(var v of x)
-    if(ft(v, ++i, x)) n++;
-  return n;
+  return arrayCount(x, ft);
 }
 export default count;
