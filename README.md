@@ -96,11 +96,11 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [isUnique]            | Checks if there are no duplicate values.
 | [isDisjoint]          | Checks if iterables have no value in common.
 |                       |
-| [isValue]             | Checks if iterable has a value.
-| [isPrefix]            | Checks if iterable starts with a prefix.
-| [isSuffix]            | Checks if iterable ends with a suffix.
-| [isInfix]             | Checks if iterable contains an infix.
-| [isSubsequence]       | Checks if iterable has a subsequence.
+| [hasValue]             | Checks if iterable has a value.
+| [hasPrefix]            | Checks if iterable starts with a prefix.
+| [hasSuffix]            | Checks if iterable ends with a suffix.
+| [hasInfix]             | Checks if iterable contains an infix.
+| [hasSubsequence]       | Checks if iterable has a subsequence.
 |                       |
 | [isEqual]             | Checks if two iterables are equal.
 | [compare]             | Compares two iterables.
@@ -173,11 +173,11 @@ iterable.reduce(x, (acc, v) => acc+v);
 [difference]: https://github.com/nodef/extra-iterable/wiki/difference
 [isUnique]: https://github.com/nodef/extra-iterable/wiki/isUnique
 [isDisjoint]: https://github.com/nodef/extra-iterable/wiki/isDisjoint
-[isValue]: https://github.com/nodef/extra-iterable/wiki/isValue
-[isPrefix]: https://github.com/nodef/extra-iterable/wiki/isPrefix
-[isInfix]: https://github.com/nodef/extra-iterable/wiki/isInfix
-[isSuffix]: https://github.com/nodef/extra-iterable/wiki/isSuffix
-[isSubsequence]: https://github.com/nodef/extra-iterable/wiki/isSubsequence
+[hasValue]: https://github.com/nodef/extra-iterable/wiki/hasValue
+[hasPrefix]: https://github.com/nodef/extra-iterable/wiki/hasPrefix
+[hasInfix]: https://github.com/nodef/extra-iterable/wiki/hasInfix
+[hasSuffix]: https://github.com/nodef/extra-iterable/wiki/hasSuffix
+[hasSubsequence]: https://github.com/nodef/extra-iterable/wiki/hasSubsequence
 [isEqual]: https://github.com/nodef/extra-iterable/wiki/isEqual
 [compare]: https://github.com/nodef/extra-iterable/wiki/compare
 [search]: https://github.com/nodef/extra-iterable/wiki/search
