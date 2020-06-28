@@ -10,7 +10,7 @@ import type {compareFn, mapFn} from './_types';
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function isSuffix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>, fm: mapFn<T, T|U>=null): boolean {
+function hasSuffix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>, fm: mapFn<T, T|U>=null): boolean {
   var fc = fc||cmp, fm = fm||id;
   var y1 = from$(y), Y = y1.length;
   var a = [], ai = 0, n = 0;
@@ -27,4 +27,4 @@ function isSuffix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>, fm
   }
   return true;
 }
-export default isSuffix;
+export default hasSuffix;
