@@ -1,5 +1,6 @@
 export {default as END} from './END';
 export {default as accumulate} from './accumulate';
+export {default as callable} from './callable';
 export {default as cartesianProduct} from './cartesianProduct';
 export {default as chunk} from './chunk';
 export {default as compare} from './compare';
@@ -31,6 +32,7 @@ export {default as flatMap} from './flatMap';
 export {default as forEach} from './forEach';
 export {default as from} from './from';
 export {default as fromApply} from './fromApply';
+export {default as fromCall} from './fromCall';
 export {default as fromRange} from './fromRange';
 export {default as get} from './get';
 export {default as getAll} from './getAll';

@@ -1,10 +1,14 @@
 import isOnce from './isOnce';
 
 function manyLate<T>(x: Iterable<T>, a: T[]): Iterable<T> {
-  return {[Symbol.iterator]: function* () {
-    if(a.length) { yield* a; return; }
-    for(var v of x) { a.push(v); yield v; }
-  }};
+  return {[Symbol.iterator]: () => {
+    var i = 0, xi = x[Symbol.iterator]();
+    return {next: () => {
+    if(i<a.length) return {value: a[i++], done: false};
+    var {value, done} = xi.next();
+    if(!done) a[i++] = value;
+    return {value, done};
+  }}}};
 }
 
 /**
