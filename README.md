@@ -17,7 +17,7 @@ NPM packages. These are mentioned in references of each method.
 ```javascript
 const iterable = require('extra-iterable');
 // import * as iterable from 'extra-iterable';
-// import * as iterable from 'https://unpkg.com/extra-iterable@2.5.5/index.mjs'; (deno)
+// import * as iterable from 'https://unpkg.com/extra-iterable@2.5.10/index.mjs'; (deno)
 
 var x = [2, 4, 6, 8];
 iterable.get(x, 1);
