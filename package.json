@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.5.7",
+  "version": "2.5.8",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "module": "index.mjs",
@@ -21,6 +21,7 @@
     "iterable",
     "END",
     "accumulate",
+    "callable",
     "cartesianProduct",
     "chunk",
     "compare",
@@ -52,6 +53,7 @@
     "forEach",
     "from",
     "fromApply",
+    "fromCall",
     "fromRange",
     "get",
     "getAll",
@@ -157,7 +159,7 @@
   "license": "MIT",
   "devDependencies": {
     "extra-array": "^2.10.7",
-    "extra-build": "^1.1.24",
+    "extra-build": "^1.1.25",
     "extra-math": "^1.1.0",
     "extra-set": "^2.2.3"
   }
