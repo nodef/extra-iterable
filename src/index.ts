@@ -49,6 +49,7 @@ export {default as includes} from './includes';
 export {default as index} from './index!';
 export {default as indexOf} from './indexOf';
 export {default as indexRange} from './indexRange';
+export {default as indices} from './indices';
 export {default as init} from './init';
 export {default as interleave} from './interleave';
 export {default as intermix} from './intermix';
