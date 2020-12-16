@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "2.5.13",
+  "version": "2.5.14",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "module": "index.mjs",
@@ -19,7 +19,6 @@
   "keywords": [
     "extra",
     "iterable",
-    "END",
     "accumulate",
     "callable",
     "cartesianProduct",
@@ -40,6 +39,7 @@
     "dropRight",
     "dropWhile",
     "dropWhileRight",
+    "END",
     "entries",
     "every",
     "fill",
@@ -158,9 +158,9 @@
   "author": "wolfram77@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "extra-array": "^2.10.8",
-    "extra-build": "^1.1.27",
-    "extra-math": "^1.1.1",
-    "extra-set": "^2.2.3"
+    "extra-array": "^2.10.9",
+    "extra-build": "^1.1.28",
+    "extra-math": "^1.1.2",
+    "extra-set": "^2.2.4"
   }
 }

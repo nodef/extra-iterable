@@ -1,4 +1,3 @@
-export {default as END} from './END';
 export {default as accumulate} from './accumulate';
 export {default as callable} from './callable';
 export {default as cartesianProduct} from './cartesianProduct';
@@ -19,6 +18,7 @@ export {default as drop} from './drop';
 export {default as dropRight} from './dropRight';
 export {default as dropWhile} from './dropWhile';
 export {default as dropWhileRight} from './dropWhileRight';
+export {default as END} from './END';
 export {default as entries} from './entries';
 export {default as every} from './every';
 export {default as fill} from './fill';
