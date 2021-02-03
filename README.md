@@ -14,6 +14,8 @@ Methods as separate packages:
 
 > Stability: Experimental.
 
+<br>
+
 ```javascript
 const iterable = require("extra-iterable");
 // import * as iterable from "extra-iterable";
@@ -36,7 +38,11 @@ iterable.reduce(x, (acc, v) => acc+v);
 // 10
 ```
 
-### reference
+<br>
+<br>
+
+
+## Index
 
 | Method                | Action
 |-----------------------|-------
@@ -115,8 +121,9 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [every]               | Checks if all values satisfy a test.
 
 <br>
+<br>
 
-[![nodef](https://merferry.glitch.me/card/extra-iterable.svg)](https://nodef.github.io)
+[![](https://img.youtube.com/vi/qgxPbqDskyw/maxresdefault.jpg)](https://www.youtube.com/watch?v=qgxPbqDskyw)
 
 [browserify]: https://www.npmjs.com/package/browserify
 [rollup]: https://www.npmjs.com/package/rollup
