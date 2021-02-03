@@ -1,4 +1,12 @@
-An [iterable] is a sequence of values. [:running:] [:vhs:] [:package:] [:moon:] [:ledger:]
+An [iterable] is a sequence of values.<br>
+:package: [NPM](https://www.npmjs.com/package/extra-iterable),
+:smiley_cat: [GitHub](https://github.com/orgs/nodef/packages?repo_name=extra-iterable),
+:running: [RunKit](https://npm.runkit.com/extra-iterable),
+:vhs: [Asciinema](https://asciinema.org/a/339719),
+:moon: [Minified](https://www.npmjs.com/package/extra-iterable.min),
+:scroll: [Files](https://unpkg.com/extra-iterable/),
+:newspaper: [JSDoc](https://nodef.github.io/extra-iterable/),
+:blue_book: [Wiki](https://github.com/nodef/extra-iterable/wiki/).
 
 Assumption here is that an iterable can only be iterated over once. Methods
 which require multiple iterations preserve old values in a backup array using
@@ -129,10 +137,6 @@ iterable.reduce(x, (acc, v) => acc+v);
 [rollup]: https://www.npmjs.com/package/rollup
 [uglify-js]: https://www.npmjs.com/package/uglify-js
 [iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
-[bootstrapping]: https://en.wikipedia.org/wiki/Bootstrapping_(compilers)
-[:running:]: https://npm.runkit.com/extra-iterable
-[:package:]: https://www.npmjs.com/package/extra-iterable
-[:moon:]: https://www.npmjs.com/package/extra-iterable.min
 [:ledger:]: https://unpkg.com/extra-iterable/
 [is]: https://github.com/nodef/extra-iterable/wiki/is
 [get]: https://github.com/nodef/extra-iterable/wiki/get
@@ -199,4 +203,3 @@ iterable.reduce(x, (acc, v) => acc+v);
 [accumulate]: https://github.com/nodef/extra-iterable/wiki/accumulate
 [symmetricDifference]: https://github.com/nodef/extra-iterable/wiki/symmetricDifference
 [scanWhile]: https://github.com/nodef/extra-iterable/wiki/scanWhile
-[:vhs:]: https://asciinema.org/a/339719
