@@ -52,81 +52,81 @@ iterable.reduce(x, (acc, v) => acc+v);
 
 ## Index
 
-| Method                | Action
-|-----------------------|-------
-| [is]                  | Checks if value is iterable.
-| [get]                 | Gets value at index.
-| [set]                 | Sets value at index.
-| [swap]                | Exchanges two values.
-| [index]               | Gets zero-based index.
-| [indexRange]          | Gets index range of part of iterable.
-| [isEmpty]             | Checks is iterable is empty.
-| [size]                | Counts the number of values.
+| Method                | Action                                         |
+| --------------------- | ---------------------------------------------- |
+| [is]                  | Checks if value is iterable.                   |
+| [get]                 | Gets value at index.                           |
+| [set]                 | Sets value at index.                           |
+| [swap]                | Exchanges two values.                          |
+| [index]               | Gets zero-based index.                         |
+| [indexRange]          | Gets index range of part of iterable.          |
+| [isEmpty]             | Checks is iterable is empty.                   |
+| [size]                | Counts the number of values.                   |
 |                       |
-| [entries]             | Lists all index-value pairs.
-| [iterator]            | Gives iterator for iterable.
-| [many]                | Converts a once iterable to many.
-| [from]                | Converts iterator to iterable.
+| [entries]             | Lists all index-value pairs.                   |
+| [iterator]            | Gives iterator for iterable.                   |
+| [many]                | Converts a once iterable to many.              |
+| [from]                | Converts iterator to iterable.                 |
 |                       |
-| [take]                | Keeps first n values only.
-| [drop]                | Discards first n values only.
-| [head]                | Gets first value.
-| [left]                | Gets values from left.
-| [concat]              | Appends values from iterables.
-| [push]                | Adds values to the end.
-| [copy]                | Copies part of iterable to another.
-| [fill]                | Fills with given value.
-| [slice]               | Gets part of an iterable.
-| [splice]              | Removes or replaces existing values.
+| [take]                | Keeps first n values only.                     |
+| [drop]                | Discards first n values only.                  |
+| [head]                | Gets first value.                              |
+| [left]                | Gets values from left.                         |
+| [concat]              | Appends values from iterables.                 |
+| [push]                | Adds values to the end.                        |
+| [copy]                | Copies part of iterable to another.            |
+| [fill]                | Fills with given value.                        |
+| [slice]               | Gets part of an iterable.                      |
+| [splice]              | Removes or replaces existing values.           |
 |                       |
-| [chunk]               | Breaks iterable into chunks of given size.
-| [cycle]               | Gives values that cycle through an iterable.
-| [repeat]              | Repeats an iterable given times.
-| [reverse]             | Reverses the values.
-| [rotate]              | Rotates values in iterable.
-| [interleave]          | Merges values from iterables.
-| [merge]               | Merges values from sorted iterables.
-| [flat]                | Flattens nested iterable to given depth.
+| [chunk]               | Breaks iterable into chunks of given size.     |
+| [cycle]               | Gives values that cycle through an iterable.   |
+| [repeat]              | Repeats an iterable given times.               |
+| [reverse]             | Reverses the values.                           |
+| [rotate]              | Rotates values in iterable.                    |
+| [interleave]          | Merges values from iterables.                  |
+| [merge]               | Merges values from sorted iterables.           |
+| [flat]                | Flattens nested iterable to given depth.       |
 |                       |
-| [min]                 | Finds smallest entry.
-| [max]                 | Finds largest entry.
-| [range]               | Finds smallest and largest entries.
-| [count]               | Counts values which satisfy a test.
-| [partition]           | Segregates values by test result.
-| [cut]                 | Breaks iterable when test passes.
-| [split]               | Breaks iterable considering test as separator.
-| [group]               | Keeps similar values together and in order.
-| [join]                | Joins values together.
+| [min]                 | Finds smallest entry.                          |
+| [max]                 | Finds largest entry.                           |
+| [range]               | Finds smallest and largest entries.            |
+| [count]               | Counts values which satisfy a test.            |
+| [partition]           | Segregates values by test result.              |
+| [cut]                 | Breaks iterable when test passes.              |
+| [split]               | Breaks iterable considering test as separator. |
+| [group]               | Keeps similar values together and in order.    |
+| [join]                | Joins values together.                         |
 |                       |
-| [map]                 | Updates values based on map function.
-| [filter]              | Keeps the values which pass a test.
-| [reduce]              | Reduces values to a single value.
-| [accumulate]          | Produces accumulating values.
-| [cartesianProduct]    | Lists cartesian product of iterables.
-| [zip]                 | Combines values from iterables.
+| [map]                 | Updates values based on map function.          |
+| [filter]              | Keeps the values which pass a test.            |
+| [reduce]              | Reduces values to a single value.              |
+| [accumulate]          | Produces accumulating values.                  |
+| [cartesianProduct]    | Lists cartesian product of iterables.          |
+| [zip]                 | Combines values from iterables.                |
 |                       |
-| [unique]              | Removes duplicate values.
-| [union]               | Gives values present in any iterable.
-| [intersection]        | Gives values present in both iterables.
-| [difference]          | Gives values not present in another iterable.
-| [symmetricDifference] | Gives values not present in both iterables.
-| [isUnique]            | Checks if there are no duplicate values.
-| [isDisjoint]          | Checks if iterables have no value in common.
+| [unique]              | Removes duplicate values.                      |
+| [union]               | Gives values present in any iterable.          |
+| [intersection]        | Gives values present in both iterables.        |
+| [difference]          | Gives values not present in another iterable.  |
+| [symmetricDifference] | Gives values not present in both iterables.    |
+| [isUnique]            | Checks if there are no duplicate values.       |
+| [isDisjoint]          | Checks if iterables have no value in common.   |
 |                       |
-| [hasValue]             | Checks if iterable has a value.
-| [hasPrefix]            | Checks if iterable starts with a prefix.
-| [hasSuffix]            | Checks if iterable ends with a suffix.
-| [hasInfix]             | Checks if iterable contains an infix.
-| [hasSubsequence]       | Checks if iterable has a subsequence.
+| [hasValue]            | Checks if iterable has a value.                |
+| [hasPrefix]           | Checks if iterable starts with a prefix.       |
+| [hasSuffix]           | Checks if iterable ends with a suffix.         |
+| [hasInfix]            | Checks if iterable contains an infix.          |
+| [hasSubsequence]      | Checks if iterable has a subsequence.          |
 |                       |
-| [isEqual]             | Checks if two iterables are equal.
-| [compare]             | Compares two iterables.
-| [search]              | Finds index of first value passing a test.
-| [scanWhile]           | Scans from left, while a test passes.
-| [find]                | Finds first value passing a test.
-| [forEach]             | Calls a function for each value.
-| [some]                | Checks if any value satisfies a test.
-| [every]               | Checks if all values satisfy a test.
+| [isEqual]             | Checks if two iterables are equal.             |
+| [compare]             | Compares two iterables.                        |
+| [search]              | Finds index of first value passing a test.     |
+| [scanWhile]           | Scans from left, while a test passes.          |
+| [find]                | Finds first value passing a test.              |
+| [forEach]             | Calls a function for each value.               |
+| [some]                | Checks if any value satisfies a test.          |
+| [every]               | Checks if all values satisfy a test.           |
 
 <br>
 <br>
