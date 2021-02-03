@@ -1,5 +1,5 @@
-import slice from './slice';
-import hasValue from './hasValue';
+import slice from "./slice";
+import hasValue from "./hasValue";
 
 /**
  * Checks if iterable has a value.

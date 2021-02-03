@@ -1,4 +1,4 @@
-import tail from './tail';
+import tail from "./tail";
 
 /**
  * Removes first value.

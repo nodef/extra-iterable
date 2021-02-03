@@ -1,5 +1,5 @@
-import {isDisjoint as arrayIsDisjoint} from 'extra-array';
-import type {compareFn, mapFn} from './_types';
+import {isDisjoint as arrayIsDisjoint} from "extra-array";
+import type {compareFn, mapFn} from "./_types";
 
 /**
  * Checks if iterables have no value in common.

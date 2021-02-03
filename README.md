@@ -15,9 +15,9 @@ NPM packages. These are mentioned in references of each method.
 > Stability: Experimental.
 
 ```javascript
-const iterable = require('extra-iterable');
-// import * as iterable from 'extra-iterable';
-// import * as iterable from 'https://unpkg.com/extra-iterable@2.5.10/index.mjs'; (deno)
+const iterable = require("extra-iterable");
+// import * as iterable from "extra-iterable";
+// import * as iterable from "https://unpkg.com/extra-iterable@2.5.10/index.mjs"; (deno)
 
 var x = [2, 4, 6, 8];
 iterable.get(x, 1);
@@ -59,7 +59,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [head]                | Gets first value.
 | [left]                | Gets values from left.
 | [concat]              | Appends values from iterables.
-| [push]                | Adds values to the end. 
+| [push]                | Adds values to the end.
 | [copy]                | Copies part of iterable to another.
 | [fill]                | Fills with given value.
 | [slice]               | Gets part of an iterable.

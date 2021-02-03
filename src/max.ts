@@ -1,5 +1,5 @@
-import range from './range';
-import type {mapFn, compareFn} from './_types';
+import range from "./range";
+import type {mapFn, compareFn} from "./_types";
 
 /**
  * Finds largest entry.

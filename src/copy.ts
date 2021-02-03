@@ -1,5 +1,5 @@
-import slice from './slice';
-import END from './END';
+import slice from "./slice";
+import END from "./END";
 
 /**
  * Copies part of iterable to another.

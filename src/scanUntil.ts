@@ -1,5 +1,5 @@
-import {scanUntil as arrayScanUntil} from 'extra-array';
-import type {testFn} from './_types';
+import {scanUntil as arrayScanUntil} from "extra-array";
+import type {testFn} from "./_types";
 
 /**
  * Scans from left, until a test passes.

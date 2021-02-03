@@ -1,5 +1,5 @@
-import {searchValue as arraySearchValue} from 'extra-array';
-import type {compareFn, mapFn} from './_types';
+import {searchValue as arraySearchValue} from "extra-array";
+import type {compareFn, mapFn} from "./_types";
 
 /**
  * Finds first index of a value.

@@ -1,4 +1,4 @@
-import {from$} from 'extra-array';
+import {from$} from "extra-array";
 
 /**
  * Reverses the values.

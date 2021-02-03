@@ -1,6 +1,6 @@
-import some from './some';
-import id from './_id';
-import type {mapFn, tillFn} from './_types';
+import some from "./some";
+import id from "./_id";
+import type {mapFn, tillFn} from "./_types";
 
 /**
  * Combines values from iterables.

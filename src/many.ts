@@ -1,4 +1,4 @@
-import isOnce from './isOnce';
+import isOnce from "./isOnce";
 
 function manyLate<T>(x: Iterable<T>, a: T[]): Iterable<T> {
   return {[Symbol.iterator]: () => {

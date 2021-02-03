@@ -1,5 +1,5 @@
-import {partition as arrayPartition} from 'extra-array';
-import type {testFn} from './_types';
+import {partition as arrayPartition} from "extra-array";
+import type {testFn} from "./_types";
 
 /**
  * Segregates values by test result.

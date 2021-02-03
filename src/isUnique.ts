@@ -1,5 +1,5 @@
-import {isUnique as arrayIsUnique} from 'extra-array';
-import type {compareFn, mapFn} from './_types';
+import {isUnique as arrayIsUnique} from "extra-array";
+import type {compareFn, mapFn} from "./_types";
 
 /**
  * Checks if there are no duplicate values.

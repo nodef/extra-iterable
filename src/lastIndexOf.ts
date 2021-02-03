@@ -1,6 +1,6 @@
-import searchValueRight from './searchValueRight';
-import slice from './slice';
-import END from './END';
+import searchValueRight from "./searchValueRight";
+import slice from "./slice";
+import END from "./END";
 
 /**
  * Finds last index of a value.

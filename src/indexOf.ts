@@ -1,5 +1,5 @@
-import searchValue from './searchValue';
-import slice from './slice';
+import searchValue from "./searchValue";
+import slice from "./slice";
 
 /**
  * Finds first index of a value.

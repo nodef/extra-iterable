@@ -1,6 +1,6 @@
-import type {compareFn, mapFn} from './_types';
-import id from './_id';
-import cmp from './_cmp';
+import type {compareFn, mapFn} from "./_types";
+import id from "./_id";
+import cmp from "./_cmp";
 
 function* uniqueMap<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIterator<T> {
   var fm = fm||id;

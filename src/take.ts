@@ -1,4 +1,4 @@
-import slice from './slice';
+import slice from "./slice";
 
 /**
  * Keeps first n values only.

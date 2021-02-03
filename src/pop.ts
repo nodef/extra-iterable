@@ -1,4 +1,4 @@
-import init from './init';
+import init from "./init";
 
 /**
  * Removes last value.

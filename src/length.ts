@@ -1,5 +1,5 @@
-import size from './size';
-import END from './END';
+import size from "./size";
+import END from "./END";
 
 /**
  * Counts the number of values.

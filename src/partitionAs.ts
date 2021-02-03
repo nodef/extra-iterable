@@ -1,5 +1,5 @@
-import {partitionAs as arrayPartitionAs} from 'extra-array';
-import type {mapFn} from './_types';
+import {partitionAs as arrayPartitionAs} from "extra-array";
+import type {mapFn} from "./_types";
 
 /**
  * Segregates values by similarity.

@@ -1,5 +1,5 @@
-import filter from './filter';
-import type {testFn} from './_types';
+import filter from "./filter";
+import type {testFn} from "./_types";
 
 /**
  * Finds all values passing a test.

@@ -1,5 +1,5 @@
-import {range as arrayRange} from 'extra-array';
-import type {mapFn, compareFn} from './_types';
+import {range as arrayRange} from "extra-array";
+import type {mapFn, compareFn} from "./_types";
 
 /**
  * Finds smallest and largest entries.

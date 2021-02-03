@@ -1,5 +1,5 @@
-import searchInfix from './searchInfix';
-import type {compareFn, mapFn} from './_types';
+import searchInfix from "./searchInfix";
+import type {compareFn, mapFn} from "./_types";
 
 /**
  * Checks if iterable contains an infix.

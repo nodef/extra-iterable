@@ -1,6 +1,6 @@
-import id from './_id';
-import isList from './isList';
-import type {mapFn, testFn} from './_types';
+import id from "./_id";
+import isList from "./isList";
+import type {mapFn, testFn} from "./_types";
 
 /**
  * Flattens nested iterable to given depth.

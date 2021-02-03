@@ -1,4 +1,4 @@
-import isOnce from './isOnce';
+import isOnce from "./isOnce";
 
 /**
  * Checks if value is many iterable.

@@ -1,4 +1,4 @@
-import slice from './slice';
+import slice from "./slice";
 
 /**
  * Discards last n values only.
@@ -10,4 +10,3 @@ function* dropRight<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
   else yield* x;
 }
 export default dropRight;
-

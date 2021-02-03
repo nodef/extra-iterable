@@ -1,5 +1,5 @@
-import cutAt from './cutAt';
-import map from './map';
+import cutAt from "./cutAt";
+import map from "./map";
 
 /**
  * Breaks iterable after given indices.

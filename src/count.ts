@@ -1,5 +1,5 @@
-import {count as arrayCount} from 'extra-array';
-import type {testFn} from './_types';
+import {count as arrayCount} from "extra-array";
+import type {testFn} from "./_types";
 
 /**
  * Counts values which satisfy a test.

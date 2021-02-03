@@ -1,5 +1,5 @@
-import chunk from './chunk';
-import repeat from './repeat';
+import chunk from "./chunk";
+import repeat from "./repeat";
 
 /**
  * Places values of an iterable between another.

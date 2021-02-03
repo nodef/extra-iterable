@@ -1,4 +1,4 @@
-import many from './many';
+import many from "./many";
 
 /**
  * Repeats an iterable given times.

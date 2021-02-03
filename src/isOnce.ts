@@ -1,4 +1,4 @@
-import is from './is';
+import is from "./is";
 
 /**
  * Checks if value is once iterable.

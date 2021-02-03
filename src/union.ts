@@ -1,7 +1,7 @@
-import many from './many';
-import id from './_id';
-import cmp from './_cmp';
-import type {compareFn, mapFn} from './_types';
+import many from "./many";
+import id from "./_id";
+import cmp from "./_cmp";
+import type {compareFn, mapFn} from "./_types";
 
 function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIterator<T> {
   var fm = fm||id;

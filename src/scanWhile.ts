@@ -1,5 +1,5 @@
-import {scanWhile as arrayScanWhile} from 'extra-array';
-import type {testFn} from './_types';
+import {scanWhile as arrayScanWhile} from "extra-array";
+import type {testFn} from "./_types";
 
 /**
  * Scans from left, while a test passes.

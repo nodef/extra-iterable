@@ -1,6 +1,6 @@
-import last from './last';
-import searchInfixAll from './searchInfixAll';
-import type {compareFn, mapFn} from './_types';
+import last from "./last";
+import searchInfixAll from "./searchInfixAll";
+import type {compareFn, mapFn} from "./_types";
 
 /**
  * Finds last index of an infix.

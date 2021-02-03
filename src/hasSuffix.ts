@@ -1,7 +1,7 @@
-import id from './_id';
-import cmp from './_cmp';
-import {from$} from 'extra-array';
-import type {compareFn, mapFn} from './_types';
+import id from "./_id";
+import cmp from "./_cmp";
+import {from$} from "extra-array";
+import type {compareFn, mapFn} from "./_types";
 
 /**
  * Checks if iterable ends with a suffix.

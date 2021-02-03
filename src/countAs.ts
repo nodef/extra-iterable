@@ -1,5 +1,5 @@
-import {countAs as arrayCountAs} from 'extra-array';
-import type {mapFn} from './_types';
+import {countAs as arrayCountAs} from "extra-array";
+import type {mapFn} from "./_types";
 
 /**
  * Counts occurrences of values.

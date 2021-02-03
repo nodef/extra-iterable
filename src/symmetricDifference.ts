@@ -1,6 +1,6 @@
-import many from './many';
-import difference from './difference';
-import type {compareFn, mapFn} from './_types';
+import many from "./many";
+import difference from "./difference";
+import type {compareFn, mapFn} from "./_types";
 
 /**
  * Gives values not present in both iterables.

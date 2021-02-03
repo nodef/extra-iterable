@@ -1,6 +1,6 @@
-import head from './head';
-import searchInfixAll from './searchInfixAll';
-import type {compareFn, mapFn} from './_types';
+import head from "./head";
+import searchInfixAll from "./searchInfixAll";
+import type {compareFn, mapFn} from "./_types";
 
 /**
  * Finds first index of an infix.

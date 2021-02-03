@@ -1,4 +1,4 @@
-import getPath from './getPath';
+import getPath from "./getPath";
 
 /**
  * Checks if nested iterable has a path.

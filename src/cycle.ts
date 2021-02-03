@@ -1,6 +1,6 @@
-import {mod} from 'extra-math';
-import many from './many';
-import size from './size';
+import {mod} from "extra-math";
+import many from "./many";
+import size from "./size";
 
 /**
  * Gives values that cycle through an iterable.

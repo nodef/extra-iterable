@@ -1,5 +1,5 @@
-import min from './min';
-import type {compareFn, mapFn} from './_types';
+import min from "./min";
+import type {compareFn, mapFn} from "./_types";
 
 /**
  * Merges values from sorted iterables.

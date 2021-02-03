@@ -1,4 +1,4 @@
-import splice from './splice';
+import splice from "./splice";
 
 /**
  * Removes value at index.

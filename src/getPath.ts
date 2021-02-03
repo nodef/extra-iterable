@@ -1,5 +1,5 @@
-import is from './is';
-import get from './get';
+import is from "./is";
+import get from "./get";
 
 /**
  * Gets value at path in a nested iterable.

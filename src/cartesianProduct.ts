@@ -1,6 +1,6 @@
-import many from './many';
-import id from './_id';
-import type {mapFn} from './_types';
+import many from "./many";
+import id from "./_id";
+import type {mapFn} from "./_types";
 
 /**
  * Lists cartesian product of iterables.

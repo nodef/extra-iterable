@@ -1,4 +1,4 @@
-import END from './END';
+import END from "./END";
 
 /**
  * Fills with given value.

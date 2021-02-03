@@ -1,5 +1,5 @@
-import searchSubsequence from './searchSubsequence';
-import type {mapFn, compareFn} from './_types';
+import searchSubsequence from "./searchSubsequence";
+import type {mapFn, compareFn} from "./_types";
 
 /**
  * Checks if iterable has a subsequence.

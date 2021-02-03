@@ -1,4 +1,4 @@
-import type {testFn} from './_types';
+import type {testFn} from "./_types";
 
 function everyBool<T>(x: Iterable<T>): boolean {
   for(var v of x)
