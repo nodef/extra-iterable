@@ -5,14 +5,16 @@ export default [{
   input: "src/index.js",
   output: {
     file: "index.js",
-    format: "cjs"
+    format: "cjs",
+    exports: "auto"
   },
   plugins: [resolve(), commonjs()]
 }, {
   input: "src/index.js",
   output: {
     file: "index.mjs",
-    format: "es"
+    format: "es",
+    exports: "auto"
   },
   plugins: [resolve(), commonjs()]
 }];

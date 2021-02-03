@@ -1,16 +1,16 @@
 An [iterable] is a sequence of values. [:running:] [:vhs:] [:package:] [:moon:] [:ledger:]
 
-Methods as separate packages:
-
-- `@extra-iterable/swap`: use [rollup] to bundle this es module.
-- `@extra-iterable/swap.min`: use in browser ([browserify], [uglify-js]).
-
 Assumption here is that an iterable can only be iterated over once. Methods
 which require multiple iterations preserve old values in a backup array using
 [many]. Many methods accept both compare and map functions, and in some cases
 using **only** a map function enables *faster comparision* (like [unique]).
 I borrowed a lot of ideas from Haskell, Elm, Python, Basic, Lodash, and other
 NPM packages. These are mentioned in references of each method.
+
+Methods as separate packages:
+
+- `@extra-iterable/swap`: use [rollup] to bundle this es module.
+- `@extra-iterable/swap.min`: use in browser ([browserify], [uglify-js]).
 
 > Stability: Experimental.
 
