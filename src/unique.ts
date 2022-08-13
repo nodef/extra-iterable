@@ -1,9 +1,9 @@
 import type {compareFn, mapFn} from "./_types";
-import id from "./_id";
-import cmp from "./_cmp";
+import {IDENTITY} from "extra-function";
+import {COMPARE}  from "extra-function";
 
 function* uniqueMap<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIterator<T> {
-  var fm = fm||id;
+  var fm = fm || IDENTITY;
   var s = new Set(), i = -1;
   for(var v of x) {
     var v1 = fm(v, ++i, x);
@@ -13,7 +13,8 @@ function* uniqueMap<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIte
 }
 
 function* uniqueDual<T, U=T>(x: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
-  var fc=fc||cmp, fm = fm||id;
+  var fc = fc || COMPARE;
+  var fm = fm || IDENTITY;
   var s = [], i = -1;
   x: for(var v of x) {
     var v1 = fm(v, ++i, x);

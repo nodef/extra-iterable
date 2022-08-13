@@ -1,5 +1,5 @@
-import id from "./_id";
-import cmp from "./_cmp";
+import {IDENTITY} from "extra-function";
+import {COMPARE}  from "extra-function";
 import {from$} from "extra-array";
 import type {compareFn, mapFn} from "./_types";
 
@@ -11,7 +11,8 @@ import type {compareFn, mapFn} from "./_types";
  * @param fm map function (v, i, x)
  */
 function hasSuffix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>, fm: mapFn<T, T|U>=null): boolean {
-  var fc = fc||cmp, fm = fm||id;
+  var fc = fc || COMPARE;
+  var fm = fm || IDENTITY;
   var y1 = from$(y), Y = y1.length;
   var a = [], ai = 0, n = 0;
   if(Y===0) return true;

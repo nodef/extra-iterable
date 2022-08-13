@@ -1,10 +1,10 @@
 import many from "./many";
-import id from "./_id";
-import cmp from "./_cmp";
+import {IDENTITY} from "extra-function";
+import {COMPARE}  from "extra-function";
 import type {compareFn, mapFn} from "./_types";
 
 function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIterator<T> {
-  var fm = fm||id;
+  var fm = fm || IDENTITY;
   var s = new Set();
   var i = -1, j = -1;
   for(var u of x) {
@@ -18,7 +18,8 @@ function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: mapFn<T, T|U>=nul
 }
 
 function* unionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
-  var fc = fc||cmp, fm = fm||id;
+  var fc = fc || COMPARE;
+  var fm = fm || IDENTITY;
   var x = many(x);
   yield* x;
   var x1 = [...x].map(fm), j = -1;

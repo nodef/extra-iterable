@@ -1,5 +1,5 @@
-import id from "./_id";
-import cmp from "./_cmp";
+import {IDENTITY} from "extra-function";
+import {COMPARE}  from "extra-function";
 import type {mapFn, compareFn} from "./_types";
 
 /**
@@ -11,7 +11,8 @@ import type {mapFn, compareFn} from "./_types";
  * @returns start index of subsequence, -1 if not found
  */
 function searchSubsequence<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): number {
-  var fc = fc||cmp, fm = fm||id;
+  var fc = fc || COMPARE;
+  var fm = fm || IDENTITY;
   var iy = y[Symbol.iterator]();
   var {value, done} = iy.next();
   if(done) return 0;

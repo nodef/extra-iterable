@@ -1,5 +1,5 @@
 import many from "./many";
-import id from "./_id";
+import {IDENTITY} from "extra-function";
 import type {mapFn} from "./_types";
 
 /**
@@ -8,8 +8,8 @@ import type {mapFn} from "./_types";
  * @param fm map function (vs, i)
  */
 function* cartesianProduct<T, U=T>(xs: Iterable<T>[], fm: mapFn<T[], T[]|U>=null): IterableIterator<T[]|U> {
-  var fm = fm||id;
-  var X = xs.length;
+  var fm = fm || IDENTITY;
+  var X  = xs.length;
   if(X===0) return;
   var is = [], os = [];
   for(var i=0; i<X; i++) {

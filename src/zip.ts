@@ -1,5 +1,5 @@
 import some from "./some";
-import id from "./_id";
+import {IDENTITY} from "extra-function";
 import type {mapFn, tillFn} from "./_types";
 
 /**
@@ -10,7 +10,8 @@ import type {mapFn, tillFn} from "./_types";
  * @param vd default value
  */
 function* zip<T, U=T[]>(xs: Iterable<T>[], fm: mapFn<T[], T[]|U>=null, ft: tillFn=null, vd?: T): IterableIterator<T[]|U> {
-  var fm = fm||id, ft = ft||some as tillFn;
+  var fm = fm || IDENTITY;
+  var ft = ft || some as tillFn;
   var X = xs.length;
   if(X===0) return;
   var is = [], ds = [], vs = [];

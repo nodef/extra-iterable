@@ -1,5 +1,5 @@
-import id from "./_id";
-import cmp from "./_cmp";
+import {IDENTITY} from "extra-function";
+import {COMPARE}  from "extra-function";
 import {from$} from "extra-array";
 import type {compareFn, mapFn} from "./_types";
 
@@ -11,7 +11,8 @@ import type {compareFn, mapFn} from "./_types";
  * @param fm map function (v, i, x)
  */
 function* searchInfixAll<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>, fm: mapFn<T, T|U>=null): IterableIterator<number> {
-  var fc = fc||cmp, fm = fm||id;
+  var fc = fc || COMPARE;
+  var fm = fm || IDENTITY;
   var y1 = from$(y), Y = y1.length;
   if(Y===0) yield 0;
   var y1 = y1.map(fm, null) as T[];

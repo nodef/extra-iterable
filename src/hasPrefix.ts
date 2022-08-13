@@ -1,5 +1,5 @@
-import id from "./_id";
-import cmp from "./_cmp";
+import {IDENTITY} from "extra-function";
+import {COMPARE}  from "extra-function";
 import type {mapFn, compareFn} from "./_types";
 
 /**
@@ -10,7 +10,8 @@ import type {mapFn, compareFn} from "./_types";
  * @param fm map function (v, i, x)
  */
 function hasPrefix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): boolean {
-  var fc = fc||cmp, fm = fm||id;
+  var fc = fc || COMPARE;
+  var fm = fm || IDENTITY;
   var ix = x[Symbol.iterator](), i = -1;
   for(var v of y) {
     var {value, done} = ix.next();

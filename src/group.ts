@@ -1,5 +1,5 @@
-import id from "./_id";
-import cmp from "./_cmp";
+import {IDENTITY} from "extra-function";
+import {COMPARE}  from "extra-function";
 import type {mapFn, compareFn} from "./_types";
 
 /**
@@ -9,7 +9,8 @@ import type {mapFn, compareFn} from "./_types";
  * @param fm map function (v, i, x)
  */
 function* group<T, U=T>(x: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T[]> {
-  var fc = fc||cmp, fm = fm||id;
+  var fc = fc || COMPARE;
+  var fm = fm || IDENTITY;
   var a = [], u1: T|U, i = -1;
   for(var v of x) {
     var v1 = fm(v, ++i, x);

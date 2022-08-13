@@ -1,5 +1,5 @@
-import id from "./_id";
-import cmp from "./_cmp";
+import {IDENTITY} from "extra-function";
+import {COMPARE}  from "extra-function";
 import type {compareFn, mapFn} from "./_types";
 
 /**
@@ -11,7 +11,8 @@ import type {compareFn, mapFn} from "./_types";
  * @returns x<y: -1, x=y: 0, x>y: 1
  */
 function compare<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): number {
-  var fc = fc||cmp, fm = fm||id;
+  var fc = fc || COMPARE;
+  var fm = fm || IDENTITY;
   var ix = x[Symbol.iterator]();
   var iy = y[Symbol.iterator]();
   for(var i=0;; i++) {
