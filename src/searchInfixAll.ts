@@ -11,7 +11,7 @@ import type {CompareFunction, MapFunction} from "./_types";
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function* searchInfixAll<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>, fm: MapFunction<T, T|U>=null): IterableIterator<number> {
+function* searchInfixAll<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<number> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var y1 = from$(y), Y = y1.length;

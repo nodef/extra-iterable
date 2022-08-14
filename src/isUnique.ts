@@ -8,7 +8,7 @@ import type {CompareFunction, MapFunction} from "./_types";
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function isUnique<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): boolean {
+function isUnique<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   return arrayIsUnique(x, fc, fm);
 }
 export default isUnique;

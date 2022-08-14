@@ -8,7 +8,7 @@ import type {MapFunction} from "./_types";
  * @param xs iterables
  * @param fm map function (vs, i)
  */
-function* cartesianProduct<T, U=T>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U>=null): IterableIterator<T[]|U> {
+function* cartesianProduct<T, U=T>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U> | null=null): IterableIterator<T[]|U> {
   var fm = fm || IDENTITY;
   var X  = xs.length;
   if(X===0) return;

@@ -8,7 +8,7 @@ import type {CompareFunction, MapFunction} from "./_types";
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function* merge<T, U=T>(xs: Iterable<T>[], fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
+function* merge<T, U=T>(xs: Iterable<T>[], fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var X = xs.length;
   var is = [], os = [];
   for(var n=0, i=0; n<X; n++) {

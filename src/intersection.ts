@@ -4,7 +4,7 @@ import {from as setFrom} from "extra-set";
 import type {CompareFunction, MapFunction} from "./_types";
 
 
-function* intersectionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
+function* intersectionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var s = setFrom(y, fm);
   var fm = fm || IDENTITY, i = -1;
   for(var u of x) {
@@ -13,7 +13,7 @@ function* intersectionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunctio
   }
 }
 
-function* intersectionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
+function* intersectionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var y1 = [...y].map(fm), i = -1;
@@ -31,7 +31,7 @@ function* intersectionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFu
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function* intersection<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
+function* intersection<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   if(fc) yield* intersectionDual(x, y, fc, fm);
   else yield* intersectionMap(x, y, fm);
 }

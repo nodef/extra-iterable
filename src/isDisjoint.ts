@@ -9,7 +9,7 @@ import type {CompareFunction, MapFunction} from "./_types";
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function isDisjoint<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): boolean {
+function isDisjoint<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   return arrayIsDisjoint(x, y, fc, fm);
 }
 export default isDisjoint;

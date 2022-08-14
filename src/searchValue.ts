@@ -10,7 +10,7 @@ import type {CompareFunction, MapFunction} from "./_types";
  * @param fm map function (v, i, x)
  * @returns index of value, -1 if not found
  */
-function searchValue<T, U=T>(x: Iterable<T>, v: T, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): number {
+function searchValue<T, U=T>(x: Iterable<T>, v: T, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): number {
   return arraySearchValue(x, v, fc, fm);
 }
 export default searchValue;

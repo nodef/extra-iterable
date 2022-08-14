@@ -10,7 +10,7 @@ import type {MapFunction, EndFunction} from "./_types";
  * @param ft till function (dones) (some)
  * @param vd default value
  */
-function* zip<T, U=T[]>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U>=null, ft: EndFunction=null, vd?: T): IterableIterator<T[]|U> {
+function* zip<T, U=T[]>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U> | null=null, ft: EndFunction | null=null, vd?: T): IterableIterator<T[]|U> {
   var fm = fm || IDENTITY;
   var ft = ft || some as EndFunction;
   var X = xs.length;

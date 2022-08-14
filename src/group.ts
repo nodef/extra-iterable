@@ -9,7 +9,7 @@ import type {MapFunction, CompareFunction} from "./_types";
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function* group<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): IterableIterator<T[]> {
+function* group<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T[]> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var a = [], u1: T|U, i = -1;

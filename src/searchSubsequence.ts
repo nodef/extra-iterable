@@ -11,7 +11,7 @@ import type {MapFunction, CompareFunction} from "./_types";
  * @param fm map function (v, i, x)
  * @returns start index of subsequence, -1 if not found
  */
-function searchSubsequence<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): number {
+function searchSubsequence<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): number {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var iy = y[Symbol.iterator]();
