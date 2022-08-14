@@ -1,6 +1,6 @@
 import {IDENTITY} from "extra-function";
 import isList from "./isList";
-import type {mapFn, testFn} from "./_types";
+import type {MapFunction, TestFunction} from "./_types";
 
 /**
  * Flattens nested iterable, based on map function.
@@ -8,7 +8,7 @@ import type {mapFn, testFn} from "./_types";
  * @param fm map function (v, i, x)
  * @param ft test function (v, i, x)
  */
-function* flatMap(x: Iterable<any>, fm: mapFn<any, any>=null, ft: testFn<any>=null): IterableIterator<any> {
+function* flatMap(x: Iterable<any>, fm: MapFunction<any, any>=null, ft: TestFunction<any>=null): IterableIterator<any> {
   var fm = fm || IDENTITY;
   var ft = ft || isList, i = -1;
   for(var v of x) {

@@ -1,4 +1,4 @@
-import type {testFn} from "./_types";
+import type {TestFunction} from "./_types";
 
 function someBool<T>(x: Iterable<T>): boolean {
   for(var v of x)
@@ -6,7 +6,7 @@ function someBool<T>(x: Iterable<T>): boolean {
   return false;
 }
 
-function someTest<T>(x: Iterable<T>, ft: testFn<T>): boolean {
+function someTest<T>(x: Iterable<T>, ft: TestFunction<T>): boolean {
   var i = -1;
   for(var v of x)
     if(ft(v, ++i, x)) return true;
@@ -18,7 +18,7 @@ function someTest<T>(x: Iterable<T>, ft: testFn<T>): boolean {
  * @param x an iterable
  * @param ft test function (v, i, x)
  */
-function some<T>(x: Iterable<T>, ft: testFn<T>=null): boolean {
+function some<T>(x: Iterable<T>, ft: TestFunction<T>=null): boolean {
   if(ft) return someTest(x, ft);
   else return someBool(x);
 }

@@ -1,6 +1,6 @@
 import head from "./head";
 import searchInfixAll from "./searchInfixAll";
-import type {compareFn, mapFn} from "./_types";
+import type {CompareFunction, MapFunction} from "./_types";
 
 /**
  * Finds first index of an infix.
@@ -9,7 +9,7 @@ import type {compareFn, mapFn} from "./_types";
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function searchInfix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>, fm: mapFn<T, T|U>=null): number {
+function searchInfix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>, fm: MapFunction<T, T|U>=null): number {
   return head(searchInfixAll(x, y, fc, fm), -1);
 }
 export default searchInfix;

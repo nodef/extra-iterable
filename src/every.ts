@@ -1,4 +1,4 @@
-import type {testFn} from "./_types";
+import type {TestFunction} from "./_types";
 
 function everyBool<T>(x: Iterable<T>): boolean {
   for(var v of x)
@@ -6,7 +6,7 @@ function everyBool<T>(x: Iterable<T>): boolean {
   return true;
 }
 
-function everyTest<T>(x: Iterable<T>, ft: testFn<T>): boolean {
+function everyTest<T>(x: Iterable<T>, ft: TestFunction<T>): boolean {
   var i = -1;
   for(var v of x)
     if(!ft(v, ++i, x)) return false;
@@ -18,7 +18,7 @@ function everyTest<T>(x: Iterable<T>, ft: testFn<T>): boolean {
  * @param x an iterable
  * @param ft test function (v, i, x)
  */
-function every<T>(x: Iterable<T>, ft: testFn<T>=null): boolean {
+function every<T>(x: Iterable<T>, ft: TestFunction<T>=null): boolean {
   if(ft) return everyTest(x, ft);
   else return everyBool(x);
 }

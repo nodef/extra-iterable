@@ -1,8 +1,8 @@
-import type {compareFn, mapFn} from "./_types";
+import type {CompareFunction, MapFunction} from "./_types";
 import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
 
-function* uniqueMap<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIterator<T> {
+function* uniqueMap<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
   var fm = fm || IDENTITY;
   var s = new Set(), i = -1;
   for(var v of x) {
@@ -12,7 +12,7 @@ function* uniqueMap<T, U=T>(x: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIte
   }
 }
 
-function* uniqueDual<T, U=T>(x: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
+function* uniqueDual<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var s = [], i = -1;
@@ -30,7 +30,7 @@ function* uniqueDual<T, U=T>(x: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function* unique<T, U=T>(x: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
+function* unique<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
   if(fc) yield* uniqueDual(x, fc, fm);
   else yield* uniqueMap(x, fm);
 }

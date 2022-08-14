@@ -1,6 +1,6 @@
 import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
-import type {mapFn, compareFn} from "./_types";
+import type {MapFunction, CompareFunction} from "./_types";
 
 /**
  * Finds first index of a subsequence.
@@ -10,7 +10,7 @@ import type {mapFn, compareFn} from "./_types";
  * @param fm map function (v, i, x)
  * @returns start index of subsequence, -1 if not found
  */
-function searchSubsequence<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): number {
+function searchSubsequence<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): number {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var iy = y[Symbol.iterator]();

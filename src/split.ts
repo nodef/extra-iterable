@@ -1,11 +1,11 @@
-import type {testFn} from "./_types";
+import type {TestFunction} from "./_types";
 
 /**
  * Breaks iterable considering test as separator.
  * @param x an iterable
  * @param ft test function (v, i, x)
  */
-function* split<T>(x: Iterable<T>, ft: testFn<T>): IterableIterator<T[]> {
+function* split<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T[]> {
   var a: T[] = [], i = -1;
   for(var v of x) {
     if(!ft(v, ++i, x)) a.push(v);

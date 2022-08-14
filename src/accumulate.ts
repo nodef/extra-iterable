@@ -1,4 +1,4 @@
-import type {reduceFn} from "./_types";
+import type {ReduceFunction} from "./_types";
 
 /**
  * Produces accumulating values.
@@ -6,7 +6,7 @@ import type {reduceFn} from "./_types";
  * @param fr reduce function (acc, v, i, x)
  * @param acc initial value
  */
-function* accumulate<T, U=T>(x: Iterable<T>, fr: reduceFn<T, T|U>, acc?: T|U): IterableIterator<T|U> {
+function* accumulate<T, U=T>(x: Iterable<T>, fr: ReduceFunction<T, T|U>, acc?: T|U): IterableIterator<T|U> {
   var init = arguments.length <= 2, i = -1;
   for(var v of x) {
     if(init) { acc = v; init = false; ++i; }

@@ -1,6 +1,6 @@
 import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
-import type {mapFn, compareFn} from "./_types";
+import type {MapFunction, CompareFunction} from "./_types";
 
 /**
  * Checks if iterable starts with a prefix.
@@ -9,7 +9,7 @@ import type {mapFn, compareFn} from "./_types";
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function hasPrefix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): boolean {
+function hasPrefix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): boolean {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var ix = x[Symbol.iterator](), i = -1;

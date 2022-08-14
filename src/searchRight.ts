@@ -1,4 +1,4 @@
-import type {testFn} from "./_types";
+import type {TestFunction} from "./_types";
 
 /**
  * Finds index of last value passing a test.
@@ -6,7 +6,7 @@ import type {testFn} from "./_types";
  * @param ft test function (v, i, x)
  * @returns index of value, -1 if not found
  */
-function searchRight<T>(x: Iterable<T>, ft: testFn<T>): number {
+function searchRight<T>(x: Iterable<T>, ft: TestFunction<T>): number {
   var i = -1, a = -1;
   for(var v of x)
     if(ft(v, ++i, x)) a = i;

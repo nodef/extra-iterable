@@ -1,6 +1,6 @@
 import some from "./some";
 import {IDENTITY} from "extra-function";
-import type {mapFn, tillFn} from "./_types";
+import type {MapFunction, EndFunction} from "./_types";
 
 /**
  * Combines values from iterables.
@@ -9,9 +9,9 @@ import type {mapFn, tillFn} from "./_types";
  * @param ft till function (dones) (some)
  * @param vd default value
  */
-function* zip<T, U=T[]>(xs: Iterable<T>[], fm: mapFn<T[], T[]|U>=null, ft: tillFn=null, vd?: T): IterableIterator<T[]|U> {
+function* zip<T, U=T[]>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U>=null, ft: EndFunction=null, vd?: T): IterableIterator<T[]|U> {
   var fm = fm || IDENTITY;
-  var ft = ft || some as tillFn;
+  var ft = ft || some as EndFunction;
   var X = xs.length;
   if(X===0) return;
   var is = [], ds = [], vs = [];

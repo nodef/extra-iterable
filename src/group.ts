@@ -1,6 +1,6 @@
 import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
-import type {mapFn, compareFn} from "./_types";
+import type {MapFunction, CompareFunction} from "./_types";
 
 /**
  * Keeps similar values together and in order.
@@ -8,7 +8,7 @@ import type {mapFn, compareFn} from "./_types";
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function* group<T, U=T>(x: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T[]> {
+function* group<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): IterableIterator<T[]> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var a = [], u1: T|U, i = -1;

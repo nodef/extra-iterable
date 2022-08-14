@@ -1,5 +1,5 @@
 import {scanUntil as arrayScanUntil} from "extra-array";
-import type {testFn} from "./_types";
+import type {TestFunction} from "./_types";
 
 /**
  * Scans from left, until a test passes.
@@ -7,7 +7,7 @@ import type {testFn} from "./_types";
  * @param ft test function (v, i, x)
  * @returns index where test passes
  */
-function scanUntil<T>(x: Iterable<T>, ft: testFn<T>): number {
+function scanUntil<T>(x: Iterable<T>, ft: TestFunction<T>): number {
   return arrayScanUntil(x, ft);
 }
 export default scanUntil;

@@ -1,4 +1,4 @@
-import type {testFn} from "./_types";
+import type {TestFunction} from "./_types";
 
 /**
  * Finds indices of values passing a test.
@@ -6,7 +6,7 @@ import type {testFn} from "./_types";
  * @param ft test function (v, i, x)
  * @returns indices of value
  */
-function* searchAll<T>(x: Iterable<T>, ft: testFn<T>): IterableIterator<number> {
+function* searchAll<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<number> {
   var i = -1;
   for(var v of x)
     if(ft(v, ++i, x)) yield i;

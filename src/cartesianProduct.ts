@@ -1,13 +1,13 @@
 import many from "./many";
 import {IDENTITY} from "extra-function";
-import type {mapFn} from "./_types";
+import type {MapFunction} from "./_types";
 
 /**
  * Lists cartesian product of iterables.
  * @param xs iterables
  * @param fm map function (vs, i)
  */
-function* cartesianProduct<T, U=T>(xs: Iterable<T>[], fm: mapFn<T[], T[]|U>=null): IterableIterator<T[]|U> {
+function* cartesianProduct<T, U=T>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U>=null): IterableIterator<T[]|U> {
   var fm = fm || IDENTITY;
   var X  = xs.length;
   if(X===0) return;

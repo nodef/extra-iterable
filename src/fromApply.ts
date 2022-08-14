@@ -1,4 +1,4 @@
-import type {mapFn} from "./_types";
+import type {MapFunction} from "./_types";
 
 /**
  * Generates iterable from function application.
@@ -6,7 +6,7 @@ import type {mapFn} from "./_types";
  * @param v start value
  * @param n number of values (-1 => Inf)
  */
-function* fromApply<T>(fm: mapFn<T, T>=null, v: T, n: number=-1): IterableIterator<T> {
+function* fromApply<T>(fm: MapFunction<T, T>=null, v: T, n: number=-1): IterableIterator<T> {
   if(n!==0) yield v;
   for(var i=1; i!==n; i++)
     yield (v = fm(v, i, null));

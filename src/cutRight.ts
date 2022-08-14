@@ -1,11 +1,11 @@
-import type {testFn} from "./_types";
+import type {TestFunction} from "./_types";
 
 /**
  * Breaks iterable after test passes.
  * @param x an iterable
  * @param ft test function (v, i, x)
  */
-function* cutRight<T>(x: Iterable<T>, ft: testFn<T>): IterableIterator<T[]> {
+function* cutRight<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T[]> {
   var i = -1, a = [];
   for(var v of x) {
     a.push(v);

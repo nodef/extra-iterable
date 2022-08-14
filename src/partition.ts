@@ -1,5 +1,5 @@
 import {partition as arrayPartition} from "extra-array";
-import type {testFn} from "./_types";
+import type {TestFunction} from "./_types";
 
 /**
  * Segregates values by test result.
@@ -7,7 +7,7 @@ import type {testFn} from "./_types";
  * @param ft test function (v, i, x)
  * @returns [satisfies, doesnt]
  */
-function partition<T>(x: Iterable<T>, ft: testFn<T>): [T[], T[]] {
+function partition<T>(x: Iterable<T>, ft: TestFunction<T>): [T[], T[]] {
   return arrayPartition(x, ft);
 }
 export default partition;

@@ -1,9 +1,9 @@
 import many from "./many";
 import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
-import type {compareFn, mapFn} from "./_types";
+import type {CompareFunction, MapFunction} from "./_types";
 
-function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: mapFn<T, T|U>=null): IterableIterator<T> {
+function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
   var fm = fm || IDENTITY;
   var s = new Set();
   var i = -1, j = -1;
@@ -17,7 +17,7 @@ function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: mapFn<T, T|U>=nul
   }
 }
 
-function* unionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
+function* unionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var x = many(x);
@@ -38,7 +38,7 @@ function* unionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=n
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-function* union<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: compareFn<T|U>=null, fm: mapFn<T, T|U>=null): IterableIterator<T> {
+function* union<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
   if(fc) yield* unionDual(x, y, fc, fm);
   else yield* unionMap(x, y, fm);
 }
