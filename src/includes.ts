@@ -1,6 +1,7 @@
 import slice from "./slice";
 import hasValue from "./hasValue";
 
+
 /**
  * Checks if iterable has a value.
  * @param x an iterable

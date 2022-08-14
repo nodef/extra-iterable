@@ -1,6 +1,7 @@
 import {countAs as arrayCountAs} from "extra-array";
 import type {MapFunction} from "./_types";
 
+
 /**
  * Counts occurrences of values.
  * @param x an iterable

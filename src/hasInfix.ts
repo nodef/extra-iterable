@@ -1,6 +1,7 @@
 import searchInfix from "./searchInfix";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Checks if iterable contains an infix.
  * @param x an iterable

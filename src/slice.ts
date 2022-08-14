@@ -1,5 +1,6 @@
 import END from "./END";
 
+
 function* slicePos<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
   var k = -1;
   for(var v of x) {

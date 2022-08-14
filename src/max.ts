@@ -1,6 +1,7 @@
 import range from "./range";
 import type {MapFunction, CompareFunction} from "./_types";
 
+
 /**
  * Finds largest entry.
  * @param x an iterable

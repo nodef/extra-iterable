@@ -1,5 +1,6 @@
 import type {TestFunction} from "./_types";
 
+
 /**
  * Scans from right, until a test passes.
  * @param x an iterable

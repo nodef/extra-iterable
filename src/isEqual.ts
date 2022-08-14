@@ -1,6 +1,7 @@
 import compare from "./compare";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Checks if two iterables are equal.
  * @param x an iterable

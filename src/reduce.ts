@@ -1,5 +1,6 @@
 import type {ReduceFunction} from "./_types";
 
+
 /**
  * Reduces values to a single value.
  * @param x an iterable

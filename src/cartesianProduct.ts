@@ -2,6 +2,7 @@ import many from "./many";
 import {IDENTITY} from "extra-function";
 import type {MapFunction} from "./_types";
 
+
 /**
  * Lists cartesian product of iterables.
  * @param xs iterables

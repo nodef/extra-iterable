@@ -2,6 +2,7 @@ import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
 import type {MapFunction, CompareFunction} from "./_types";
 
+
 /**
  * Finds first index of a subsequence.
  * @param x an iterable

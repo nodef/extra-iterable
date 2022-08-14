@@ -1,6 +1,7 @@
 import {scanUntil as arrayScanUntil} from "extra-array";
 import type {TestFunction} from "./_types";
 
+
 /**
  * Scans from left, until a test passes.
  * @param x an iterable

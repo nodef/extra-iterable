@@ -1,5 +1,6 @@
 import type {TestFunction} from "./_types";
 
+
 /**
  * Keeps values from right, while a test passes.
  * @param x an iterable

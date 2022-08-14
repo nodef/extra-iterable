@@ -1,6 +1,7 @@
 import filter from "./filter";
 import type {TestFunction} from "./_types";
 
+
 /**
  * Finds all values passing a test.
  * @param x an iterable

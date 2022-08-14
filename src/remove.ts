@@ -1,5 +1,6 @@
 import splice from "./splice";
 
+
 /**
  * Removes value at index.
  * @param x an iterable

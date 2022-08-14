@@ -1,6 +1,7 @@
 import min from "./min";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Merges values from sorted iterables.
  * @param xs iterables

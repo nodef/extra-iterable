@@ -1,6 +1,7 @@
 import {range as arrayRange} from "extra-array";
 import type {MapFunction, CompareFunction} from "./_types";
 
+
 /**
  * Finds smallest and largest entries.
  * @param x an iterable

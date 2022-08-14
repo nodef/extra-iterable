@@ -1,5 +1,6 @@
 import init from "./init";
 
+
 /**
  * Removes last value.
  * @param x an iterable

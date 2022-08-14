@@ -2,6 +2,7 @@ import some from "./some";
 import {IDENTITY} from "extra-function";
 import type {MapFunction, EndFunction} from "./_types";
 
+
 /**
  * Combines values from iterables.
  * @param xs iterables

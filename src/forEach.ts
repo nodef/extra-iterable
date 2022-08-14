@@ -1,5 +1,6 @@
 import type {ProcessFunction} from "./_types";
 
+
 /**
  * Calls a function for each value.
  * @param x an iterable

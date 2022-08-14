@@ -2,6 +2,7 @@ import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Compares two iterables.
  * @param x an iterable

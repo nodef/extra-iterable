@@ -3,6 +3,7 @@ import {COMPARE}  from "extra-function";
 import {from as setFrom} from "extra-set";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 function* intersectionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
   var s = setFrom(y, fm);
   var fm = fm || IDENTITY, i = -1;

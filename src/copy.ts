@@ -1,6 +1,7 @@
 import slice from "./slice";
 import END from "./END";
 
+
 /**
  * Copies part of iterable to another.
  * @param x target iterable

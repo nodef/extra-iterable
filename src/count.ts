@@ -1,6 +1,7 @@
 import {count as arrayCount} from "extra-array";
 import type {TestFunction} from "./_types";
 
+
 /**
  * Counts values which satisfy a test.
  * @param x an iterable

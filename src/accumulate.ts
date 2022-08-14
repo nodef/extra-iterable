@@ -1,5 +1,6 @@
 import type {ReduceFunction} from "./_types";
 
+
 /**
  * Produces accumulating values.
  * @param x an iterable

@@ -1,5 +1,6 @@
 import getPath from "./getPath";
 
+
 /**
  * Checks if nested iterable has a path.
  * @param x a nested iterable

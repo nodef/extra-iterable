@@ -1,6 +1,7 @@
 import size from "./size";
 import END from "./END";
 
+
 /**
  * Counts the number of values.
  * @param x an iterable

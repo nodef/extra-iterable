@@ -2,6 +2,7 @@ import head from "./head";
 import searchInfixAll from "./searchInfixAll";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Finds first index of an infix.
  * @param x an iterable

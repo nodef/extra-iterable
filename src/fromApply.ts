@@ -1,5 +1,6 @@
 import type {MapFunction} from "./_types";
 
+
 /**
  * Generates iterable from function application.
  * @param fm map function (v, i)

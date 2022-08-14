@@ -1,6 +1,7 @@
 import {partitionAs as arrayPartitionAs} from "extra-array";
 import type {MapFunction} from "./_types";
 
+
 /**
  * Segregates values by similarity.
  * @param x an iterable

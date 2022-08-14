@@ -1,5 +1,6 @@
 import is from "./is";
 
+
 /**
  * Checks if value is once iterable.
  * @param v a value

@@ -2,6 +2,7 @@ import many from "./many";
 import difference from "./difference";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Gives values not present in both iterables.
  * @param x an iterable

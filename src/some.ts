@@ -1,5 +1,6 @@
 import type {TestFunction} from "./_types";
 
+
 function someBool<T>(x: Iterable<T>): boolean {
   for(var v of x)
     if(v) return true;

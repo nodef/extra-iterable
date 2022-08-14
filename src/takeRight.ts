@@ -1,5 +1,6 @@
 import slice from "./slice";
 
+
 /**
  * Keeps last n values only.
  * @param x an iterable

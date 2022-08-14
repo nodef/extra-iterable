@@ -3,6 +3,7 @@ import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
   var fm = fm || IDENTITY;
   var s = new Set();

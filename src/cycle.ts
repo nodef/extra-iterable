@@ -2,6 +2,7 @@ import {mod} from "extra-math";
 import many from "./many";
 import size from "./size";
 
+
 /**
  * Gives values that cycle through an iterable.
  * @param x an iterable

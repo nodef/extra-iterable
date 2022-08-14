@@ -2,6 +2,7 @@ import last from "./last";
 import searchInfixAll from "./searchInfixAll";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Finds last index of an infix.
  * @param x an iterable

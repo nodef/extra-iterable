@@ -2,6 +2,7 @@ import {IDENTITY} from "extra-function";
 import isList from "./isList";
 import type {MapFunction, TestFunction} from "./_types";
 
+
 /**
  * Flattens nested iterable, based on map function.
  * @param x a nested iterable

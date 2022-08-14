@@ -3,6 +3,7 @@ import {COMPARE}  from "extra-function";
 import {from$} from "extra-array";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Finds indices of an infix.
  * @param x an iterable

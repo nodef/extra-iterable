@@ -1,5 +1,6 @@
 import tail from "./tail";
 
+
 /**
  * Removes first value.
  * @param x an iterable

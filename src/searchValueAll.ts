@@ -2,6 +2,7 @@ import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Finds indices of a value.
  * @param x an iterable

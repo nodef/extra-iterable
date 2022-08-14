@@ -1,6 +1,7 @@
 import searchValue from "./searchValue";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Checks if iterable has a value.
  * @param x an iterable

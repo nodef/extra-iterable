@@ -1,6 +1,7 @@
 import searchValue from "./searchValue";
 import slice from "./slice";
 
+
 /**
  * Finds first index of a value.
  * @param x an iterable

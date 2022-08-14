@@ -1,6 +1,7 @@
 import searchSubsequence from "./searchSubsequence";
 import type {MapFunction, CompareFunction} from "./_types";
 
+
 /**
  * Checks if iterable has a subsequence.
  * @param x an iterable

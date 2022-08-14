@@ -1,5 +1,6 @@
 import type {CombineFunction} from "./_types";
 
+
 /**
  * Estimates new values between existing ones.
  * @param x an iterable

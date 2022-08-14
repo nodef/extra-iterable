@@ -1,5 +1,6 @@
 import type {MapFunction} from "./_types";
 
+
 /**
  * Updates values based on map function.
  * @param x an iterable

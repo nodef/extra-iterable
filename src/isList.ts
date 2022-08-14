@@ -1,5 +1,6 @@
 import is from "./is";
 
+
 /**
  * Checks if value is list (not string).
  * @param v a value

@@ -1,6 +1,7 @@
 import {isUnique as arrayIsUnique} from "extra-array";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Checks if there are no duplicate values.
  * @param x an iterable

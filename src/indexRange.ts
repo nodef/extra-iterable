@@ -1,6 +1,7 @@
 import size from "./size";
 import END from "./END";
 
+
 /**
  * Gets index range of part of iterable.
  * @param x an iterable

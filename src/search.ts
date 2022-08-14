@@ -1,5 +1,6 @@
 import type {TestFunction} from "./_types";
 
+
 /**
  * Finds index of first value passing a test.
  * @param x an iterable

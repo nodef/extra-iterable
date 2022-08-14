@@ -1,6 +1,7 @@
 import {partition as arrayPartition} from "extra-array";
 import type {TestFunction} from "./_types";
 
+
 /**
  * Segregates values by test result.
  * @param x an iterable

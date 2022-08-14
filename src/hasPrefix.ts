@@ -2,6 +2,7 @@ import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
 import type {MapFunction, CompareFunction} from "./_types";
 
+
 /**
  * Checks if iterable starts with a prefix.
  * @param x an iterable

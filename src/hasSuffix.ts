@@ -3,6 +3,7 @@ import {COMPARE}  from "extra-function";
 import {from$} from "extra-array";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Checks if iterable ends with a suffix.
  * @param x an iterable

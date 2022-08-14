@@ -1,5 +1,6 @@
 import isOnce from "./isOnce";
 
+
 function manyLate<T>(x: Iterable<T>, a: T[]): Iterable<T> {
   return {[Symbol.iterator]: () => {
     var i = 0, xi = x[Symbol.iterator]();

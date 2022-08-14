@@ -3,6 +3,7 @@ import many from "./many";
 import size from "./size";
 import END from "./END";
 
+
 /**
  * Copies part of iterable within.
  * @param x an iterable

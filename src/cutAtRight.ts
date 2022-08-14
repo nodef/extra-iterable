@@ -1,6 +1,7 @@
 import cutAt from "./cutAt";
 import map from "./map";
 
+
 /**
  * Breaks iterable after given indices.
  * @param x an iterable

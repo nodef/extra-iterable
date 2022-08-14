@@ -1,5 +1,6 @@
 import type {TestFunction} from "./_types";
 
+
 /**
  * Breaks iterable when test passes.
  * @param x an iterable

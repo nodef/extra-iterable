@@ -1,6 +1,7 @@
 import {isDisjoint as arrayIsDisjoint} from "extra-array";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Checks if iterables have no value in common.
  * @param x an iterable

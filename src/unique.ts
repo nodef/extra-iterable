@@ -2,6 +2,7 @@ import type {CompareFunction, MapFunction} from "./_types";
 import {IDENTITY} from "extra-function";
 import {COMPARE}  from "extra-function";
 
+
 function* uniqueMap<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U>=null): IterableIterator<T> {
   var fm = fm || IDENTITY;
   var s = new Set(), i = -1;

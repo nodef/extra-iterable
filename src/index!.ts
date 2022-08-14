@@ -1,5 +1,6 @@
 import size from "./size";
 
+
 /**
  * Gets zero-based index.
  * @param x an iterable

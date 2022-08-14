@@ -1,6 +1,7 @@
 import {searchValue as arraySearchValue} from "extra-array";
 import type {CompareFunction, MapFunction} from "./_types";
 
+
 /**
  * Finds first index of a value.
  * @param x an iterable
