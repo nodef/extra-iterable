@@ -1,12 +1,9 @@
 An [iterable] is a sequence of values.<br>
-:package: [NPM](https://www.npmjs.com/package/extra-iterable),
-:smiley_cat: [GitHub](https://github.com/orgs/nodef/packages?repo_name=extra-iterable),
-:running: [RunKit](https://npm.runkit.com/extra-iterable),
-:vhs: [Asciinema](https://asciinema.org/a/339719),
-:moon: [Minified](https://www.npmjs.com/package/extra-iterable.min),
-:scroll: [Files](https://unpkg.com/extra-iterable/),
-:newspaper: [JSDoc](https://nodef.github.io/extra-iterable/),
-:blue_book: [Wiki](https://github.com/nodef/extra-iterable/wiki/).
+📦 [Node.js](https://www.npmjs.com/package/extra-iterable),
+🌐 [Web](https://www.npmjs.com/package/extra-iterable.web),
+📜 [Files](https://unpkg.com/extra-iterable/),
+📰 [Docs](https://nodef.github.io/extra-iterable/),
+📘 [Wiki](https://github.com/nodef/extra-iterable/wiki/).
 
 Assumption here is that an iterable can only be iterated over once. Methods
 which require multiple iterations preserve old values in a backup array using
@@ -15,19 +12,21 @@ using **only** a map function enables *faster comparision* (like [unique]).
 I borrowed a lot of ideas from Haskell, Elm, Python, Basic, Lodash, and other
 NPM packages. These are mentioned in references of each method.
 
-Methods as separate packages:
+This package is available in *Node.js* and *Web* formats. The web format
+is exposed as `extra_iterable` standalone variable and can be loaded from
+[jsDelivr CDN].
 
-- `@extra-iterable/swap`: use [rollup] to bundle this es module.
-- `@extra-iterable/swap.min`: use in browser ([browserify], [uglify-js]).
+> Stability: [Experimental](https://www.youtube.com/watch?v=L1j93RnIxEo).
 
-> Stability: Experimental.
+[iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
+[jsDelivr CDN]: https://cdn.jsdelivr.net/npm/extra-iterable.web/index.js
 
 <br>
 
 ```javascript
-const iterable = require("extra-iterable");
+const iterable = require('extra-iterable');
 // import * as iterable from "extra-iterable";
-// import * as iterable from "https://unpkg.com/extra-iterable@2.5.10/index.mjs"; (deno)
+// import * as iterable from "https://unpkg.com/extra-iterable/index.mjs"; (deno)
 
 var x = [2, 4, 6, 8];
 iterable.get(x, 1);
@@ -52,8 +51,8 @@ iterable.reduce(x, (acc, v) => acc+v);
 
 ## Index
 
-| Method                | Action                                         |
-| --------------------- | ---------------------------------------------- |
+| Property | Description |
+|  ----  |  ----  |
 | [is]                  | Checks if value is iterable.                   |
 | [get]                 | Gets value at index.                           |
 | [set]                 | Sets value at index.                           |
@@ -133,11 +132,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 
 [![](https://img.youtube.com/vi/qgxPbqDskyw/maxresdefault.jpg)](https://www.youtube.com/watch?v=qgxPbqDskyw)
 
-[browserify]: https://www.npmjs.com/package/browserify
-[rollup]: https://www.npmjs.com/package/rollup
-[uglify-js]: https://www.npmjs.com/package/uglify-js
-[iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
-[:ledger:]: https://unpkg.com/extra-iterable/
+
 [is]: https://github.com/nodef/extra-iterable/wiki/is
 [get]: https://github.com/nodef/extra-iterable/wiki/get
 [set]: https://github.com/nodef/extra-iterable/wiki/set
