@@ -8,8 +8,8 @@ import type {TestFunction} from "./_types";
  */
 function* dropWhileRight<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T> {
   var i = -1, a = [];
-  for(var v of x) {
-    if(ft(v, ++i, x)) a.push(v);
+  for (var v of x) {
+    if (ft(v, ++i, x)) a.push(v);
     else { yield* a; yield v; a.length = 0; }
   }
 }

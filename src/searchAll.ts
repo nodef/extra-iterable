@@ -9,7 +9,7 @@ import type {TestFunction} from "./_types";
  */
 function* searchAll<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<number> {
   var i = -1;
-  for(var v of x)
-    if(ft(v, ++i, x)) yield i;
+  for (var v of x)
+    if (ft(v, ++i, x)) yield i;
 }
 export default searchAll;

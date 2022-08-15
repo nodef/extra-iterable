@@ -11,25 +11,25 @@ import type {MapFunction} from "./_types";
 function* cartesianProduct<T, U=T>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U> | null=null): IterableIterator<T[]|U> {
   var fm = fm || IDENTITY;
   var X  = xs.length;
-  if(X===0) return;
+  if (X===0) return;
   var is = [], os = [];
-  for(var i=0; i<X; i++) {
+  for (var i=0; i<X; i++) {
     xs[i] = i>0? many(xs[i]) : xs[i];
     is[i] = xs[i][Symbol.iterator]();
     os[i] = is[i].next();
-    if(os[i].done) return;
+    if (os[i].done) return;
   }
-  for(var i=0;; i++) {
+  for (var i=0;; i++) {
     var vs = [];
-    for(var o of os) vs.push(o.value);
+    for (var o of os) vs.push(o.value);
     yield fm(vs, i, null);
-    for(var r=X-1; r>=0; r--) {
+    for (var r=X-1; r>=0; r--) {
       os[r] = is[r].next();
-      if(!os[r].done) break;
+      if (!os[r].done) break;
       is[r] = xs[r][Symbol.iterator]();
       os[r] = is[r].next();
     }
-    if(r<0) break;
+    if (r<0) break;
   }
 }
 export default cartesianProduct;

@@ -15,8 +15,8 @@ function* intermix<T>(x: Iterable<T>, y: Iterable<T>, m: number=1, n: number=1, 
   var x1 = chunk(x, m, s);
   var y1 = chunk(repeat(y), n, t);
   var iy = y1[Symbol.iterator](), i = -1;
-  for(var u of x1) {
-    if(++i>0) yield* iy.next().value;
+  for (var u of x1) {
+    if (++i>0) yield* iy.next().value;
     yield* u;
   }
 }

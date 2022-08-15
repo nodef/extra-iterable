@@ -12,17 +12,17 @@ import END from "./END";
  */
 function* copy<T>(x: Iterable<T>, y: Iterable<T>, j: number=0, i: number=0, I: number=END): IterableIterator<T> {
   var k = -1, J = -1;
-  for(var u of x) {
-    if(++k===j) {
+  for (var u of x) {
+    if (++k===j) {
       J = k;
-      for(var v of slice(y, i, I))
+      for (var v of slice(y, i, I))
       { yield v; ++J; }
     }
-    if(k>=j && k<J) continue;
+    if (k>=j && k<J) continue;
     else yield u;
   }
-  if(k<j) {
-    for(; ++k<j;) yield undefined;
+  if (k<j) {
+    for (; ++k<j;) yield undefined;
     yield* slice(y, i, I);
   }
 }

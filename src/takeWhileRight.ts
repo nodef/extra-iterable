@@ -8,8 +8,8 @@ import type {TestFunction} from "./_types";
  */
 function* takeWhileRight<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T> {
   var i = -1, a = [];
-  for(var v of x) {
-    if(ft(v, ++i, x)) a.push(v);
+  for (var v of x) {
+    if (ft(v, ++i, x)) a.push(v);
     else a.length = 0;
   }
   yield* a;

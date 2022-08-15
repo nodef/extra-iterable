@@ -7,7 +7,7 @@ import slice from "./slice";
  * @param n number of values (1)
  */
 function* right<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
-  if(n===0) return;
+  if (n===0) return;
   yield* slice(x, -n);
 }
 export default right;

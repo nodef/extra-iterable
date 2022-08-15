@@ -8,9 +8,9 @@ import type {TestFunction} from "./_types";
  */
 function* cutRight<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T[]> {
   var i = -1, a = [];
-  for(var v of x) {
+  for (var v of x) {
     a.push(v);
-    if(ft(v, ++i, x)) { yield a; a = []; }
+    if (ft(v, ++i, x)) { yield a; a = []; }
   }
   yield a;
 }

@@ -8,8 +8,8 @@ import type {CombineFunction} from "./_types";
  */
 function* interpolate<T>(x: Iterable<T>, fc: CombineFunction<T>): IterableIterator<T> {
   var u: T, i = -1;
-  for(var v of x) {
-    if(++i>0) yield fc(u, v);
+  for (var v of x) {
+    if (++i>0) yield fc(u, v);
     yield (u = v);
   }
 }

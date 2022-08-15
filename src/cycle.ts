@@ -12,8 +12,8 @@ import size from "./size";
 function* cycle<T>(x: Iterable<T>, i: number=0, n: number=-1): IterableIterator<T> {
   var x = many(x);
   var i = i===0? 0 : mod(i, size(x));
-  while(true) {
-    for(var v of x) {
+  while (true) {
+    for (var v of x) {
       if(--i>=0) continue;
       if(n--===0) return;
       yield v;

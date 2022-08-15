@@ -15,9 +15,9 @@ function* searchValueAll<T, U=T>(x: Iterable<T>, v: T, fc: CompareFunction<T|U> 
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var v1 = fm(v, 0, null), i = -1;
-  for(var u of x) {
+  for (var u of x) {
     var u1 = fm(u, ++i, x);
-    if(fc(u1, v1)===0) yield i;
+    if (fc(u1, v1)===0) yield i;
   }
 }
 export default searchValueAll;

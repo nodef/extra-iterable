@@ -9,8 +9,8 @@ import type {TestFunction} from "./_types";
  */
 function scanWhileRight<T>(x: Iterable<T>, ft: TestFunction<T>): number {
   var i = 0, a = 0;
-  for(var v of x)
-    if(!ft(v, i++, x)) a = i;
+  for (var v of x)
+    if (!ft(v, i++, x)) a = i;
   return a;
 }
 export default scanWhileRight;

@@ -13,8 +13,8 @@ import END from "./END";
  */
 function* copyWithin<T>(x: Iterable<T>, j: number=0, i: number=0, I: number=END): IterableIterator<T> {
   var x = many(x), n = size(x);
-  for(var v of copy(x, x, j, i, I)) {
-    if(--n<0) break;
+  for (var v of copy(x, x, j, i, I)) {
+    if (--n<0) break;
     yield v;
   }
 }

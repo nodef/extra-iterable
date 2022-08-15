@@ -9,8 +9,8 @@ import END from "./END";
  */
 function size<T>(x: Iterable<T>, i: number=0, I: number=END): number {
   var j = -1, n = 0;
-  for(var _ of x)
-    if(++j>=i && j<I) n++;
+  for (var _ of x)
+    if (++j>=i && j<I) n++;
   return n;
 }
 export default size;

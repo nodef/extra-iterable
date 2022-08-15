@@ -8,7 +8,7 @@ import many from "./many";
  */
 function* repeat<T>(x: Iterable<T>, n: number=-1): IterableIterator<T> {
   var x = many(x);
-  for(; n!==0; n--)
+  for (; n!==0; n--)
     yield* x;
 }
 export default repeat;

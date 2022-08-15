@@ -8,7 +8,7 @@ import type {MapFunction} from "./_types";
  */
 function* map<T, U>(x: Iterable<T>, fm: MapFunction<T, U>): IterableIterator<U> {
   var i = -1;
-  for(var v of x)
+  for (var v of x)
     yield fm(v, ++i, x);
 }
 export default map;

@@ -16,15 +16,15 @@ function searchSubsequence<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFu
   var fm = fm || IDENTITY;
   var iy = y[Symbol.iterator]();
   var {value, done} = iy.next();
-  if(done) return 0;
+  if (done) return 0;
   var i = -1, j = -1, a = -1;
   var v1 = fm(value, ++j, y);
-  for(var u of x) {
+  for (var u of x) {
     var u1 = fm(u, ++i, x);
-    if(fc(u1, v1)!==0) continue;
-    if(a<0) a = i;
+    if (fc(u1, v1)!==0) continue;
+    if (a<0) a = i;
     var {value, done} = iy.next();
-    if(done) return a;
+    if (done) return a;
     v1 = fm(value, ++j, y);
   }
   return -1;

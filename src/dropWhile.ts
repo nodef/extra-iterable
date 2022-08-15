@@ -8,9 +8,9 @@ import type {TestFunction} from "./_types";
  */
 function* dropWhile<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T> {
   var c = true, i = -1;
-  for(var v of x) {
+  for (var v of x) {
     c = c && ft(v, ++i, x);
-    if(!c) yield v;
+    if (!c) yield v;
   }
 }
 export default dropWhile;

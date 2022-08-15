@@ -8,7 +8,7 @@ import get from "./get";
  * @param p path
  */
 function getPath(x: Iterable<any>, p: number[]): any {
-  for(var i of p)
+  for (var i of p)
     x = is(x)? get(x, i) : undefined;
   return x;
 }

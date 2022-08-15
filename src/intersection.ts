@@ -7,9 +7,9 @@ import type {CompareFunction, MapFunction} from "./_types";
 function* intersectionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var s = setFrom(y, fm);
   var fm = fm || IDENTITY, i = -1;
-  for(var u of x) {
+  for (var u of x) {
     var u1 = fm(u, ++i, x);
-    if(s.has(u1)) yield u;
+    if (s.has(u1)) yield u;
   }
 }
 
@@ -17,10 +17,10 @@ function* intersectionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFu
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var y1 = [...y].map(fm), i = -1;
-  x: for(var u of x) {
+  x: for (var u of x) {
     var u1 = fm(u, ++i, x);
-    for(var v1 of y1)
-      if(fc(u1, v1)===0) { yield u; continue x; }
+    for (var v1 of y1)
+      if (fc(u1, v1)===0) { yield u; continue x; }
   }
 }
 
@@ -32,7 +32,7 @@ function* intersectionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFu
  * @param fm map function (v, i, x)
  */
 function* intersection<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
-  if(fc) yield* intersectionDual(x, y, fc, fm);
+  if (fc) yield* intersectionDual(x, y, fc, fm);
   else yield* intersectionMap(x, y, fm);
 }
 export default intersection;

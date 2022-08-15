@@ -13,9 +13,9 @@ function* group<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var a = [], u1: T|U, i = -1;
-  for(var v of x) {
+  for (var v of x) {
     var v1 = fm(v, ++i, x);
-    if(i>0 && fc(u1, v1)!==0) { yield a; a = [v]; }
+    if (i>0 && fc(u1, v1)!==0) { yield a; a = [v]; }
     else a.push(v);
     u1 = v1;
   }

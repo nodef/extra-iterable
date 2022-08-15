@@ -16,16 +16,16 @@ function hasSuffix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T
   var fm = fm || IDENTITY;
   var y1 = from$(y), Y = y1.length;
   var a = [], ai = 0, n = 0;
-  if(Y===0) return true;
-  for(var u of x) {
+  if (Y===0) return true;
+  for (var u of x) {
     a[ai++ % Y] = u;
     n++;
   }
-  if(a.length<Y) return false;
-  for(var i=0, j=n-Y; i<Y; i++, j++) {
+  if (a.length<Y) return false;
+  for (var i=0, j=n-Y; i<Y; i++, j++) {
     var u1 = fm(a[ai++ % Y], j, x);
     var v1 = fm(y1[i], i, y);
-    if(fc(u1, v1)!==0) return false;
+    if (fc(u1, v1)!==0) return false;
   }
   return true;
 }

@@ -5,8 +5,8 @@
  */
 function* intersperse<T>(x: Iterable<T>, v: T): IterableIterator<T> {
   var i = -1;
-  for(var u of x) {
-    if(++i>0) yield v;
+  for (var u of x) {
+    if (++i>0) yield v;
     yield u;
   }
 }

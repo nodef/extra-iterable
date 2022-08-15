@@ -8,7 +8,7 @@ import type {TestFunction} from "./_types";
  */
 function find<T>(x: Iterable<T>, ft: TestFunction<T>): T {
   var i = -1;
-  for(var v of x)
-    if(ft(v, ++i, x)) return v;
+  for (var v of x)
+    if (ft(v, ++i, x)) return v;
 }
 export default find;

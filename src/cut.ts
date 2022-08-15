@@ -8,8 +8,8 @@ import type {TestFunction} from "./_types";
  */
 function* cut<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T[]> {
   var i = -1, a = [];
-  for(var v of x) {
-    if(ft(v, ++i, x)) { yield a; a = []; }
+  for (var v of x) {
+    if (ft(v, ++i, x)) { yield a; a = []; }
     a.push(v);
   }
   yield a;

@@ -9,8 +9,8 @@ import type {TestFunction} from "./_types";
  */
 function search<T>(x: Iterable<T>, ft: TestFunction<T>): number {
   var i = -1;
-  for(var v of x)
-    if(ft(v, ++i, x)) return i;
+  for (var v of x)
+    if (ft(v, ++i, x)) return i;
   return -1;
 }
 export default search;

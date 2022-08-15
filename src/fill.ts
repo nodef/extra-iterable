@@ -10,8 +10,8 @@ import END from "./END";
  */
 function* fill<T>(x: Iterable<T>, v: T, i: number=0, I: number=END): IterableIterator<T> {
   var j = -1;
-  for(var u of x) {
-    if(++j>=i && j<I) yield v;
+  for (var u of x) {
+    if (++j>=i && j<I) yield v;
     else yield u;
   }
 }

@@ -5,7 +5,7 @@
  */
 function last<T>(x: Iterable<T>, vd?: T): T {
   var v = vd;
-  for(var v of x);
+  for (var v of x);
   return v;
 }
 export default last;

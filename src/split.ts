@@ -8,10 +8,10 @@ import type {TestFunction} from "./_types";
  */
 function* split<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T[]> {
   var a: T[] = [], i = -1;
-  for(var v of x) {
-    if(!ft(v, ++i, x)) a.push(v);
-    else if(a.length) { yield a; a = []; }
+  for (var v of x) {
+    if (!ft(v, ++i, x)) a.push(v);
+    else if (a.length) { yield a; a = []; }
   }
-  if(a.length) yield a;
+  if (a.length) yield a;
 }
 export default split;

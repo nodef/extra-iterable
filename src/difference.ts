@@ -7,9 +7,9 @@ import type {CompareFunction, MapFunction} from "./_types";
 function* differenceMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var s = setFrom(y, fm);
   var fm = fm || IDENTITY, i = -1;
-  for(var u of x) {
+  for (var u of x) {
     var u1 = fm(u, ++i, x);
-    if(!s.has(u1)) yield u;
+    if (!s.has(u1)) yield u;
   }
 }
 
@@ -17,10 +17,10 @@ function* differenceDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunc
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var y1 = [...y].map(fm), i = -1;
-  x: for(var u of x) {
+  x: for (var u of x) {
     var u1 = fm(u, ++i, x);
-    for(var v1 of y1)
-      if(fc(u1, v1)===0) continue x;
+    for (var v1 of y1)
+      if (fc(u1, v1)===0) continue x;
     yield u;
   }
 }
@@ -33,7 +33,7 @@ function* differenceDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunc
  * @param fm map function (v, i, x)
  */
 function* difference<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
-  if(fc) yield* differenceDual(x, y, fc, fm);
+  if (fc) yield* differenceDual(x, y, fc, fm);
   else yield* differenceMap(x, y, fm);
 }
 export default difference;

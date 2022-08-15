@@ -14,16 +14,16 @@ function* zip<T, U=T[]>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U> | null=nu
   var fm = fm || IDENTITY;
   var ft = ft || some as EndFunction;
   var X = xs.length;
-  if(X===0) return;
+  if (X===0) return;
   var is = [], ds = [], vs = [];
-  for(var r=0; r<X; r++)
+  for (var r=0; r<X; r++)
     is[r] = xs[r][Symbol.iterator]();
-  for(var i=0;; i++) {
-    for(var r=0; r<X; r++) {
+  for (var i=0;; i++) {
+    for (var r=0; r<X; r++) {
       var {done, value} = is[r].next();
       ds[r] = done; vs[r] = done? vd : value;
     }
-    if(ft(ds)) break;
+    if (ft(ds)) break;
     yield fm(vs.slice(), i, null);
   }
 }

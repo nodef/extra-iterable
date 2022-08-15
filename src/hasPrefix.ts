@@ -14,12 +14,12 @@ function hasPrefix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var ix = x[Symbol.iterator](), i = -1;
-  for(var v of y) {
+  for (var v of y) {
     var {value, done} = ix.next();
-    if(done) return false;
+    if (done) return false;
     var u1 = fm(value, ++i, x);
     var v1 = fm(v, i, y);
-    if(fc(u1, v1)!==0) return false;
+    if (fc(u1, v1)!==0) return false;
   }
   return true;
 }

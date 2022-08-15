@@ -11,17 +11,17 @@ import type {CompareFunction, MapFunction} from "./_types";
 function* merge<T, U=T>(xs: Iterable<T>[], fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var X = xs.length;
   var is = [], os = [];
-  for(var n=0, i=0; n<X; n++) {
+  for (var n=0, i=0; n<X; n++) {
     is[i] = xs[i][Symbol.iterator]();
     os[i] = is[i].next();
-    if(!os[i].done) i++;
+    if (!os[i].done) i++;
   }
-  while(i>0) {
+  while (i>0) {
     var vs = os.map(o => o.value);
     var j = min(vs, fc, fm)[0];
     yield vs[j];
     os[j] = is[j].next();
-    if(!os[j].done) continue;
+    if (!os[j].done) continue;
     is.splice(j, 1);
     os.splice(j, 1);
     i--;

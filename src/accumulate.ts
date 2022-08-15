@@ -9,8 +9,8 @@ import type {ReduceFunction} from "./_types";
  */
 function* accumulate<T, U=T>(x: Iterable<T>, fr: ReduceFunction<T, T|U>, acc?: T|U): IterableIterator<T|U> {
   var init = arguments.length <= 2, i = -1;
-  for(var v of x) {
-    if(init) { acc = v; init = false; ++i; }
+  for (var v of x) {
+    if (init) { acc = v; init = false; ++i; }
     else acc = fr(acc, v, ++i, x);
     yield acc;
   }

@@ -8,8 +8,8 @@ import type {TestFunction} from "./_types";
  */
 function findRight<T>(x: Iterable<T>, ft: TestFunction<T>): T {
   var i = -1, a: T;
-  for(var v of x)
-    if(ft(v, ++i, x)) a = v;
+  for (var v of x)
+    if (ft(v, ++i, x)) a = v;
   return a;
 }
 export default findRight;

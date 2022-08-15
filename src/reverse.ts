@@ -7,7 +7,7 @@ import {from$} from "extra-array";
  */
 function* reverse<T>(x: Iterable<T>): IterableIterator<T> {
   var a = from$(x);
-  for(var i=a.length-1; i>=0; i--)
+  for (var i=a.length-1; i>=0; i--)
     yield a[i];
 }
 export default reverse;

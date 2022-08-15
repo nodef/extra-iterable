@@ -10,9 +10,9 @@ import END from "./END";
  */
 function* splice<T>(x: Iterable<T>, i: number=0, n: number=END-i, ...vs: T[]): IterableIterator<T> {
   var j = -1;
-  for(var u of x) {
-    if(++j<i || j>=i+n) yield u;
-    else if(j===i) yield* vs;
+  for (var u of x) {
+    if (++j<i || j>=i+n) yield u;
+    else if (j===i) yield* vs;
   }
 }
 export default splice;

@@ -8,7 +8,7 @@ import type {TestFunction} from "./_types";
  */
 function* filter<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T> {
   var i = -1;
-  for(var v of x)
-    if(ft(v, ++i, x)) yield v;
+  for (var v of x)
+    if (ft(v, ++i, x)) yield v;
 }
 export default filter;
