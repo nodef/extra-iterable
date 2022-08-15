@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "An iterable is a sequence of values.",
   "main": "index.js",
   "module": "index.mjs",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
-    "@types/jest": "^28.1.6",
+    "@types/jest": "^28.1.7",
     "extra-array": "^2.10.19",
     "extra-build": "^2.2.27",
     "extra-function": "^1.1.8",
