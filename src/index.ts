@@ -133,7 +133,7 @@ export function isIterator(v: any): v is Iterator<any> {
  * @param x an iterable
  */
 export function isList<T>(x: Iterable<T>): boolean {
-  return typeof x!=="string";
+  return is(x) && typeof x!=="string";
 }
 
 
@@ -412,9 +412,9 @@ export function index<T>(x: Iterable<T>, i: number=0): number {
  */
 export function indexRange<T>(x: Iterable<T>, i: number=0, I: number=END): [number, number] {
   var X = length(x);
-  var i = i>=0? Math.min(i, X-1) : Math.max(X+i, 0);
-  var I = I>=0? Math.min(I, X-1) : Math.max(X+I, 0);
-  return [Math.min(i, I), Math.max(i, I)];
+  var i = i>=0? Math.min(i, X) : Math.max(X+i, 0);
+  var I = I>=0? Math.min(I, X) : Math.max(X+I, 0);
+  return [i, Math.max(i, I)];
 }
 
 
@@ -2028,7 +2028,7 @@ export function* merge<T, U=T>(xs: Iterable<T>[], fc: CompareFunction<T|U> | nul
   }
   while (i>0) {
     var vs = os.map(o => o.value);
-    var j  = min(vs, fc, fm)[0];
+    var j  = minEntry(vs, fc, fm)[0];
     yield vs[j];
     os[j] = is[j].next();
     if (!os[j].done) continue;
@@ -2066,7 +2066,7 @@ export function join<T>(x: Iterable<T>, sep: string=","): string {
  * @param fm map function (v, i, x)
  * @returns TODO
  */
-export function isUnique<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): boolean {
+export function isUnique<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   if (fc) return isUniqueDual(x, fc, fm);
   else return isUniqueMap(x, fm);
 }
@@ -2101,7 +2101,7 @@ function isUniqueDual<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U>=null, fm:
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
  */
-export function isDisjoint<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): boolean {
+export function isDisjoint<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   if (fc) return isDisjointDual(x, y, fc, fm);
   return isDisjointMap(x, y, fm);
 }

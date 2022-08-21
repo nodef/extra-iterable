@@ -33,6 +33,9 @@ import {
   min,
   max,
   range,
+  minEntry,
+  maxEntry,
+  rangeEntries,
   slice,
   head,
   tail,
@@ -175,8 +178,6 @@ test("isList", () => {
   var a = isList([1, 2]);
   expect(a).toBe(true);
   var a = isList("ab");
-  expect(a).toBe(false);
-  var a = isList(1);
   expect(a).toBe(false);
 });
 
@@ -567,11 +568,11 @@ test("countAs", () => {
 test("min", () => {
   var x = [1, 2, -3, -4];
   var a = min(x);
-  expect(a).toStrictEqual([3, -4]);
+  expect(a).toBe(-4);
   var a = min(x, (a, b) => Math.abs(a) - Math.abs(b));
-  expect(a).toStrictEqual([0, 1]);
+  expect(a).toBe(1);
   var a = min(x, null, v => Math.abs(v));
-  expect(a).toStrictEqual([0, 1]);
+  expect(a).toBe(1);
 });
 
 
@@ -580,11 +581,11 @@ test("min", () => {
 test("max", () => {
   var x = [1, 2, -3, -4];
   var a = max(x);
-  expect(a).toStrictEqual([1, 2]);
+  expect(a).toBe(2);
   var a = max(x, (a, b) => Math.abs(a) - Math.abs(b));
-  expect(a).toStrictEqual([3, -4]);
+  expect(a).toBe(-4);
   var a = max(x, null, v => Math.abs(v));
-  expect(a).toStrictEqual([3, -4]);
+  expect(a).toBe(-4);
 });
 
 
@@ -593,10 +594,49 @@ test("max", () => {
 test("range", () => {
   var x = [1, 2, -3, -4];
   var a = range(x);
-  expect(a).toStrictEqual([[3, -4], [1, 2]]);
+  expect(a).toStrictEqual([-4, 2]);
   var a = range(x, (a, b) => Math.abs(a) - Math.abs(b));
-  expect(a).toStrictEqual([[0, 1], [3, -4]]);
+  expect(a).toStrictEqual([1, -4]);
   var a = range(x, null, v => Math.abs(v));
+  expect(a).toStrictEqual([1, -4]);
+});
+
+
+
+
+test("minEntry", () => {
+  var x = [1, 2, -3, -4];
+  var a = minEntry(x);
+  expect(a).toStrictEqual([3, -4]);
+  var a = minEntry(x, (a, b) => Math.abs(a) - Math.abs(b));
+  expect(a).toStrictEqual([0, 1]);
+  var a = minEntry(x, null, v => Math.abs(v));
+  expect(a).toStrictEqual([0, 1]);
+});
+
+
+
+
+test("maxEntry", () => {
+  var x = [1, 2, -3, -4];
+  var a = maxEntry(x);
+  expect(a).toStrictEqual([1, 2]);
+  var a = maxEntry(x, (a, b) => Math.abs(a) - Math.abs(b));
+  expect(a).toStrictEqual([3, -4]);
+  var a = maxEntry(x, null, v => Math.abs(v));
+  expect(a).toStrictEqual([3, -4]);
+});
+
+
+
+
+test("rangeEntries", () => {
+  var x = [1, 2, -3, -4];
+  var a = rangeEntries(x);
+  expect(a).toStrictEqual([[3, -4], [1, 2]]);
+  var a = rangeEntries(x, (a, b) => Math.abs(a) - Math.abs(b));
+  expect(a).toStrictEqual([[0, 1], [3, -4]]);
+  var a = rangeEntries(x, null, v => Math.abs(v));
   expect(a).toStrictEqual([[0, 1], [3, -4]]);
 });
 
