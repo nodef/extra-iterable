@@ -7,13 +7,13 @@ import {
   values,
   entries,
   from,
-  fromCall,
-  fromApply,
+  fromInvocation,
+  fromApplication,
   fromRange,
-  callable,
+  toInvokable,
   isOnce,
   isMany,
-  many,
+  toMany,
   isEmpty,
   length,
   size,
@@ -247,12 +247,12 @@ test("from", () => {
 
 
 
-test("fromCall", () => {
+test("fromInvocation", () => {
   var id = 0;
   function getId() {
     return ++id;
   }
-  var x = fromCall(getId);
+  var x = fromInvocation(getId);
   var a = [...take(x, 4)];
   expect(a).toStrictEqual([1, 2, 3, 4]);
 });
@@ -260,10 +260,10 @@ test("fromCall", () => {
 
 
 
-test("fromApply", () => {
-  var a = [...fromApply(v => v+2, 2, 4)];
+test("fromApplication", () => {
+  var a = [...take(fromApplication(v => v+2, 2), 4)];
   expect(a).toStrictEqual([2, 4, 6, 8]);
-  var a = [...fromApply(v => v*2, 2, 4)];
+  var a = [...take(fromApplication(v => v*2, 2), 4)];
   expect(a).toStrictEqual([2, 4, 8, 16]);
 });
 
@@ -283,9 +283,9 @@ test("fromRange", () => {
 // BEHAVIOR
 // --------
 
-test("callable", () => {
+test("toInvokable", () => {
   var x = [1, 2, 3, 4], s = [0];
-  var f = callable(x);
+  var f = toInvokable(x);
   for (var i=0; i<6; i++)
     s.push(f());
   expect(s).toStrictEqual([0, 1, 2, 3, 4, undefined, undefined]);
@@ -316,7 +316,7 @@ test("isMany", () => {
 
 
 
-test("many", () => {
+test("toMany", () => {
   var w = [1, 2, 3].values(), s = [0];
   var a = [...w, ...w];
   // ("w" cant be iterated multiple times)
@@ -328,7 +328,7 @@ test("many", () => {
     }
   }
   var x = from1ToN(3);
-  var y = many(x);
+  var y = toMany(x);
   expect(s).toStrictEqual([0]);
   var a = [...y];
   expect(a).toStrictEqual([1, 2, 3]);
@@ -338,7 +338,7 @@ test("many", () => {
   expect(s).toStrictEqual([0, 1, 2, 3]);
   var s = [0];
   var x = from1ToN(3);
-  var y = many(x, true);
+  var y = toMany(x, true);
   expect(s).toStrictEqual([0, 1, 2, 3]);
   var a = [...y];
   expect(a).toStrictEqual([1, 2, 3]);

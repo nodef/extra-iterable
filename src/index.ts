@@ -2,15 +2,9 @@ import {
   IDENTITY,
   COMPARE,
 } from "extra-function";
-import {
-  mod
-} from "extra-math";
-import {
-  from$ as arrayFrom$,
-} from "extra-array";
-import {
-  from as setFrom,
-} from "extra-set";
+import {mod} from "extra-math";
+import {from$ as arrayFrom$} from "extra-array";
+import {from  as setFrom}    from "extra-set";
 
 
 
@@ -20,6 +14,8 @@ import {
 
 /** End of iterable. */
 export const END = Number.MAX_SAFE_INTEGER;
+/** Empty iterable. */
+const EMPTY = [].values();
 
 
 
@@ -129,11 +125,12 @@ export function isIterator(v: any): v is Iterator<any> {
 
 
 /**
- * Check if iterable is a list (not string).
- * @param x an iterable
+ * Check if value is a list (iterable & !string).
+ * @param v a value
+ * @returns v is list?
  */
-export function isList<T>(x: Iterable<T>): boolean {
-  return is(x) && typeof x!=="string";
+export function isList<T>(v: Iterable<T>): boolean {
+  return is(v) && typeof v!=="string";
 }
 
 
@@ -150,7 +147,7 @@ export function iterator<T>(x: Iterable<T>): Iterator<T> {
 /**
  * List all indices.
  * @param x an iterable
- * @returns [0, 1, ..., |x|-1]
+ * @returns 0, 1, ..., |x|-1
  */
 export function* keys<T>(x: Iterable<T>): IterableIterator<number> {
   var i = -1;
@@ -162,17 +159,18 @@ export function* keys<T>(x: Iterable<T>): IterableIterator<number> {
 /**
  * List all values.
  * @param x an iterable
- * @returns [v₀, v₁, ...] | vᵢ = x[i]
+ * @returns v₀, v₁, ... | vᵢ = x[i]
  */
 export function* values<T>(x: Iterable<T>): IterableIterator<T> {
   yield* x;
 }
+export {values as toOnce};
 
 
 /**
  * List all index-value pairs.
  * @param x an iterable
- * @returns [[0, v₀], [1, v₁], ...] | vᵢ = x[i]
+ * @returns [0, v₀], [1, v₁], ... | vᵢ = x[i]
  */
 export function* entries<T>(x: Iterable<T>): IterableIterator<[number, T]> {
   var i = -1;
@@ -186,64 +184,65 @@ export function* entries<T>(x: Iterable<T>): IterableIterator<[number, T]> {
 // GENERATE
 // --------
 
+/**
+ * Convert an iterable-like to iterable.
+ * @param x an iterator/iterable
+ * @returns x as iterable
+ */
+export function from<T>(x: Iterator<T> | Iterable<T>): Iterable<T> {
+  if (is(x)) return x;
+  return fromIterator(x);
+}
+
+
+/**
+ * Convert an iterator to iterable.
+ * @param x an iterator/iterable
+ * @returns x as iterable
+ */
+export function fromIterator<T>(x: Iterator<T>): Iterable<T> {
+  return {[Symbol.iterator]: () => x};
+}
+
 
 /**
  * Generate iterable from given number range.
  * @param v start number [0]
  * @param V stop number, excluding [END]
  * @param dv step size [1]
- * @returns [v, v+dv, v+2dv, ...]
+ * @returns v, v+dv, v+2dv, ...
  */
-export function fromRange(v: number=0, V: number=END, dv: number=1): IterableIterator<number> {
-  return dv<0? fromRangeDec(v, v, dv) : fromRangeInc(v, V, dv);
-}
-
-function* fromRangeInc(v: number, V: number, dv: number): IterableIterator<number> {
-  for (; v<V; v+=dv)
-    yield v;
-}
-
-function* fromRangeDec(v: number, V: number, dv: number): IterableIterator<number> {
-  for (; v>V; v+=dv)
+export function* fromRange(v: number=0, V: number=END, dv: number=1): IterableIterator<number> {
+  for (var n=0, N=(V-v)/dv; n<N; ++n, v+=dv)
     yield v;
 }
 
 
 /**
- * Converts iterator to iterable.
- * @param x an iterator/iterable
- * @returns x as iterable
+ * Generate iterable from repeated function invocation.
+ * @param fn function (impure)
+ * @param args arguments
+ * @returns fn(...args), fn(...args), ...
  */
-export function from<T>(x: Iterator<T> | Iterable<T>): Iterable<T> {
-  if (typeof x[Symbol.iterator]==="function") return x as Iterable<T>;
-  return {[Symbol.iterator]: () => x as Iterator<T>};
-}
-
-
-/**
- * Generate iterable from function call.
- * @param fc called function
- * @param as arguments
- * @returns TODO
- */
-export function* fromCall<T>(fc: Function, ...as: any[]): IterableIterator<T> {
+export function* fromInvocation<T>(fn: Function, ...args: any[]): IterableIterator<T> {
   for (;;)
-    yield fc(...as);
+    yield fn(...args);
 }
+export {fromInvocation as fromCall};
 
 
 /**
- * Generate iterable from function application.
+ * Generate iterable from repeated function application.
  * @param fm map function (v, i)
  * @param v start value
- * @param n number of values (-1 => Inf)
- * @returns TODO
+ * @returns v, fm(v), fm(fm(v)), ...
  */
-export function* fromApply<T>(fm: MapFunction<T, T>=null, v: T, n: number=-1): IterableIterator<T> {
-  if (n!==0) yield v;
-  for (var i=1; i!==n; ++i)
-    yield (v = fm(v, i, null));
+export function* fromApplication<T>(fm: MapFunction<T, T>, v: T): IterableIterator<T> {
+  yield v;
+  for (var i=1;; ++i)
+    yield v = fm(v, i, null);
 }
+export {fromApplication as fromApply};
 
 
 
@@ -252,17 +251,7 @@ export function* fromApply<T>(fm: MapFunction<T, T>=null, v: T, n: number=-1): I
 // --------
 
 /**
- * Give a function that iterates over values.
- * @param x an iterable
- */
-export function callable<T>(x: Iterable<T>): () => T {
-  var ix = x[Symbol.iterator]();
-  return () => ix.next().value;
-}
-
-
-/**
- * Check if iterable can iterated only once.
+ * Check if an iterable can iterated only once.
  * @param x an iterable
  * @returns x\[\<iterator\>\] = x?
  */
@@ -272,7 +261,7 @@ export function isOnce<T>(x: Iterable<T>): x is IterableIterator<T> {
 
 
 /**
- * Check if iterable can be iterated many times.
+ * Check if an iterable can be iterated many times.
  * @param x an iterable
  * @returns x\[\<iterator\>\] ≠ x?
  */
@@ -282,17 +271,18 @@ export function isMany<T>(x: Iterable<T>): x is Iterable<T> {
 
 
 /**
- * Convert a once iterable to many.
+ * Convert a once-like iterable to many.
  * @param x an iterable
- * @param now consume immediately? (false)
- * @returns x' = x | x' can be iterated multiple times
+ * @param now consume immediately? [false]
+ * @returns x' | x' = x; x' can be iterated multiple times
  */
-export function many<T>(x: Iterable<T>, now: boolean=false): Iterable<T> {
+export function toMany<T>(x: Iterable<T>, now: boolean=false): Iterable<T> {
   if (!isOnce(x)) return x;
-  return now? Array.from(x) : manyLate(x[Symbol.iterator](), []);
+  return now? Array.from(x) : toManyLate(x[Symbol.iterator](), []);
 }
+export {toMany as many};
 
-function manyLate<T>(ix: Iterator<T>, a: T[]): Iterable<T> {
+function toManyLate<T>(ix: Iterator<T>, a: T[]): Iterable<T> {
   return {
     [Symbol.iterator]: () => {
       var i = -1;
@@ -309,15 +299,28 @@ function manyLate<T>(ix: Iterator<T>, a: T[]): Iterable<T> {
 }
 
 
+/**
+ * Generate a function that iterates over values upon invocation.
+ * @param x an iterable
+ * @returns fn | fn() → x[0], fn() → x[1], ...
+ */
+export function toInvokable<T>(x: Iterable<T>): () => T {
+  var ix = x[Symbol.iterator]();
+  return () => ix.next().value;
+}
+export {toInvokable as toCallable};
+export {toInvokable as callable};
+
+
 
 
 // LENGTH
 // ------
 
 /**
- * Check if iterable is empty.
+ * Check if an iterable is empty.
  * @param x an iterable
- * @returns |x|=0?
+ * @returns |x| = 0?
  */
 export function isEmpty<T>(x: Iterable<T>): boolean {
   for (var _ of x)
@@ -327,10 +330,10 @@ export function isEmpty<T>(x: Iterable<T>): boolean {
 
 
 /**
- * Find the length of iterable.
+ * Find the length of an iterable.
  * @param x an iterable
  * @param i start index [0]
- * @param I end index [|x|]
+ * @param I end index [END]
  * @returns |x[i..I]|
  */
 export function length<T>(x: Iterable<T>, i: number=0, I: number=END): number {
@@ -392,22 +395,22 @@ export function isEqual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunct
 // -------
 
 /**
- * Get zero-based index.
+ * Get zero-based index for element in iterable.
  * @param x an iterable
- * @param i index (-ve: from right) [0]
+ * @param i index (-ve: from right)
  * @returns i' | x[i'] = x[i]; i'>=0
  */
-export function index<T>(x: Iterable<T>, i: number=0): number {
+export function index<T>(x: Iterable<T>, i: number): number {
   var X = length(x);
   return i>=0? Math.min(i, X-1) : Math.max(X+i, 0);
 }
 
 
 /**
- * Gets index range of part of iterable.
+ * Gets index range for part of iterable.
  * @param x an iterable
- * @param i start index (-ve: from right) (0)
- * @param I end index (-ve: from right) (X)
+ * @param i start index (-ve: from right) [0]
+ * @param I end index (-ve: from right) [END]
  * @returns [start_index, end_index]
  */
 export function indexRange<T>(x: Iterable<T>, i: number=0, I: number=END): [number, number] {
@@ -435,20 +438,18 @@ export function get<T>(x: Iterable<T>, i: number): T {
  * Get values at indices.
  * @param x an iterable
  * @param is indices (sorted)
- * @returns [x[i], x[j], ...] | [i, j, ...] = is (TODO)
+ * @returns x[i₀], x[i₁], ... | [i₀, i₁, ...] = is
  */
-export function* getAll<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T> {
-  var ii = is[Symbol.iterator]() as Iterator<number, number>;
-  var value = -1, j = -1;
+export function* getAll<T>(x: Iterable<T>, is: number[]): IterableIterator<T> {
+  var i  = 0, j = -1;
+  var IS = is.length;
   for (var v of x) {
-    while (value<=j) {
-      var {value, done} = ii.next();
-      if (done) return;
-      if (value<=j) yield;
-    }
-    if (value===++j) yield v;
+    if (is[i]!==++j) continue;
+    do { yield v; }  while (++i<IS && is[i]===is[i-1]);
+    if (i>=IS) break;
   }
-  while (!ii.next().done) yield;
+  for (; i<IS; ++i)
+    yield;
 }
 
 
@@ -456,7 +457,7 @@ export function* getAll<T>(x: Iterable<T>, is: Iterable<number>): IterableIterat
  * Get value at path in a nested iterable.
  * @param x a nested iterable
  * @param p path
- * @returns TODO
+ * @returns x[i₀][i₁][...] | [i₀, i₁, ...] = p
  */
 export function getPath(x: Iterable<any>, p: number[]): any {
   for (var i of p)
@@ -469,7 +470,7 @@ export function getPath(x: Iterable<any>, p: number[]): any {
  * Check if nested iterable has a path.
  * @param x a nested iterable
  * @param p path
- * @returns TODO
+ * @returns x[i₀][i₁][...] exists? | [i₀, i₁, ...] = p
  */
 export function hasPath(x: Iterable<any>, p: number[]): boolean {
   return getPath(x, p)!==undefined;
@@ -481,14 +482,14 @@ export function hasPath(x: Iterable<any>, p: number[]): boolean {
  * @param x an iterable
  * @param i index
  * @param v value
- * @returns TODO
+ * @returns x' | x' = x; x'[i] = v
  */
 export function* set<T>(x: Iterable<T>, i: number, v: T): IterableIterator<T> {
   var j = -1;
   for (var u of x)
-    yield (++j===i? v:u);
-  if (j>=i) return;
-  for (; ++j<i;) yield undefined;
+    yield ++j===i? v : u;
+  if  (j>=i) return;
+  for (; ++j<i;) yield;
   yield v;
 }
 
@@ -498,19 +499,19 @@ export function* set<T>(x: Iterable<T>, i: number, v: T): IterableIterator<T> {
  * @param x an iterable
  * @param i an index
  * @param j another index
- * @returns TODO
+ * @returns x' | x' = x; x'[i] = x[j]; x'[j] = x[i]
  */
 export function* swap<T>(x: Iterable<T>, i: number, j: number): IterableIterator<T> {
-  if (i===j) yield* x;
+  if (i===j) { yield* x; return; }
   var k = Math.min(i, j);
   var l = Math.max(i, j);
-  var m: T[] = [];
-  var vk: T, i = -1;
+  var mid: T[]  = [];
+  var vk:  T, i = -1;
   for (var v of x) {
     if (++i<k || i>l) yield v;
     else if (i===k) vk = v;
-    else if (i<l) m.push(v)
-    else { yield v; yield* m; yield vk; }
+    else if (i<l) mid.push(v)
+    else { yield v; yield* mid; yield vk; mid = null; }
   }
 }
 
@@ -519,7 +520,7 @@ export function* swap<T>(x: Iterable<T>, i: number, j: number): IterableIterator
  * Remove value at index.
  * @param x an iterable
  * @param i index
- * @returns TODO
+ * @returns x[0..i] ⧺ x[i+1..]
  */
 export function* remove<T>(x: Iterable<T>, i: number): IterableIterator<T> {
   yield* splice(x, i, 1);
@@ -549,7 +550,7 @@ export function count<T>(x: Iterable<T>, ft: TestFunction<T>): number {
  * Count occurrences of values.
  * @param x an array
  * @param fm map function (v, i, x)
- * @returns Map \{value => count\}
+ * @returns Map \{value ⇒ count\}
  */
 export function countAs<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U> | null=null): Map<T|U, number> {
   var fm = fm || IDENTITY;
@@ -567,7 +568,7 @@ export function countAs<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U> | null=n
  * @param x an iterable
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns min(x)
+ * @returns v | v ≤ vᵢ; vᵢ ∈ x
  */
 export function min<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): T {
   return rangeEntries(x, fc, fm)[0][1];
@@ -579,7 +580,7 @@ export function min<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null
  * @param x an iterable
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns max(x)
+ * @returns v | v ≥ vᵢ; vᵢ ∈ x
  */
 export function max<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): T {
   return rangeEntries(x, fc, fm)[1][1];
@@ -594,8 +595,8 @@ export function max<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null
  * @returns [min_value, max_value]
  */
 export function range<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): [T, T] {
-  var [[, a], [, b]] = rangeEntries(x, fc, fm);
-  return [a, b];
+  var [a, b] = rangeEntries(x, fc, fm);
+  return [a[1], b[1]];
 }
 
 
@@ -653,26 +654,26 @@ export function rangeEntries<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | 
 /**
  * Get part of an iterable.
  * @param x an iterable
- * @param i start index (-ve: from right) (0)
- * @param I end index (-ve: from right) (X)
- * @returns TODO
+ * @param i start index (-ve: from right) [0]
+ * @param I end index (-ve: from right) [END]
+ * @returns x[i..I]
  */
-export function* slice<T>(x: Iterable<T>, i: number=0, I: number=END): IterableIterator<T> {
-  if (i>=0 && I>=0) yield* slicePos(x, i, I);
-  else if (i>=0 && I<0) yield* slicePosNeg(x, i, I);
-  else yield* sliceNeg(x, i, I);
+export function slice<T>(x: Iterable<T>, i: number=0, I: number=END): IterableIterator<T> {
+  if (i>=0 && I>=0)     return slicePos(x, i, I);
+  else if (i>=0 && I<0) return slicePosNeg(x, i, I);
+  else return sliceNeg(x, i, I);
 }
 
 function* slicePos<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
   var k = -1;
   for (var v of x) {
     if (++k>=I) break;
-    if (k>=i) yield v;
+    if (k>=i)   yield v;
   }
 }
 
 function* slicePosNeg<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
-  var j = 0, k = -1;
+  var j = 0,  k = -1;
   var a = [], A = -I;
   for (var v of x) {
     if (++k<i) continue;
@@ -682,14 +683,14 @@ function* slicePosNeg<T>(x: Iterable<T>, i: number, I: number): IterableIterator
 }
 
 function* sliceNeg<T>(x: Iterable<T>, i: number, I: number): IterableIterator<T> {
-  var j = 0, n = 0;
+  var j = 0,  X = 0;
   var a = [], A = -i;
   for (var v of x) {
     a[j] = v; j = (j+1) % A;
-    n++;
+    ++X;
   }
-  if (n<A) return;
-  var I = I<0? I : Math.min(I-n, 0);
+  var i = Math.max(X+i, 0);
+  var I = I<0? Math.max(X+I, 0) : Math.min(I, X);
   var n = Math.max(I-i, 0);
   var J = Math.max(j+n-A, 0);
   yield* a.slice(j, j+n);
@@ -711,34 +712,6 @@ export function head<T>(x: Iterable<T>, vd?: T): T {
 
 
 /**
- * Get values except first.
- * @param x an iterable
- * @returns x[1..|x|-1]
- */
-export function* tail<T>(x: Iterable<T>): IterableIterator<T> {
-  var i = -1;
-  for (var v of x)
-    if (++i>0) yield v;
-}
-export {tail as shift};
-
-
-/**
- * Get values except last.
- * @param x an iterable
- * @returns x[0..|x|-2]
- */
-export function* init<T>(x: Iterable<T>): IterableIterator<T> {
-  var u: T, i = -1;
-  for (var v of x) {
-    if (++i>0) yield u;
-    u = v;
-  }
-}
-export {init as pop};
-
-
-/**
  * Get last value.
  * @param x an iterable
  * @param vd default value
@@ -752,59 +725,86 @@ export function last<T>(x: Iterable<T>, vd?: T): T {
 
 
 /**
+ * Get values except first.
+ * @param x an iterable
+ * @returns x[1..|x|]
+ */
+export function* tail<T>(x: Iterable<T>): IterableIterator<T> {
+  var i = -1;
+  for (var v of x)
+    if (++i>0) yield v;
+}
+export {tail as shift};
+
+
+/**
+ * Get values except last.
+ * @param x an iterable
+ * @returns x[0..|x|-1]
+ */
+export function* init<T>(x: Iterable<T>): IterableIterator<T> {
+  var u: T, i = -1;
+  for (var v of x) {
+    if (++i>0) yield u;
+    u = v;
+  }
+}
+export {init as pop};
+
+
+/**
  * Get values from left.
  * @param x an iterable
- * @param n number of values (1)
- * @returns TODO
+ * @param n number of values
+ * @returns x[0..n]
  */
-export function* left<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
-  yield* slice(x, 0, n);
+export function left<T>(x: Iterable<T>, n: number): IterableIterator<T> {
+  return slice(x, 0, n);
 }
 
 
 /**
  * Get values from right.
  * @param x an iterable
- * @param n number of values (1)
- * @returns TODO
+ * @param n number of values
+ * @returns x[-n..]
  */
-export function* right<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
-  if (n===0) return;
-  yield* slice(x, -n);
+export function right<T>(x: Iterable<T>, n: number): IterableIterator<T> {
+  return n!==0? slice(x, -n) : EMPTY;
 }
 
 
 /**
  * Get values from middle.
  * @param x an iterable
- * @param i start index (0)
- * @param n number of values (1)
- * @returns TODO
+ * @param i start index
+ * @param n number of values [1]
+ * @returns x[i..i+n]
  */
-export function* middle<T>(x: Iterable<T>, i: number=0, n: number=1): IterableIterator<T> {
-  yield* slice(x, i, i+n);
+export function middle<T>(x: Iterable<T>, i: number, n: number=1): IterableIterator<T> {
+  return slice(x, i, i+n);
 }
 
 
 /**
  * Keep first n values only.
  * @param x an iterable
- * @param n number of values (1)
- * @returns TODO
+ * @param n number of values [1]
+ * @returns x[0..n]
  */
-export function* take<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
-  yield* slice(x, 0, n);
+export function take<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
+  return slice(x, 0, n);
 }
 
 
 /**
  * Keep last n values only.
  * @param x an iterable
- * @param n number of values (1)
- * @returns TODO
+ * @param n number of values [1]
+ * @returns x[-n..]
  */
-export function* takeRight<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
-  if (n>0) yield* slice(x, -n);
+export function takeRight<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
+  return n>0? slice(x, -n) : EMPTY;
 }
 
 
@@ -827,7 +827,7 @@ export function* takeWhile<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIter
  * Keep values from right, while a test passes.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns x[T..|x|-1] | ft(x[i]) = true ∀ i ∈ [T, |x|-1] & ft(x[T-1]) = false
+ * @returns x[T..] | ft(x[i]) = true ∀ i ∈ [T, |x|-1] & ft(x[T-1]) = false
  */
 export function* takeWhileRight<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T> {
   var a = [], i = -1;
@@ -842,23 +842,22 @@ export function* takeWhileRight<T>(x: Iterable<T>, ft: TestFunction<T>): Iterabl
 /**
  * Discard first n values only.
  * @param x an iterable
- * @param n number of values (1)
- * @returns TODO
+ * @param n number of values [1]
+ * @returns x[n..]
  */
-export function* drop<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
-  yield* slice(x, n);
+export function drop<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
+  return slice(x, n);
 }
 
 
 /**
  * Discard last n values only.
  * @param x an iterable
- * @param n number of values (1)
- * @returns TODO
+ * @param n number of values [1]
+ * @returns x[0..-n]
  */
-export function* dropRight<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
-  if (n>0) yield* slice(x, 0, -n);
-  else yield* x;
+export function dropRight<T>(x: Iterable<T>, n: number=1): IterableIterator<T> {
+  return n>0? slice(x, 0, -n) : values(x);
 }
 
 
@@ -866,7 +865,7 @@ export function* dropRight<T>(x: Iterable<T>, n: number=1): IterableIterator<T> 
  * Discard values from left, while a test passes.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns x[T..|x|-1] | ft(x[i]) = true ∀ i ∈ [0, T-1] & ft(x[T]) = false
+ * @returns x[T..] | ft(x[i]) = true ∀ i ∈ [0, T-1] & ft(x[T]) = false
  */
 export function* dropWhile<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T> {
   var c = true, i = -1;
@@ -901,8 +900,8 @@ export function* dropWhileRight<T>(x: Iterable<T>, ft: TestFunction<T>): Iterabl
  * Check if iterable has a value.
  * @param x an iterable
  * @param v search value
- * @param i start index (0)
- * @returns TODO
+ * @param i start index [0]
+ * @returns v ∈ x[i..]?
  */
 export function includes<T>(x: Iterable<T>, v: T, i: number=0): boolean {
   return hasValue(slice(x, i), v);
@@ -913,12 +912,12 @@ export function includes<T>(x: Iterable<T>, v: T, i: number=0): boolean {
  * Find first index of a value.
  * @param x an iterable
  * @param v search value
- * @param i start index (0)
- * @returns TODO
+ * @param i start index [0]
+ * @returns index of v in x[i..] if found else -1
  */
 export function indexOf<T>(x: Iterable<T>, v: T, i: number=0): number {
   var a = searchValue(slice(x, i), v);
-  return a<0? a : a+i;
+  return a>=0? a+i : a;
 }
 
 
@@ -926,8 +925,8 @@ export function indexOf<T>(x: Iterable<T>, v: T, i: number=0): number {
  * Find last index of a value.
  * @param x an iterable
  * @param v search value
- * @param i start index (X-1)
- * @returns TODO
+ * @param i start index [END-1]
+ * @returns last index of v in x[0..i] if found else -1
  */
 export function lastIndexOf<T>(x: Iterable<T>, v: T, i: number=END-1): number {
   return searchValueRight(slice(x, 0, i+1), v);
@@ -938,7 +937,7 @@ export function lastIndexOf<T>(x: Iterable<T>, v: T, i: number=END-1): number {
  * Find first value passing a test.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns TODO
+ * @returns first v | ft(v) = true; v ∈ x
  */
 export function find<T>(x: Iterable<T>, ft: TestFunction<T>): T {
   var i = -1;
@@ -951,7 +950,7 @@ export function find<T>(x: Iterable<T>, ft: TestFunction<T>): T {
  * Find last value passing a test.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns TODO
+ * @returns last v | ft(v) = true; v ∈ x
  */
 export function findRight<T>(x: Iterable<T>, ft: TestFunction<T>): T {
   var i = -1, a: T;
@@ -962,21 +961,10 @@ export function findRight<T>(x: Iterable<T>, ft: TestFunction<T>): T {
 
 
 /**
- * Find all values passing a test.
- * @param x an iterable
- * @param ft test function (v, i, x)
- * @returns TODO
- */
-export function* findAll<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T> {
-  yield* filter(x, ft);
-}
-
-
-/**
  * Scan from left, while a test passes.
  * @param x an array
  * @param ft test function (v, i, x)
- * @returns index where test fails
+ * @returns first index where test fails
  */
 export function scanWhile<T>(x: Iterable<T>, ft: TestFunction<T>): number {
   var i = -1;
@@ -1004,7 +992,7 @@ export function scanWhileRight<T>(x: Iterable<T>, ft: TestFunction<T>): number {
  * Scan from left, until a test passes.
  * @param x an array
  * @param ft test function (v, i, x)
- * @returns index where test passes
+ * @returns first index where test passes
  */
 export function scanUntil<T>(x: Iterable<T>, ft: TestFunction<T>): number {
   var i = -1;
@@ -1032,7 +1020,7 @@ export function scanUntilRight<T>(x: Iterable<T>, ft: TestFunction<T>): number {
  * Find index of first value passing a test.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns index of value, -1 if not found
+ * @returns first index of value, -1 if not found
  */
 export function search<T>(x: Iterable<T>, ft: TestFunction<T>): number {
   var i = -1;
@@ -1046,7 +1034,7 @@ export function search<T>(x: Iterable<T>, ft: TestFunction<T>): number {
  * Find index of last value passing a test.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns index of value, -1 if not found
+ * @returns last index of value, -1 if not found
  */
 export function searchRight<T>(x: Iterable<T>, ft: TestFunction<T>): number {
   var i = -1, a = -1;
@@ -1075,7 +1063,7 @@ export function* searchAll<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIter
  * @param v search value
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns index of value, -1 if not found
+ * @returns first index of value, -1 if not found
  */
 export function searchValue<T, U=T>(x: Iterable<T>, v: T, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): number {
   var fc = fc || COMPARE;
@@ -1095,7 +1083,7 @@ export function searchValue<T, U=T>(x: Iterable<T>, v: T, fc: CompareFunction<T|
  * @param v search value
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns index of value, -1 if not found
+ * @returns last index of value, -1 if not found
  */
 export function searchValueRight<T, U=T>(x: Iterable<T>, v: T, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): number {
   var fc = fc || COMPARE;
@@ -1135,7 +1123,7 @@ export function* searchValueAll<T, U=T>(x: Iterable<T>, v: T, fc: CompareFunctio
  * @param y search infix
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns first i | x[i..i+|y|] = y else -1
  */
 export function searchInfix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): number {
   return head(searchInfixAll(x, y, fc, fm), -1);
@@ -1148,7 +1136,7 @@ export function searchInfix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareF
  * @param y search infix
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns first i | x[i..i+|y|] = y else -1
  */
 export function searchInfixRight<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): number {
   return last(searchInfixAll(x, y, fc, fm), -1);
@@ -1161,19 +1149,19 @@ export function searchInfixRight<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: Com
  * @param y search infix
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns i₀, i₁, ... | x[j..j+|y|] = y; j ∈ [i₀, i₁, ...]
  */
 export function* searchInfixAll<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<number> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
-  var y1 = arrayFrom$(y), Y = y1.length;
-  if (Y===0) yield 0;
-  var y1 = y1.map(fm, null) as T[];
-  var m = new Array(Y).fill(false);
-  var i = -1, J = 0;
+  var y1 = [...map(y, fm)];
+  var Y  = y1.length;
+  if (Y===0) { yield* fromRange(0, length(x)); return; }
+  var m  = new Array(Y).fill(false);
+  var i  = -1, J = 0;
   for (var u of x) {
     var u1 = fm(u, ++i, x);
-    for (var j=J; j>0; j--)
+    for (var j=J; j>0; --j)
       m[j] = m[j-1] && fc(u1, y1[j])===0;
     m[0] = fc(u1, y1[0])===0;
     J = Math.min(J+1, Y-1);
@@ -1193,18 +1181,21 @@ export function* searchInfixAll<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: Comp
 export function searchSubsequence<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): number {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
-  var iy = y[Symbol.iterator]();
-  var {value, done} = iy.next();
-  if (done) return 0;
-  var i = -1, j = -1, a = -1;
-  var v1 = fm(value, ++j, y);
+  var y1 = [...map(y, fm)];
+  var Y  = y1.length;
+  if (Y===0) return 0;
+  var si = [], sn = [], i = -1;
   for (var u of x) {
     var u1 = fm(u, ++i, x);
+    for (var s=0, S=si.length; s<S; ++s) {
+      var v1 = y1[sn[s]];
+      if (fc(u1, v1)!==0) continue;
+      if (++sn[s]===Y) return si[s];
+    }
+    var v1 = y1[0];
     if (fc(u1, v1)!==0) continue;
-    if (a<0) a = i;
-    var {value, done} = iy.next();
-    if (done) return a;
-    v1 = fm(value, ++j, y);
+    si.push(i);
+    sn.push(1);
   }
   return -1;
 }
@@ -1226,19 +1217,19 @@ export function hasValue<T, U=T>(x: Iterable<T>, v: T, fc: CompareFunction<T|U> 
 /**
  * Check if iterable starts with a prefix.
  * @param x an iterable
- * @param y prefix?
+ * @param y search prefix
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns x[0..|y|] = y?
  */
 export function hasPrefix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var ix = x[Symbol.iterator](), i = -1;
   for (var v of y) {
-    var {value, done} = ix.next();
-    if (done) return false;
-    var u1 = fm(value, ++i, x);
+    var a  = ix.next();
+    if (a.done) return false;
+    var u1 = fm(a.value, ++i, x);
     var v1 = fm(v, i, y);
     if (fc(u1, v1)!==0) return false;
   }
@@ -1249,24 +1240,24 @@ export function hasPrefix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFun
 /**
  * Check if iterable ends with a suffix.
  * @param x an iterable
- * @param y suffix?
+ * @param y seach suffix
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns x[|x|-|y|..] = y?
  */
 export function hasSuffix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var y1 = arrayFrom$(y), Y = y1.length;
-  var a = [], ai = 0, n = 0;
+  var a = [], k = 0, n = 0;
   if (Y===0) return true;
   for (var u of x) {
-    a[ai++ % Y] = u;
-    n++;
+    a[k++ % Y] = u;
+    ++n;
   }
   if (a.length<Y) return false;
-  for (var i=0, j=n-Y; i<Y; i++, j++) {
-    var u1 = fm(a[ai++ % Y], j, x);
+  for (var i=0, j=n-Y; i<Y; ++i, ++j) {
+    var u1 = fm(a[k++ % Y], j, x);
     var v1 = fm(y1[i], i, y);
     if (fc(u1, v1)!==0) return false;
   }
@@ -1277,10 +1268,10 @@ export function hasSuffix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFun
 /**
  * Check if iterable contains an infix.
  * @param x an iterable
- * @param y infix?
+ * @param y search infix
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns x[i..I] = y for some i, I?
  */
 export function hasInfix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   return searchInfix(x, y, fc, fm)>=0;
@@ -1290,10 +1281,10 @@ export function hasInfix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunc
 /**
  * Check if iterable has a subsequence.
  * @param x an iterable
- * @param y subsequence?
+ * @param y search subsequence
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns x[i₀] ⧺ x[i₁] ⧺ ... = y, for some i₀, i₁, ...? | i₀ < i₁ < ...
  */
 export function hasSubsequence<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   return searchSubsequence(x, y, fc, fm)>=0;
@@ -1321,7 +1312,7 @@ export function forEach<T>(x: Iterable<T>, fp: ProcessFunction<T>): void {
  * Check if any value satisfies a test.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns true if ft(vᵢ) for some vᵢ ∈ x
+ * @returns true if ft(vᵢ) = true for some vᵢ ∈ x
  */
 export function some<T>(x: Iterable<T>, ft: TestFunction<T> | null=null): boolean {
   if (ft) return someTest(x, ft);
@@ -1346,7 +1337,7 @@ function someTest<T>(x: Iterable<T>, ft: TestFunction<T>): boolean {
  * Check if all values satisfy a test.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns true if ft(vᵢ) ∀ vᵢ ∈ x
+ * @returns true if ft(vᵢ) = true for all vᵢ ∈ x
  */
 export function every<T>(x: Iterable<T>, ft: TestFunction<T> | null=null): boolean {
   if (ft) return everyTest(x, ft);
@@ -1371,7 +1362,7 @@ function everyTest<T>(x: Iterable<T>, ft: TestFunction<T>): boolean {
  * Transform values of an iterable.
  * @param x an iterable
  * @param fm map function (v, i, x)
- * @returns [w₀, w₁, ...] | wᵢ = fm(vᵢ, i, x)
+ * @returns fm(v₀), fm(v₁), ... | vᵢ ∈ x
  */
 export function* map<T, U>(x: Iterable<T>, fm: MapFunction<T, U>): IterableIterator<U> {
   var i = -1;
@@ -1385,12 +1376,12 @@ export function* map<T, U>(x: Iterable<T>, fm: MapFunction<T, U>): IterableItera
  * @param x an iterable
  * @param fr reduce function (acc, v, i, x)
  * @param acc initial value
- * @returns acc = fr(acc, vᵢ, i, x) after all values are processed
+ * @returns fr(fr(acc, v₀), v₁)... | fr(acc, v₀) = v₀ if acc not given
  */
 export function reduce<T, U>(x: Iterable<T>, fr: ReduceFunction<T, U>, acc?: U): U {
   var init = arguments.length <= 2, i = -1;
   for (var v of x) {
-    if (init) { init = false; acc = v as any as U; ++i; }
+    if (init) { init = false; acc = v as any; ++i; }
     else acc = fr(acc, v, ++i, x);
   }
   return acc;
@@ -1401,34 +1392,34 @@ export function reduce<T, U>(x: Iterable<T>, fr: ReduceFunction<T, U>, acc?: U):
  * Keep the values which pass a test.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns [v₀, v₁, ...] | ft(vᵢ) = true ∀ vᵢ; vᵢ ∈ x
+ * @returns v₀, v₁, ... | ft(vᵢ) = true; vᵢ ∈ x
  */
 export function* filter<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T> {
   var i = -1;
   for (var v of x)
     if (ft(v, ++i, x)) yield v;
 }
+export {filter as findAll};
 
 
 /**
  * Keep the values at given indices.
  * @param x an iterable
- * @param is indices
- * @returns [v₀, v₁, ...] | i ∈ is; vᵢ = x[i]
+ * @param is indices (sorted)
+ * @returns v₀, v₁, ... | vᵢ = x[i]; i ∈ is
  */
 export function* filterAt<T>(x: Iterable<T>, is: number[]): IterableIterator<T> {
   var i = -1;
   for (var v of x)
     if (is.includes(++i)) yield v;
 }
-// TODO: require sorted array?
 
 
 /**
  * Discard the values which pass a test.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns [v₀, v₁, ...] | ft(vᵢ) = false ∀ vᵢ; vᵢ ∈ x
+ * @returns v₀, v₁, ... | ft(vᵢ) = false; vᵢ ∈ x
  */
 export function* reject<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T> {
   var i = -1;
@@ -1440,15 +1431,14 @@ export function* reject<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterato
 /**
  * Discard the values at given indices.
  * @param x an iterable
- * @param is indices
- * @returns [v₀, v₁, ...] | i ∉ is; vᵢ = x[i]
+ * @param is indices (sorted)
+ * @returns v₀, v₁, ... | vᵢ = x[i]; i ∉ is
  */
 export function* rejectAt<T>(x: Iterable<T>, is: number[]): IterableIterator<T> {
   var i = -1;
   for (var v of x)
     if (!is.includes(++i)) yield v;
 }
-// TODO: require sorted array?
 
 
 /**
@@ -1456,7 +1446,7 @@ export function* rejectAt<T>(x: Iterable<T>, is: number[]): IterableIterator<T> 
  * @param x an iterable
  * @param fr reduce function (acc, v, i, x)
  * @param acc initial value
- * @returns [...acc = fr(acc, vᵢ, i, x)]
+ * @returns fr(acc, v₀), fr(fr(acc, v₀), v₁), ... | fr(acc, v₀) = v₀ if acc not given
  */
 export function* accumulate<T, U=T>(x: Iterable<T>, fr: ReduceFunction<T, T|U>, acc?: T|U): IterableIterator<T|U> {
   var init = arguments.length <= 2, i = -1;
@@ -1473,7 +1463,7 @@ export function* accumulate<T, U=T>(x: Iterable<T>, fr: ReduceFunction<T, T|U>, 
  * @param x a nested iterable
  * @param n maximum depth (-1 ⇒ all)
  * @param fm map function (v, i, x)
- * @param ft test function for flatten (v, i, x)
+ * @param ft flatten test (v, i, x) [isList]
  * @returns flat iterable
  */
 export function* flat(x: Iterable<any>, n: number=-1, fm: MapFunction<any, any> | null=null, ft: TestFunction<any> | null=null): IterableIterator<any> {
@@ -1491,7 +1481,7 @@ export function* flat(x: Iterable<any>, n: number=-1, fm: MapFunction<any, any> 
  * Flatten nested iterable, based on map function.
  * @param x a nested iterable
  * @param fm map function (v, i, x)
- * @param ft test function (v, i, x)
+ * @param ft flatten test (v, i, x) [isList]
  * @returns flat iterable
  */
 export function* flatMap(x: Iterable<any>, fm: MapFunction<any, any> | null=null, ft: TestFunction<any> | null=null): IterableIterator<any> {
@@ -1511,19 +1501,19 @@ export function* flatMap(x: Iterable<any>, fm: MapFunction<any, any> | null=null
  * @param fm map function (vs, i, xs)
  * @param fe end function (dones) [some]
  * @param vd default value
- * @returns [fm([x₀[0], x₁[0], ...]), fm([x₀[1], x₁[1], ...]), ...]
+ * @returns fm([x₀[0], x₁[0], ...]), fm([x₀[1], x₁[1], ...]), ...
  */
 export function* zip<T, U=T[]>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U> | null=null, fe: EndFunction | null=null, vd?: T): IterableIterator<T[]|U> {
   var fm = fm || IDENTITY;
   var fe = fe || some as EndFunction;
   var X = xs.length;
   if (X===0) return;
-  var is = [], ds = [], vs = [];
+  var ix = [], ds = [], vs = [];
   for (var r=0; r<X; r++)
-    is[r] = xs[r][Symbol.iterator]();
+    ix[r] = xs[r][Symbol.iterator]();
   for (var i=0;; ++i) {
     for (var r=0; r<X; ++r) {
-      var {done, value} = is[r].next();
+      var {done, value} = ix[r].next();
       ds[r] = done;
       vs[r] = done? vd : value;
     }
@@ -1531,7 +1521,6 @@ export function* zip<T, U=T[]>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U> | 
     yield fm(vs.slice(), i, null);
   }
 }
-// TODO: check this
 
 
 
@@ -1545,7 +1534,7 @@ export function* zip<T, U=T[]>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U> | 
  * @param v value
  * @param i start index [0]
  * @param I end index [END]
- * @returns x[i..I] = v
+ * @returns x' | x' = x; x'[i..I] = v
  */
 export function* fill<T>(x: Iterable<T>, v: T, i: number=0, I: number=END): IterableIterator<T> {
   var j = -1;
@@ -1560,7 +1549,7 @@ export function* fill<T>(x: Iterable<T>, v: T, i: number=0, I: number=END): Iter
  * Add values to the end.
  * @param x an iterable
  * @param vs values to add
- * @returns [...x, ...vs]
+ * @returns ...x, ...vs
  */
 export function* push<T>(x: Iterable<T>, ...vs: T[]): IterableIterator<T> {
   yield* x;
@@ -1572,7 +1561,7 @@ export function* push<T>(x: Iterable<T>, ...vs: T[]): IterableIterator<T> {
  * Add values to the start.
  * @param x an iterable
  * @param vs values to add
- * @returns [...vs, ...x]
+ * @returns ...vs, ...x
  */
 export function* unshift<T>(x: Iterable<T>, ...vs: T[]): IterableIterator<T> {
   yield* vs;
@@ -1584,10 +1573,10 @@ export function* unshift<T>(x: Iterable<T>, ...vs: T[]): IterableIterator<T> {
  * Copy part of iterable to another.
  * @param x target iterable
  * @param y source iterable
- * @param j write index (0)
- * @param i read start index (0)
- * @param I read end index (X)
- * @returns TODO
+ * @param j write index [0]
+ * @param i read start index [0]
+ * @param I read end index [END]
+ * @returns x[0..j] ⧺ y[i..I] ⧺ x[j+I-i..]
  */
 export function* copy<T>(x: Iterable<T>, y: Iterable<T>, j: number=0, i: number=0, I: number=END): IterableIterator<T> {
   var k = -1, J = -1;
@@ -1601,7 +1590,7 @@ export function* copy<T>(x: Iterable<T>, y: Iterable<T>, j: number=0, i: number=
     else yield u;
   }
   if (k<j) {
-    for (; ++k<j;) yield undefined;
+    for (; ++k<j;) yield;
     yield* slice(y, i, I);
   }
 }
@@ -1610,31 +1599,34 @@ export function* copy<T>(x: Iterable<T>, y: Iterable<T>, j: number=0, i: number=
 /**
  * Copy part of iterable within.
  * @param x an iterable
- * @param j write index (0)
- * @param i read start index (0)
- * @param I read end index (X)
- * @returns TODO
+ * @param j write index [0]
+ * @param i read start index [0]
+ * @param I read end index [END]
+ * @returns x[0..j] ⧺ x[i..I] ⧺ x[j+I-i..]
  */
 export function* copyWithin<T>(x: Iterable<T>, j: number=0, i: number=0, I: number=END): IterableIterator<T> {
-  var x = many(x), n = length(x);
+  var x = toMany(x), n = length(x);
   for (var v of copy(x, x, j, i, I)) {
     if (--n<0) break;
     yield v;
   }
 }
+// copyWithinLeft()?
+// copyWithinRight()?
 
 
 /**
  * Move part of iterable within.
  * @param x an iterable
- * @param j write index (0)
- * @param i read start index (0)
- * @param I read end index (X)
- * @returns TODO
+ * @param j write index [0]
+ * @param i read start index [0]
+ * @param I read end index [END]
+ * @returns x[0..j] ⧺ x[i..I] ⧺ x[j..i] ⧺ x[I..]
  */
-export function* moveWithin<T>(x: Iterable<T>, j: number=0, i: number=0, I: number=END): IterableIterator<T> {
-  if (j<i) yield* movePart(x, j, i, I);
-  else yield* movePart(x, i, I, j);
+export function moveWithin<T>(x: Iterable<T>, j: number=0, i: number=0, I: number=END): IterableIterator<T> {
+  if (j<i)      return movePart(x, j, i, I);
+  else if (j>I) return movePart(x, i, I, j);
+  else          return values(x);
 }
 
 function* movePart<T>(x: Iterable<T>, j: number, k: number, l: number): IterableIterator<T> {
@@ -1654,10 +1646,10 @@ function* movePart<T>(x: Iterable<T>, j: number, k: number, l: number): Iterable
 /**
  * Remove or replaces existing values.
  * @param x an iterable
- * @param i remove index (0)
- * @param n number of values to remove (rest)
+ * @param i remove index [0]
+ * @param n number of values to remove [rest]
  * @param vs values to insert
- * @returns TODO
+ * @returns x[0..i] ⧺ vs ⧺ x[i+n..]
  */
 export function* splice<T>(x: Iterable<T>, i: number=0, n: number=END-i, ...vs: T[]): IterableIterator<T> {
   var j = -1;
@@ -1672,15 +1664,15 @@ export function* splice<T>(x: Iterable<T>, i: number=0, n: number=END-i, ...vs: 
  * Break iterable considering test as separator.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns TODO
+ * @returns x[j..k] ⧺ x[l..m] ⧺ ... | ft(x[i]) = true; i = 0..j / k..l / ...
  */
 export function* split<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T[]> {
   var a: T[] = [], i = -1;
   for (var v of x) {
     if (!ft(v, ++i, x)) a.push(v);
-    else if (a.length) { yield a; a = []; }
+    else if (a.length>0) { yield a; a = []; }
   }
-  if (a.length) yield a;
+  if (a.length>0) yield a;
 }
 
 
@@ -1688,15 +1680,15 @@ export function* split<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator
  * Break iterable considering indices as separator.
  * @param x an iterable
  * @param is indices (sorted)
- * @returns TODO
+ * @returns x[j..k] ⧺ x[l..m] ⧺ ... | ft(x[i]) = true; i = 0..j / k..l / ...; i ∈ is
  */
 export function* splitAt<T>(x: Iterable<T>, is: number[]): IterableIterator<T[]> {
   var a: T[] = [], i = -1;
   for (var v of x) {
     if (!is.includes(++i)) a.push(v);
-    else if (a.length) { yield a; a = []; }
+    else if (a.length>0) { yield a; a = []; }
   }
-  if (a.length) yield a;
+  if (a.length>0) yield a;
 }
 
 
@@ -1704,7 +1696,7 @@ export function* splitAt<T>(x: Iterable<T>, is: number[]): IterableIterator<T[]>
  * Break iterable when test passes.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns TODO [values, ^ft values, ^ft values, ...]
+ * @returns x[0..j] ⧺ x[j..k] ⧺ ... | ft(x[i]) = true; i = j, k, ...
  */
 export function* cut<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T[]> {
   var i = -1, a = [];
@@ -1720,7 +1712,7 @@ export function* cut<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T
  * Break iterable after test passes.
  * @param x an iterable
  * @param ft test function (v, i, x)
- * @returns TODO [values ^ft, values ^ft, values ^ft, ...]
+ * @returns x[0..j+1] ⧺ x[j+1..k] ⧺ ... | ft(x[i]) = true; i = j, k, ...
  */
 export function* cutRight<T>(x: Iterable<T>, ft: TestFunction<T>): IterableIterator<T[]> {
   var i = -1, a = [];
@@ -1736,21 +1728,21 @@ export function* cutRight<T>(x: Iterable<T>, ft: TestFunction<T>): IterableItera
  * Break iterable at given indices.
  * @param x an iterable
  * @param is split indices (sorted)
- * @returns TODO
+ * @returns x[0..j] ⧺ x[j..k] ⧺ ... | ft(x[i]) = true; i = j, k, ...; i ∈ is
  */
 export function* cutAt<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T[]> {
   var ii = is[Symbol.iterator]();
-  var {value, done} = ii.next();
-  if (done) value = END;
+  var i  = ii.next();
+  if (i.done) i.value = END;
   var a = [], j = -1;
   for (var v of x) {
-    if (++j<value) { a.push(v); continue; }
+    if (++j<i.value) { a.push(v); continue; }
     yield a; a = [v];
-    var {value, done} = ii.next();
-    if (done) value = END;
+    var i = ii.next();
+    if (i.done) i.value = END;
   }
   yield a;
-  for (; !done; {done}=ii.next()) yield [];
+  for (; !i.done; i=ii.next()) yield [];
 }
 
 
@@ -1758,7 +1750,7 @@ export function* cutAt<T>(x: Iterable<T>, is: Iterable<number>): IterableIterato
  * Break iterable after given indices.
  * @param x an iterable
  * @param is split indices (sorted)
- * @returns TODO
+ * @returns x[0..j+1] ⧺ x[j+1..k] ⧺ ... | ft(x[i]) = true; i = j, k, ...; i ∈ is
  */
 export function* cutAtRight<T>(x: Iterable<T>, is: Iterable<number>): IterableIterator<T[]> {
   yield* cutAt(x, map(is, i => i+1));
@@ -1770,7 +1762,7 @@ export function* cutAtRight<T>(x: Iterable<T>, is: Iterable<number>): IterableIt
  * @param x an iterable
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns x[0..k], x[k..l], ... | fc(x[i], x[j]) = 0; i, j = 0..k / k..l / ...
  */
 export function* group<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T[]> {
   var fc = fc || COMPARE;
@@ -1806,11 +1798,11 @@ export function partition<T>(x: Iterable<T>, ft: TestFunction<T>): [T[], T[]] {
  * Segregate values by similarity.
  * @param x an array
  * @param fm map function (v, i, x)
- * @returns Map {key => values}
+ * @returns Map {key ⇒ values}
  */
 export function partitionAs<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U>=null): Map<T|U, T[]> {
   var fm = fm || IDENTITY;
-  var a = new Map(), i = -1;
+  var a  = new Map(), i = -1;
   for (var v of x) {
     var v1 = fm(v, ++i, x);
     if (!a.has(v1)) a.set(v1, []);
@@ -1823,9 +1815,9 @@ export function partitionAs<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U>=null
 /**
  * Break iterable into chunks of given size.
  * @param x an iterable
- * @param n chunk size (1)
- * @param s chunk step (n)
- * @returns TODO
+ * @param n chunk size [1]
+ * @param s chunk step [n]
+ * @returns x[0..n], x[s..s+n], x[2s..2s+n], ...
  */
 export function* chunk<T>(x: Iterable<T>, n: number=1, s: number=n): IterableIterator<T[]> {
   var M = Math.max(n, s);
@@ -1833,7 +1825,7 @@ export function* chunk<T>(x: Iterable<T>, n: number=1, s: number=n): IterableIte
   for (var v of x) {
     if (m<n) a.push(v);
     if (++m<M) continue;
-    yield a;
+    do { yield a; } while (s<=0);
     a = a.slice(s);
     m = a.length;
   }
@@ -1844,19 +1836,27 @@ export function* chunk<T>(x: Iterable<T>, n: number=1, s: number=n): IterableIte
 /**
  * Give values that cycle through an iterable.
  * @param x an iterable
- * @param i start index (0)
- * @param n number of values (-1 => Inf)
- * @returns TODO
+ * @param i start index [0]
+ * @param n number of values [-1 ⇒ Inf]
+ * @returns x[i..] ⧺ x ⧺ x ⧺ ... with upto n values
  */
 export function* cycle<T>(x: Iterable<T>, i: number=0, n: number=-1): IterableIterator<T> {
-  var x = many(x);
-  var i = i===0? 0 : mod(i, length(x));
+  var x = toMany(x), X = 0;
+  if (i<0) {
+    X = length(x);
+    if (X===0) return;
+    i = mod(i, X);
+  }
   while (true) {
+    X = 0;
     for (var v of x) {
-      if(--i>=0) continue;
-      if(n--===0) return;
+      ++X;
+      if (--i>=0)  continue;
+      if (n--===0) return;
       yield v;
     }
+    if (X===0) return;
+    if (i>=X)  i = mod(i, X);
   }
 }
 
@@ -1864,11 +1864,11 @@ export function* cycle<T>(x: Iterable<T>, i: number=0, n: number=-1): IterableIt
 /**
  * Repeat an iterable given times.
  * @param x an iterable
- * @param n times (-1 => Inf)
- * @returns [...x, ...x, ...(n times)]
+ * @param n times [-1 ⇒ Inf]
+ * @returns ...x, ...x, ...(n times)
  */
 export function* repeat<T>(x: Iterable<T>, n: number=-1): IterableIterator<T> {
-  var x = many(x);
+  var x = toMany(x);
   for (; n!==0; --n)
     yield* x;
 }
@@ -1877,11 +1877,11 @@ export function* repeat<T>(x: Iterable<T>, n: number=-1): IterableIterator<T> {
 /**
  * Reverse the values.
  * @param x an iterable
- * @returns TODO
+ * @returns x[|x|-1], x[|x|-2], ..., x[1], x[0]
  */
 export function* reverse<T>(x: Iterable<T>): IterableIterator<T> {
   var a = arrayFrom$(x);
-  for (var i=a.length-1; i>=0; i--)
+  for (var i=a.length-1; i>=0; --i)
     yield a[i];
 }
 
@@ -1889,13 +1889,13 @@ export function* reverse<T>(x: Iterable<T>): IterableIterator<T> {
 /**
  * Rotate values in iterable.
  * @param x an iterable
- * @param n rotate amount (+ve: left, -ve: right) (0)
- * @returns TODO
+ * @param n rotate amount (+ve: left, -ve: right) [0]
+ * @returns x[n..] ⧺ x[0..n]
  */
-export function* rotate<T>(x: Iterable<T>, n: number=0): IterableIterator<T> {
-  if (n===0) yield* x;
-  else if (n>0) yield* rotateLeft(x, n);
-  else yield* rotateRight(x, -n);
+export function rotate<T>(x: Iterable<T>, n: number=0): IterableIterator<T> {
+  if (n===0)    return values(x);
+  else if (n>0) return rotateLeft (x,  n);
+  else          return rotateRight(x, -n);
 }
 
 function* rotateLeft<T>(x: Iterable<T>, n: number): IterableIterator<T> {
@@ -1904,14 +1904,15 @@ function* rotateLeft<T>(x: Iterable<T>, n: number): IterableIterator<T> {
     if (++i<n) a.push(v);
     else yield v;
   }
-  if (++i>=n) { yield* a; return; }
+  if (++i===0 || i>=n) { yield* a; return; }
   var n = n % i;
   yield* a.slice(n);
-  yield* a.slice(-n);
+  yield* a.slice(0, n);
 }
 
 function* rotateRight<T>(x: Iterable<T>, n: number): IterableIterator<T> {
   var a = Array.from(x);
+  if (a.length===0) return;
   var n = n % a.length;
   yield* a.slice(-n);
   yield* a.slice(0, -n);
@@ -1919,14 +1920,44 @@ function* rotateRight<T>(x: Iterable<T>, n: number): IterableIterator<T> {
 
 
 /**
+ * Place a separator between every value.
+ * @param x an iterable
+ * @param v separator
+ * @returns x[0], v, x[1], v, ..., x[|x|-1]
+ */
+export function* intersperse<T>(x: Iterable<T>, v: T): IterableIterator<T> {
+  var i = -1;
+  for (var u of x) {
+    if (++i>0) yield v;
+    yield u;
+  }
+}
+
+
+/**
+ * Estimate new values between existing ones.
+ * @param x an iterable
+ * @param fc combine function (a, b)
+ * @returns x[0], fc(x[0], x[1]), x[1], fc(x[1], x[2]), ..., x[|x|-1]
+ */
+export function* interpolate<T>(x: Iterable<T>, fc: CombineFunction<T>): IterableIterator<T> {
+  var u: T, i = -1;
+  for (var v of x) {
+    if (++i>0) yield fc(u, v);
+    yield (u = v);
+  }
+}
+
+
+/**
  * Place values of an iterable between another.
  * @param x an iterable
  * @param y another iterable
- * @param m number of values from x (1)
- * @param n number of values from y (1)
- * @param s step size for x (m)
- * @param t step size for y (n)
- * @returns TODO
+ * @param m number of values from x [1]
+ * @param n number of values from y [1]
+ * @param s step size for x [m]
+ * @param t step size for y [n]
+ * @returns x[0..m], y[0..n], x[s..s+m], y[t..t+n], ..., x[k*s..|x|-1] | k ∈ W
  */
 export function* intermix<T>(x: Iterable<T>, y: Iterable<T>, m: number=1, n: number=1, s: number=m, t: number=n): IterableIterator<T> {
   var x1 = chunk(x, m, s);
@@ -1940,57 +1971,21 @@ export function* intermix<T>(x: Iterable<T>, y: Iterable<T>, m: number=1, n: num
 
 
 /**
- * Merge values from iterables.
+ * Place values from iterables alternately.
  * @param xs iterables
- * @returns TODO
+ * @returns x₀[0], x₁[0], ..., x₀[1], x₁[0], ... | [x₀, x₁, ...] = xs
  */
 export function* interleave<T>(xs: Iterable<T>[]): IterableIterator<T> {
-  var X = xs.length;
-  var is = [], os = [];
-  for (var n=0, i=0; n<X; n++) {
-    is[i] = xs[i][Symbol.iterator]();
-    os[i] = is[i].next();
-    if (!os[i].done) i++;
-  }
-  for (var j=0; i>0; j++) {
-    var vs = os.map(o => o.value);
-    j %= i;
-    yield vs[j];
-    os[j] = is[j].next();
-    if (!os[j].done) continue;
-    is.splice(j, 1);
-    os.splice(j, 1);
-    i--;
-  }
-}
-
-
-/**
- * Estimate new values between existing ones.
- * @param x an iterable
- * @param fc combine function (a, b)
- * @returns TODO
- */
-export function* interpolate<T>(x: Iterable<T>, fc: CombineFunction<T>): IterableIterator<T> {
-  var u: T, i = -1;
-  for (var v of x) {
-    if (++i>0) yield fc(u, v);
-    yield (u = v);
-  }
-}
-
-
-/**
- * Place a separator between every value.
- * @param x an iterable
- * @param v separator
- * @returns TODO
- */
-export function* intersperse<T>(x: Iterable<T>, v: T): IterableIterator<T> {
-  var i = -1;
-  for (var u of x) {
-    if (++i>0) yield v;
-    yield u;
+  var X  = xs.length;
+  if (X===0) return;
+  var ix = [];
+  for (var i=0; i<X; ++i)
+    ix[i] = xs[i][Symbol.iterator]();
+  for (var i=0, n=X; n>0; i=(i+1)%X) {
+    if (ix[i]==null) continue;
+    var a = ix[i].next();
+    if (a.done) { ix[i] = null; --n; }
+    else yield a.value;
   }
 }
 
@@ -2003,7 +1998,7 @@ export function* intersperse<T>(x: Iterable<T>, v: T): IterableIterator<T> {
 /**
  * Append values from iterables.
  * @param xs iterables
- * @returns [...x₀, ...x₁, ...] | [x₀, x₁, ...] = xs
+ * @returns ...x₀, ...x₁, ... | [x₀, x₁, ...] = xs
  */
 export function* concat<T>(...xs: Iterable<T>[]): IterableIterator<T> {
   for (var x of xs)
@@ -2020,24 +2015,23 @@ export function* concat<T>(...xs: Iterable<T>[]): IterableIterator<T> {
  */
 export function* merge<T, U=T>(xs: Iterable<T>[], fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var X  = xs.length;
-  var is = [], os = [];
-  for (var n=0, i=0; n<X; ++n) {
-    is[i] = xs[i][Symbol.iterator]();
-    os[i] = is[i].next();
-    if (!os[i].done) ++i;
+  var ix = [], ax = [];
+  for (var i=0, n=0; n<X; ++n) {
+    ix[i] = xs[i][Symbol.iterator]();
+    ax[i] = ix[i].next();
+    if (!ax[i].done) ++i;
   }
   while (i>0) {
-    var vs = os.map(o => o.value);
-    var j  = minEntry(vs, fc, fm)[0];
-    yield vs[j];
-    os[j] = is[j].next();
-    if (!os[j].done) continue;
-    is.splice(j, 1);
-    os.splice(j, 1);
-    i--;
+    var as = ax.map(a => a.value);
+    var j  = minEntry(as, fc, fm)[0];
+    yield as[j];
+    ax[j] = ix[j].next();
+    if (!ax[j].done) continue;
+    ix.splice(j, 1);
+    ax.splice(j, 1);
+    --i;
   }
 }
-// TODO: check this
 
 
 /**
@@ -2064,20 +2058,20 @@ export function join<T>(x: Iterable<T>, sep: string=","): string {
  * @param x an array
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns ∀ vᵢ, vⱼ ∈ x, is vᵢ ≠ vⱼ?
  */
 export function isUnique<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   if (fc) return isUniqueDual(x, fc, fm);
-  else return isUniqueMap(x, fm);
+  else    return isUniqueMap (x, fm);
 }
 
 function isUniqueMap<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U>=null): boolean {
   var fm = fm || IDENTITY;
-  var s = new Set(), i = -1;
+  var x1 = new Set(), i = -1;
   for (var v of x) {
     var v1 = fm(v, ++i, x);
-    if (s.has(v1)) return false;
-    s.add(v1);
+    if (x1.has(v1)) return false;
+    x1.add(v1);
   }
   return true;
 }
@@ -2085,10 +2079,10 @@ function isUniqueMap<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U>=null): bool
 function isUniqueDual<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): boolean {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
-  var x1 = [...x].map(fm);
-  for(var u1 of x1) {
-    for(var v1 of x1)
-      if(fc(u1, v1)===0) return false;
+  var x1 = [...map(x, fm)];
+  for (var u1 of x1) {
+    for (var v1 of x1)
+      if (fc(u1, v1)===0) return false;
   }
   return true;
 }
@@ -2100,18 +2094,19 @@ function isUniqueDual<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U>=null, fm:
  * @param y another array
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
+ * @returns x ∩ y = Φ?
  */
 export function isDisjoint<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   if (fc) return isDisjointDual(x, y, fc, fm);
-  return isDisjointMap(x, y, fm);
+  else    return isDisjointMap (x, y, fm);
 }
 
 function isDisjointMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U>=null): boolean {
-  var s = setFrom(y, fm);
-  var fm = fm || IDENTITY, i = -1;
+  var y1 = setFrom(y, fm), i = -1;
+  var fm = fm || IDENTITY;
   for (var u of x) {
     var u1 = fm(u, ++i, x);
-    if (s.has(u1)) return false;
+    if (y1.has(u1)) return false;
   }
   return true;
 }
@@ -2119,7 +2114,7 @@ function isDisjointMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T
 function isDisjointDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): boolean {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
-  var y1 = [...y].map(fm), i = -1;
+  var y1 = [...map(y, fm)], i = -1;
   for (var u of x) {
     var u1 = fm(u, ++i, x);
     for (var v1 of y1)
@@ -2134,32 +2129,32 @@ function isDisjointDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunct
  * @param x an iterable
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns v₀, v₁, ... | vᵢ ∈ x; vᵢ ≠ vⱼ ∀ i, j
  */
 export function* unique<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   if (fc) yield* uniqueDual(x, fc, fm);
-  else yield* uniqueMap(x, fm);
+  else    yield* uniqueMap (x, fm);
 }
 
 function* uniqueMap<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var fm = fm || IDENTITY;
-  var s = new Set(), i = -1;
+  var x1 = new Set(), i = -1;
   for (var v of x) {
     var v1 = fm(v, ++i, x);
-    if (s.has(v1)) continue;
-    s.add(v1); yield v;
+    if (x1.has(v1)) continue;
+    x1.add(v1); yield v;
   }
 }
 
 function* uniqueDual<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
-  var s = [], i = -1;
-  x: for (var v of x) {
+  var x1 = [], i = -1;
+  NEXTX: for (var v of x) {
     var v1 = fm(v, ++i, x);
-    for (var u1 of s)
-      if (fc(u1, v1)===0) continue x;
-    s.push(v1); yield v;
+    for (var u1 of x1)
+      if (fc(u1, v1)===0) continue NEXTX;
+    x1.push(v1); yield v;
   }
 }
 
@@ -2170,37 +2165,36 @@ function* uniqueDual<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=nul
  * @param y another iterable
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns x ∪ y = \{v | v ∈ x or v ∈ y\}
  */
 export function* union<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   if (fc) yield* unionDual(x, y, fc, fm);
-  else yield* unionMap(x, y, fm);
+  else    yield* unionMap (x, y, fm);
 }
 
 function* unionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var fm = fm || IDENTITY;
-  var s = new Set();
-  var i = -1, j = -1;
+  var x1 = new Set();
+  var i  = -1, j = -1;
   for (var u of x) {
     var u1 = fm(u, ++i, x);
-    s.add(u1); yield u;
+    x1.add(u1); yield u;
   }
   for (var v of y) {
     var v1 = fm(v, ++j, y);
-    if (!s.has(v1)) yield v;
+    if (!x1.has(v1)) yield v;
   }
 }
 
 function* unionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
-  var x = many(x);
-  yield* x;
-  var x1 = [...x].map(fm), j = -1;
-  y: for (var v of y) {
+  var x  = toMany(x); yield* x;
+  var x1 = [...map(x, fm)], j = -1;
+  NEXTY: for (var v of y) {
     var v1 = fm(v, ++j, y);
     for (var u1 of x1)
-      if (fc(u1, v1)===0) continue y;
+      if (fc(u1, v1)===0) continue NEXTY;
     yield v;
   }
 }
@@ -2212,30 +2206,30 @@ function* unionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<
  * @param y another iterable
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns x ∩ y = \{v | v ∈ x, v ∈ y\}
  */
 export function* intersection<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   if (fc) yield* intersectionDual(x, y, fc, fm);
-  else yield* intersectionMap(x, y, fm);
+  else    yield* intersectionMap (x, y, fm);
 }
 
 function* intersectionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
-  var s = setFrom(y, fm);
-  var fm = fm || IDENTITY, i = -1;
+  var y1 = setFrom(y, fm), i = -1;
+  var fm = fm || IDENTITY;
   for (var u of x) {
     var u1 = fm(u, ++i, x);
-    if (s.has(u1)) yield u;
+    if (y1.has(u1)) yield u;
   }
 }
 
 function* intersectionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
-  var y1 = [...y].map(fm), i = -1;
-  x: for (var u of x) {
+  var y1 = [...map(y, fm)], i = -1;
+  NEXTX: for (var u of x) {
     var u1 = fm(u, ++i, x);
     for (var v1 of y1)
-      if (fc(u1, v1)===0) { yield u; continue x; }
+      if (fc(u1, v1)===0) { yield u; continue NEXTX; }
   }
 }
 
@@ -2246,30 +2240,30 @@ function* intersectionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFu
  * @param y another iterable
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns x - y = \{v | v ∈ x, v ∉ y\}
  */
 export function* difference<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   if (fc) yield* differenceDual(x, y, fc, fm);
-  else yield* differenceMap(x, y, fm);
+  else    yield* differenceMap (x, y, fm);
 }
 
 function* differenceMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
-  var s = setFrom(y, fm);
-  var fm = fm || IDENTITY, i = -1;
+  var y1 = setFrom(y, fm), i = -1;
+  var fm = fm || IDENTITY;
   for (var u of x) {
     var u1 = fm(u, ++i, x);
-    if (!s.has(u1)) yield u;
+    if (!y1.has(u1)) yield u;
   }
 }
 
 function* differenceDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
-  var y1 = [...y].map(fm), i = -1;
-  x: for (var u of x) {
+  var y1 = [...map(y, fm)], i = -1;
+  NEXTX: for (var u of x) {
     var u1 = fm(u, ++i, x);
     for (var v1 of y1)
-      if (fc(u1, v1)===0) continue x;
+      if (fc(u1, v1)===0) continue NEXTX;
     yield u;
   }
 }
@@ -2281,13 +2275,14 @@ function* differenceDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunc
  * @param y another iterable
  * @param fc compare function (a, b)
  * @param fm map function (v, i, x)
- * @returns TODO
+ * @returns x-y ∪ y-x
  */
 export function* symmetricDifference<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
-  var x = many(x), y = many(y);
+  var x = toMany(x), y = toMany(y);
   yield* difference(x, y, fc, fm);
   yield* difference(y, x, fc, fm);
 }
+
 
 
 
@@ -2295,28 +2290,28 @@ export function* symmetricDifference<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc:
  * List cartesian product of iterables.
  * @param xs iterables
  * @param fm map function (vs, i)
- * @returns TODO
+ * @returns x₀ × x₁ × ... = \{[v₀, v₁, ...] | v₀ ∈ x₀, v₁ ∈ x₁, ...] \}
  */
 export function* cartesianProduct<T, U=T>(xs: Iterable<T>[], fm: MapFunction<T[], T[]|U> | null=null): IterableIterator<T[]|U> {
   var fm = fm || IDENTITY;
   var X  = xs.length;
   if (X===0) return;
-  var is = [], os = [];
-  for (var i=0; i<X; i++) {
-    xs[i] = i>0? many(xs[i]) : xs[i];
-    is[i] = xs[i][Symbol.iterator]();
-    os[i] = is[i].next();
-    if (os[i].done) return;
+  var jx = [], ix = [], ax = [];
+  for (var i=0; i<X; ++i) {
+    jx[i] = i>0? toMany(xs[i]) : xs[i];
+    ix[i] = jx[i][Symbol.iterator]();
+    ax[i] = ix[i].next();
+    if (ax[i].done) return;
   }
-  for (var i=0;; i++) {
+  for (var i=0;; ++i) {
     var vs = [];
-    for (var o of os) vs.push(o.value);
+    for (var a of ax) vs.push(a.value);
     yield fm(vs, i, null);
-    for (var r=X-1; r>=0; r--) {
-      os[r] = is[r].next();
-      if (!os[r].done) break;
-      is[r] = xs[r][Symbol.iterator]();
-      os[r] = is[r].next();
+    for (var r=X-1; r>=0; --r) {
+      ax[r] = ix[r].next();
+      if (!ax[r].done) break;
+      ix[r] = jx[r][Symbol.iterator]();
+      ax[r] = ix[r].next();
     }
     if (r<0) break;
   }
