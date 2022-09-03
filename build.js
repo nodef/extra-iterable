@@ -46,6 +46,7 @@ function publishRootPackage(ds, ver, typ) {
 function transformJsdoc(x, dm) {
   if (!dm.has(x.name)) return null;
   var link = `[📘](https://github.com/${owner}/${repo}/wiki/${x.name})`;
+  x.description = x.description.replace(/\[📘\]\(.+?\)/g, '');
   x.description = x.description.trim() + '\n' + link;
   return x;
 }
