@@ -1316,7 +1316,7 @@ export function forEach<T>(x: Iterable<T>, fp: ProcessFunction<T>): void {
  */
 export function some<T>(x: Iterable<T>, ft: TestFunction<T> | null=null): boolean {
   if (ft) return someTest(x, ft);
-  else return someBoolean(x);
+  else    return someBoolean(x);
 }
 
 function someBoolean<T>(x: Iterable<T>): boolean {
@@ -1341,7 +1341,7 @@ function someTest<T>(x: Iterable<T>, ft: TestFunction<T>): boolean {
  */
 export function every<T>(x: Iterable<T>, ft: TestFunction<T> | null=null): boolean {
   if (ft) return everyTest(x, ft);
-  else return everyBoolean(x);
+  else    return everyBoolean(x);
 }
 
 function everyBoolean<T>(x: Iterable<T>): boolean {

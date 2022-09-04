@@ -199,6 +199,9 @@ iterable.reduce(x, (acc, v) => acc+v);
 
 [![](https://img.youtube.com/vi/qgxPbqDskyw/maxresdefault.jpg)](https://www.youtube.com/watch?v=qgxPbqDskyw)<br>
 [![DOI](https://zenodo.org/badge/133694055.svg)](https://zenodo.org/badge/latestdoi/133694055)
+[![Coverage Status](https://coveralls.io/repos/github/nodef/extra-iterable/badge.svg?branch=master)](https://coveralls.io/github/nodef/extra-iterable?branch=master)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/1ba4b1b22418456df9f9/test_coverage)](https://codeclimate.com/github/nodef/extra-iterable/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1ba4b1b22418456df9f9/maintainability)](https://codeclimate.com/github/nodef/extra-iterable/maintainability)
 
 
 [is]: https://nodef.github.io/extra-iterable/functions/is.html
