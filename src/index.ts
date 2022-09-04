@@ -1798,7 +1798,7 @@ export function partition<T>(x: Iterable<T>, ft: TestFunction<T>): [T[], T[]] {
  * Segregate values by similarity.
  * @param x an array
  * @param fm map function (v, i, x)
- * @returns Map {key ⇒ values}
+ * @returns Map \{key ⇒ values\}
  */
 export function partitionAs<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U>=null): Map<T|U, T[]> {
   var fm = fm || IDENTITY;
@@ -2038,7 +2038,7 @@ export function* merge<T, U=T>(xs: Iterable<T>[], fc: CompareFunction<T|U> | nul
  * Join values together into a string.
  * @param x an iterable
  * @param sep separator (,)
- * @returns "${v₀}${sep}${v₁}..." | vᵢ ∈ x
+ * @returns "$\{v₀\}$\{sep\}$\{v₁\}..." | vᵢ ∈ x
  */
 export function join<T>(x: Iterable<T>, sep: string=","): string {
   var a = "";
