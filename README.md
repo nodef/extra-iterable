@@ -197,7 +197,8 @@ iterable.reduce(x, (acc, v) => acc+v);
 <br>
 
 
-[![](https://img.youtube.com/vi/qgxPbqDskyw/maxresdefault.jpg)](https://www.youtube.com/watch?v=qgxPbqDskyw)
+[![](https://img.youtube.com/vi/qgxPbqDskyw/maxresdefault.jpg)](https://www.youtube.com/watch?v=qgxPbqDskyw)<br>
+[![DOI](https://zenodo.org/badge/133694055.svg)](https://zenodo.org/badge/latestdoi/133694055)
 
 
 [is]: https://nodef.github.io/extra-iterable/functions/is.html
