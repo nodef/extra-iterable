@@ -2037,7 +2037,7 @@ export function* merge<T, U=T>(xs: Iterable<T>[], fc: CompareFunction<T|U> | nul
 /**
  * Join values together into a string.
  * @param x an iterable
- * @param sep separator (,)
+ * @param sep separator [,]
  * @returns "$\{v₀\}$\{sep\}$\{v₁\}..." | vᵢ ∈ x
  */
 export function join<T>(x: Iterable<T>, sep: string=","): string {
