@@ -407,7 +407,7 @@ export function index<T>(x: Iterable<T>, i: number): number {
 
 
 /**
- * Gets index range for part of iterable.
+ * Get index range for part of iterable.
  * @param x an iterable
  * @param i start index (-ve: from right) [0]
  * @param I end index (-ve: from right) [END]
@@ -415,8 +415,8 @@ export function index<T>(x: Iterable<T>, i: number): number {
  */
 export function indexRange<T>(x: Iterable<T>, i: number=0, I: number=END): [number, number] {
   var X = length(x);
-  var i = i>=0? Math.min(i, X) : Math.max(X+i, 0);
-  var I = I>=0? Math.min(I, X) : Math.max(X+I, 0);
+  var i = i>=0? Math.min(i, X-1) : Math.max(X+i, 0);
+  var I = I>=0? Math.min(I, X-1) : Math.max(X+I, 0);
   return [i, Math.max(i, I)];
 }
 
