@@ -345,6 +345,33 @@ export function length<T>(x: Iterable<T>, i: number=0, I: number=END): number {
 export {length as size};
 
 
+/**
+ * Get zero-based index for element in iterable.
+ * @param x an iterable
+ * @param i index (-ve: from right)
+ * @returns i' | x[i'] = x[i]; i' ∈ [0, |x|]
+ */
+export function index<T>(x: Iterable<T>, i: number): number {
+  var X = length(x);
+  return i>=0? Math.min(i, X) : Math.max(X+i, 0);
+}
+
+
+/**
+ * Get index range for part of iterable.
+ * @param x an iterable
+ * @param i start index (-ve: from right) [0]
+ * @param I end index (-ve: from right) [END]
+ * @returns [i', I'] | i' ≤ I'; i', I' ∈ [0, |x|]
+ */
+export function indexRange<T>(x: Iterable<T>, i: number=0, I: number=END): [number, number] {
+  var X = length(x);
+  var i = i>=0? Math.min(i, X) : Math.max(X+i, 0);
+  var I = I>=0? Math.min(I, X) : Math.max(X+I, 0);
+  return [i, Math.max(i, I)];
+}
+
+
 
 
 // COMPARE
@@ -393,33 +420,6 @@ export function isEqual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunct
 
 // GET/SET
 // -------
-
-/**
- * Get zero-based index for element in iterable.
- * @param x an iterable
- * @param i index (-ve: from right)
- * @returns i' | x[i'] = x[i]; i' ∈ [0, |x|]
- */
-export function index<T>(x: Iterable<T>, i: number): number {
-  var X = length(x);
-  return i>=0? Math.min(i, X) : Math.max(X+i, 0);
-}
-
-
-/**
- * Get index range for part of iterable.
- * @param x an iterable
- * @param i start index (-ve: from right) [0]
- * @param I end index (-ve: from right) [END]
- * @returns [i', I'] | i' ≤ I'; i', I' ∈ [0, |x|]
- */
-export function indexRange<T>(x: Iterable<T>, i: number=0, I: number=END): [number, number] {
-  var X = length(x);
-  var i = i>=0? Math.min(i, X) : Math.max(X+i, 0);
-  var I = I>=0? Math.min(I, X) : Math.max(X+I, 0);
-  return [i, Math.max(i, I)];
-}
-
 
 /**
  * Get value at index.

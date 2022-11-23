@@ -172,16 +172,12 @@ test("is", () => {
 });
 
 
-
-
 test("isList", () => {
   var a = isList([1, 2]);
   expect(a).toBe(true);
   var a = isList("ab");
   expect(a).toBe(false);
 });
-
-
 
 
 test("isIterator", () => {
@@ -195,16 +191,12 @@ test("isIterator", () => {
 });
 
 
-
-
 test("iterator", () => {
   var a = iterator([1, 2]);
   expect(a.next().value).toBe(1);
   var a = iterator(new Set([1, 2]));
   expect(a.next().value).toBe(1);
 });
-
-
 
 
 test("keys", () => {
@@ -214,15 +206,11 @@ test("keys", () => {
 });
 
 
-
-
 test("values", () => {
   var x = [1, 2, 3];
   var a = [...values(x)];
   expect(a).toStrictEqual([1, 2, 3]);
 });
-
-
 
 
 test("entries", () => {
@@ -245,8 +233,6 @@ test("from", () => {
 });
 
 
-
-
 test("fromInvocation", () => {
   var id = 0;
   function getId() {
@@ -258,16 +244,12 @@ test("fromInvocation", () => {
 });
 
 
-
-
 test("fromApplication", () => {
   var a = [...take(fromApplication(v => v+2, 2), 4)];
   expect(a).toStrictEqual([2, 4, 6, 8]);
   var a = [...take(fromApplication(v => v*2, 2), 4)];
   expect(a).toStrictEqual([2, 4, 8, 16]);
 });
-
-
 
 
 test("fromRange", () => {
@@ -292,8 +274,6 @@ test("toInvokable", () => {
 });
 
 
-
-
 test("isOnce", () => {
   var x = [1, 2, 3, 4];
   var a = isOnce(x);
@@ -303,8 +283,6 @@ test("isOnce", () => {
 });
 
 
-
-
 test("isMany", () => {
   var x = [1, 2, 3, 4];
   var a = isMany(x);
@@ -312,8 +290,6 @@ test("isMany", () => {
   var a = isMany(x.values());
   expect(a).toBe(false);
 });
-
-
 
 
 test("toMany", () => {
@@ -365,8 +341,6 @@ test("isEmpty", () => {
 });
 
 
-
-
 test("length", () => {
   var x = [2, 4, 6, 8];
   var a = length(x);
@@ -378,8 +352,6 @@ test("length", () => {
 });
 
 
-
-
 test("size", () => {
   var x = [2, 4, 6, 8];
   var a = size(x);
@@ -388,6 +360,28 @@ test("size", () => {
   expect(a).toBe(3);
   var a = size(x, 1, 3);
   expect(a).toBe(2);
+});
+
+
+test("index", () => {
+  var x = [2, 4, 6, 8];
+  var a = index(x, 1);
+  expect(a).toBe(1);
+  var a = index(x, -1);
+  expect(a).toBe(3);
+  var a = index(x, -10);
+  expect(a).toBe(0);
+});
+
+
+test("indexRange", () => {
+  var x = [2, 4, 6, 8];
+  var a = indexRange(x, 1);
+  expect(a).toStrictEqual([1, 4]);
+  var a = indexRange(x, 1, -1);
+  expect(a).toStrictEqual([1, 3]);
+  var a = indexRange(x, 1, -10);
+  expect(a).toStrictEqual([1, 1]);
 });
 
 
@@ -414,8 +408,6 @@ test("compare", () => {
 });
 
 
-
-
 test("isEqual", () => {
   var x = [1, 2];
   var a = isEqual(x, [1, 2]);
@@ -434,32 +426,6 @@ test("isEqual", () => {
 // GET/SET
 // -------
 
-test("index", () => {
-  var x = [2, 4, 6, 8];
-  var a = index(x, 1);
-  expect(a).toBe(1);
-  var a = index(x, -1);
-  expect(a).toBe(3);
-  var a = index(x, -10);
-  expect(a).toBe(0);
-});
-
-
-
-
-test("indexRange", () => {
-  var x = [2, 4, 6, 8];
-  var a = indexRange(x, 1);
-  expect(a).toStrictEqual([1, 4]);
-  var a = indexRange(x, 1, -1);
-  expect(a).toStrictEqual([1, 3]);
-  var a = indexRange(x, 1, -10);
-  expect(a).toStrictEqual([1, 1]);
-});
-
-
-
-
 test("get", () => {
   var x = [2, 4, 6, 8];
   var a = get(x, 1);
@@ -469,8 +435,6 @@ test("get", () => {
 });
 
 
-
-
 test("getAll", () => {
   var x = [2, 4, 6, 8];
   var a = [...getAll(x, [1, 2])];
@@ -478,8 +442,6 @@ test("getAll", () => {
   var a = [...getAll(x, [1, 3])];
   expect(a).toStrictEqual([4, 8]);
 });
-
-
 
 
 test("getPath", () => {
@@ -493,8 +455,6 @@ test("getPath", () => {
 });
 
 
-
-
 test("hasPath", () => {
   var x = [[2, 4], 6, 8];
   var a = hasPath(x, [1]);
@@ -506,8 +466,6 @@ test("hasPath", () => {
 });
 
 
-
-
 test("set", () => {
   var x = [2, 4, 6, 8];
   var a = [...set(x, 1, 40)];
@@ -517,8 +475,6 @@ test("set", () => {
 });
 
 
-
-
 test("swap", () => {
   var x = [1, 2, 3, 4];
   var a = [...swap(x, 0, 1)];
@@ -526,8 +482,6 @@ test("swap", () => {
   var a = [...swap(x, 0, 3)];
   expect(a).toStrictEqual([4, 2, 3, 1]);
 });
-
-
 
 
 test("remove", () => {
@@ -551,8 +505,6 @@ test("count", () => {
 });
 
 
-
-
 test("countAs", () => {
   var x = [1, 1, 2, 2, 4];
   var a = countAs(x);
@@ -561,8 +513,6 @@ test("countAs", () => {
   var a = countAs(x, v => v % 2);
   expect(a).toStrictEqual(new Map([[1, 2], [0, 2]]));
 });
-
-
 
 
 test("min", () => {
@@ -576,8 +526,6 @@ test("min", () => {
 });
 
 
-
-
 test("max", () => {
   var x = [1, 2, -3, -4];
   var a = max(x);
@@ -587,8 +535,6 @@ test("max", () => {
   var a = max(x, null, v => Math.abs(v));
   expect(a).toBe(-4);
 });
-
-
 
 
 test("range", () => {
@@ -602,8 +548,6 @@ test("range", () => {
 });
 
 
-
-
 test("minEntry", () => {
   var x = [1, 2, -3, -4];
   var a = minEntry(x);
@@ -615,8 +559,6 @@ test("minEntry", () => {
 });
 
 
-
-
 test("maxEntry", () => {
   var x = [1, 2, -3, -4];
   var a = maxEntry(x);
@@ -626,8 +568,6 @@ test("maxEntry", () => {
   var a = maxEntry(x, null, v => Math.abs(v));
   expect(a).toStrictEqual([3, -4]);
 });
-
-
 
 
 test("rangeEntries", () => {
@@ -657,16 +597,12 @@ test("slice", () => {
 });
 
 
-
-
 test("head", () => {
   var a = head([1, 2, 3]);
   expect(a).toBe(1);
   var a = head([], -1);
   expect(a).toBe(-1);
 });
-
-
 
 
 test("tail", () => {
@@ -679,8 +615,6 @@ test("tail", () => {
 });
 
 
-
-
 test("init", () => {
   var a = [...init([1, 2, 3])];
   expect(a).toStrictEqual([1, 2]);
@@ -689,16 +623,12 @@ test("init", () => {
 });
 
 
-
-
 test("last", () => {
   var a = last([1, 2, 3]);
   expect(a).toBe(3);
   var a = last([], -1);
   expect(a).toBe(-1);
 });
-
-
 
 
 test("left", () => {
@@ -710,8 +640,6 @@ test("left", () => {
 });
 
 
-
-
 test("right", () => {
   var x = [1, 2, 3];
   var a = [...right(x, 1)];
@@ -719,8 +647,6 @@ test("right", () => {
   var a = [...right(x, 2)];
   expect(a).toStrictEqual([2, 3]);
 });
-
-
 
 
 test("middle", () => {
@@ -732,8 +658,6 @@ test("middle", () => {
 });
 
 
-
-
 test("take", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...take(x, 2)];
@@ -741,8 +665,6 @@ test("take", () => {
   var a = [...take(x, 3)];
   expect(a).toStrictEqual([1, 2, 3]);
 });
-
-
 
 
 test("takeRight", () => {
@@ -754,8 +676,6 @@ test("takeRight", () => {
 });
 
 
-
-
 test("takeWhile", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...takeWhile(x, v => v < 3)];
@@ -763,8 +683,6 @@ test("takeWhile", () => {
   var a = [...takeWhile(x, v => v < 4)];
   expect(a).toStrictEqual([1, 2, 3]);
 });
-
-
 
 
 test("takeWhileRight", () => {
@@ -776,8 +694,6 @@ test("takeWhileRight", () => {
 });
 
 
-
-
 test("drop", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...drop(x, 2)];
@@ -785,8 +701,6 @@ test("drop", () => {
   var a = [...drop(x, 3)];
   expect(a).toStrictEqual([4, 5]);
 });
-
-
 
 
 test("dropRight", () => {
@@ -798,8 +712,6 @@ test("dropRight", () => {
 });
 
 
-
-
 test("dropWhile", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...dropWhile(x, v => v < 3)];
@@ -807,8 +719,6 @@ test("dropWhile", () => {
   var a = [...dropWhile(x, v => v < 4)];
   expect(a).toStrictEqual([4, 5]);
 });
-
-
 
 
 test("dropWhileRight", () => {
@@ -834,8 +744,6 @@ test("includes", () => {
 });
 
 
-
-
 test("indexOf", () => {
   var x = [1, 2, 3, 2, 5];
   var a = indexOf(x, 2);
@@ -844,8 +752,6 @@ test("indexOf", () => {
   var a = indexOf(x, 2, 2);
   expect(a).toBe(3);
 });
-
-
 
 
 test("lastIndexOf", () => {
@@ -858,8 +764,6 @@ test("lastIndexOf", () => {
 });
 
 
-
-
 test("find", () => {
   var x = [1, 2, 3, 4, 5];
   var a = find(x, v => v % 2===0);
@@ -867,8 +771,6 @@ test("find", () => {
   var a = find(x, v => v % 2===1);
   expect(a).toBe(1);
 });
-
-
 
 
 test("findRight", () => {
@@ -880,8 +782,6 @@ test("findRight", () => {
 });
 
 
-
-
 test("findAll", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...findAll(x, v => v % 2===1)];
@@ -889,8 +789,6 @@ test("findAll", () => {
   var a = [...findAll(x, v => v % 2===0)];
   expect(a).toStrictEqual([2, 4]);
 });
-
-
 
 
 test("scanWhile", () => {
@@ -904,8 +802,6 @@ test("scanWhile", () => {
 });
 
 
-
-
 test("scanWhileRight", () => {
   var x = [1, 1, 2, 2, 3, 3, 4, 4];
   var a = scanWhileRight(x, v => v % 3!==0);
@@ -915,8 +811,6 @@ test("scanWhileRight", () => {
   var a = scanWhileRight(x, v => v % 6!==0);
   expect(a).toBe(0);
 });
-
-
 
 
 test("scanUntil", () => {
@@ -930,8 +824,6 @@ test("scanUntil", () => {
 });
 
 
-
-
 test("scanUntilRight", () => {
   var x = [1, 1, 2, 2, 3, 3, 4, 4];
   var a = scanUntilRight(x, v => v % 3===0);
@@ -943,8 +835,6 @@ test("scanUntilRight", () => {
 });
 
 
-
-
 test("search", () => {
   var x = [1, 2, 3, 4, 5];
   var a = search(x, v => v % 2===0);
@@ -952,8 +842,6 @@ test("search", () => {
   var a = search(x, v => v % 2===1);
   expect(a).toBe(0);
 });
-
-
 
 
 test("searchRight", () => {
@@ -965,8 +853,6 @@ test("searchRight", () => {
 });
 
 
-
-
 test("searchAll", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...searchAll(x, v => v % 2===0)];
@@ -974,8 +860,6 @@ test("searchAll", () => {
   var a = [...searchAll(x, v => v % 2===1)];
   expect(a).toStrictEqual([0, 2, 4]);
 });
-
-
 
 
 test("searchValue", () => {
@@ -991,8 +875,6 @@ test("searchValue", () => {
 });
 
 
-
-
 test("searchValueRight", () => {
   var x = [1, 2, 3, 2, 5];
   var a = searchValueRight(x, 2);
@@ -1005,8 +887,6 @@ test("searchValueRight", () => {
 });
 
 
-
-
 test("searchValueAll", () => {
   var x = [1, 2, 3, 2, 5];
   var a = [...searchValueAll(x, 2)];
@@ -1017,8 +897,6 @@ test("searchValueAll", () => {
   var a = [...searchValueAll(x, 2, null, v => Math.abs(v))];
   expect(a).toStrictEqual([1, 3]);
 });
-
-
 
 
 test("searchInfix", () => {
@@ -1036,8 +914,6 @@ test("searchInfix", () => {
 });
 
 
-
-
 test("searchInfixRight", () => {
   var x = [1, 2, 3, 4];
   var y = [2, 3];
@@ -1051,8 +927,6 @@ test("searchInfixRight", () => {
   var a = searchInfixRight(x, y, null, v => Math.abs(v));
   expect(a).toBe(1);
 });
-
-
 
 
 test("searchInfixAll", () => {
@@ -1070,8 +944,6 @@ test("searchInfixAll", () => {
 });
 
 
-
-
 test("searchSubsequence", () => {
   var x = [1, 2, 3, 4];
   var a = searchSubsequence(x, [2, 4]);
@@ -1085,8 +957,6 @@ test("searchSubsequence", () => {
 });
 
 
-
-
 test("hasValue", () => {
   var x = [1, 2, -3];
   var a = hasValue(x, 3);
@@ -1096,8 +966,6 @@ test("hasValue", () => {
   var a = hasValue(x, 3, null, v => Math.abs(v));
   expect(a).toBe(true);
 });
-
-
 
 
 test("hasPrefix", () => {
@@ -1113,8 +981,6 @@ test("hasPrefix", () => {
 });
 
 
-
-
 test("hasSuffix", () => {
   var x = [1, 2, 3, 4];
   var a = hasSuffix(x, [3, 4]);
@@ -1128,8 +994,6 @@ test("hasSuffix", () => {
 });
 
 
-
-
 test("hasInfix", () => {
   var x = [1, 2, 3, 4];
   var a = hasInfix(x, [2, 3]);
@@ -1141,8 +1005,6 @@ test("hasInfix", () => {
   var a = hasInfix(x, [-2, -3], null, v => Math.abs(v));
   expect(a).toBe(true);
 });
-
-
 
 
 test("hasSubsequence", () => {
@@ -1171,8 +1033,6 @@ test("forEach", () => {
 });
 
 
-
-
 test("some", () => {
   var x = [1, 2, -3, -4];
   var a = some(x, v => v > 10);
@@ -1180,8 +1040,6 @@ test("some", () => {
   var a = some(x, v => v < 0);
   expect(a).toBe(true);
 });
-
-
 
 
 test("every", () => {
@@ -1193,15 +1051,11 @@ test("every", () => {
 });
 
 
-
-
 test("map", () => {
   var x = [1, 2, 3, 4];
   var a = [...map(x, v => v * 2)];
   expect(a).toStrictEqual([2, 4, 6, 8]);
 });
-
-
 
 
 test("reduce", () => {
@@ -1213,8 +1067,6 @@ test("reduce", () => {
 });
 
 
-
-
 test("filter", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...filter(x, v => v % 2===1)];
@@ -1222,8 +1074,6 @@ test("filter", () => {
   var a = [...filter(x, v => v % 2===0)];
   expect(a).toStrictEqual([2, 4]);
 });
-
-
 
 
 test("filterAt", () => {
@@ -1235,8 +1085,6 @@ test("filterAt", () => {
 });
 
 
-
-
 test("reject", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...reject(x, v => v % 2===1)];
@@ -1244,8 +1092,6 @@ test("reject", () => {
   var a = [...reject(x, v => v % 2===0)];
   expect(a).toStrictEqual([1, 3, 5]);
 });
-
-
 
 
 test("rejectAt", () => {
@@ -1257,8 +1103,6 @@ test("rejectAt", () => {
 });
 
 
-
-
 test("accumulate", () => {
   var x = [1, 2, 3, 4];
   var a = [...accumulate(x, (acc, v) => acc+v)];
@@ -1266,8 +1110,6 @@ test("accumulate", () => {
   var a = [...accumulate(x, (acc, v) => acc+v, 100)];
   expect(a).toStrictEqual([101, 103, 106, 110]);
 });
-
-
 
 
 test("flat", () => {
@@ -1281,8 +1123,6 @@ test("flat", () => {
 });
 
 
-
-
 test("flatMap", () => {
   var x = [[1, 2], [3, [4, [5]]]];
   var a = [...flatMap(x)];
@@ -1292,8 +1132,6 @@ test("flatMap", () => {
   var a = [...flatMap(x, v => flat(v))];
   expect(a).toStrictEqual([1, 2, 3, 4, 5]);
 });
-
-
 
 
 test("zip", () => {
@@ -1328,8 +1166,6 @@ test("fill", () => {
 });
 
 
-
-
 test("push", () => {
   var x = [1, 2];
   var a = [...push(x, 3)];
@@ -1337,8 +1173,6 @@ test("push", () => {
   var a = [...push(x, 3, 4)];
   expect(a).toStrictEqual([1, 2, 3, 4]);
 });
-
-
 
 
 test("pop", () => {
@@ -1351,8 +1185,6 @@ test("pop", () => {
 });
 
 
-
-
 test("shift", () => {
   var x = [1, 2, 3];
   var a = [...shift(x)];
@@ -1363,8 +1195,6 @@ test("shift", () => {
 });
 
 
-
-
 test("unshift", () => {
   var x = [3, 4];
   var a = [...unshift(x, 2)];
@@ -1372,8 +1202,6 @@ test("unshift", () => {
   var a = [...unshift(x, 1, 2)];
   expect(a).toStrictEqual([1, 2, 3, 4]);
 });
-
-
 
 
 test("copy", () => {
@@ -1390,8 +1218,6 @@ test("copy", () => {
 });
 
 
-
-
 test("copyWithin", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...copyWithin(x, 3)];
@@ -1403,8 +1229,6 @@ test("copyWithin", () => {
 });
 
 
-
-
 test("moveWithin", () => {
   var x = [1, 2, 3, 4, 5, 6];
   var a = [...moveWithin(x, 0, 1, 3)];
@@ -1412,8 +1236,6 @@ test("moveWithin", () => {
   var a = [...moveWithin(x, 6, 3, 5)];
   expect(a).toStrictEqual([1, 2, 3, 6, 4, 5]);  // (4,5 to right)
 });
-
-
 
 
 test("splice", () => {
@@ -1427,8 +1249,6 @@ test("splice", () => {
 });
 
 
-
-
 test("split", () => {
   var x = [1, 2, 2, 3, 5, 4, 4, 7];
   var a = [...split(x, v => v % 2 === 0)];
@@ -1437,8 +1257,6 @@ test("split", () => {
   var a = [...split(x, v => v % 2 === 0)];
   expect(a).toStrictEqual([[5]]);
 });
-
-
 
 
 test("splitAt", () => {
@@ -1451,8 +1269,6 @@ test("splitAt", () => {
 });
 
 
-
-
 test("cut", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...cut(x, v => v % 2===0)];
@@ -1460,8 +1276,6 @@ test("cut", () => {
   var a = [...cut(x, v => v % 2===1)];
   expect(a).toStrictEqual([[], [1, 2], [3, 4], [5]]);
 });
-
-
 
 
 test("cutRight", () => {
@@ -1473,8 +1287,6 @@ test("cutRight", () => {
 });
 
 
-
-
 test("cutAt", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...cutAt(x, [1, 3])];
@@ -1484,8 +1296,6 @@ test("cutAt", () => {
 });
 
 
-
-
 test("cutAtRight", () => {
   var x = [1, 2, 3, 4, 5];
   var a = [...cutAtRight(x, [1, 3])];
@@ -1493,8 +1303,6 @@ test("cutAtRight", () => {
   var a = [...cutAtRight(x, [0, 4])];
   expect(a).toStrictEqual([[1], [2, 3, 4, 5], []]);
 });
-
-
 
 
 test("group", () => {
@@ -1508,8 +1316,6 @@ test("group", () => {
 });
 
 
-
-
 test("partition", () => {
   var x = [1, 2, 3, 4];
   var a = partition(x, v => v % 2===0);
@@ -1520,8 +1326,6 @@ test("partition", () => {
 });
 
 
-
-
 test("partitionAs", () => {
   var x = [1, 2, 3, 4];
   var a = partitionAs(x, v => v % 2===0);
@@ -1530,8 +1334,6 @@ test("partitionAs", () => {
   var b = partitionAs(x, v => v % 3);
   expect(b).toStrictEqual(new Map([[1, [1, 4]], [2, [2, 5]], [0, [3]]]));
 });
-
-
 
 
 test("chunk", () => {
@@ -1545,8 +1347,6 @@ test("chunk", () => {
 });
 
 
-
-
 test("cycle", () => {
   var x = [1, 2, 3];
   var a = [...cycle(x, 0, 2)];
@@ -1558,8 +1358,6 @@ test("cycle", () => {
 });
 
 
-
-
 test("repeat", () => {
   var x = [1, 2];
   var a = [...repeat(x, 2)];
@@ -1569,15 +1367,11 @@ test("repeat", () => {
 });
 
 
-
-
 test("reverse", () => {
   var x = [1, 2, 3, 4];
   var a = [...reverse(x)];
   expect(a).toStrictEqual([4, 3, 2, 1]);
 });
-
-
 
 
 test("rotate", () => {
@@ -1589,8 +1383,6 @@ test("rotate", () => {
   var a = [...rotate(x, -1)];
   expect(a).toStrictEqual([4, 1, 2, 3]);
 });
-
-
 
 
 test("intermix", () => {
@@ -1607,8 +1399,6 @@ test("intermix", () => {
 });
 
 
-
-
 test("interleave", () => {
   var x = [1, 2, 3, 4];
   var y = [10, 20, 30, 40];
@@ -1620,15 +1410,11 @@ test("interleave", () => {
 });
 
 
-
-
 test("interpolate", () => {
   var x = [1, 2, 3];
   var a = [...interpolate(x, (a, b) => (a + b)/2)];
   expect(a).toStrictEqual([1, 1.5, 2, 2.5, 3]);
 });
-
-
 
 
 test("intersperse", () => {
@@ -1656,8 +1442,6 @@ test("concat", () => {
 });
 
 
-
-
 test("merge", () => {
   var x = [1, 3, 5, 7];
   var y = [2, 4, 8];
@@ -1678,8 +1462,6 @@ test("merge", () => {
     5,  7, -8
   ]);
 });
-
-
 
 
 test("join", () => {
@@ -1707,8 +1489,6 @@ test("isUnique", () => {
 });
 
 
-
-
 test("isDisjoint", () => {
   var x = [1, 2, 3, 4];
   var a = isDisjoint(x, [2, 5]);
@@ -1720,8 +1500,6 @@ test("isDisjoint", () => {
   var a = isDisjoint(x, [-2, -5], null, v => Math.abs(v));
   expect(a).toBe(false);
 });
-
-
 
 
 test("unique", () => {
@@ -1736,8 +1514,6 @@ test("unique", () => {
   var a = [...unique(x, null, v => Math.abs(v))];
   expect(a).toStrictEqual([1, 2, 3, 4]);
 });
-
-
 
 
 test("union", () => {
@@ -1758,8 +1534,6 @@ test("union", () => {
 });
 
 
-
-
 test("intersection", () => {
   var x = [1, 2, 3, 4];
   var y = [2, 3, 5];
@@ -1771,8 +1545,6 @@ test("intersection", () => {
   var a = [...intersection(x, y, null, v => Math.abs(v))];
   expect(a).toStrictEqual([2, 3]);
 });
-
-
 
 
 test("difference", () => {
@@ -1788,8 +1560,6 @@ test("difference", () => {
   var a = [...difference(x, y, null, v => Math.abs(v))];
   expect(a).toStrictEqual([1, 3, 5]);
 });
-
-
 
 
 test("symmetricDifference", () => {
@@ -1808,8 +1578,6 @@ test("symmetricDifference", () => {
   var a = [...symmetricDifference(x, y, null, v => Math.abs(v))];
   expect(a).toStrictEqual([1, 2, -5]);
 });
-
-
 
 
 test("cartesianProduct", () => {
