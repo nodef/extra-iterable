@@ -31,19 +31,19 @@ const iterable = require('extra-iterable');
 
 var x = [2, 4, 6, 8];
 iterable.get(x, 1);
-// 4
+// → 4
 
 var x = [1, 2, 3, 4];
 [...iterable.swap(x, 0, 1)];
-// [ 2, 1, 3, 4 ]
+// → [ 2, 1, 3, 4 ]
 
 var x = [1, 2, 3];
 [...iterable.cycle(x, 0, 4)];
-// [1, 2, 3, 1]
+// → [1, 2, 3, 1]
 
 var x = [1, 2, 3, 4];
 iterable.reduce(x, (acc, v) => acc+v);
-// 10
+// → 10
 ```
 
 <br>
@@ -80,7 +80,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [isEqual] | Check if two iterables are equal. |
 |  |  |
 | [index] | Get zero-based index for element in iterable. |
-| [indexRange] | Gets index range for part of iterable. |
+| [indexRange] | Get index range for part of iterable. |
 | [get] | Get value at index. |
 | [getAll] | Get values at indices. |
 | [getPath] | Get value at path in a nested iterable. |
@@ -205,129 +205,129 @@ iterable.reduce(x, (acc, v) => acc+v);
 [![Maintainability](https://api.codeclimate.com/v1/badges/1ba4b1b22418456df9f9/maintainability)](https://codeclimate.com/github/nodef/extra-iterable/maintainability)
 
 
-[is]: https://nodef.github.io/extra-iterable/functions/is.html
-[isIterator]: https://nodef.github.io/extra-iterable/functions/isIterator.html
-[isList]: https://nodef.github.io/extra-iterable/functions/isList.html
-[iterator]: https://nodef.github.io/extra-iterable/functions/iterator.html
-[keys]: https://nodef.github.io/extra-iterable/functions/keys.html
-[values]: https://nodef.github.io/extra-iterable/functions/values.html
-[entries]: https://nodef.github.io/extra-iterable/functions/entries.html
-[from]: https://nodef.github.io/extra-iterable/functions/from.html
-[fromIterator]: https://nodef.github.io/extra-iterable/functions/fromIterator.html
-[fromRange]: https://nodef.github.io/extra-iterable/functions/fromRange.html
-[fromInvocation]: https://nodef.github.io/extra-iterable/functions/fromInvocation.html
-[fromApplication]: https://nodef.github.io/extra-iterable/functions/fromApplication.html
-[isOnce]: https://nodef.github.io/extra-iterable/functions/isOnce.html
-[isMany]: https://nodef.github.io/extra-iterable/functions/isMany.html
-[toMany]: https://nodef.github.io/extra-iterable/functions/toMany.html
-[toInvokable]: https://nodef.github.io/extra-iterable/functions/toInvokable.html
-[isEmpty]: https://nodef.github.io/extra-iterable/functions/isEmpty.html
-[length]: https://nodef.github.io/extra-iterable/functions/length.html
-[compare]: https://nodef.github.io/extra-iterable/functions/compare.html
-[isEqual]: https://nodef.github.io/extra-iterable/functions/isEqual.html
-[index]: https://nodef.github.io/extra-iterable/functions/index.html
-[indexRange]: https://nodef.github.io/extra-iterable/functions/indexRange.html
-[get]: https://nodef.github.io/extra-iterable/functions/get.html
-[getAll]: https://nodef.github.io/extra-iterable/functions/getAll.html
-[getPath]: https://nodef.github.io/extra-iterable/functions/getPath.html
-[hasPath]: https://nodef.github.io/extra-iterable/functions/hasPath.html
-[set]: https://nodef.github.io/extra-iterable/functions/set.html
-[swap]: https://nodef.github.io/extra-iterable/functions/swap.html
-[remove]: https://nodef.github.io/extra-iterable/functions/remove.html
-[count]: https://nodef.github.io/extra-iterable/functions/count.html
-[countAs]: https://nodef.github.io/extra-iterable/functions/countAs.html
-[min]: https://nodef.github.io/extra-iterable/functions/min.html
-[max]: https://nodef.github.io/extra-iterable/functions/max.html
-[range]: https://nodef.github.io/extra-iterable/functions/range.html
-[minEntry]: https://nodef.github.io/extra-iterable/functions/minEntry.html
-[maxEntry]: https://nodef.github.io/extra-iterable/functions/maxEntry.html
-[rangeEntries]: https://nodef.github.io/extra-iterable/functions/rangeEntries.html
-[slice]: https://nodef.github.io/extra-iterable/functions/slice.html
-[head]: https://nodef.github.io/extra-iterable/functions/head.html
-[last]: https://nodef.github.io/extra-iterable/functions/last.html
-[tail]: https://nodef.github.io/extra-iterable/functions/tail.html
-[init]: https://nodef.github.io/extra-iterable/functions/init.html
-[left]: https://nodef.github.io/extra-iterable/functions/left.html
-[right]: https://nodef.github.io/extra-iterable/functions/right.html
-[middle]: https://nodef.github.io/extra-iterable/functions/middle.html
-[take]: https://nodef.github.io/extra-iterable/functions/take.html
-[takeRight]: https://nodef.github.io/extra-iterable/functions/takeRight.html
-[takeWhile]: https://nodef.github.io/extra-iterable/functions/takeWhile.html
-[takeWhileRight]: https://nodef.github.io/extra-iterable/functions/takeWhileRight.html
-[drop]: https://nodef.github.io/extra-iterable/functions/drop.html
-[dropRight]: https://nodef.github.io/extra-iterable/functions/dropRight.html
-[dropWhile]: https://nodef.github.io/extra-iterable/functions/dropWhile.html
-[dropWhileRight]: https://nodef.github.io/extra-iterable/functions/dropWhileRight.html
-[includes]: https://nodef.github.io/extra-iterable/functions/includes.html
-[indexOf]: https://nodef.github.io/extra-iterable/functions/indexOf.html
-[lastIndexOf]: https://nodef.github.io/extra-iterable/functions/lastIndexOf.html
-[find]: https://nodef.github.io/extra-iterable/functions/find.html
-[findRight]: https://nodef.github.io/extra-iterable/functions/findRight.html
-[scanWhile]: https://nodef.github.io/extra-iterable/functions/scanWhile.html
-[scanWhileRight]: https://nodef.github.io/extra-iterable/functions/scanWhileRight.html
-[scanUntil]: https://nodef.github.io/extra-iterable/functions/scanUntil.html
-[scanUntilRight]: https://nodef.github.io/extra-iterable/functions/scanUntilRight.html
-[search]: https://nodef.github.io/extra-iterable/functions/search.html
-[searchRight]: https://nodef.github.io/extra-iterable/functions/searchRight.html
-[searchAll]: https://nodef.github.io/extra-iterable/functions/searchAll.html
-[searchValue]: https://nodef.github.io/extra-iterable/functions/searchValue.html
-[searchValueRight]: https://nodef.github.io/extra-iterable/functions/searchValueRight.html
-[searchValueAll]: https://nodef.github.io/extra-iterable/functions/searchValueAll.html
-[searchInfix]: https://nodef.github.io/extra-iterable/functions/searchInfix.html
-[searchInfixRight]: https://nodef.github.io/extra-iterable/functions/searchInfixRight.html
-[searchInfixAll]: https://nodef.github.io/extra-iterable/functions/searchInfixAll.html
-[searchSubsequence]: https://nodef.github.io/extra-iterable/functions/searchSubsequence.html
-[hasValue]: https://nodef.github.io/extra-iterable/functions/hasValue.html
-[hasPrefix]: https://nodef.github.io/extra-iterable/functions/hasPrefix.html
-[hasSuffix]: https://nodef.github.io/extra-iterable/functions/hasSuffix.html
-[hasInfix]: https://nodef.github.io/extra-iterable/functions/hasInfix.html
-[hasSubsequence]: https://nodef.github.io/extra-iterable/functions/hasSubsequence.html
-[forEach]: https://nodef.github.io/extra-iterable/functions/forEach.html
-[some]: https://nodef.github.io/extra-iterable/functions/some.html
-[every]: https://nodef.github.io/extra-iterable/functions/every.html
-[map]: https://nodef.github.io/extra-iterable/functions/map.html
-[reduce]: https://nodef.github.io/extra-iterable/functions/reduce.html
-[filter]: https://nodef.github.io/extra-iterable/functions/filter.html
-[filterAt]: https://nodef.github.io/extra-iterable/functions/filterAt.html
-[reject]: https://nodef.github.io/extra-iterable/functions/reject.html
-[rejectAt]: https://nodef.github.io/extra-iterable/functions/rejectAt.html
-[accumulate]: https://nodef.github.io/extra-iterable/functions/accumulate.html
-[flat]: https://nodef.github.io/extra-iterable/functions/flat.html
-[flatMap]: https://nodef.github.io/extra-iterable/functions/flatMap.html
-[zip]: https://nodef.github.io/extra-iterable/functions/zip.html
-[fill]: https://nodef.github.io/extra-iterable/functions/fill.html
-[push]: https://nodef.github.io/extra-iterable/functions/push.html
-[unshift]: https://nodef.github.io/extra-iterable/functions/unshift.html
-[copy]: https://nodef.github.io/extra-iterable/functions/copy.html
-[copyWithin]: https://nodef.github.io/extra-iterable/functions/copyWithin.html
-[moveWithin]: https://nodef.github.io/extra-iterable/functions/moveWithin.html
-[splice]: https://nodef.github.io/extra-iterable/functions/splice.html
-[split]: https://nodef.github.io/extra-iterable/functions/split.html
-[splitAt]: https://nodef.github.io/extra-iterable/functions/splitAt.html
-[cut]: https://nodef.github.io/extra-iterable/functions/cut.html
-[cutRight]: https://nodef.github.io/extra-iterable/functions/cutRight.html
-[cutAt]: https://nodef.github.io/extra-iterable/functions/cutAt.html
-[cutAtRight]: https://nodef.github.io/extra-iterable/functions/cutAtRight.html
-[group]: https://nodef.github.io/extra-iterable/functions/group.html
-[partition]: https://nodef.github.io/extra-iterable/functions/partition.html
-[partitionAs]: https://nodef.github.io/extra-iterable/functions/partitionAs.html
-[chunk]: https://nodef.github.io/extra-iterable/functions/chunk.html
-[cycle]: https://nodef.github.io/extra-iterable/functions/cycle.html
-[repeat]: https://nodef.github.io/extra-iterable/functions/repeat.html
-[reverse]: https://nodef.github.io/extra-iterable/functions/reverse.html
-[rotate]: https://nodef.github.io/extra-iterable/functions/rotate.html
-[intersperse]: https://nodef.github.io/extra-iterable/functions/intersperse.html
-[interpolate]: https://nodef.github.io/extra-iterable/functions/interpolate.html
-[intermix]: https://nodef.github.io/extra-iterable/functions/intermix.html
-[interleave]: https://nodef.github.io/extra-iterable/functions/interleave.html
-[concat]: https://nodef.github.io/extra-iterable/functions/concat.html
-[merge]: https://nodef.github.io/extra-iterable/functions/merge.html
-[join]: https://nodef.github.io/extra-iterable/functions/join.html
-[isUnique]: https://nodef.github.io/extra-iterable/functions/isUnique.html
-[isDisjoint]: https://nodef.github.io/extra-iterable/functions/isDisjoint.html
-[unique]: https://nodef.github.io/extra-iterable/functions/unique.html
-[union]: https://nodef.github.io/extra-iterable/functions/union.html
-[intersection]: https://nodef.github.io/extra-iterable/functions/intersection.html
-[difference]: https://nodef.github.io/extra-iterable/functions/difference.html
-[symmetricDifference]: https://nodef.github.io/extra-iterable/functions/symmetricDifference.html
-[cartesianProduct]: https://nodef.github.io/extra-iterable/functions/cartesianProduct.html
+[is]: https://github.com/nodef/extra-iterable/wiki/is
+[isIterator]: https://github.com/nodef/extra-iterable/wiki/isIterator
+[isList]: https://github.com/nodef/extra-iterable/wiki/isList
+[iterator]: https://github.com/nodef/extra-iterable/wiki/iterator
+[keys]: https://github.com/nodef/extra-iterable/wiki/keys
+[values]: https://github.com/nodef/extra-iterable/wiki/values
+[entries]: https://github.com/nodef/extra-iterable/wiki/entries
+[from]: https://github.com/nodef/extra-iterable/wiki/from
+[fromIterator]: https://github.com/nodef/extra-iterable/wiki/fromIterator
+[fromRange]: https://github.com/nodef/extra-iterable/wiki/fromRange
+[fromInvocation]: https://github.com/nodef/extra-iterable/wiki/fromInvocation
+[fromApplication]: https://github.com/nodef/extra-iterable/wiki/fromApplication
+[isOnce]: https://github.com/nodef/extra-iterable/wiki/isOnce
+[isMany]: https://github.com/nodef/extra-iterable/wiki/isMany
+[toMany]: https://github.com/nodef/extra-iterable/wiki/toMany
+[toInvokable]: https://github.com/nodef/extra-iterable/wiki/toInvokable
+[isEmpty]: https://github.com/nodef/extra-iterable/wiki/isEmpty
+[length]: https://github.com/nodef/extra-iterable/wiki/length
+[compare]: https://github.com/nodef/extra-iterable/wiki/compare
+[isEqual]: https://github.com/nodef/extra-iterable/wiki/isEqual
+[index]: https://github.com/nodef/extra-iterable/wiki/index
+[indexRange]: https://github.com/nodef/extra-iterable/wiki/indexRange
+[get]: https://github.com/nodef/extra-iterable/wiki/get
+[getAll]: https://github.com/nodef/extra-iterable/wiki/getAll
+[getPath]: https://github.com/nodef/extra-iterable/wiki/getPath
+[hasPath]: https://github.com/nodef/extra-iterable/wiki/hasPath
+[set]: https://github.com/nodef/extra-iterable/wiki/set
+[swap]: https://github.com/nodef/extra-iterable/wiki/swap
+[remove]: https://github.com/nodef/extra-iterable/wiki/remove
+[count]: https://github.com/nodef/extra-iterable/wiki/count
+[countAs]: https://github.com/nodef/extra-iterable/wiki/countAs
+[min]: https://github.com/nodef/extra-iterable/wiki/min
+[max]: https://github.com/nodef/extra-iterable/wiki/max
+[range]: https://github.com/nodef/extra-iterable/wiki/range
+[minEntry]: https://github.com/nodef/extra-iterable/wiki/minEntry
+[maxEntry]: https://github.com/nodef/extra-iterable/wiki/maxEntry
+[rangeEntries]: https://github.com/nodef/extra-iterable/wiki/rangeEntries
+[slice]: https://github.com/nodef/extra-iterable/wiki/slice
+[head]: https://github.com/nodef/extra-iterable/wiki/head
+[last]: https://github.com/nodef/extra-iterable/wiki/last
+[tail]: https://github.com/nodef/extra-iterable/wiki/tail
+[init]: https://github.com/nodef/extra-iterable/wiki/init
+[left]: https://github.com/nodef/extra-iterable/wiki/left
+[right]: https://github.com/nodef/extra-iterable/wiki/right
+[middle]: https://github.com/nodef/extra-iterable/wiki/middle
+[take]: https://github.com/nodef/extra-iterable/wiki/take
+[takeRight]: https://github.com/nodef/extra-iterable/wiki/takeRight
+[takeWhile]: https://github.com/nodef/extra-iterable/wiki/takeWhile
+[takeWhileRight]: https://github.com/nodef/extra-iterable/wiki/takeWhileRight
+[drop]: https://github.com/nodef/extra-iterable/wiki/drop
+[dropRight]: https://github.com/nodef/extra-iterable/wiki/dropRight
+[dropWhile]: https://github.com/nodef/extra-iterable/wiki/dropWhile
+[dropWhileRight]: https://github.com/nodef/extra-iterable/wiki/dropWhileRight
+[includes]: https://github.com/nodef/extra-iterable/wiki/includes
+[indexOf]: https://github.com/nodef/extra-iterable/wiki/indexOf
+[lastIndexOf]: https://github.com/nodef/extra-iterable/wiki/lastIndexOf
+[find]: https://github.com/nodef/extra-iterable/wiki/find
+[findRight]: https://github.com/nodef/extra-iterable/wiki/findRight
+[scanWhile]: https://github.com/nodef/extra-iterable/wiki/scanWhile
+[scanWhileRight]: https://github.com/nodef/extra-iterable/wiki/scanWhileRight
+[scanUntil]: https://github.com/nodef/extra-iterable/wiki/scanUntil
+[scanUntilRight]: https://github.com/nodef/extra-iterable/wiki/scanUntilRight
+[search]: https://github.com/nodef/extra-iterable/wiki/search
+[searchRight]: https://github.com/nodef/extra-iterable/wiki/searchRight
+[searchAll]: https://github.com/nodef/extra-iterable/wiki/searchAll
+[searchValue]: https://github.com/nodef/extra-iterable/wiki/searchValue
+[searchValueRight]: https://github.com/nodef/extra-iterable/wiki/searchValueRight
+[searchValueAll]: https://github.com/nodef/extra-iterable/wiki/searchValueAll
+[searchInfix]: https://github.com/nodef/extra-iterable/wiki/searchInfix
+[searchInfixRight]: https://github.com/nodef/extra-iterable/wiki/searchInfixRight
+[searchInfixAll]: https://github.com/nodef/extra-iterable/wiki/searchInfixAll
+[searchSubsequence]: https://github.com/nodef/extra-iterable/wiki/searchSubsequence
+[hasValue]: https://github.com/nodef/extra-iterable/wiki/hasValue
+[hasPrefix]: https://github.com/nodef/extra-iterable/wiki/hasPrefix
+[hasSuffix]: https://github.com/nodef/extra-iterable/wiki/hasSuffix
+[hasInfix]: https://github.com/nodef/extra-iterable/wiki/hasInfix
+[hasSubsequence]: https://github.com/nodef/extra-iterable/wiki/hasSubsequence
+[forEach]: https://github.com/nodef/extra-iterable/wiki/forEach
+[some]: https://github.com/nodef/extra-iterable/wiki/some
+[every]: https://github.com/nodef/extra-iterable/wiki/every
+[map]: https://github.com/nodef/extra-iterable/wiki/map
+[reduce]: https://github.com/nodef/extra-iterable/wiki/reduce
+[filter]: https://github.com/nodef/extra-iterable/wiki/filter
+[filterAt]: https://github.com/nodef/extra-iterable/wiki/filterAt
+[reject]: https://github.com/nodef/extra-iterable/wiki/reject
+[rejectAt]: https://github.com/nodef/extra-iterable/wiki/rejectAt
+[accumulate]: https://github.com/nodef/extra-iterable/wiki/accumulate
+[flat]: https://github.com/nodef/extra-iterable/wiki/flat
+[flatMap]: https://github.com/nodef/extra-iterable/wiki/flatMap
+[zip]: https://github.com/nodef/extra-iterable/wiki/zip
+[fill]: https://github.com/nodef/extra-iterable/wiki/fill
+[push]: https://github.com/nodef/extra-iterable/wiki/push
+[unshift]: https://github.com/nodef/extra-iterable/wiki/unshift
+[copy]: https://github.com/nodef/extra-iterable/wiki/copy
+[copyWithin]: https://github.com/nodef/extra-iterable/wiki/copyWithin
+[moveWithin]: https://github.com/nodef/extra-iterable/wiki/moveWithin
+[splice]: https://github.com/nodef/extra-iterable/wiki/splice
+[split]: https://github.com/nodef/extra-iterable/wiki/split
+[splitAt]: https://github.com/nodef/extra-iterable/wiki/splitAt
+[cut]: https://github.com/nodef/extra-iterable/wiki/cut
+[cutRight]: https://github.com/nodef/extra-iterable/wiki/cutRight
+[cutAt]: https://github.com/nodef/extra-iterable/wiki/cutAt
+[cutAtRight]: https://github.com/nodef/extra-iterable/wiki/cutAtRight
+[group]: https://github.com/nodef/extra-iterable/wiki/group
+[partition]: https://github.com/nodef/extra-iterable/wiki/partition
+[partitionAs]: https://github.com/nodef/extra-iterable/wiki/partitionAs
+[chunk]: https://github.com/nodef/extra-iterable/wiki/chunk
+[cycle]: https://github.com/nodef/extra-iterable/wiki/cycle
+[repeat]: https://github.com/nodef/extra-iterable/wiki/repeat
+[reverse]: https://github.com/nodef/extra-iterable/wiki/reverse
+[rotate]: https://github.com/nodef/extra-iterable/wiki/rotate
+[intersperse]: https://github.com/nodef/extra-iterable/wiki/intersperse
+[interpolate]: https://github.com/nodef/extra-iterable/wiki/interpolate
+[intermix]: https://github.com/nodef/extra-iterable/wiki/intermix
+[interleave]: https://github.com/nodef/extra-iterable/wiki/interleave
+[concat]: https://github.com/nodef/extra-iterable/wiki/concat
+[merge]: https://github.com/nodef/extra-iterable/wiki/merge
+[join]: https://github.com/nodef/extra-iterable/wiki/join
+[isUnique]: https://github.com/nodef/extra-iterable/wiki/isUnique
+[isDisjoint]: https://github.com/nodef/extra-iterable/wiki/isDisjoint
+[unique]: https://github.com/nodef/extra-iterable/wiki/unique
+[union]: https://github.com/nodef/extra-iterable/wiki/union
+[intersection]: https://github.com/nodef/extra-iterable/wiki/intersection
+[difference]: https://github.com/nodef/extra-iterable/wiki/difference
+[symmetricDifference]: https://github.com/nodef/extra-iterable/wiki/symmetricDifference
+[cartesianProduct]: https://github.com/nodef/extra-iterable/wiki/cartesianProduct
