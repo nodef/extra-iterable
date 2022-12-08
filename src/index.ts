@@ -1814,7 +1814,7 @@ export function partition<T>(x: Iterable<T>, ft: TestFunction<T>): [T[], T[]] {
  * @param fm map function (v, i, x)
  * @returns Map \{key ⇒ values\}
  */
-export function partitionAs<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U>=null): Map<T|U, T[]> {
+export function partitionAs<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U> | null=null): Map<T|U, T[]> {
   var fm = fm || IDENTITY;
   var a  = new Map(), i = -1;
   for (var v of x) {
@@ -2079,7 +2079,7 @@ export function isUnique<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null
   else    return isUniqueMap (x, fm);
 }
 
-function isUniqueMap<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U>=null): boolean {
+function isUniqueMap<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U> | null=null): boolean {
   var fm = fm || IDENTITY;
   var x1 = new Set(), i = -1;
   for (var v of x) {
@@ -2090,7 +2090,7 @@ function isUniqueMap<T, U=T>(x: Iterable<T>, fm: MapFunction<T, T|U>=null): bool
   return true;
 }
 
-function isUniqueDual<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): boolean {
+function isUniqueDual<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var x1 = [...map(x, fm)];
@@ -2115,7 +2115,7 @@ export function isDisjoint<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFu
   else    return isDisjointMap (x, y, fm);
 }
 
-function isDisjointMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U>=null): boolean {
+function isDisjointMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U> | null=null): boolean {
   var y1 = toSet(y, fm), i = -1;
   var fm = fm || IDENTITY;
   for (var u of x) {
@@ -2125,7 +2125,7 @@ function isDisjointMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T
   return true;
 }
 
-function isDisjointDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U>=null, fm: MapFunction<T, T|U>=null): boolean {
+function isDisjointDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
   var y1 = [...map(y, fm)], i = -1;
