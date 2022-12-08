@@ -171,7 +171,7 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [partition] | Segregate values by test result. |
 | [partitionAs] | Segregate values by similarity. |
 | [chunk] | Break iterable into chunks of given size. |
-| [cycle] | Give values that cycle through an iterable. |
+| [cycle] | Obtain values that cycle through an iterable. |
 | [repeat] | Repeat an iterable given times. |
 | [reverse] | Reverse the values. |
 | [rotate] | Rotate values in iterable. |
@@ -187,10 +187,10 @@ iterable.reduce(x, (acc, v) => acc+v);
 | [isUnique] | Check if there are no duplicate values. |
 | [isDisjoint] | Checks if arrays have no value in common. |
 | [unique] | Remove duplicate values. |
-| [union] | Give values present in any iterable. |
-| [intersection] | Give values present in both iterables. |
-| [difference] | Give values not present in another iterable. |
-| [symmetricDifference] | Give values not present in both iterables. |
+| [union] | Obtain values present in any iterable. |
+| [intersection] | Obtain values present in both iterables. |
+| [difference] | Obtain values not present in another iterable. |
+| [symmetricDifference] | Obtain values not present in both iterables. |
 | [cartesianProduct] | List cartesian product of iterables. |
 
 <br>

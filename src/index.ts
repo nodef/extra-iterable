@@ -12,6 +12,7 @@ import {mod} from "extra-math";
 
 /** End of iterable. */
 export const END = Number.MAX_SAFE_INTEGER;
+
 /** Empty iterable. */
 const EMPTY = [].values();
 
@@ -1848,7 +1849,7 @@ export function* chunk<T>(x: Iterable<T>, n: number=1, s: number=n): IterableIte
 
 
 /**
- * Give values that cycle through an iterable.
+ * Obtain values that cycle through an iterable.
  * @param x an iterable
  * @param i start index [0]
  * @param n number of values [-1 ⇒ Inf]
@@ -2174,7 +2175,7 @@ function* uniqueDual<T, U=T>(x: Iterable<T>, fc: CompareFunction<T|U> | null=nul
 
 
 /**
- * Give values present in any iterable.
+ * Obtain values present in any iterable.
  * @param x an iterable
  * @param y another iterable
  * @param fc compare function (a, b)
@@ -2215,7 +2216,7 @@ function* unionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<
 
 
 /**
- * Give values present in both iterables.
+ * Obtain values present in both iterables.
  * @param x an iterable
  * @param y another iterable
  * @param fc compare function (a, b)
@@ -2249,7 +2250,7 @@ function* intersectionDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFu
 
 
 /**
- * Give values not present in another iterable.
+ * Obtain values not present in another iterable.
  * @param x an iterable
  * @param y another iterable
  * @param fc compare function (a, b)
@@ -2284,7 +2285,7 @@ function* differenceDual<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunc
 
 
 /**
- * Give values not present in both iterables.
+ * Obtain values not present in both iterables.
  * @param x an iterable
  * @param y another iterable
  * @param fc compare function (a, b)

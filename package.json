@@ -1,6 +1,6 @@
 {
   "name": "extra-iterable",
-  "version": "3.2.5",
+  "version": "3.2.6",
   "description": "A collection of functions for operating upon iterables.",
   "main": "index.js",
   "module": "index.mjs",
