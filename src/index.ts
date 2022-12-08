@@ -3,8 +3,6 @@ import {
   COMPARE,
 } from "extra-function";
 import {mod} from "extra-math";
-import {from$ as arrayFrom$} from "extra-array";
-import {from  as setFrom}    from "extra-set";
 
 
 
@@ -100,6 +98,21 @@ export type EndFunction = (dones: boolean[]) => boolean;
 
 // METHODS
 // =======
+
+// HELPERS
+// -------
+
+/** Convert an iterable to set. */
+function toSet<T, U=T>(x: Iterable<T>, fm: MapFunction<T, U> | null=null): Set<T|U> {
+  if (!fm) return new Set(x);
+  var a = new Set<U>(), i = -1;
+  for (var v of x)
+    a.add(fm(v, ++i, x));
+  return a;
+}
+
+
+
 
 // ABOUT
 // -----
@@ -1248,7 +1261,8 @@ export function hasPrefix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFun
 export function hasSuffix<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFunction<T|U> | null=null, fm: MapFunction<T, T|U> | null=null): boolean {
   var fc = fc || COMPARE;
   var fm = fm || IDENTITY;
-  var y1 = arrayFrom$(y), Y = y1.length;
+  var y1 = Array.isArray(y)? y : [...y];
+  var Y  = y1.length;
   var a = [], k = 0, n = 0;
   if (Y===0) return true;
   for (var u of x) {
@@ -1880,7 +1894,7 @@ export function* repeat<T>(x: Iterable<T>, n: number=-1): IterableIterator<T> {
  * @returns x[|x|-1], x[|x|-2], ..., x[1], x[0]
  */
 export function* reverse<T>(x: Iterable<T>): IterableIterator<T> {
-  var a = arrayFrom$(x);
+  var a = Array.isArray(x)? x : [...x];
   for (var i=a.length-1; i>=0; --i)
     yield a[i];
 }
@@ -2102,7 +2116,7 @@ export function isDisjoint<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareFu
 }
 
 function isDisjointMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U>=null): boolean {
-  var y1 = setFrom(y, fm), i = -1;
+  var y1 = toSet(y, fm), i = -1;
   var fm = fm || IDENTITY;
   for (var u of x) {
     var u1 = fm(u, ++i, x);
@@ -2214,7 +2228,7 @@ export function* intersection<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: Compar
 }
 
 function* intersectionMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
-  var y1 = setFrom(y, fm), i = -1;
+  var y1 = toSet(y, fm), i = -1;
   var fm = fm || IDENTITY;
   for (var u of x) {
     var u1 = fm(u, ++i, x);
@@ -2248,7 +2262,7 @@ export function* difference<T, U=T>(x: Iterable<T>, y: Iterable<T>, fc: CompareF
 }
 
 function* differenceMap<T, U=T>(x: Iterable<T>, y: Iterable<T>, fm: MapFunction<T, T|U> | null=null): IterableIterator<T> {
-  var y1 = setFrom(y, fm), i = -1;
+  var y1 = toSet(y, fm), i = -1;
   var fm = fm || IDENTITY;
   for (var u of x) {
     var u1 = fm(u, ++i, x);
