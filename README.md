@@ -1,21 +1,21 @@
-A collection of functions for operating upon iterables.<br>
+An [iterable] is a sequence of values.<br>
 📦 [Node.js](https://www.npmjs.com/package/extra-iterable),
 🌐 [Web](https://www.npmjs.com/package/extra-iterable.web),
 📜 [Files](https://unpkg.com/extra-iterable/),
 📰 [Docs](https://nodef.github.io/extra-iterable/),
 📘 [Wiki](https://github.com/nodef/extra-iterable/wiki/).
 
-An [iterable] is a sequence of values. Assumption here is that an iterable can
-only be iterated over once. Methods which require multiple iterations preserve
-old values in a backup array using [toMany]. Many methods accept both compare
-and map functions, and in some cases using **only** a map function enables
-*faster comparision* (like [unique]). I borrowed a lot of ideas from Haskell,
-Elm, Python, Basic, Lodash, and other NPM packages. These are mentioned in
-references of each method.
+This is a collection of functions for operating upon **iterables**. Assumption
+here is that an **iterable** can *only* be iterated over *once*. Methods which
+require multiple iterations preserve old values in a backup array using
+[toMany]. Many methods accept both compare and map functions, and in some cases
+using **only** a map function enables *faster comparision* (like [unique]). I
+borrowed a lot of ideas from Haskell, Elm, Python, Basic, Lodash, and other NPM
+packages. These are mentioned in references of each method.
 
-This package is available in *Node.js* and *Web* formats. The web format
-is exposed as `extra_iterable` standalone variable and can be loaded from
-[jsDelivr CDN].
+This package is available in *Node.js* and *Web* formats. To use it on the web,
+simply use the `extra_iterable` global variable after loading with a `<script>`
+tag from the [jsDelivr CDN].
 
 > Stability: [Experimental](https://www.youtube.com/watch?v=L1j93RnIxEo).
 
@@ -25,24 +25,24 @@ is exposed as `extra_iterable` standalone variable and can be loaded from
 <br>
 
 ```javascript
-const iterable = require('extra-iterable');
-// import * as iterable from "extra-iterable";
-// import * as iterable from "https://unpkg.com/extra-iterable/index.mjs"; (deno)
+const xiterable = require('extra-iterable');
+// import * as xiterable from "extra-iterable";
+// import * as xiterable from "https://unpkg.com/extra-iterable/index.mjs"; (deno)
 
 var x = [2, 4, 6, 8];
-iterable.get(x, 1);
+xiterable.get(x, 1);
 // → 4
 
 var x = [1, 2, 3, 4];
-[...iterable.swap(x, 0, 1)];
+[...xiterable.swap(x, 0, 1)];
 // → [ 2, 1, 3, 4 ]
 
 var x = [1, 2, 3];
-[...iterable.cycle(x, 0, 4)];
+[...xiterable.cycle(x, 0, 4)];
 // → [1, 2, 3, 1]
 
 var x = [1, 2, 3, 4];
-iterable.reduce(x, (acc, v) => acc+v);
+xiterable.reduce(x, (acc, v) => acc+v);
 // → 10
 ```
 

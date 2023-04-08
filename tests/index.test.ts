@@ -129,29 +129,29 @@ import {
   symmetricDifference,
   cartesianProduct,
 } from "../src";
-import * as iterable from "../src";
+import * as xiterable from "../src";
 
 
 
 
 test("example", () => {
   var x = [2, 4, 6, 8];
-  var v = iterable.get(x, 1);
+  var v = xiterable.get(x, 1);
   expect(v).toBe(4);
   // → 4
 
   var x = [1, 2, 3, 4];
-  var a = [...iterable.swap(x, 0, 1)];
+  var a = [...xiterable.swap(x, 0, 1)];
   expect(a).toStrictEqual([2, 1, 3, 4]);
   // → [2, 1, 3, 4]
 
   var x = [1, 2, 3];
-  var a = [...iterable.cycle(x, 0, 4)];
+  var a = [...xiterable.cycle(x, 0, 4)];
   expect(a).toStrictEqual([1, 2, 3, 1]);
   // → [1, 2, 3, 1]
 
   var x = [1, 2, 3, 4];
-  var v = iterable.reduce(x, (acc, v) => acc+v, 0);
+  var v = xiterable.reduce(x, (acc, v) => acc+v, 0);
   expect(v).toBe(10);
   // → 10
 });
