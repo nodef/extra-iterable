@@ -203,6 +203,7 @@ xiterable.reduce(x, (acc, v) => acc+v);
 [![Coverage Status](https://coveralls.io/repos/github/nodef/extra-iterable/badge.svg?branch=master)](https://coveralls.io/github/nodef/extra-iterable?branch=master)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1ba4b1b22418456df9f9/test_coverage)](https://codeclimate.com/github/nodef/extra-iterable/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1ba4b1b22418456df9f9/maintainability)](https://codeclimate.com/github/nodef/extra-iterable/maintainability)
+![](https://ga-beacon.deno.dev/G-RC63DPBH3P:SH3Eq-NoQ9mwgYeHWxu7cw/github.com/nodef/extra-iterable)
 
 
 [is]: https://github.com/nodef/extra-iterable/wiki/is
