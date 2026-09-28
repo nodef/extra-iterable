@@ -1,9 +1,9 @@
 An [iterable] is a sequence of values.<br>
-📦 [Node.js](https://www.npmjs.com/package/extra-iterable),
-🌐 [Web](https://www.npmjs.com/package/extra-iterable.web),
-📜 [Files](https://unpkg.com/extra-iterable/),
-📰 [Docs](https://nodef.github.io/extra-iterable/),
-📘 [Wiki](https://github.com/nodef/extra-iterable/wiki/).
+
+▌
+📦 [JSR](https://jsr.io/@nodef/extra-iterable),
+📦 [NPM](https://www.npmjs.com/package/extra-iterable),
+📰 [Docs](https://jsr.io/@nodef/extra-iterable/doc).
 
 This is a collection of functions for operating upon **iterables**. Assumption
 here is that an **iterable** can *only* be iterated over *once*. Methods which
@@ -13,21 +13,12 @@ using **only** a map function enables *faster comparision* (like [unique]). I
 borrowed a lot of ideas from Haskell, Elm, Python, Basic, Lodash, and other NPM
 packages. These are mentioned in references of each method.
 
-This package is available in *Node.js* and *Web* formats. To use it on the web,
-simply use the `extra_iterable` global variable after loading with a `<script>`
-tag from the [jsDelivr CDN].
-
-> Stability: [Experimental](https://www.youtube.com/watch?v=L1j93RnIxEo).
-
 [iterable]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
-[jsDelivr CDN]: https://cdn.jsdelivr.net/npm/extra-iterable.web/index.js
 
 <br>
 
 ```javascript
-const xiterable = require('extra-iterable');
-// import * as xiterable from "extra-iterable";
-// import * as xiterable from "https://unpkg.com/extra-iterable/index.mjs"; (deno)
+import * as xiterable from "jsr:@nodef/extra-iterable";
 
 var x = [2, 4, 6, 8];
 xiterable.get(x, 1);
@@ -197,138 +188,134 @@ xiterable.reduce(x, (acc, v) => acc+v);
 <br>
 
 
-[![](https://img.youtube.com/vi/qgxPbqDskyw/maxresdefault.jpg)](https://www.youtube.com/watch?v=qgxPbqDskyw)<br>
+[![](https://raw.githubusercontent.com/qb40/designs/gh-pages/0/image/11.png)](https://wolfram77.github.io)<br>
 [![ORG](https://img.shields.io/badge/org-nodef-green?logo=Org)](https://nodef.github.io)
-[![DOI](https://zenodo.org/badge/133694055.svg)](https://zenodo.org/badge/latestdoi/133694055)
-[![Coverage Status](https://coveralls.io/repos/github/nodef/extra-iterable/badge.svg?branch=master)](https://coveralls.io/github/nodef/extra-iterable?branch=master)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/1ba4b1b22418456df9f9/test_coverage)](https://codeclimate.com/github/nodef/extra-iterable/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/1ba4b1b22418456df9f9/maintainability)](https://codeclimate.com/github/nodef/extra-iterable/maintainability)
 ![](https://ga-beacon.deno.dev/G-RC63DPBH3P:SH3Eq-NoQ9mwgYeHWxu7cw/github.com/nodef/extra-iterable)
 
 
-[is]: https://github.com/nodef/extra-iterable/wiki/is
-[isIterator]: https://github.com/nodef/extra-iterable/wiki/isIterator
-[isList]: https://github.com/nodef/extra-iterable/wiki/isList
-[iterator]: https://github.com/nodef/extra-iterable/wiki/iterator
-[keys]: https://github.com/nodef/extra-iterable/wiki/keys
-[values]: https://github.com/nodef/extra-iterable/wiki/values
-[entries]: https://github.com/nodef/extra-iterable/wiki/entries
-[from]: https://github.com/nodef/extra-iterable/wiki/from
-[fromIterator]: https://github.com/nodef/extra-iterable/wiki/fromIterator
-[fromRange]: https://github.com/nodef/extra-iterable/wiki/fromRange
-[fromInvocation]: https://github.com/nodef/extra-iterable/wiki/fromInvocation
-[fromApplication]: https://github.com/nodef/extra-iterable/wiki/fromApplication
-[isOnce]: https://github.com/nodef/extra-iterable/wiki/isOnce
-[isMany]: https://github.com/nodef/extra-iterable/wiki/isMany
-[toMany]: https://github.com/nodef/extra-iterable/wiki/toMany
-[toInvokable]: https://github.com/nodef/extra-iterable/wiki/toInvokable
-[isEmpty]: https://github.com/nodef/extra-iterable/wiki/isEmpty
-[length]: https://github.com/nodef/extra-iterable/wiki/length
-[compare]: https://github.com/nodef/extra-iterable/wiki/compare
-[isEqual]: https://github.com/nodef/extra-iterable/wiki/isEqual
-[index]: https://github.com/nodef/extra-iterable/wiki/index
-[indexRange]: https://github.com/nodef/extra-iterable/wiki/indexRange
-[get]: https://github.com/nodef/extra-iterable/wiki/get
-[getAll]: https://github.com/nodef/extra-iterable/wiki/getAll
-[getPath]: https://github.com/nodef/extra-iterable/wiki/getPath
-[hasPath]: https://github.com/nodef/extra-iterable/wiki/hasPath
-[set]: https://github.com/nodef/extra-iterable/wiki/set
-[swap]: https://github.com/nodef/extra-iterable/wiki/swap
-[remove]: https://github.com/nodef/extra-iterable/wiki/remove
-[count]: https://github.com/nodef/extra-iterable/wiki/count
-[countAs]: https://github.com/nodef/extra-iterable/wiki/countAs
-[min]: https://github.com/nodef/extra-iterable/wiki/min
-[max]: https://github.com/nodef/extra-iterable/wiki/max
-[range]: https://github.com/nodef/extra-iterable/wiki/range
-[minEntry]: https://github.com/nodef/extra-iterable/wiki/minEntry
-[maxEntry]: https://github.com/nodef/extra-iterable/wiki/maxEntry
-[rangeEntries]: https://github.com/nodef/extra-iterable/wiki/rangeEntries
-[slice]: https://github.com/nodef/extra-iterable/wiki/slice
-[head]: https://github.com/nodef/extra-iterable/wiki/head
-[last]: https://github.com/nodef/extra-iterable/wiki/last
-[tail]: https://github.com/nodef/extra-iterable/wiki/tail
-[init]: https://github.com/nodef/extra-iterable/wiki/init
-[left]: https://github.com/nodef/extra-iterable/wiki/left
-[right]: https://github.com/nodef/extra-iterable/wiki/right
-[middle]: https://github.com/nodef/extra-iterable/wiki/middle
-[take]: https://github.com/nodef/extra-iterable/wiki/take
-[takeRight]: https://github.com/nodef/extra-iterable/wiki/takeRight
-[takeWhile]: https://github.com/nodef/extra-iterable/wiki/takeWhile
-[takeWhileRight]: https://github.com/nodef/extra-iterable/wiki/takeWhileRight
-[drop]: https://github.com/nodef/extra-iterable/wiki/drop
-[dropRight]: https://github.com/nodef/extra-iterable/wiki/dropRight
-[dropWhile]: https://github.com/nodef/extra-iterable/wiki/dropWhile
-[dropWhileRight]: https://github.com/nodef/extra-iterable/wiki/dropWhileRight
-[includes]: https://github.com/nodef/extra-iterable/wiki/includes
-[indexOf]: https://github.com/nodef/extra-iterable/wiki/indexOf
-[lastIndexOf]: https://github.com/nodef/extra-iterable/wiki/lastIndexOf
-[find]: https://github.com/nodef/extra-iterable/wiki/find
-[findRight]: https://github.com/nodef/extra-iterable/wiki/findRight
-[scanWhile]: https://github.com/nodef/extra-iterable/wiki/scanWhile
-[scanWhileRight]: https://github.com/nodef/extra-iterable/wiki/scanWhileRight
-[scanUntil]: https://github.com/nodef/extra-iterable/wiki/scanUntil
-[scanUntilRight]: https://github.com/nodef/extra-iterable/wiki/scanUntilRight
-[search]: https://github.com/nodef/extra-iterable/wiki/search
-[searchRight]: https://github.com/nodef/extra-iterable/wiki/searchRight
-[searchAll]: https://github.com/nodef/extra-iterable/wiki/searchAll
-[searchValue]: https://github.com/nodef/extra-iterable/wiki/searchValue
-[searchValueRight]: https://github.com/nodef/extra-iterable/wiki/searchValueRight
-[searchValueAll]: https://github.com/nodef/extra-iterable/wiki/searchValueAll
-[searchInfix]: https://github.com/nodef/extra-iterable/wiki/searchInfix
-[searchInfixRight]: https://github.com/nodef/extra-iterable/wiki/searchInfixRight
-[searchInfixAll]: https://github.com/nodef/extra-iterable/wiki/searchInfixAll
-[searchSubsequence]: https://github.com/nodef/extra-iterable/wiki/searchSubsequence
-[hasValue]: https://github.com/nodef/extra-iterable/wiki/hasValue
-[hasPrefix]: https://github.com/nodef/extra-iterable/wiki/hasPrefix
-[hasSuffix]: https://github.com/nodef/extra-iterable/wiki/hasSuffix
-[hasInfix]: https://github.com/nodef/extra-iterable/wiki/hasInfix
-[hasSubsequence]: https://github.com/nodef/extra-iterable/wiki/hasSubsequence
-[forEach]: https://github.com/nodef/extra-iterable/wiki/forEach
-[some]: https://github.com/nodef/extra-iterable/wiki/some
-[every]: https://github.com/nodef/extra-iterable/wiki/every
-[map]: https://github.com/nodef/extra-iterable/wiki/map
-[reduce]: https://github.com/nodef/extra-iterable/wiki/reduce
-[filter]: https://github.com/nodef/extra-iterable/wiki/filter
-[filterAt]: https://github.com/nodef/extra-iterable/wiki/filterAt
-[reject]: https://github.com/nodef/extra-iterable/wiki/reject
-[rejectAt]: https://github.com/nodef/extra-iterable/wiki/rejectAt
-[accumulate]: https://github.com/nodef/extra-iterable/wiki/accumulate
-[flat]: https://github.com/nodef/extra-iterable/wiki/flat
-[flatMap]: https://github.com/nodef/extra-iterable/wiki/flatMap
-[zip]: https://github.com/nodef/extra-iterable/wiki/zip
-[fill]: https://github.com/nodef/extra-iterable/wiki/fill
-[push]: https://github.com/nodef/extra-iterable/wiki/push
-[unshift]: https://github.com/nodef/extra-iterable/wiki/unshift
-[copy]: https://github.com/nodef/extra-iterable/wiki/copy
-[copyWithin]: https://github.com/nodef/extra-iterable/wiki/copyWithin
-[moveWithin]: https://github.com/nodef/extra-iterable/wiki/moveWithin
-[splice]: https://github.com/nodef/extra-iterable/wiki/splice
-[split]: https://github.com/nodef/extra-iterable/wiki/split
-[splitAt]: https://github.com/nodef/extra-iterable/wiki/splitAt
-[cut]: https://github.com/nodef/extra-iterable/wiki/cut
-[cutRight]: https://github.com/nodef/extra-iterable/wiki/cutRight
-[cutAt]: https://github.com/nodef/extra-iterable/wiki/cutAt
-[cutAtRight]: https://github.com/nodef/extra-iterable/wiki/cutAtRight
-[group]: https://github.com/nodef/extra-iterable/wiki/group
-[partition]: https://github.com/nodef/extra-iterable/wiki/partition
-[partitionAs]: https://github.com/nodef/extra-iterable/wiki/partitionAs
-[chunk]: https://github.com/nodef/extra-iterable/wiki/chunk
-[cycle]: https://github.com/nodef/extra-iterable/wiki/cycle
-[repeat]: https://github.com/nodef/extra-iterable/wiki/repeat
-[reverse]: https://github.com/nodef/extra-iterable/wiki/reverse
-[rotate]: https://github.com/nodef/extra-iterable/wiki/rotate
-[intersperse]: https://github.com/nodef/extra-iterable/wiki/intersperse
-[interpolate]: https://github.com/nodef/extra-iterable/wiki/interpolate
-[intermix]: https://github.com/nodef/extra-iterable/wiki/intermix
-[interleave]: https://github.com/nodef/extra-iterable/wiki/interleave
-[concat]: https://github.com/nodef/extra-iterable/wiki/concat
-[merge]: https://github.com/nodef/extra-iterable/wiki/merge
-[join]: https://github.com/nodef/extra-iterable/wiki/join
-[isUnique]: https://github.com/nodef/extra-iterable/wiki/isUnique
-[isDisjoint]: https://github.com/nodef/extra-iterable/wiki/isDisjoint
-[unique]: https://github.com/nodef/extra-iterable/wiki/unique
-[union]: https://github.com/nodef/extra-iterable/wiki/union
-[intersection]: https://github.com/nodef/extra-iterable/wiki/intersection
-[difference]: https://github.com/nodef/extra-iterable/wiki/difference
-[symmetricDifference]: https://github.com/nodef/extra-iterable/wiki/symmetricDifference
-[cartesianProduct]: https://github.com/nodef/extra-iterable/wiki/cartesianProduct
+[is]: https://jsr.io/@nodef/extra-iterable/doc/~/is
+[isIterator]: https://jsr.io/@nodef/extra-iterable/doc/~/isIterator
+[isList]: https://jsr.io/@nodef/extra-iterable/doc/~/isList
+[iterator]: https://jsr.io/@nodef/extra-iterable/doc/~/iterator
+[keys]: https://jsr.io/@nodef/extra-iterable/doc/~/keys
+[values]: https://jsr.io/@nodef/extra-iterable/doc/~/values
+[entries]: https://jsr.io/@nodef/extra-iterable/doc/~/entries
+[from]: https://jsr.io/@nodef/extra-iterable/doc/~/from
+[fromIterator]: https://jsr.io/@nodef/extra-iterable/doc/~/fromIterator
+[fromRange]: https://jsr.io/@nodef/extra-iterable/doc/~/fromRange
+[fromInvocation]: https://jsr.io/@nodef/extra-iterable/doc/~/fromInvocation
+[fromApplication]: https://jsr.io/@nodef/extra-iterable/doc/~/fromApplication
+[isOnce]: https://jsr.io/@nodef/extra-iterable/doc/~/isOnce
+[isMany]: https://jsr.io/@nodef/extra-iterable/doc/~/isMany
+[toMany]: https://jsr.io/@nodef/extra-iterable/doc/~/toMany
+[toInvokable]: https://jsr.io/@nodef/extra-iterable/doc/~/toInvokable
+[isEmpty]: https://jsr.io/@nodef/extra-iterable/doc/~/isEmpty
+[length]: https://jsr.io/@nodef/extra-iterable/doc/~/length
+[compare]: https://jsr.io/@nodef/extra-iterable/doc/~/compare
+[isEqual]: https://jsr.io/@nodef/extra-iterable/doc/~/isEqual
+[index]: https://jsr.io/@nodef/extra-iterable/doc/~/index
+[indexRange]: https://jsr.io/@nodef/extra-iterable/doc/~/indexRange
+[get]: https://jsr.io/@nodef/extra-iterable/doc/~/get
+[getAll]: https://jsr.io/@nodef/extra-iterable/doc/~/getAll
+[getPath]: https://jsr.io/@nodef/extra-iterable/doc/~/getPath
+[hasPath]: https://jsr.io/@nodef/extra-iterable/doc/~/hasPath
+[set]: https://jsr.io/@nodef/extra-iterable/doc/~/set
+[swap]: https://jsr.io/@nodef/extra-iterable/doc/~/swap
+[remove]: https://jsr.io/@nodef/extra-iterable/doc/~/remove
+[count]: https://jsr.io/@nodef/extra-iterable/doc/~/count
+[countAs]: https://jsr.io/@nodef/extra-iterable/doc/~/countAs
+[min]: https://jsr.io/@nodef/extra-iterable/doc/~/min
+[max]: https://jsr.io/@nodef/extra-iterable/doc/~/max
+[range]: https://jsr.io/@nodef/extra-iterable/doc/~/range
+[minEntry]: https://jsr.io/@nodef/extra-iterable/doc/~/minEntry
+[maxEntry]: https://jsr.io/@nodef/extra-iterable/doc/~/maxEntry
+[rangeEntries]: https://jsr.io/@nodef/extra-iterable/doc/~/rangeEntries
+[slice]: https://jsr.io/@nodef/extra-iterable/doc/~/slice
+[head]: https://jsr.io/@nodef/extra-iterable/doc/~/head
+[last]: https://jsr.io/@nodef/extra-iterable/doc/~/last
+[tail]: https://jsr.io/@nodef/extra-iterable/doc/~/tail
+[init]: https://jsr.io/@nodef/extra-iterable/doc/~/init
+[left]: https://jsr.io/@nodef/extra-iterable/doc/~/left
+[right]: https://jsr.io/@nodef/extra-iterable/doc/~/right
+[middle]: https://jsr.io/@nodef/extra-iterable/doc/~/middle
+[take]: https://jsr.io/@nodef/extra-iterable/doc/~/take
+[takeRight]: https://jsr.io/@nodef/extra-iterable/doc/~/takeRight
+[takeWhile]: https://jsr.io/@nodef/extra-iterable/doc/~/takeWhile
+[takeWhileRight]: https://jsr.io/@nodef/extra-iterable/doc/~/takeWhileRight
+[drop]: https://jsr.io/@nodef/extra-iterable/doc/~/drop
+[dropRight]: https://jsr.io/@nodef/extra-iterable/doc/~/dropRight
+[dropWhile]: https://jsr.io/@nodef/extra-iterable/doc/~/dropWhile
+[dropWhileRight]: https://jsr.io/@nodef/extra-iterable/doc/~/dropWhileRight
+[includes]: https://jsr.io/@nodef/extra-iterable/doc/~/includes
+[indexOf]: https://jsr.io/@nodef/extra-iterable/doc/~/indexOf
+[lastIndexOf]: https://jsr.io/@nodef/extra-iterable/doc/~/lastIndexOf
+[find]: https://jsr.io/@nodef/extra-iterable/doc/~/find
+[findRight]: https://jsr.io/@nodef/extra-iterable/doc/~/findRight
+[scanWhile]: https://jsr.io/@nodef/extra-iterable/doc/~/scanWhile
+[scanWhileRight]: https://jsr.io/@nodef/extra-iterable/doc/~/scanWhileRight
+[scanUntil]: https://jsr.io/@nodef/extra-iterable/doc/~/scanUntil
+[scanUntilRight]: https://jsr.io/@nodef/extra-iterable/doc/~/scanUntilRight
+[search]: https://jsr.io/@nodef/extra-iterable/doc/~/search
+[searchRight]: https://jsr.io/@nodef/extra-iterable/doc/~/searchRight
+[searchAll]: https://jsr.io/@nodef/extra-iterable/doc/~/searchAll
+[searchValue]: https://jsr.io/@nodef/extra-iterable/doc/~/searchValue
+[searchValueRight]: https://jsr.io/@nodef/extra-iterable/doc/~/searchValueRight
+[searchValueAll]: https://jsr.io/@nodef/extra-iterable/doc/~/searchValueAll
+[searchInfix]: https://jsr.io/@nodef/extra-iterable/doc/~/searchInfix
+[searchInfixRight]: https://jsr.io/@nodef/extra-iterable/doc/~/searchInfixRight
+[searchInfixAll]: https://jsr.io/@nodef/extra-iterable/doc/~/searchInfixAll
+[searchSubsequence]: https://jsr.io/@nodef/extra-iterable/doc/~/searchSubsequence
+[hasValue]: https://jsr.io/@nodef/extra-iterable/doc/~/hasValue
+[hasPrefix]: https://jsr.io/@nodef/extra-iterable/doc/~/hasPrefix
+[hasSuffix]: https://jsr.io/@nodef/extra-iterable/doc/~/hasSuffix
+[hasInfix]: https://jsr.io/@nodef/extra-iterable/doc/~/hasInfix
+[hasSubsequence]: https://jsr.io/@nodef/extra-iterable/doc/~/hasSubsequence
+[forEach]: https://jsr.io/@nodef/extra-iterable/doc/~/forEach
+[some]: https://jsr.io/@nodef/extra-iterable/doc/~/some
+[every]: https://jsr.io/@nodef/extra-iterable/doc/~/every
+[map]: https://jsr.io/@nodef/extra-iterable/doc/~/map
+[reduce]: https://jsr.io/@nodef/extra-iterable/doc/~/reduce
+[filter]: https://jsr.io/@nodef/extra-iterable/doc/~/filter
+[filterAt]: https://jsr.io/@nodef/extra-iterable/doc/~/filterAt
+[reject]: https://jsr.io/@nodef/extra-iterable/doc/~/reject
+[rejectAt]: https://jsr.io/@nodef/extra-iterable/doc/~/rejectAt
+[accumulate]: https://jsr.io/@nodef/extra-iterable/doc/~/accumulate
+[flat]: https://jsr.io/@nodef/extra-iterable/doc/~/flat
+[flatMap]: https://jsr.io/@nodef/extra-iterable/doc/~/flatMap
+[zip]: https://jsr.io/@nodef/extra-iterable/doc/~/zip
+[fill]: https://jsr.io/@nodef/extra-iterable/doc/~/fill
+[push]: https://jsr.io/@nodef/extra-iterable/doc/~/push
+[unshift]: https://jsr.io/@nodef/extra-iterable/doc/~/unshift
+[copy]: https://jsr.io/@nodef/extra-iterable/doc/~/copy
+[copyWithin]: https://jsr.io/@nodef/extra-iterable/doc/~/copyWithin
+[moveWithin]: https://jsr.io/@nodef/extra-iterable/doc/~/moveWithin
+[splice]: https://jsr.io/@nodef/extra-iterable/doc/~/splice
+[split]: https://jsr.io/@nodef/extra-iterable/doc/~/split
+[splitAt]: https://jsr.io/@nodef/extra-iterable/doc/~/splitAt
+[cut]: https://jsr.io/@nodef/extra-iterable/doc/~/cut
+[cutRight]: https://jsr.io/@nodef/extra-iterable/doc/~/cutRight
+[cutAt]: https://jsr.io/@nodef/extra-iterable/doc/~/cutAt
+[cutAtRight]: https://jsr.io/@nodef/extra-iterable/doc/~/cutAtRight
+[group]: https://jsr.io/@nodef/extra-iterable/doc/~/group
+[partition]: https://jsr.io/@nodef/extra-iterable/doc/~/partition
+[partitionAs]: https://jsr.io/@nodef/extra-iterable/doc/~/partitionAs
+[chunk]: https://jsr.io/@nodef/extra-iterable/doc/~/chunk
+[cycle]: https://jsr.io/@nodef/extra-iterable/doc/~/cycle
+[repeat]: https://jsr.io/@nodef/extra-iterable/doc/~/repeat
+[reverse]: https://jsr.io/@nodef/extra-iterable/doc/~/reverse
+[rotate]: https://jsr.io/@nodef/extra-iterable/doc/~/rotate
+[intersperse]: https://jsr.io/@nodef/extra-iterable/doc/~/intersperse
+[interpolate]: https://jsr.io/@nodef/extra-iterable/doc/~/interpolate
+[intermix]: https://jsr.io/@nodef/extra-iterable/doc/~/intermix
+[interleave]: https://jsr.io/@nodef/extra-iterable/doc/~/interleave
+[concat]: https://jsr.io/@nodef/extra-iterable/doc/~/concat
+[merge]: https://jsr.io/@nodef/extra-iterable/doc/~/merge
+[join]: https://jsr.io/@nodef/extra-iterable/doc/~/join
+[isUnique]: https://jsr.io/@nodef/extra-iterable/doc/~/isUnique
+[isDisjoint]: https://jsr.io/@nodef/extra-iterable/doc/~/isDisjoint
+[unique]: https://jsr.io/@nodef/extra-iterable/doc/~/unique
+[union]: https://jsr.io/@nodef/extra-iterable/doc/~/union
+[intersection]: https://jsr.io/@nodef/extra-iterable/doc/~/intersection
+[difference]: https://jsr.io/@nodef/extra-iterable/doc/~/difference
+[symmetricDifference]: https://jsr.io/@nodef/extra-iterable/doc/~/symmetricDifference
+[cartesianProduct]: https://jsr.io/@nodef/extra-iterable/doc/~/cartesianProduct
