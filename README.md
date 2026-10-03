@@ -2,7 +2,7 @@ An [iterable] is a sequence of values.<br>
 
 ▌
 📦 [JSR](https://jsr.io/@nodef/extra-iterable),
-📦 [NPM](https://www.npmjs.com/package/extra-iterable),
+📦 [NPM](https://www.npmjs.com/package/@nodef/extra-iterable),
 📰 [Docs](https://jsr.io/@nodef/extra-iterable/doc).
 
 This is a collection of functions for operating upon **iterables**. Assumption
